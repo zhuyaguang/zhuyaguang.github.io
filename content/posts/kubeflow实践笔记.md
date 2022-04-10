@@ -1,7 +1,7 @@
 ---
 title: "Kubeflow实践笔记"
 date: 2022-04-10T08:47:52+08:00
-draft: true
+draft: false
 ---
 
 # 基于 Kubernetes 的云原生 AI 平台建设
