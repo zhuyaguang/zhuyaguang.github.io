@@ -1,40 +1,47 @@
 # About
 
 
-## Career Experience
+### About zhuyagung
 
-### Apr.2017-Apr.2020 Huawei CloudBU 
+- Software developer
+- Part time translator
 
-- Huawei private cloud brand FusionStage Software Enginner
 
-- Focus on and maintain Helm to support Huawei Private Cloud PAAS Platform 
 
-### Apr.2020-Now ZheJiang Lab
+### Career Experience
 
-- ZhejiangLab AI application Platform Software Enginner 
-- Make all application CloudNative 
+1.Huawei(2017-2020),Software developer
 
-## Skill
+2.ZheJiang Lab(2020-),AI application Platform Software Enginner
+
+
+
+### Focus & Interests
 
 - CloudNative,Docker,Kubernetes,Helm
 - Kubernetes Operators
 - Bash,Git,Terraform
 
-## Voluntary Activities
+
+
+### Voluntary Activities
 
 - [GoCN  translator](https://github.com/gocn/translator)
 
 
-## I contributed project 
+
+### I contributed project 
 
 - [milvus-sdk-go](https://github.com/milvus-io/milvus-sdk-go)
 
 - [kubeedge](https://github.com/kubeedge/kubeedge)
 - [WasmEdge](https://github.com/WasmEdge/WasmEdge)
 
-## Status
+
+
+### Status
+
 - 🌱 I’m currently learning rust\vue\MIT 6.824
 -  🌱 I’m currently reading kubeflow and ml
 
-![zhuyaguang's github stats](https://github-readme-stats.vercel.app/api?username=zhuyaguang&show_icons=true)
 

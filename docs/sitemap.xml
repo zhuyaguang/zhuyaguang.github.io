@@ -3,9 +3,10 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
             <loc>https://zhuyaguang.github.io/about/</loc><lastmod>2022-04-10T12:03:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://zhuyaguang.github.io/categories/</loc><lastmod>2022-04-10T08:47:52&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://zhuyaguang.github.io/categories/kubeflow/</loc><lastmod>2022-04-10T08:47:52&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</loc><lastmod>2022-04-10T08:47:52&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://zhuyaguang.github.io/posts/</loc><lastmod>2022-04-10T08:47:52&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://zhuyaguang.github.io/</loc><lastmod>2022-04-10T08:47:52&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://zhuyaguang.github.io/hugo-command/</loc><lastmod>2022-04-10T08:41:30&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://zhuyaguang.github.io/categories/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>

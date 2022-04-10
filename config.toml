@@ -52,7 +52,7 @@ theme = "Loveit"
   #  LoveIt 主题版本
   version = "0.2.X"
   # 网站描述
-  description = "朱亚光的"
+  description = "zhuyaguang blog"
   # 网站关键词
   keywords = ["Theme", "Hugo"]
   # 网站默认主题样式 ("light", "dark", "auto")
@@ -130,11 +130,11 @@ theme = "Loveit"
     rss = 10
     # 主页个人信息
     [params.home.profile]
-      enable = true
+      enable = false
       # Gravatar 邮箱，用于优先在主页显示的头像
       gravatarEmail = "zhuyaguang1368@163.com"
       # 主页显示头像的 URL
-      avatarURL = "/logo"
+      avatarURL = ""
       #  主页显示的网站标题 (支持 HTML 格式)
       title = ""
       # 主页显示的网站副标题

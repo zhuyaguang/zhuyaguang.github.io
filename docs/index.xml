@@ -2,7 +2,7 @@
     <channel>
         <title>朱亚光的博客</title>
         <link>https://zhuyaguang.github.io/</link>
-        <description>朱亚光的</description>
+        <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
             <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Sun, 10 Apr 2022 08:47:52 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />

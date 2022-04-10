@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Kubeflow实践笔记 - 朱亚光的博客</title><meta name="Description" content="朱亚光的"><meta property="og:title" content="Kubeflow实践笔记" />
-<meta property="og:description" content="基于 Kubernetes 的云原生 AI 平台建设 提高算力资源利用 GPU 虚拟化 GPUManager 基于 GPU 驱动封装实现，用户需要对驱动的某些关键接口（如显存分配、cuda thread 创建等）进行封装劫" />
+        <title>Kubeflow实践笔记 - 朱亚光的博客</title><meta name="Description" content="kubeflow介绍、安装和使用"><meta property="og:title" content="Kubeflow实践笔记" />
+<meta property="og:description" content="kubeflow介绍、安装和使用" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-10T08:47:52+08:00" />
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
 <meta name="twitter:title" content="Kubeflow实践笔记"/>
-<meta name="twitter:description" content="基于 Kubernetes 的云原生 AI 平台建设 提高算力资源利用 GPU 虚拟化 GPUManager 基于 GPU 驱动封装实现，用户需要对驱动的某些关键接口（如显存分配、cuda thread 创建等）进行封装劫"/>
+<meta name="twitter:description" content="kubeflow介绍、安装和使用"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -35,7 +35,7 @@
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "朱亚光"
-            },"description": ""
+            },"description": "kubeflow介绍、安装和使用"
     }
     </script></head>
     <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -78,7 +78,7 @@
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Kubeflow实践笔记</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kubeflow/"><i class="far fa-folder fa-fw"></i>kubeflow</a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-10">2022-04-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 966 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -305,7 +305,7 @@
                             <a class="link-to-markdown" href="/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记" data-description="kubeflow介绍、安装和使用"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记" data-description="kubeflow介绍、安装和使用"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-title="Kubeflow实践笔记"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
