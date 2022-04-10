@@ -1,3 +1,6 @@
 [submodule "themes/Paper"]
 	path = themes/Paper
 	url = https://github.com/nanxiaobei/hugo-paper.git
+[submodule "themes/loveit"]
+	path = themes/loveit
+	url = https://github.com/dillonzq/LoveIt.git
