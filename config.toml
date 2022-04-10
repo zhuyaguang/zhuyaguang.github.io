@@ -1,0 +1,10 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = '朱亚光的博客'
+theme = 'Paper'
+
+[params]
+  disableHLJS = true                         # don't use highlight.js
+  twitter = 'SurfingSnail'                # twitter.com/YOUR_TWITTER_ID
+  github = 'zhuyaguang'                  # github.com/YOUR_GITHUB_ID
+  instagram = 'YOUR_INSTAGRAM_ID'            # instagram.com/YOUR_INSTAGRAM_ID
