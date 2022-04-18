@@ -40,7 +40,7 @@ Kubeflow 是 google 开发的包含了机器学习模型开发生命周期的开
 
 ### Kubeflow user interface (UI)
 
-![image-20220328102313469](/Users/zhuyaguang/Library/Application Support/typora-user-images/image-20220328102313469.png)
+![image-20220328102313469](../img/image-20220328102313469.png)
 
 http://10.101.32.26:8080/
 
@@ -65,6 +65,38 @@ https://github.com/dfm871002/examples/blob/master/Natural-Language-Processing/3.
 ![pipeline](https://github.com/dfm871002/examples/raw/master/Natural-Language-Processing/4.%20Image/pipeline.png)
 
 
+
+### 安装 kubeflow
+
+
+
+#### 设置镜像仓库
+
+Kaniko配置指南
+
+https://github.com/GoogleContainerTools/kaniko#pushing-to-different-registries
+
+
+
+创建一个 kubeflow 项目
+
+Manifest_root=https://raw.githubusercontent.com/kubeflow/manifests/
+
+
+
+#### 训练和部署模型
+
+https://github.com/intro-to-ml-with-kubeflow/intro-to-ml-with-kubeflow-examples
+
+
+
+模型查询示例代码： https://github.com/intro-to-ml-with-kubeflow/intro-to-ml-with-kubeflow-examples/blob/master/ch2/query-endpoint.py
+
+### kubeflow 设计
+
+#### 训练 operator
+
+https://www.kubeflow.org/docs/components/training/pytorch/
 
 ### code
 
