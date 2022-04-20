@@ -233,13 +233,90 @@ fetch = kfp.dsl.ContainerOp(
 
 [ML Metadata](https://github.com/google/ml-metadata/blob/master/g3doc/get_started.md)
 
+#### 训练机器学习模型
 
-
-### 训练机器学习模型
-
-[用户购买记录数据][https://github.com/moorissa/medium/tree/master/items-recommender/data]
+[用户购买记录数据](https://github.com/moorissa/medium/tree/master/items-recommender/data)
 
 Notebook 基础镜像：tensorflow-1.15.2-notebook-cpu:1.0.0
+
+* 安装MinIO客户端
+
+```shell
+wget    http://dl.minio.org.cn/client/mc/release/linux-amd64/mc //该地址已经404了
+https://dl.min.io/client/mc/release/linux-amd64/
+chmod +x mc
+./mc --help
+```
+
+* 部署MinIO服务
+
+```
+kubectl port-forward --address 0.0.0.0 -n kubeflow svc/minio-service 9000:9000 &
+
+./mc config host add minio http://10.101.32.26:9000 minio minio123
+
+./mc mb minio/data
+
+./mc cp recommend_1.csv  minio/data/recommender/user.csv
+./mc cp trx_data.csv minio/data/recommender/transations.csv
+```
+
+* 创建notebook，并进行 tensorflow 训练
+
+  使用 public.ecr.aws/j1r0q0g6/notebooks/notebook-servers/jupyter:v1.5.0 作为base镜像
+
+  [训练代码地址](https://github.com/intro-to-ml-with-kubeflow/intro-to-ml-with-kubeflow-examples/blob/master/recommender/Recommender_Kubeflow.ipynb)
+
+* 部署 tensorflow 作业，使用TFJobs，把训练代码放置容器里面
+
+  ```dockerfile
+  FROM  tensorflow/tensorflow:1.15.0-py3
+  RUN pip3 install --upgrade pip
+  RUN pip3 install pandas --upgrade
+  RUN pip3 install keras --upgrade
+  RUN pip3 install minio --upgrade
+  RUN pip3 install kubernetes --upgrade
+  RUN pip3 install kfmd --upgrade
+  
+  RUN mkdir -p /opt/kubeflow
+  COPY Recommender_Kubeflow.py /opt/kubeflow/
+  ENTRYPOINT ["python3", "/opt/kubeflow/Recommender_Kubeflow.py"]
+  ```
+
+  ```shell
+  docker build -t kubeflow/recommenderjob:1.0 .
+  ```
+
+  
+
+  TFJob.yaml
+
+  ```yaml
+  apiVersion: kubeflow.org/v1
+  kind: TFJob
+  metadata:
+    generateName: tfjob
+    namespace: your-user-namespace
+  spec:
+    tfReplicaSpecs:
+      Worker:
+        replicas: 1
+        restartPolicy: Never
+        template:
+          metadata:
+            spec:
+              containers:
+              - name: tensorflow
+                image: kubeflow/recommender:1.0
+  ```
+
+  更多的TFJob 和 PyTorchJob [可以参考文档](https://www.kubeflow.org/docs/components/training/pytorch/) 来进行更详细的配置和使用GPU、TPU等不同的硬件。
+
+  
+
+* [分布式训练MNIST简单例子](https://github.com/kubeflow/training-operator/tree/master/examples/tensorflow/dist-mnist)
+
+
 
 
 
