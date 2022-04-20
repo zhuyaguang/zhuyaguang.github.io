@@ -33,65 +33,217 @@ Kubeflow 是 google 开发的包含了机器学习模型开发生命周期的开
 
 
 
-### Kubeflow user interface (UI)
-
-![image-20220328102313469](../img/image-20220328102313469.png)
-
-http://10.101.32.26:8080/
-
-### 
-
-### Distributed training with Kubeflow pipeline
-
-https://github.com/kubeflow/examples/tree/master/FaceNet-distributed-training
-
-![img](https://user-images.githubusercontent.com/51089749/137869771-50941659-9fc1-450f-ae2a-5628d9b80d2d.png)
-
-
-
-
-
-### Natural-Language-Processing
-
-https://github.com/dfm871002/examples/blob/master/Natural-Language-Processing/3.%20Jupyter%20Notebook/Jupyter%20Notebook.md
-
-
-
-![pipeline](https://github.com/dfm871002/examples/raw/master/Natural-Language-Processing/4.%20Image/pipeline.png)
-
 
 
 ### 安装 kubeflow
+
+#### todo
+
+
+
+
+
+### kubeflow学习指南笔记
+
+> [本书代码地址](https://github.com/intro-to-ml-with-kubeflow/intro-to-ml-with-kubeflow-examples)
 
 
 
 #### 设置镜像仓库
 
-Kaniko配置指南
+Kaniko配置指南：https://github.com/GoogleContainerTools/kaniko#pushing-to-different-registries
 
-https://github.com/GoogleContainerTools/kaniko#pushing-to-different-registries
-
-
-
-创建一个 kubeflow 项目
-
-Manifest_root=https://raw.githubusercontent.com/kubeflow/manifests/
-
-
-
-#### 训练和部署模型
-
-https://github.com/intro-to-ml-with-kubeflow/intro-to-ml-with-kubeflow-examples
-
-
+#### 创建一个 kubeflow 项目，手写数字识别
 
 模型查询示例代码： https://github.com/intro-to-ml-with-kubeflow/intro-to-ml-with-kubeflow-examples/blob/master/ch2/query-endpoint.py
 
-### kubeflow 设计
+```python
+import requests
+import numpy as np
 
-#### 训练 operator
+from tensorflow.examples.tutorials.mnist import input_data
+from matplotlib import pyplot as plt
 
-https://www.kubeflow.org/docs/components/training/pytorch/
+def download_mnist():
+    return input_data.read_data_sets("MNIST_data/", one_hot=True)
+
+
+def gen_image(arr):
+    two_d = (np.reshape(arr, (28, 28)) * 255).astype(np.uint8)
+    plt.imshow(two_d, cmap=plt.cm.gray_r, interpolation='nearest')
+    return plt
+#end::scriptSetup[]
+
+AMBASSADOR_API_IP = "10.53.148.167:30134"
+
+#tag::scriptGuts[]
+mnist = download_mnist()
+batch_xs, batch_ys = mnist.train.next_batch(1)
+chosen = 0
+gen_image(batch_xs[chosen]).show()
+data = batch_xs[chosen].reshape((1, 784))
+features = ["X" + str(i + 1) for i in range(0, 784)]
+request = {"data": {"names": features, "ndarray": data.tolist()}}
+deploymentName = "mnist-classifier"
+uri = "http://" + AMBASSADOR_API_IP + "/seldon/" + \
+    deploymentName + "/api/v0.1/predictions"
+
+response = requests.post(uri, json=request)
+#end::scriptGuts[]
+print(response.status_code)
+```
+
+#### kubeflow 设计
+
+[训练 operator汇总](https://www.kubeflow.org/docs/components/training/)
+
+#### Pipeline
+
+pipeline本质上是一个容器执行的图，除了指定哪些容器以何种顺序运行之外，它还允许用户向整个pipeline传递参数和在容器之间传递参数。
+
+每一个pipeline包含下面四个必要步骤
+
+1.创建容器 2.创建一个操作 3.对操作进行排序 4.输出为可执行的YAML文件
+
+
+
+#### pipeline 基本例子
+
+```python
+#!/usr/bin/env python
+# coding: utf-8
+
+
+import kfp
+from kfp import compiler
+import kfp.dsl as dsl
+import kfp.notebook
+import kfp.components as comp
+
+
+
+#Define a Python function
+def add(a: float, b: float) -> float:
+    '''Calculates sum of two arguments'''
+    return a + b
+
+
+add_op = comp.func_to_container_op(add)
+
+
+from typing import NamedTuple
+
+
+def my_divmod(
+    dividend: float, divisor: float
+) -> NamedTuple('MyDivmodOutput', [('quotient', float), ('remainder', float)]):
+    '''Divides two numbers and calculate  the quotient and remainder'''
+    #Imports inside a component function:
+    import numpy as np
+
+    #This function demonstrates how to use nested functions inside a component function:
+    def divmod_helper(dividend, divisor):
+        return np.divmod(dividend, divisor)
+
+    (quotient, remainder) = divmod_helper(dividend, divisor)
+
+    from collections import namedtuple
+    divmod_output = namedtuple('MyDivmodOutput', ['quotient', 'remainder'])
+    return divmod_output(quotient, remainder)
+
+
+divmod_op = comp.func_to_container_op(
+    my_divmod, base_image='tensorflow/tensorflow:1.14.0-py3')
+
+
+@dsl.pipeline(
+    name='Calculation pipeline',
+    description='A toy pipeline that performs arithmetic calculations.')
+def calc_pipeline(
+    a='a',
+    b='7',
+    c='17',
+):
+    #Passing pipeline parameter and a constant value as operation arguments
+    add_task = add_op(a, 4)  # Returns a dsl.ContainerOp class instance.
+
+    #Passing a task output reference as operation arguments
+    #For an operation with a single return value, the output reference can be accessed using `task.output` or `task.outputs['output_name']` syntax
+    divmod_task = divmod_op(add_task.output, b)
+
+    #For an operation with a multiple return values, the output references can be accessed using `task.outputs['output_name']` syntax
+    result_task = add_op(divmod_task.outputs['quotient'], c)
+
+
+if __name__ == '__main__':
+    # Compiling the pipeline
+    kfp.compiler.Compiler().compile(calc_pipeline, 'ch04.yaml')
+```
+
+
+
+#### 步骤之间存储数据
+
+kubeflow Pipeline 的 volumeOp 允许创建一个自动管理的持久卷。
+
+```python
+dvop = dsl.volumeOp(name="create_pvc",resource_name="my-pvc-2",size="5Gi",modes=dsl.VOLUME_MODE_RWO)
+
+```
+
+
+
+还可以利用 MinIO 把文件写入容器本地，并在ContainerOp中指定参数
+
+```python
+fetch = kfp.dsl.ContainerOp(
+    name="download",
+    command=['sh','-c'],
+    arguments=[
+        'sleep 1;'
+        'mkdir -p /tmp/data;'
+        'wget '+ data_url +' -O /tmp/data/result.csv'
+    ],
+    file_outputs={'downloaded':'/tmp/data'}
+)
+```
+
+
+
+#### func_to_container
+
+[标准组件库](https://github.com/kubeflow/pipelines/tree/master/components)
+
+
+
+#### Pipeline 高级主题
+
+1. [复杂条件判断](https://github.com/kubeflow/pipelines/blob/master/samples/tutorials/DSL%20-%20Control%20structures/DSL%20-%20Control%20structures.py)
+2. 定期执行pipeline，使用recurring
+
+
+
+#### 数据准备和特征准备
+
+[2022数据准备工具列表](https://solutionsreview.com/data-integration/the-best-data-preparation-tools-and-software/)
+
+
+
+#### 元数据
+
+[ML Metadata](https://github.com/google/ml-metadata/blob/master/g3doc/get_started.md)
+
+
+
+### 训练机器学习模型
+
+[用户购买记录数据][https://github.com/moorissa/medium/tree/master/items-recommender/data]
+
+Notebook 基础镜像：tensorflow-1.15.2-notebook-cpu:1.0.0
+
+
+
+
 
 ### code
 

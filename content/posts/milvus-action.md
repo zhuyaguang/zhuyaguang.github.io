@@ -210,3 +210,6 @@ Zilliz 公司理念：以重新定义数据科学为愿景，致力于打造一�
 
 2.我们提供了软件、硬件、算法全链路的解决方法，可以针对用户不同的场景端到端进行支持。
 
+
+
+[Milvus实战系列](https://space.bilibili.com/478166626/channel/seriesdetail?sid=2050872)
