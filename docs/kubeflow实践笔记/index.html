@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0\/"
-        },"genre": "posts","wordcount":  2140 ,
+        },"genre": "posts","wordcount":  2663 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0\/","datePublished": "2022-04-10T08:47:52+08:00","dateModified": "2022-04-10T08:47:52+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Kubeflow实践笔记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kubeflow/"><i class="far fa-folder fa-fw"></i>kubeflow</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-10">2022-04-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2140 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-10">2022-04-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2663 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -102,7 +102,7 @@
           <ul>
             <li><a href="#设置镜像仓库">设置镜像仓库</a></li>
             <li><a href="#创建一个-kubeflow-项目手写数字识别">创建一个 kubeflow 项目，手写数字识别</a></li>
-            <li><a href="#kubeflow-设计">kubeflow 设计</a></li>
+            <li><a href="#kubeflow-组件设计">kubeflow 组件设计</a></li>
             <li><a href="#pipeline">Pipeline</a></li>
             <li><a href="#pipeline-基本例子">pipeline 基本例子</a></li>
             <li><a href="#步骤之间存储数据">步骤之间存储数据</a></li>
@@ -110,10 +110,11 @@
             <li><a href="#pipeline-高级主题">Pipeline 高级主题</a></li>
             <li><a href="#数据准备和特征准备">数据准备和特征准备</a></li>
             <li><a href="#元数据">元数据</a></li>
-            <li><a href="#训练机器学习模型">训练机器学习模型</a></li>
+            <li><a href="#使用tfjob训练机器学习模型">使用TFjob训练机器学习模型</a></li>
+            <li><a href="#使用tfjob分布式训练机器学习模型">使用TFjob分布式训练机器学习模型</a></li>
+            <li><a href="#使用pytorchjob训练机器学习模型">使用PyTorchJob训练机器学习模型</a></li>
           </ul>
         </li>
-        <li><a href="#code">code</a></li>
       </ul>
     </li>
   </ul>
@@ -241,13 +242,58 @@
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="kubeflow-设计">kubeflow 设计</h4>
-<p><a href="https://www.kubeflow.org/docs/components/training/" target="_blank" rel="noopener noreffer">训练 operator汇总</a></p>
+</div><h4 id="kubeflow-组件设计">kubeflow 组件设计</h4>
+<p><a href="https://www.kubeflow.org/docs/components/central-dash/" target="_blank" rel="noopener noreffer">Central Dashboard</a> ：主界面</p>
+<p><a href="https://www.kubeflow.org/docs/components/notebooks/" target="_blank" rel="noopener noreffer">Kubeflow Notebooks</a>：可以安装Jupyter</p>
+<p><a href="https://www.kubeflow.org/docs/components/pipelines/" target="_blank" rel="noopener noreffer">Kubeflow Pipelines</a>:pipeline</p>
+<p><a href="https://www.kubeflow.org/docs/components/katib/" target="_blank" rel="noopener noreffer">Katib</a>:超参数调优</p>
+<p><a href="https://www.kubeflow.org/docs/components/training/" target="_blank" rel="noopener noreffer">Training Operators</a>：各种训练模型的 crd controller</p>
+<p><a href="https://www.kubeflow.org/docs/components/multi-tenancy/" target="_blank" rel="noopener noreffer">Multi-Tenancy</a> :多租户</p>
 <h4 id="pipeline">Pipeline</h4>
 <p>pipeline本质上是一个容器执行的图，除了指定哪些容器以何种顺序运行之外，它还允许用户向整个pipeline传递参数和在容器之间传递参数。</p>
 <p>每一个pipeline包含下面四个必要步骤</p>
 <p>1.创建容器 2.创建一个操作 3.对操作进行排序 4.输出为可执行的YAML文件</p>
-<h4 id="pipeline-基本例子">pipeline 基本例子</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">kfp</span> <span class="kn">import</span> <span class="n">dsl</span><span class="p">,</span> <span class="n">compiler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">kfp</span> <span class="k">as</span> <span class="nn">comp</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@comp</span><span class="o">.</span><span class="n">create_component_from_func</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">echo_op</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Hello world&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@dsl</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;my-first-pipeline&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;A hello world pipeline.&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">hello_world_pipeline</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">echo_task</span> <span class="o">=</span> <span class="n">echo_op</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">compiler</span><span class="o">.</span><span class="n">Compiler</span><span class="p">()</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">hello_world_pipeline</span><span class="p">,</span> <span class="vm">__file__</span> <span class="o">+</span> <span class="s1">&#39;.yaml&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="pipeline-基本例子">pipeline 基本例子</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -427,8 +473,251 @@
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><p>pipeline 之间传递数据例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">arguments</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">unicodedata</span> <span class="kn">import</span> <span class="n">name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">Command</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">kfp</span> <span class="kn">import</span> <span class="n">dsl</span><span class="p">,</span> <span class="n">compiler</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">gcs_download_op</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">dsl</span><span class="o">.</span><span class="n">ContainerOp</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;GCS - Download&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">image</span><span class="o">=</span><span class="s1">&#39;google/cloud-sdk:279.0.0&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">command</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sh&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arguments</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gsutil cat $0 | tee $1&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s1">&#39;/tmp/results.txt&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">file_outputs</span><span class="o">=</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;/tmp/results.txt&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">echo_op</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">dsl</span><span class="o">.</span><span class="n">ContainerOp</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;echo&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">image</span><span class="o">=</span><span class="s1">&#39;library/bash:4.4.23&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">command</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sh&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arguments</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;echo &#34;$0&#34;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@dsl</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sequential-pipeline&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;A pipeline with two sequential steps.&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sequential_pipeline</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;gs://ml-pipeline/sample-data/shakespeare/shakespeare1.txt&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;A pipeline with two sequential steps.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">download_task</span> <span class="o">=</span> <span class="n">gcs_download_op</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">echo_task</span> <span class="o">=</span> <span class="n">echo_op</span><span class="p">(</span><span class="n">download_task</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">compiler</span><span class="o">.</span><span class="n">Compiler</span><span class="p">()</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">sequential_pipeline</span><span class="p">,</span> <span class="vm">__file__</span> <span class="o">+</span> <span class="s1">&#39;.yaml&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div><h4 id="func_to_container">func_to_container</h4>
-<p><a href="https://github.com/kubeflow/pipelines/tree/master/components" target="_blank" rel="noopener noreffer">标准组件库</a></p>
+<p>一个函数变成一个container，有很多种方式</p>
+<p>1.参数加镜像模式，业务逻辑通过镜像传递进来</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">SendMsg</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">send_msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;akash&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">dsl</span><span class="o">.</span><span class="n">ContainerOp</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Print msg&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">image</span> <span class="o">=</span> <span class="s1">&#39;docker.io/akashdesarda/comp1:latest&#39;</span><span class="p">,</span> <span class="c1">#逻辑在这里面</span>
+</span></span><span class="line"><span class="cl">        <span class="n">command</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;msg.py&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arguments</span><span class="o">=</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;--msg&#39;</span><span class="p">,</span> <span class="n">send_msg</span>
+</span></span><span class="line"><span class="cl">        <span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">file_outputs</span><span class="o">=</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="s1">&#39;/output.txt&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2.参数加函数模式加基础镜像，业务逻辑直接写在函数里面，通过基础镜像运行 有bug，会去拉busybox镜像，需要修改源代码的基础镜像。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">log_folder</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NamedTuple</span><span class="p">(</span><span class="s1">&#39;Outputs&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;start_time_string&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">)]):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># some code here </span>
+</span></span><span class="line"><span class="cl">     <span class="c1">#逻辑在这里面</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">load_data_op</span><span class="o">=</span><span class="n">func_to_container_op</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">func</span><span class="o">=</span><span class="n">load_data</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">base_image</span><span class="o">=</span><span class="s2">&#34;mike0355/k8s-facenet-distributed-training:4&#34;</span><span class="p">,</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.目前最新的版本似乎都提倡LoadFrom File/URL/Text这种形式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">kfp</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">kfp.components</span> <span class="k">as</span> <span class="nn">comp</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">kfp.dsl</span> <span class="k">as</span> <span class="nn">dsl</span>
+</span></span><span class="line"><span class="cl"><span class="n">create_step_get_lines</span> <span class="o">=</span> <span class="n">comp</span><span class="o">.</span><span class="n">load_component_from_text</span><span class="p">(</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">name: Get Lines
+</span></span></span><span class="line"><span class="cl"><span class="s2">description: Gets the specified number of lines from the input file.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">inputs:
+</span></span></span><span class="line"><span class="cl"><span class="s2">- {name: input_1, type: String, description: &#39;Data for input_1&#39;}
+</span></span></span><span class="line"><span class="cl"><span class="s2">- {name: parameter_1, type: Integer, default: &#39;100&#39;, description: &#39;Number of lines to copy&#39;}
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">outputs:
+</span></span></span><span class="line"><span class="cl"><span class="s2">- {name: output_1, type: String, description: &#39;output_1 data.&#39;}
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">implementation:
+</span></span></span><span class="line"><span class="cl"><span class="s2">  container:
+</span></span></span><span class="line"><span class="cl"><span class="s2">    image: zhuyaguang/pipeline:v4
+</span></span></span><span class="line"><span class="cl"><span class="s2">    command: [
+</span></span></span><span class="line"><span class="cl"><span class="s2">      python3, 
+</span></span></span><span class="line"><span class="cl"><span class="s2">      # Path of the program inside the container
+</span></span></span><span class="line"><span class="cl"><span class="s2">      /pipelines/component/src/v2_2.py,
+</span></span></span><span class="line"><span class="cl"><span class="s2">      --input1-path,
+</span></span></span><span class="line"><span class="cl"><span class="s2">      {inputPath: input_1},
+</span></span></span><span class="line"><span class="cl"><span class="s2">      --param1, 
+</span></span></span><span class="line"><span class="cl"><span class="s2">      {inputValue: parameter_1},
+</span></span></span><span class="line"><span class="cl"><span class="s2">      --output1-path, 
+</span></span></span><span class="line"><span class="cl"><span class="s2">      {outputPath: output_1},
+</span></span></span><span class="line"><span class="cl"><span class="s2">    ]&#34;&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Define your pipeline</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@dsl</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pipeline_root</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">name</span><span class="o">=</span><span class="s2">&#34;example-pipeline&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">my_pipeline</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">get_lines_step</span> <span class="o">=</span> <span class="n">create_step_get_lines</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Input name &#34;Input 1&#34; is converted to pythonic parameter name &#34;input_1&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">input_1</span><span class="o">=</span><span class="s1">&#39;one</span><span class="se">\n</span><span class="s1">two</span><span class="se">\n</span><span class="s1">three</span><span class="se">\n</span><span class="s1">four</span><span class="se">\n</span><span class="s1">five</span><span class="se">\n</span><span class="s1">six</span><span class="se">\n</span><span class="s1">seven</span><span class="se">\n</span><span class="s1">eight</span><span class="se">\n</span><span class="s1">nine</span><span class="se">\n</span><span class="s1">ten&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">parameter_1</span><span class="o">=</span><span class="s1">&#39;5&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Compiling the pipeline</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kfp</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">Compiler</span><span class="p">()</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">my_pipeline</span><span class="p">,</span> <span class="s1">&#39;v2.yaml&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>更多的方式例子可参考：<a href="https://github.com/kubeflow/pipelines/tree/master/components" target="_blank" rel="noopener noreffer">标准组件库</a></p>
 <h4 id="pipeline-高级主题">Pipeline 高级主题</h4>
 <ol>
 <li><a href="https://github.com/kubeflow/pipelines/blob/master/samples/tutorials/DSL%20-%20Control%20structures/DSL%20-%20Control%20structures.py" target="_blank" rel="noopener noreffer">复杂条件判断</a></li>
@@ -438,7 +727,7 @@
 <p><a href="https://solutionsreview.com/data-integration/the-best-data-preparation-tools-and-software/" target="_blank" rel="noopener noreffer">2022数据准备工具列表</a></p>
 <h4 id="元数据">元数据</h4>
 <p><a href="https://github.com/google/ml-metadata/blob/master/g3doc/get_started.md" target="_blank" rel="noopener noreffer">ML Metadata</a></p>
-<h4 id="训练机器学习模型">训练机器学习模型</h4>
+<h4 id="使用tfjob训练机器学习模型">使用TFjob训练机器学习模型</h4>
 <p><a href="https://github.com/moorissa/medium/tree/master/items-recommender/data" target="_blank" rel="noopener noreffer">用户购买记录数据</a></p>
 <p>Notebook 基础镜像：tensorflow-1.15.2-notebook-cpu:1.0.0</p>
 <ul>
@@ -546,13 +835,15 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">kubeflow.org/v1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">TFJob</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">generateName</span><span class="p">:</span><span class="w"> </span><span class="l">tfjob</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">your-user-namespace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">recommenderjob</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubeflow-user-example-com</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tfReplicaSpecs</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Worker</span><span class="p">:</span><span class="w">
@@ -560,19 +851,23 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Never</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">template</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">sidecar.istio.io/inject</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;false&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">containers</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">tensorflow</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">kubeflow/recommender:1.0</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>更多的TFJob 和 PyTorchJob <a href="https://www.kubeflow.org/docs/components/training/pytorch/" target="_blank" rel="noopener noreffer">可以参考文档</a> 来进行更详细的配置和使用GPU、TPU等不同的硬件。</p>
 </li>
-<li>
-<p><a href="https://github.com/kubeflow/training-operator/tree/master/examples/tensorflow/dist-mnist" target="_blank" rel="noopener noreffer">分布式训练MNIST简单例子</a></p>
-</li>
 </ul>
-<h3 id="code">code</h3>
+<h4 id="使用tfjob分布式训练机器学习模型">使用TFjob分布式训练机器学习模型</h4>
+<p><a href="https://github.com/kubeflow/training-operator/tree/master/examples/tensorflow/dist-mnist" target="_blank" rel="noopener noreffer">分布式训练MNIST简单例子</a></p>
+<h4 id="使用pytorchjob训练机器学习模型">使用PyTorchJob训练机器学习模型</h4>
+<ul>
+<li>训练代码</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -645,10 +940,11 @@
 </span></span><span class="line"><span class="cl">    <span class="n">BertConfig</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">BertTokenizer</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">BertForMaskedLM</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">DataCollatorForWholeWordMask</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">LineByLineTextDataset</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DataCollatorForLanguageModeling</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Trainer</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">TrainingArguments</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">LineByLineWithRefDataset</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TrainingArguments</span>
+</span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">torch</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">tokenizers</span>
@@ -660,7 +956,7 @@
 </span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_max_length&#34;</span><span class="p">:</span> <span class="mi">512</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">tokenizer</span> <span class="o">=</span>  <span class="n">BertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;/home/hdu-sunhao/孙浩/二次训练_nezha/&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">tokenizer_kwargs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tokenizer</span> <span class="o">=</span>  <span class="n">BertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;/home/pipeline-demo/&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">tokenizer_kwargs</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="n">config_new</span> <span class="o">=</span> <span class="n">BertConfig</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    
@@ -668,14 +964,14 @@
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="n">model</span><span class="o">.</span><span class="n">resize_token_embeddings</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">))</span>  
 </span></span><span class="line"><span class="cl">                            
-</span></span><span class="line"><span class="cl">    <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">LineByLineWithRefDataset</span><span class="p">(</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">,</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">file_path</span><span class="p">,</span> <span class="n">ref_path</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ref_path</span><span class="p">,</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>      
+</span></span><span class="line"><span class="cl">    <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">LineByLineTextDataset</span><span class="p">(</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">,</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">file_path</span><span class="p">,</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>      
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">    <span class="n">data_collator</span> <span class="o">=</span> <span class="n">DataCollatorForWholeWordMask</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">mlm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mlm_probability</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data_collator</span> <span class="o">=</span> <span class="n">DataCollatorForLanguageModeling</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">mlm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mlm_probability</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="n">pretrain_batch_size</span><span class="o">=</span><span class="mi">16</span>
 </span></span><span class="line"><span class="cl">    <span class="n">num_train_epochs</span><span class="o">=</span><span class="mi">5</span>
 </span></span><span class="line"><span class="cl">    <span class="n">training_args</span> <span class="o">=</span> <span class="n">TrainingArguments</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="n">output_dir</span><span class="o">=</span><span class="s1">&#39;/home/hdu-sunhao/孙浩/二次训练_nezha/model-claims/args&#39;</span><span class="p">,</span> <span class="n">overwrite_output_dir</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_train_epochs</span><span class="o">=</span><span class="n">num_train_epochs</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">output_dir</span><span class="o">=</span><span class="s1">&#39;/home/pipeline-demo/args&#39;</span><span class="p">,</span> <span class="n">overwrite_output_dir</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_train_epochs</span><span class="o">=</span><span class="n">num_train_epochs</span><span class="p">,</span> 
 </span></span><span class="line"><span class="cl">        <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">warmup_steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">local_rank</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">local_rank</span><span class="p">,</span> <span class="c1">#dataloader_pin_memory = False,</span>
 </span></span><span class="line"><span class="cl">        <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="n">pretrain_batch_size</span><span class="p">,</span> <span class="n">logging_strategy</span> <span class="o">=</span><span class="s2">&#34;epoch&#34;</span><span class="p">,</span><span class="n">save_strategy</span> <span class="o">=</span> <span class="s2">&#34;epoch&#34;</span><span class="p">,</span> <span class="n">save_total_limit</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    
@@ -687,11 +983,10 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&#34;nezha_train&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;--config&#34;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&#34;二次训练_nezha&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;--model&#34;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&#34;二次训练_nezha&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;--file_path&#34;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&#34;二次训练_nezha&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;--ref_path&#34;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&#34;二次训练_nezha&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;--save_dir&#34;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&#34;二次训练_nezha&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;--config&#34;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s2">&#34;bert-base-uncased&#34;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&#34;二次训练_nezha&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;--model&#34;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s2">&#34;bert-base-uncased&#34;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&#34;二次训练_nezha&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;--file_path&#34;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s2">&#34;/home/pipeline-demo/newfileaa&#34;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&#34;二次训练_nezha&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;--save_dir&#34;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s2">&#34;/home/pipeline-demo&#34;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&#34;二次训练_nezha&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;--local_rank&#34;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&#34;For distributed training: local_rank&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>

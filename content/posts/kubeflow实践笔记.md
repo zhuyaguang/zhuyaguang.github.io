@@ -98,9 +98,19 @@ response = requests.post(uri, json=request)
 print(response.status_code)
 ```
 
-#### kubeflow 设计
+#### kubeflow 组件设计
 
-[训练 operator汇总](https://www.kubeflow.org/docs/components/training/)
+[Central Dashboard](https://www.kubeflow.org/docs/components/central-dash/) ：主界面
+
+[Kubeflow Notebooks](https://www.kubeflow.org/docs/components/notebooks/)：可以安装Jupyter
+
+[Kubeflow Pipelines](https://www.kubeflow.org/docs/components/pipelines/):pipeline
+
+[Katib](https://www.kubeflow.org/docs/components/katib/):超参数调优
+
+[Training Operators](https://www.kubeflow.org/docs/components/training/)：各种训练模型的 crd controller
+
+ [Multi-Tenancy](https://www.kubeflow.org/docs/components/multi-tenancy/) :多租户
 
 #### Pipeline
 
@@ -109,6 +119,26 @@ pipeline本质上是一个容器执行的图，除了指定哪些容器以何种
 每一个pipeline包含下面四个必要步骤
 
 1.创建容器 2.创建一个操作 3.对操作进行排序 4.输出为可执行的YAML文件
+
+```python
+from kfp import dsl, compiler
+import kfp as comp
+
+
+@comp.create_component_from_func
+def echo_op():
+    print("Hello world")
+
+@dsl.pipeline(
+    name='my-first-pipeline',
+    description='A hello world pipeline.'
+)
+def hello_world_pipeline():
+    echo_task = echo_op()
+
+if __name__ == '__main__':
+    compiler.Compiler().compile(hello_world_pipeline, __file__ + '.yaml')
+```
 
 
 
@@ -215,9 +245,144 @@ fetch = kfp.dsl.ContainerOp(
 
 
 
+pipeline 之间传递数据例子
+
+```python
+from ast import arguments
+from unicodedata import name
+
+from setuptools import Command
+from kfp import dsl, compiler
+
+
+def gcs_download_op(url):
+    return dsl.ContainerOp(
+        name='GCS - Download',
+        image='google/cloud-sdk:279.0.0',
+        command=['sh', '-c'],
+        arguments=['gsutil cat $0 | tee $1', url, '/tmp/results.txt'],
+        file_outputs={
+            'data': '/tmp/results.txt',
+        }
+    )
+
+
+def echo_op(text):
+    return dsl.ContainerOp(
+        name='echo',
+        image='library/bash:4.4.23',
+        command=['sh', '-c'],
+        arguments=['echo "$0"', text]
+    )
+
+@dsl.pipeline(
+    name='sequential-pipeline',
+    description='A pipeline with two sequential steps.'
+)
+def sequential_pipeline(url='gs://ml-pipeline/sample-data/shakespeare/shakespeare1.txt'):
+    """A pipeline with two sequential steps."""
+
+    download_task = gcs_download_op(url)
+    echo_task = echo_op(download_task.output)
+
+if __name__ == '__main__':
+    compiler.Compiler().compile(sequential_pipeline, __file__ + '.yaml')
+```
+
+
+
 #### func_to_container
 
-[标准组件库](https://github.com/kubeflow/pipelines/tree/master/components)
+一个函数变成一个container，有很多种方式
+
+1.参数加镜像模式，业务逻辑通过镜像传递进来 
+
+```python
+def SendMsg(
+    send_msg: str = 'akash'
+):
+    return dsl.ContainerOp(
+        name = 'Print msg', 
+        image = 'docker.io/akashdesarda/comp1:latest', #逻辑在这里面
+        command = ['python', 'msg.py'],
+        arguments=[
+            '--msg', send_msg
+        ],
+        file_outputs={
+            'output': '/output.txt',
+        }
+    )
+```
+
+2.参数加函数模式加基础镜像，业务逻辑直接写在函数里面，通过基础镜像运行 有bug，会去拉busybox镜像，需要修改源代码的基础镜像。
+
+```python
+    def load_data(log_folder:str)->NamedTuple('Outputs', [('start_time_string',str)]):
+    # some code here 
+     #逻辑在这里面
+    
+    load_data_op=func_to_container_op(
+        func=load_data,
+        base_image="mike0355/k8s-facenet-distributed-training:4",  
+    )
+    
+    
+```
+
+
+
+3.目前最新的版本似乎都提倡LoadFrom File/URL/Text这种形式
+
+```python
+import kfp
+import kfp.components as comp
+import kfp.dsl as dsl
+create_step_get_lines = comp.load_component_from_text("""
+name: Get Lines
+description: Gets the specified number of lines from the input file.
+
+inputs:
+- {name: input_1, type: String, description: 'Data for input_1'}
+- {name: parameter_1, type: Integer, default: '100', description: 'Number of lines to copy'}
+
+outputs:
+- {name: output_1, type: String, description: 'output_1 data.'}
+
+implementation:
+  container:
+    image: zhuyaguang/pipeline:v4
+    command: [
+      python3, 
+      # Path of the program inside the container
+      /pipelines/component/src/v2_2.py,
+      --input1-path,
+      {inputPath: input_1},
+      --param1, 
+      {inputValue: parameter_1},
+      --output1-path, 
+      {outputPath: output_1},
+    ]""")
+
+# Define your pipeline
+@dsl.pipeline(
+    pipeline_root='',
+    name="example-pipeline",
+) 
+def my_pipeline():
+    get_lines_step = create_step_get_lines(
+        # Input name "Input 1" is converted to pythonic parameter name "input_1"
+        input_1='one\ntwo\nthree\nfour\nfive\nsix\nseven\neight\nnine\nten',
+        parameter_1='5',
+    )
+
+if __name__ == '__main__':
+    # Compiling the pipeline
+    kfp.compiler.Compiler().compile(my_pipeline, 'v2.yaml')
+```
+
+
+
+更多的方式例子可参考：[标准组件库](https://github.com/kubeflow/pipelines/tree/master/components)
 
 
 
@@ -238,7 +403,9 @@ fetch = kfp.dsl.ContainerOp(
 
 [ML Metadata](https://github.com/google/ml-metadata/blob/master/g3doc/get_started.md)
 
-#### 训练机器学习模型
+
+
+#### 使用TFjob训练机器学习模型
 
 [用户购买记录数据](https://github.com/moorissa/medium/tree/master/items-recommender/data)
 
@@ -300,8 +467,8 @@ kubectl port-forward --address 0.0.0.0 -n kubeflow svc/minio-service 9000:9000 &
   apiVersion: kubeflow.org/v1
   kind: TFJob
   metadata:
-    generateName: tfjob
-    namespace: your-user-namespace
+    name: recommenderjob
+    namespace: kubeflow-user-example-com
   spec:
     tfReplicaSpecs:
       Worker:
@@ -309,25 +476,23 @@ kubectl port-forward --address 0.0.0.0 -n kubeflow svc/minio-service 9000:9000 &
         restartPolicy: Never
         template:
           metadata:
-            spec:
-              containers:
+            annotations:
+              sidecar.istio.io/inject: "false"
+          spec:
+            containers:
               - name: tensorflow
                 image: kubeflow/recommender:1.0
   ```
 
   更多的TFJob 和 PyTorchJob [可以参考文档](https://www.kubeflow.org/docs/components/training/pytorch/) 来进行更详细的配置和使用GPU、TPU等不同的硬件。
 
-  
+#### 使用TFjob分布式训练机器学习模型
 
-* [分布式训练MNIST简单例子](https://github.com/kubeflow/training-operator/tree/master/examples/tensorflow/dist-mnist)
+[分布式训练MNIST简单例子](https://github.com/kubeflow/training-operator/tree/master/examples/tensorflow/dist-mnist)
 
+#### 使用PyTorchJob训练机器学习模型
 
-
-
-
-
-
-### code
+* 训练代码
 
 ```python
 #!/usr/bin/env python
@@ -339,10 +504,11 @@ from transformers import (
     BertConfig,
     BertTokenizer,
     BertForMaskedLM,
-    DataCollatorForWholeWordMask,
+    LineByLineTextDataset,
+    DataCollatorForLanguageModeling,
     Trainer,
-    TrainingArguments,
-    LineByLineWithRefDataset
+    TrainingArguments
+    
 )
 import torch
 import tokenizers
@@ -354,7 +520,7 @@ def main(args):
         "model_max_length": 512
     }
     
-    tokenizer =  BertTokenizer.from_pretrained('/home/hdu-sunhao/孙浩/二次训练_nezha/', **tokenizer_kwargs)
+    tokenizer =  BertTokenizer.from_pretrained('/home/pipeline-demo/', **tokenizer_kwargs)
     
     config_new = BertConfig.from_pretrained(args.config)
     
@@ -362,14 +528,14 @@ def main(args):
     
     model.resize_token_embeddings(len(tokenizer))  
                             
-    train_dataset = LineByLineWithRefDataset(tokenizer = tokenizer,file_path = args.file_path, ref_path = args.ref_path, block_size=512)      
+    train_dataset = LineByLineTextDataset(tokenizer = tokenizer,file_path = args.file_path, block_size=512)      
             
-    data_collator = DataCollatorForWholeWordMask(tokenizer=tokenizer, mlm=True, mlm_probability=0.15)
+    data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=True, mlm_probability=0.15)
     
     pretrain_batch_size=16
     num_train_epochs=5
     training_args = TrainingArguments(
-        output_dir='/home/hdu-sunhao/孙浩/二次训练_nezha/model-claims/args', overwrite_output_dir=True, num_train_epochs=num_train_epochs, 
+        output_dir='/home/pipeline-demo/args', overwrite_output_dir=True, num_train_epochs=num_train_epochs, 
         learning_rate=1e-4, weight_decay=0.01, warmup_steps=10000, local_rank = args.local_rank, #dataloader_pin_memory = False,
         per_device_train_batch_size=pretrain_batch_size, logging_strategy ="epoch",save_strategy = "epoch", save_total_limit = 1)
     
@@ -381,14 +547,14 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="nezha_train")
-    parser.add_argument("--config", type = str, default = None, help = "二次训练_nezha")
-    parser.add_argument("--model", type = str, default = None, help = "二次训练_nezha")
-    parser.add_argument("--file_path", type = str, default = None, help = "二次训练_nezha")
-    parser.add_argument("--ref_path", type = str, default = None, help = "二次训练_nezha")
-    parser.add_argument("--save_dir", type = str, default = None, help = "二次训练_nezha")
+    parser.add_argument("--config", type = str, default = "bert-base-uncased", help = "二次训练_nezha")
+    parser.add_argument("--model", type = str, default = "bert-base-uncased", help = "二次训练_nezha")
+    parser.add_argument("--file_path", type = str, default = "/home/pipeline-demo/newfileaa", help = "二次训练_nezha")
+    parser.add_argument("--save_dir", type = str, default = "/home/pipeline-demo", help = "二次训练_nezha")
     parser.add_argument("--local_rank", type = int, default = -1, help = "For distributed training: local_rank")
     args = parser.parse_args()
     main(args)
+
 ```
 
 
