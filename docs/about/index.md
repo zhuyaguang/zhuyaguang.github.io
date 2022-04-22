@@ -21,6 +21,7 @@
 - CloudNative,Docker,Kubernetes,Helm
 - Kubernetes Operators
 - Bash,Git,Terraform
+- MLops
 
 
 

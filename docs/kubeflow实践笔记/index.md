@@ -420,7 +420,7 @@ chmod +x mc
 ```
 kubectl port-forward --address 0.0.0.0 -n kubeflow svc/minio-service 9000:9000 &
 
-./mc config host add minio http://10.101.32.26:9000 minio minio123
+./mc config host add minio http://10.101.32.13:9000 minio minio123
 
 ./mc mb minio/data
 
@@ -475,19 +475,19 @@ kubectl port-forward --address 0.0.0.0 -n kubeflow svc/minio-service 9000:9000 &
               sidecar.istio.io/inject: "false"
           spec:
             containers:
-              - name: tensorflow
-                image: kubeflow/recommender:1.0
+            - name: tensorflow
+              image: 10.100.29.62/kubeflow/recommender:1.0
+            imagePullSecrets:
+            - name: harbor
   ```
 
   更多的TFJob 和 PyTorchJob [可以参考文档](https://www.kubeflow.org/docs/components/training/pytorch/) 来进行更详细的配置和使用GPU、TPU等不同的硬件。
 
-#### 使用TFjob分布式训练机器学习模型
 
-[分布式训练MNIST简单例子](https://github.com/kubeflow/training-operator/tree/master/examples/tensorflow/dist-mnist)
 
 #### 使用PyTorchJob训练机器学习模型
 
-* 训练代码
+* 训练代码 `train.py`
 
 ```python
 #!/usr/bin/env python
@@ -552,6 +552,63 @@ if __name__ == "__main__":
 
 ```
 
+* Dockerfile
 
+```dockerfile
+FROM python:3.7
+RUN python3 -m pip install transformers
+RUN python3 -m pip install torch -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN python3 -m pip install tokenizers
+RUN python3 -m pip install argparse
+COPY ./vocab.txt /home/pipeline-demo/vocab.txt
+COPY ./newfileaa /home/pipeline-demo/newfileaa
+COPY ./train.py /home/pipeline-demo/train.py
+```
+
+```
+docker build -f Dockerfile -t 10.100.29.62/kubeflow/train:v1 ./
+```
+
+* PyTorchJob.yaml
+
+```yaml
+apiVersion: "kubeflow.org/v1"
+kind: PyTorchJob
+metadata:
+  name: pytorch-simple
+  namespace: kubeflow
+spec:
+  pytorchReplicaSpecs:
+    Master:
+      replicas: 1
+      restartPolicy: OnFailure
+      template:
+        spec:
+          containers:
+            - name: pytorch
+              image: 10.100.29.62/kubeflow/zhuyaguang/pipeline:v6
+              imagePullPolicy: Always
+              command:
+                - "python3"
+                - "/home/pipeline-demo/train.py"
+    Worker:
+      replicas: 1
+      restartPolicy: OnFailure
+      template:
+        spec:
+          containers:
+            - name: pytorch
+              image: 10.100.29.62/kubeflow/zhuyaguang/pipeline:v6
+              imagePullPolicy: Always
+              command:
+                - "python3"
+                - "/home/pipeline-demo/train.py"
+```
+
+
+
+#### 更多使用TFjob、PyTorchJob 分布式训练机器学习模型例子
+
+[分布式训练MNIST简单例子](https://github.com/kubeflow/training-operator/tree/master/examples/tensorflow/dist-mnist)
 
 

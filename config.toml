@@ -47,6 +47,14 @@ theme = "Loveit"
     url = "/about/"
     title = ""
     weight = 4
+  [[menu.main]]
+    identifier = "reading"
+    pre = ""
+    post = ""
+    name = "书单"
+    url = "/reading/"
+    title = ""
+    weight = 5
 
 [params]
   #  LoveIt 主题版本
@@ -130,17 +138,17 @@ theme = "Loveit"
     rss = 10
     # 主页个人信息
     [params.home.profile]
-      enable = false
+      enable = true
       # Gravatar 邮箱，用于优先在主页显示的头像
       gravatarEmail = "zhuyaguang1368@163.com"
       # 主页显示头像的 URL
-      avatarURL = ""
+      avatarURL = "https://en.gravatar.com/userimage/220462221/a34be956617f399a4630c30605fdbe14.jpg"
       #  主页显示的网站标题 (支持 HTML 格式)
       title = ""
       # 主页显示的网站副标题
       subtitle = "今年要写10篇博客哦"
       # 是否为副标题显示打字机动画
-      typeit = true
+      typeit =  false
       # 是否显示社交账号
       social = true
       #  免责声明 (支持 HTML 格式)
