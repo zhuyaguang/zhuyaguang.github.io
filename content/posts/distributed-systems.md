@@ -15,21 +15,27 @@ description: "分布式系统学习博客、课程、学习笔记汇总"
 
 #### 分布式实验室公众号文章
 
-分布式系统的一些基础理论：https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&mid=2247544603&idx=1&sn=ee21a430e1abd59e51d8f23888814193&source=41#wechat_redirect
+分布式系统的一些基础理论：
 
-值得你收藏的100篇分布式干货文章
+https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&mid=2247544603&idx=1&sn=ee21a430e1abd59e51d8f23888814193&source=41#wechat_redirect
 
-Raft：寻找一种易于理解的一致性算法：https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&mid=2247544599&idx=1&sn=81bac7d198e294a998a6408b2f2aba43&source=41#wechat_redirect
+值得你收藏的100篇分布式干货文章：
+
+Raft：寻找一种易于理解的一致性算法：
+
+https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&mid=2247544599&idx=1&sn=81bac7d198e294a998a6408b2f2aba43&source=41#wechat_redirect
 
 #### 其他文章
 
-深入解析Apache Pulsar系列（二）：https://mp.weixin.qq.com/s/m_RRLrQMSERDBb64afGFFA
+深入解析Apache Pulsar系列（二）：
+
+https://mp.weixin.qq.com/s/m_RRLrQMSERDBb64afGFFA
 
 
 
 ### 书籍
 
-分布式系统
+分布式架构原理与实践
 
 
 
