@@ -37,7 +37,15 @@ Kubeflow 是 google 开发的包含了机器学习模型开发生命周期的开
 
 ### 安装 kubeflow
 
-#### todo
+#### 下载 修改过镜像地址的的代码仓库
+
+```shell
+git clone https://github.com/zhuyaguang/manifests.git
+
+while ! kustomize build example | kubectl apply -f -; do echo "Retrying to apply resources"; sleep 10; done
+```
+
+
 
 
 
@@ -400,7 +408,7 @@ if __name__ == '__main__':
 
 
 
-#### 使用TFjob训练机器学习模型
+#### 使用TFjob训练机器学习模型（预测用户购买行为）
 
 [用户购买记录数据](https://github.com/moorissa/medium/tree/master/items-recommender/data)
 
@@ -485,7 +493,7 @@ kubectl port-forward --address 0.0.0.0 -n kubeflow svc/minio-service 9000:9000 &
 
 
 
-#### 使用PyTorchJob训练机器学习模型
+#### 使用PyTorchJob训练机器学习模型 (孙浩的专利检索)
 
 * 训练代码 `train.py`
 
@@ -561,12 +569,12 @@ RUN python3 -m pip install torch -i https://pypi.tuna.tsinghua.edu.cn/simple
 RUN python3 -m pip install tokenizers
 RUN python3 -m pip install argparse
 COPY ./vocab.txt /home/pipeline-demo/vocab.txt
-COPY ./newfileaa /home/pipeline-demo/newfileaa
+COPY ./newfileaa /home/pipeline-demo/newfileaa 
 COPY ./train.py /home/pipeline-demo/train.py
 ```
 
 ```
-docker build -f Dockerfile -t 10.100.29.62/kubeflow/train:v1 ./
+docker build -f Dockerfile -t 10.100.29.62/kubeflow/train:v2 ./
 ```
 
 * PyTorchJob.yaml
@@ -586,7 +594,7 @@ spec:
         spec:
           containers:
             - name: pytorch
-              image: 10.100.29.62/kubeflow/zhuyaguang/pipeline:v6
+              image: 10.100.29.62/kubeflow/train:v2
               imagePullPolicy: Always
               command:
                 - "python3"
@@ -598,17 +606,18 @@ spec:
         spec:
           containers:
             - name: pytorch
-              image: 10.100.29.62/kubeflow/zhuyaguang/pipeline:v6
+              image: 10.100.29.62/kubeflow/train:v2
               imagePullPolicy: Always
               command:
                 - "python3"
                 - "/home/pipeline-demo/train.py"
+
 ```
 
+#### [TF job分布式训练MNIST例子](https://github.com/kubeflow/training-operator/tree/master/examples/tensorflow/dist-mnist)
 
 
-#### 更多使用TFjob、PyTorchJob 分布式训练机器学习模型例子
 
-[分布式训练MNIST简单例子](https://github.com/kubeflow/training-operator/tree/master/examples/tensorflow/dist-mnist)
+
 
 
