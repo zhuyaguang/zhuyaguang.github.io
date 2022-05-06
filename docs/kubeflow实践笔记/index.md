@@ -624,6 +624,10 @@ spec:
 
 
 
+### 问题
+
+* 如果访问界面403，请删除 kubectl delete  pods authservice-0  -n istio-system 重启
+
 
 
 
