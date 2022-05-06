@@ -47,6 +47,12 @@ while ! kustomize build example | kubectl apply -f -; do echo "Retrying to apply
 
 
 
+#### 启动kubeflow界面
+
+```
+kubectl port-forward --address 0.0.0.0 -n istio-system svc/istio-ingressgateway 8080:80 &
+```
+
 
 
 

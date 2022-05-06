@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0\/"
-        },"genre": "posts","wordcount":  2795 ,
+        },"genre": "posts","wordcount":  2817 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0\/","datePublished": "2022-04-10T08:47:52+08:00","dateModified": "2022-04-10T08:47:52+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Kubeflow实践笔记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kubeflow/"><i class="far fa-folder fa-fw"></i>kubeflow</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-10">2022-04-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2795 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-10">2022-04-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2817 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -96,6 +96,7 @@
         <li><a href="#安装-kubeflow">安装 kubeflow</a>
           <ul>
             <li><a href="#下载-修改过镜像地址的的代码仓库">下载 修改过镜像地址的的代码仓库</a></li>
+            <li><a href="#启动kubeflow界面">启动kubeflow界面</a></li>
           </ul>
         </li>
         <li><a href="#kubeflow学习指南笔记">kubeflow学习指南笔记</a>
@@ -172,6 +173,15 @@
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/zhuyaguang/manifests.git
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">while</span> ! kustomize build example <span class="p">|</span> kubectl apply -f -<span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="s2">&#34;Retrying to apply resources&#34;</span><span class="p">;</span> sleep 10<span class="p">;</span> <span class="k">done</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="启动kubeflow界面">启动kubeflow界面</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl port-forward --address 0.0.0.0 -n istio-system svc/istio-ingressgateway 8080:80 &amp;
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="kubeflow学习指南笔记">kubeflow学习指南笔记</h3>
