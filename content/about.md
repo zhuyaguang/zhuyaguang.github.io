@@ -45,6 +45,6 @@ draft: false
 
 ### Status
 
-- 🌱 I’m currently learning rust\vue\MIT 6.824
--  🌱 I’m currently reading kubeflow and ml
+- 🌱 I’m currently learning rust\distributed-system
+-  🌱 I’m currently reading kubeflow and mlops
 
