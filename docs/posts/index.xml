@@ -4,13 +4,20 @@
         <link>https://zhuyaguang.github.io/posts/</link>
         <description>所有文章 | 朱亚光的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Wed, 04 May 2022 11:02:29 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Mon, 09 May 2022 10:13:22 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Mlops 产品研习录</title>
+    <link>https://zhuyaguang.github.io/mlops/</link>
+    <pubDate>Mon, 09 May 2022 10:13:22 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/mlops/</guid>
+    <description><![CDATA[4.6号，听了公众号“M小姐研习录”的一个直播，下一个infra 百亿美金战场在哪里？。最近刚好也在用kubeflow做一些infra的工作。]]></description>
+</item><item>
     <title>分布式系统学习</title>
     <link>https://zhuyaguang.github.io/distributed-systems/</link>
     <pubDate>Wed, 04 May 2022 11:02:29 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/distributed-systems/</guid>
-    <description><![CDATA[GitHub 《分布式系统模式》中文版：https://github.com/dreamhead/patterns-of-distributed-sys]]></description>
+    <description><![CDATA[GitHub 1 《分布式系统模式》中文版 公众号文章 分布式实验室公众号文章 分布式系统的一些基础理论： https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&mid=2247544603&idx=1&sn=ee21a430e1abd59e51d8f23888814193&source=41#wechat_redirect 值得你收藏的100篇分布式干货文章： Raft：寻找一]]></description>
 </item><item>
     <title>向量检索落地场景探索</title>
     <link>https://zhuyaguang.github.io/milvus-action/</link>

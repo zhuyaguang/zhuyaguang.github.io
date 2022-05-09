@@ -7,7 +7,9 @@ description: "分布式系统学习博客、课程、学习笔记汇总"
 
 ### GitHub
 
-《分布式系统模式》中文版：https://github.com/dreamhead/patterns-of-distributed-systems
+```markdown
+{{< link href="https://github.com/dreamhead/patterns-of-distributed-systems" content=《分布式系统模式》中文版 >}}
+```
 
 ### 公众号文章
 
