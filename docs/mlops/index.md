@@ -1,8 +1,5 @@
----
-title: "Mlops 产品研习录"
-date: 2022-05-09T10:13:22+08:00
-draft: true
----
+# Mlops 产品研习录
+
 
 
 
@@ -49,3 +46,4 @@ draft: true
 ### BentoML
 
 >  Simplify Model Deployment
+

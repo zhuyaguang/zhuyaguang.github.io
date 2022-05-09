@@ -1,9 +1,5 @@
----
-title: "分布式系统学习"
-date: 2022-05-04T11:02:29+08:00
-draft: true
-description: "分布式系统学习博客、课程、学习笔记汇总"
----
+# 分布式系统学习
+
 
 <!--more-->
 
@@ -66,3 +62,4 @@ https://mit-public-courses-cn-translatio.gitbook.io/mit6-824/
 分布式缓存高手课
 
 分布式数据库30讲
+
