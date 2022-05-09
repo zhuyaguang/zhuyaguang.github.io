@@ -5,6 +5,8 @@ draft: true
 description: "分布式系统学习博客、课程、学习笔记汇总"
 ---
 
+<!--more-->
+
 ### GitHub
 
 {{< link href="https://github.com/dreamhead/patterns-of-distributed-systems" content=《分布式系统模式》中文版 >}}
