@@ -3,7 +3,10 @@ title: "向量检索落地场景探索"
 date: 2022-04-18T17:23:48+08:00
 draft: false
 categories: [向量检索]
+description: "向量检索落地场景探索"
 ---
+
+<!--more-->
 
 ### 向量检索落地场景探索
 

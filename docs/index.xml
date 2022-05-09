@@ -12,7 +12,7 @@
     <pubDate>Mon, 09 May 2022 10:13:22 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/mlops/</guid>
-    <description><![CDATA[4.6号，听了公众号“M小姐研习录”的一个直播，下一个infra 百亿美金战场在哪里？。最近刚好也在用kubeflow做一些infra的工作。]]></description>
+    <description><![CDATA[MLops 产品大汇总]]></description>
 </item><item>
     <title>分布式系统学习</title>
     <link>https://zhuyaguang.github.io/distributed-systems/</link>
@@ -26,14 +26,14 @@
     <pubDate>Mon, 18 Apr 2022 17:23:48 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/milvus-action/</guid>
-    <description><![CDATA[向量检索落地场景探索 Zilliz 公司理念：以重新定义数据科学为愿景，致力于打造一家全球领先的开源技术创新公司，并通过开源和云原生解决方案为企业解锁非结]]></description>
+    <description><![CDATA[向量检索落地场景探索]]></description>
 </item><item>
     <title>Kubeflow实践笔记</title>
     <link>https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</link>
     <pubDate>Sun, 10 Apr 2022 08:47:52 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</guid>
-    <description><![CDATA[基于 Kubernetes 的云原生 AI 平台建设 提高算力资源利用 GPU 虚拟化 GPUManager 基于 GPU 驱动封装实现，用户需要对驱动的某些关键接口（如显存分配、cuda thread 创建等）进行封装劫]]></description>
+    <description><![CDATA[kubeflow介绍、安装和使用]]></description>
 </item><item>
     <title>Hugo Command</title>
     <link>https://zhuyaguang.github.io/hugo-command/</link>

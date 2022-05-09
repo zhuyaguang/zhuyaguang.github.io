@@ -6,6 +6,8 @@ categories: [kubeflow]
 description: "kubeflow介绍、安装和使用"
 ---
 
+<!--more-->
+
 # 基于 Kubernetes 的云原生 AI 平台建设
 
 ### 提高算力资源利用

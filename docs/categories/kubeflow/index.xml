@@ -10,6 +10,6 @@
     <pubDate>Sun, 10 Apr 2022 08:47:52 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</guid>
-    <description><![CDATA[基于 Kubernetes 的云原生 AI 平台建设 提高算力资源利用 GPU 虚拟化 GPUManager 基于 GPU 驱动封装实现，用户需要对驱动的某些关键接口（如显存分配、cuda thread 创建等）进行封装劫]]></description>
+    <description><![CDATA[kubeflow介绍、安装和使用]]></description>
 </item></channel>
 </rss>

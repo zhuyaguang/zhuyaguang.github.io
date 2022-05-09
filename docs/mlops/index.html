@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Mlops 产品研习录 - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="Mlops 产品研习录" />
-<meta property="og:description" content="4.6号，听了公众号“M小姐研习录”的一个直播，下一个infra 百亿美金战场在哪里？。最近刚好也在用kubeflow做一些infra的工作。" />
+        <title>Mlops 产品研习录 - 朱亚光的博客</title><meta name="Description" content="MLops 产品大汇总"><meta property="og:title" content="Mlops 产品研习录" />
+<meta property="og:description" content="MLops 产品大汇总" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/mlops/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-09T10:13:22+08:00" />
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
 <meta name="twitter:title" content="Mlops 产品研习录"/>
-<meta name="twitter:description" content="4.6号，听了公众号“M小姐研习录”的一个直播，下一个infra 百亿美金战场在哪里？。最近刚好也在用kubeflow做一些infra的工作。"/>
+<meta name="twitter:description" content="MLops 产品大汇总"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,13 +29,13 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/mlops\/"
-        },"genre": "posts","wordcount":  250 ,
+        },"genre": "posts","wordcount":  272 ,
         "url": "https:\/\/zhuyaguang.github.io\/mlops\/","datePublished": "2022-05-09T10:13:22+08:00","dateModified": "2022-05-09T10:13:22+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "朱亚光"
-            },"description": ""
+            },"description": "MLops 产品大汇总"
     }
     </script></head>
     <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Mlops 产品研习录</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-09">2022-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 250 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-09">2022-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 272 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -102,7 +102,7 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>4.6号，听了公众号“M小姐研习录”的一个直播，<code>下一个infra 百亿美金战场在哪里？</code>。最近刚好也在用kubeflow做一些infra的工作。</p>
+            </div><div class="content" id="content"><p>4.6号，听了公众号“M小姐研习录”的一个直播，<code>下一个infra 百亿美金战场在哪里？</code>。最近刚好也在用kubeflow做一些infra的工作。所以就对直播中提到的一些产品进行梳理和体验。</p>
 <p>关注M小姐的公众号是因为她的一篇关于Hashicorp（terraform的母公司，开发了一系列Infra-as-code的工具）总结性文章，写的非常好。<a href="https://mp.weixin.qq.com/s/Y2A7-Ui2nzUgodkEbgR6lQ" target="_blank" rel="noopener noreffer">【年度公司】Hashicorp：160亿美金的开源标杆，15000字的研究笔记，2021年不遗憾</a></p>
 <h3 id="databricks">databricks</h3>
 <blockquote>
@@ -129,8 +129,7 @@
 <h3 id="bentoml">BentoML</h3>
 <blockquote>
 <p>Simplify Model Deployment</p>
-</blockquote>
-</div><div class="post-footer" id="post-footer">
+</blockquote></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -143,7 +142,7 @@
                             <a class="link-to-markdown" href="/mlops/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/mlops/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/mlops/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-description="MLops 产品大汇总"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-description="MLops 产品大汇总"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
