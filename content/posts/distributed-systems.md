@@ -7,9 +7,7 @@ description: "分布式系统学习博客、课程、学习笔记汇总"
 
 ### GitHub
 
-```markdown
 {{< link href="https://github.com/dreamhead/patterns-of-distributed-systems" content=《分布式系统模式》中文版 >}}
-```
 
 ### 公众号文章
 
@@ -29,9 +27,9 @@ https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&mid=2247544599&idx=1&sn=81bac7
 
 #### 其他文章
 
-深入解析Apache Pulsar系列（二）：
+{{< link href="https://mp.weixin.qq.com/s/m_RRLrQMSERDBb64afGFFA" content=深入解析Apache Pulsar系列（二） >}}
 
-https://mp.weixin.qq.com/s/m_RRLrQMSERDBb64afGFFA
+
 
 
 
