@@ -1,6 +1,8 @@
 # Hugo Command
 
 
+<!--more-->
+
 ```shell
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/zhuyaguang/.zprofile
 

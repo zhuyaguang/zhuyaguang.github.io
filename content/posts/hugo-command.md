@@ -2,7 +2,11 @@
 title: "Hugo Command"
 date: 2022-04-10T08:41:30+08:00
 draft: false
+description: "Hugo 常用命令"
+
 ---
+
+<!--more-->
 
 ```shell
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/zhuyaguang/.zprofile

@@ -20,7 +20,7 @@
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/mlops/" /><link rel="prev" href="https://zhuyaguang.github.io/distributed-systems/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/mlops/" /><link rel="prev" href="https://zhuyaguang.github.io/distributed-systems/" /><link rel="next" href="https://zhuyaguang.github.io/2021/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/mlops\/"
-        },"genre": "posts","wordcount":  272 ,
+        },"genre": "posts","wordcount":  676 ,
         "url": "https:\/\/zhuyaguang.github.io\/mlops\/","datePublished": "2022-05-09T10:13:22+08:00","dateModified": "2022-05-09T10:13:22+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Mlops 产品研习录</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-09">2022-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 272 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-09">2022-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 676 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -88,15 +88,21 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#databricks">databricks</a>
       <ul>
-        <li><a href="#databricks">databricks</a></li>
+        <li><a href="#mlflow">MLflow</a></li>
+      </ul>
+    </li>
+    <li><a href="#argo">argo</a>
+      <ul>
+        <li><a href="#argo-cd">Argo CD</a></li>
+        <li><a href="#argo-workflow">Argo workflow</a></li>
+        <li><a href="#seldon">Seldon</a></li>
         <li><a href="#metaflow"><strong>Metaflow</strong></a></li>
         <li><a href="#prefect">Prefect</a></li>
         <li><a href="#snorkel">snorkel</a></li>
         <li><a href="#apache-airflow">Apache Airflow</a></li>
         <li><a href="#valohai">valohai</a></li>
-        <li><a href="#mlflow">MLflow</a></li>
         <li><a href="#bentoml">BentoML</a></li>
       </ul>
     </li>
@@ -104,10 +110,28 @@
 </nav></div>
             </div><div class="content" id="content"><p>4.6号，听了公众号“M小姐研习录”的一个直播，<code>下一个infra 百亿美金战场在哪里？</code>。最近刚好也在用kubeflow做一些infra的工作。所以就对直播中提到的一些产品进行梳理和体验。</p>
 <p>关注M小姐的公众号是因为她的一篇关于Hashicorp（terraform的母公司，开发了一系列Infra-as-code的工具）总结性文章，写的非常好。<a href="https://mp.weixin.qq.com/s/Y2A7-Ui2nzUgodkEbgR6lQ" target="_blank" rel="noopener noreffer">【年度公司】Hashicorp：160亿美金的开源标杆，15000字的研究笔记，2021年不遗憾</a></p>
-<h3 id="databricks">databricks</h3>
+<h2 id="databricks">databricks</h2>
 <blockquote>
 <p>All your data, analytics and AI on one platform</p>
 </blockquote>
+<p>因为没有优秀的开发者社区运营和推广团队，Spark变现比较难，之后团队成员决定成立Databricks，以商业化方式推动Spark社区发展。可以把 databricks 称为 云化的 spark。</p>
+<p>除了spark，databricks还有这些产品：开发和维护 AI 生命周期管理平台 MLflow、数据分析工具 Koalas 和 Delta Lake。Delta Lake 为Apache Spark 和其他大数据引擎提供可伸缩的 ACID 事务，让用户可以基于 HDFS 和云存储构建可靠的数据湖（Data Lakes数据湖是一种数据存储理念）。</p>
+<p>全球已经有7000 多家组织（包括荷兰银行、康泰纳仕、H&amp;M 集团、再生元和壳牌）依靠 Databricks 实现大规模数据工程、协作数据科学、全生命周期机器学习和业务分析。</p>
+<h3 id="mlflow">MLflow</h3>
+<blockquote>
+<p>An open source platform for the machine learning lifecycle</p>
+</blockquote>
+<p>和kubeflow类似的产品，可以看看两者的差别 <a href="https://medium.com/weareservian/the-cheesy-analogy-of-mlflow-and-kubeflow-715a45580fbe" target="_blank" rel="noopener noreffer">THe Cheesy Analogy of MLflow and Kubeflow</a></p>
+<p>具体使用实践，可以参考这个系列文章 <a href="https://medium.com/tag/mlflow-101" target="_blank" rel="noopener noreffer">mlflow 101</a></p>
+<p><a href="https://mlflow.org/docs/latest/quickstart.html" target="_blank" rel="noopener noreffer">Mlfow 官方文档</a></p>
+<h2 id="argo">argo</h2>
+<h3 id="argo-cd">Argo CD</h3>
+<p>从代码到环境的部署</p>
+<p><a href="https://argo-cd.readthedocs.io/en/stable/" target="_blank" rel="noopener noreffer">argo cd官方文档</a></p>
+<h3 id="argo-workflow">Argo workflow</h3>
+<p><a href="https://argoproj.github.io/argo-workflows/" target="_blank" rel="noopener noreffer">argo workflow官方文档</a></p>
+<h3 id="seldon">Seldon</h3>
+<p>An open source platform to deploy your machine learning models on Kubernetes at massive scale.</p>
 <h3 id="metaflow"><strong>Metaflow</strong></h3>
 <blockquote>
 <p>A framework for real-life data science</p>
@@ -122,9 +146,7 @@
 <p>Airflow is a platform created by the community to programmatically author, schedule and monitor workflows.</p>
 </blockquote>
 <h3 id="valohai">valohai</h3>
-<h3 id="mlflow">MLflow</h3>
 <blockquote>
-<p>An open source platform for the machine learning lifecycle</p>
 </blockquote>
 <h3 id="bentoml">BentoML</h3>
 <blockquote>
@@ -154,7 +176,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/distributed-systems/" class="prev" rel="prev" title="分布式系统学习"><i class="fas fa-angle-left fa-fw"></i>分布式系统学习</a></div>
+    <div class="post-nav"><a href="/distributed-systems/" class="prev" rel="prev" title="分布式系统学习"><i class="fas fa-angle-left fa-fw"></i>分布式系统学习</a>
+            <a href="/2021/" class="next" rel="next" title="2021年总结">2021年总结<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">
