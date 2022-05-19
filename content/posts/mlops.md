@@ -104,3 +104,5 @@ An open source platform to deploy your machine learning models on Kubernetes at 
 cube是tme开源的一站式云原生机器学习平台
 
 [Cube Studio](https://github.com/tencentmusic/cube-studio)
+
+[火山引擎大规模机器学习平台架构设计与应用实践](https://mp.weixin.qq.com/s/--pWXB1FL8Qf_9mIrVMvYA)
