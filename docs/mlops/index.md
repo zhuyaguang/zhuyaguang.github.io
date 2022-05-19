@@ -35,9 +35,19 @@
 
 [argo cd官方文档](https://argo-cd.readthedocs.io/en/stable/)
 
+[GitOps 持续部署工具 Argo CD 初体验](https://mp.weixin.qq.com/s/Hgp7N_HPkpFjfP_qcl4Fzg)
+
+
+
 ### Argo workflow
 
 [argo workflow官方文档](https://argoproj.github.io/argo-workflows/)
+
+[Argo Workflows-Kubernetes的工作流引擎](https://cloud.tencent.com/developer/article/1810139)
+
+
+
+> 1.最新版本的argo-server有问题，回退到V3.2.11 2.修改 workflow-controller-configmap 和 artifact-repositories 的 minio endpoint地址 为cluster IP。
 
 
 
@@ -45,7 +55,7 @@
 
 An open source platform to deploy your machine learning models on Kubernetes at massive scale.
 
-
+[seldon 官方文档](https://docs.seldon.io/projects/seldon-core/en/latest/)
 
 
 
@@ -82,4 +92,14 @@ An open source platform to deploy your machine learning models on Kubernetes at 
 ### BentoML
 
 >  Simplify Model Deployment
+
+
+
+## 平台
+
+cube是tme开源的一站式云原生机器学习平台
+
+[Cube Studio](https://github.com/tencentmusic/cube-studio)
+
+[火山引擎大规模机器学习平台架构设计与应用实践](https://mp.weixin.qq.com/s/--pWXB1FL8Qf_9mIrVMvYA)
 

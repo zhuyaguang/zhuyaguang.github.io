@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/mlops\/"
-        },"genre": "posts","wordcount":  676 ,
+        },"genre": "posts","wordcount":  831 ,
         "url": "https:\/\/zhuyaguang.github.io\/mlops\/","datePublished": "2022-05-09T10:13:22+08:00","dateModified": "2022-05-09T10:13:22+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Mlops 产品研习录</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-09">2022-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 676 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-09">2022-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 831 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -106,6 +106,7 @@
         <li><a href="#bentoml">BentoML</a></li>
       </ul>
     </li>
+    <li><a href="#平台">平台</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>4.6号，听了公众号“M小姐研习录”的一个直播，<code>下一个infra 百亿美金战场在哪里？</code>。最近刚好也在用kubeflow做一些infra的工作。所以就对直播中提到的一些产品进行梳理和体验。</p>
@@ -128,10 +129,16 @@
 <h3 id="argo-cd">Argo CD</h3>
 <p>从代码到环境的部署</p>
 <p><a href="https://argo-cd.readthedocs.io/en/stable/" target="_blank" rel="noopener noreffer">argo cd官方文档</a></p>
+<p><a href="https://mp.weixin.qq.com/s/Hgp7N_HPkpFjfP_qcl4Fzg" target="_blank" rel="noopener noreffer">GitOps 持续部署工具 Argo CD 初体验</a></p>
 <h3 id="argo-workflow">Argo workflow</h3>
 <p><a href="https://argoproj.github.io/argo-workflows/" target="_blank" rel="noopener noreffer">argo workflow官方文档</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1810139" target="_blank" rel="noopener noreffer">Argo Workflows-Kubernetes的工作流引擎</a></p>
+<blockquote>
+<p>1.最新版本的argo-server有问题，回退到V3.2.11 2.修改 workflow-controller-configmap 和 artifact-repositories 的 minio endpoint地址 为cluster IP。</p>
+</blockquote>
 <h3 id="seldon">Seldon</h3>
 <p>An open source platform to deploy your machine learning models on Kubernetes at massive scale.</p>
+<p><a href="https://docs.seldon.io/projects/seldon-core/en/latest/" target="_blank" rel="noopener noreffer">seldon 官方文档</a></p>
 <h3 id="metaflow"><strong>Metaflow</strong></h3>
 <blockquote>
 <p>A framework for real-life data science</p>
@@ -151,7 +158,11 @@
 <h3 id="bentoml">BentoML</h3>
 <blockquote>
 <p>Simplify Model Deployment</p>
-</blockquote></div><div class="post-footer" id="post-footer">
+</blockquote>
+<h2 id="平台">平台</h2>
+<p>cube是tme开源的一站式云原生机器学习平台</p>
+<p><a href="https://github.com/tencentmusic/cube-studio" target="_blank" rel="noopener noreffer">Cube Studio</a></p>
+<p><a href="https://mp.weixin.qq.com/s/--pWXB1FL8Qf_9mIrVMvYA" target="_blank" rel="noopener noreffer">火山引擎大规模机器学习平台架构设计与应用实践</a></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
