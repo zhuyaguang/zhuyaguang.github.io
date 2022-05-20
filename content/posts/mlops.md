@@ -51,7 +51,9 @@ description: "MLops 产品大汇总"
 
 
 
-> 1.最新版本的argo-server有问题，回退到V3.2.11 2.修改 workflow-controller-configmap 和 artifact-repositories 的 minio endpoint地址 为cluster IP。
+> 1.最新版本的argo-server有问题，回退到V3.2.11 
+>
+> 2.修改 workflow-controller-configmap 和 artifact-repositories 的 minio endpoint地址 为cluster IP。
 
 
 
@@ -60,6 +62,22 @@ description: "MLops 产品大汇总"
 An open source platform to deploy your machine learning models on Kubernetes at massive scale.
 
 [seldon 官方文档](https://docs.seldon.io/projects/seldon-core/en/latest/)
+
+### BentoML
+
+>  Simplify Model Deployment
+
+[BentoML 官网](https://docs.bentoml.org/en/latest/quickstart.html)
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -89,13 +107,7 @@ An open source platform to deploy your machine learning models on Kubernetes at 
 
 
 
-> 
 
-
-
-### BentoML
-
->  Simplify Model Deployment
 
 
 

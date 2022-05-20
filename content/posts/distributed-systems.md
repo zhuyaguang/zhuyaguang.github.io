@@ -31,7 +31,11 @@ description: "分布式系统学习博客、课程、学习笔记汇总"
 
 ### 书籍
 
-分布式架构原理与实践
+#### 《分布式架构原理与实践》笔记
+
+* 4.2分布锁
+
+  [Go实现的分布式锁](https://chai2010.cn/advanced-go-programming-book/ch6-cloud/ch6-02-lock.html)
 
 
 
@@ -51,9 +55,7 @@ https://zhuanlan.zhihu.com/p/110168818
 
 https://mit-public-courses-cn-translatio.gitbook.io/mit6-824/
 
-
-
-#### 极客时间
+### 极客时间
 
 分布式金融架构
 
