@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/mlops\/"
-        },"genre": "posts","wordcount":  834 ,
+        },"genre": "posts","wordcount":  1160 ,
         "url": "https:\/\/zhuyaguang.github.io\/mlops\/","datePublished": "2022-05-09T10:13:22+08:00","dateModified": "2022-05-09T10:13:22+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Mlops 产品研习录</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-09">2022-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 834 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-09">2022-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1160 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -88,15 +88,16 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#databricks">databricks</a>
+    <li><a href="#databrickshttpsdatabrickscom"><a href="https://databricks.com/">databricks</a></a>
       <ul>
         <li><a href="#mlflow">MLflow</a></li>
       </ul>
     </li>
-    <li><a href="#argo">argo</a>
+    <li><a href="#argovolcanoseldonbentoml搭建云原生机器学习平台">argo+volcano+(seldon/BentoML)搭建云原生机器学习平台</a>
       <ul>
         <li><a href="#argo-cd">Argo CD</a></li>
         <li><a href="#argo-workflow">Argo workflow</a></li>
+        <li><a href="#volcano">volcano</a></li>
         <li><a href="#seldon">Seldon</a></li>
         <li><a href="#bentoml">BentoML</a></li>
         <li><a href="#metaflow"><strong>Metaflow</strong></a></li>
@@ -111,7 +112,7 @@
 </nav></div>
             </div><div class="content" id="content"><p>4.6号，听了公众号“M小姐研习录”的一个直播，<code>下一个infra 百亿美金战场在哪里？</code>。最近刚好也在用kubeflow做一些infra的工作。所以就对直播中提到的一些产品进行梳理和体验。</p>
 <p>关注M小姐的公众号是因为她的一篇关于Hashicorp（terraform的母公司，开发了一系列Infra-as-code的工具）总结性文章，写的非常好。<a href="https://mp.weixin.qq.com/s/Y2A7-Ui2nzUgodkEbgR6lQ" target="_blank" rel="noopener noreffer">【年度公司】Hashicorp：160亿美金的开源标杆，15000字的研究笔记，2021年不遗憾</a></p>
-<h2 id="databricks">databricks</h2>
+<h2 id="databrickshttpsdatabrickscom"><a href="https://databricks.com/" target="_blank" rel="noopener noreffer">databricks</a></h2>
 <blockquote>
 <p>All your data, analytics and AI on one platform</p>
 </blockquote>
@@ -125,7 +126,7 @@
 <p>和kubeflow类似的产品，可以看看两者的差别 <a href="https://medium.com/weareservian/the-cheesy-analogy-of-mlflow-and-kubeflow-715a45580fbe" target="_blank" rel="noopener noreffer">THe Cheesy Analogy of MLflow and Kubeflow</a></p>
 <p>具体使用实践，可以参考这个系列文章 <a href="https://medium.com/tag/mlflow-101" target="_blank" rel="noopener noreffer">mlflow 101</a></p>
 <p><a href="https://mlflow.org/docs/latest/quickstart.html" target="_blank" rel="noopener noreffer">Mlfow 官方文档</a></p>
-<h2 id="argo">argo</h2>
+<h2 id="argovolcanoseldonbentoml搭建云原生机器学习平台">argo+volcano+(seldon/BentoML)搭建云原生机器学习平台</h2>
 <h3 id="argo-cd">Argo CD</h3>
 <p>从代码到环境的部署</p>
 <p><a href="https://argo-cd.readthedocs.io/en/stable/" target="_blank" rel="noopener noreffer">argo cd官方文档</a></p>
@@ -137,6 +138,8 @@
 <p>1.最新版本的argo-server有问题，回退到V3.2.11</p>
 <p>2.修改 workflow-controller-configmap 和 artifact-repositories 的 minio endpoint地址 为cluster IP。</p>
 </blockquote>
+<h3 id="volcano">volcano</h3>
+<p><a href="https://volcano.sh/zh/" target="_blank" rel="noopener noreffer">volcano文档</a></p>
 <h3 id="seldon">Seldon</h3>
 <p>An open source platform to deploy your machine learning models on Kubernetes at massive scale.</p>
 <p><a href="https://docs.seldon.io/projects/seldon-core/en/latest/" target="_blank" rel="noopener noreffer">seldon 官方文档</a></p>
@@ -149,6 +152,7 @@
 <blockquote>
 <p>A framework for real-life data science</p>
 </blockquote>
+<p><a href="https://docs.metaflow.org/" target="_blank" rel="noopener noreffer">Metaflow官网</a></p>
 <h3 id="prefect">Prefect</h3>
 <h3 id="snorkel">snorkel</h3>
 <blockquote>
@@ -160,9 +164,13 @@
 </blockquote>
 <h3 id="valohai">valohai</h3>
 <h2 id="平台">平台</h2>
-<p>cube是tme开源的一站式云原生机器学习平台</p>
 <p><a href="https://github.com/tencentmusic/cube-studio" target="_blank" rel="noopener noreffer">Cube Studio</a></p>
-<p><a href="https://mp.weixin.qq.com/s/--pWXB1FL8Qf_9mIrVMvYA" target="_blank" rel="noopener noreffer">火山引擎大规模机器学习平台架构设计与应用实践</a></p></div><div class="post-footer" id="post-footer">
+<p>cube是tme开源的一站式云原生机器学习平台</p>
+<p><a href="https://mp.weixin.qq.com/s/--pWXB1FL8Qf_9mIrVMvYA" target="_blank" rel="noopener noreffer">火山引擎大规模机器学习平台架构设计与应用实践</a></p>
+<p><a href="https://octopus.openi.org.cn/docs/introduction/intro/" target="_blank" rel="noopener noreffer">鹏城实验室启智章鱼平台</a></p>
+<p>Octopus是一款面向多计算场景的一站式融合计算平台。平台主要针对AI、HPC等场景的计算与资源管理的需求来设计，向算力使用用户提供了对数据、算法、镜像、模型与算力等资源的管理与使用功能，方便用户一站式构建计算环境，实现计算。同时，向集群管理人员提供了集群资源管理与监控，计算任务管理与监控等功能，方便集群管理人员对整体系统进行操作与分析。</p>
+<p>Octopus平台底层基于容器编排平台Kubernetes ，充分利用容器敏捷、轻量、隔离等特点来实现计算场景多样性的需求。</p>
+<p><a href="https://mp.weixin.qq.com/s/UckkV8kFfPE6JZjui_bbtA" target="_blank" rel="noopener noreffer">百度AI原生云实践: 基于容器云打造 AI 开发基础设施</a></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
