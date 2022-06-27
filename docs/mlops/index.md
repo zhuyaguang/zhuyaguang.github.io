@@ -50,6 +50,8 @@
 > 1.最新版本的argo-server有问题，回退到V3.2.11 
 >
 > 2.修改 workflow-controller-configmap 和 artifact-repositories 的 minio endpoint地址 为cluster IP。
+>
+> kubectl -n argo port-forward --address 0.0.0.0 svc/argo-server 2746:2746
 
 ### volcano
 
@@ -69,15 +71,7 @@ An open source platform to deploy your machine learning models on Kubernetes at 
 
 
 
-
-
-
-
-
-
-
-
-
+## 其它产品
 
 ### **Metaflow**
 
@@ -113,19 +107,23 @@ An open source platform to deploy your machine learning models on Kubernetes at 
 
 ## 平台
 
-[Cube Studio](https://github.com/tencentmusic/cube-studio)
+1.[Cube Studio](https://github.com/tencentmusic/cube-studio)
 
 cube是tme开源的一站式云原生机器学习平台
 
-[火山引擎大规模机器学习平台架构设计与应用实践](https://mp.weixin.qq.com/s/--pWXB1FL8Qf_9mIrVMvYA)
+2.[火山引擎大规模机器学习平台架构设计与应用实践](https://mp.weixin.qq.com/s/--pWXB1FL8Qf_9mIrVMvYA)
 
 
 
-[鹏城实验室启智章鱼平台](https://octopus.openi.org.cn/docs/introduction/intro/)
+3.[鹏城实验室启智章鱼平台](https://octopus.openi.org.cn/docs/introduction/intro/)
 
 Octopus是一款面向多计算场景的一站式融合计算平台。平台主要针对AI、HPC等场景的计算与资源管理的需求来设计，向算力使用用户提供了对数据、算法、镜像、模型与算力等资源的管理与使用功能，方便用户一站式构建计算环境，实现计算。同时，向集群管理人员提供了集群资源管理与监控，计算任务管理与监控等功能，方便集群管理人员对整体系统进行操作与分析。
 
 Octopus平台底层基于容器编排平台Kubernetes ，充分利用容器敏捷、轻量、隔离等特点来实现计算场景多样性的需求。
 
-[百度AI原生云实践: 基于容器云打造 AI 开发基础设施](https://mp.weixin.qq.com/s/UckkV8kFfPE6JZjui_bbtA)
+4.[百度AI原生云实践: 基于容器云打造 AI 开发基础设施](https://mp.weixin.qq.com/s/UckkV8kFfPE6JZjui_bbtA)
+
+5.[趋动科技GPU池化技术](https://mp.weixin.qq.com/s/y38qjIBn4w0_HPH_3pqhcw)
+
+GPU与CPU的解耦是智算中心建设的目标之一。GPU虚拟化以及GPU资源池建设的意义在于解耦AI应用与GPU服务的深度绑定，把 GPU 的静态分配变成动态分配，GPU 使用率获得4倍以上提升。借助OrionX的池化能力，AI应用无需关注部署的节点有没有GPU资源，只要在智算中心网络可达，均可以通过OrionX远程调用的功能，在整个智算中心范围内调用符合要求的GPU资源进行AI计算。
 
