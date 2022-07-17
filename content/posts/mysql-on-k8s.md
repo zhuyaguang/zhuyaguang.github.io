@@ -1,5 +1,5 @@
 ---
-title: "Mysql on K8s"
+title: "K8s 上的中间件"
 date: 2022-07-16T13:53:33+08:00
 draft: false
 description: "mysql上k8s方案汇总"
