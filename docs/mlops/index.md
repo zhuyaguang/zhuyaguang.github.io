@@ -68,6 +68,10 @@ An open source platform to deploy your machine learning models on Kubernetes at 
 * 安装helm
 * [安装istio](https://istio.io/latest/docs/setup/install/helm/)
 
+
+
+> seldon 对 pytorch 支持不太友好呢
+
 ### BentoML
 
 >  Simplify Model Deployment
