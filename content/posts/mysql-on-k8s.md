@@ -88,3 +88,13 @@ docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=admin -d mysql:5.7
 
 ### RadonDB
 
+```
+helm repo add radondb https://radondb.github.io/radondb-mysql-kubernetes/
+
+helm install demo radondb/mysql-operator
+
+kubectl apply -f https://github.com/radondb/radondb-mysql-kubernetes/releases/latest/download/mysql_v1alpha1_mysqlcluster.yaml
+
+
+```
+
