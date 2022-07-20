@@ -2,9 +2,12 @@
 title: "Cube on Kubesphere"
 date: 2022-07-18T11:31:10+08:00
 draft: false
+description: "在 kubesphere 搭建 cube-studio "
 ---
 
-# 基于kubesphere搭建一站式云原生机器学习平台 
+<!--more-->
+
+# 基于 kubesphere 搭建一站式云原生机器学习平台 
 
 ## 搭建 kubesphere 
 

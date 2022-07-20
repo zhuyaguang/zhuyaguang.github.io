@@ -1,7 +1,9 @@
 # Cube on Kubesphere
 
 
-# 基于kubesphere搭建一站式云原生机器学习平台 
+<!--more-->
+
+# 基于 kubesphere 搭建一站式云原生机器学习平台 
 
 ## 搭建 kubesphere 
 
