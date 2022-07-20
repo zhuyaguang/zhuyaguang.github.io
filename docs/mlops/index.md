@@ -144,6 +144,14 @@ GPU与CPU的解耦是智算中心建设的目标之一。GPU虚拟化以及GPU�
 
 
 
+6.[九章云极 DataCanvas](https://datacanvas.io/)
+
+数据智能基础软件供应商。目前九章云极 DataCanvas 主要在算法平台和实时数据上发力。
+
+[AI落地的新范式，就“藏”在下一场软件基础设施的重大升级里](https://mp.weixin.qq.com/s/3MsW03DEz-Wh-Fv3wJWMpA)
+
+
+
 ## 资料
 
 [MLOps London](https://www.youtube.com/channel/UCSBfllj_pRPB36TAZJfjXWg)

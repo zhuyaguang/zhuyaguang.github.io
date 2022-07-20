@@ -98,3 +98,46 @@ kubectl apply -f https://github.com/radondb/radondb-mysql-kubernetes/releases/la
 
 ```
 
+
+
+添加用户
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sample-user-password   # 密钥名称。应用于 MysqlUser 中的 secretSelector.secretName。  
+data:
+  pwdForSample: UmFkb25EQkAxMjMKIA==  #密钥键，应用于 MysqlUser 中的 secretSelector.secretKey。示例密码为 base64 加密的 RadonDB@123
+  # pwdForSample2:
+  # pwdForSample3:
+```
+
+
+
+```yaml
+apiVersion: mysql.radondb.com/v1alpha1
+kind: MysqlUser
+metadata:
+ 
+  name: sample-user-cr  # 用户 CR 名称，建议使用一个用户 CR 管理一个用户。
+spec:
+  user: sample_user  # 需要创建/更新的用户的名称。
+  hosts:            # 支持访问的主机，可以填多个，% 代表所有主机。 
+       - "%"
+  permissions:
+    - database: "*"  # 数据库名称，* 代表所有数据库。 
+      tables:        # 表名称，* 代表所有表。
+         - "*"
+      privileges:     # 权限，参考 https://dev.mysql.com/doc/refman/5.7/en/grant.html。
+         - SELECT
+  
+  userOwner:  # 指定被操作用户所在的集群。不支持修改。  
+    clusterName: sample
+    nameSpace: default # radondb mysql 集群所在的命名空间。
+  
+  secretSelector:  # 指定用户的密钥和保存当前用户密码的键。
+    secretName: sample-user-password  # 密钥名称。   
+    secretKey: pwdForSample  # 密钥键，一个密钥可以保存多个用户的密码，以键区分。
+```
+
