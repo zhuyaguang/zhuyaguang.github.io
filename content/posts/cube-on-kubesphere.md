@@ -1,8 +1,8 @@
 ---
-title: "Cube on Kubesphere"
+title: "基于 kubesphere 搭建一站式云原生机器学习平台 "
 date: 2022-07-18T11:31:10+08:00
 draft: false
-description: "在 kubesphere 搭建 cube-studio "
+description: "在 kubesphere 上搭建 cube-studio "
 ---
 
 <!--more-->
@@ -27,7 +27,7 @@ description: "在 kubesphere 搭建 cube-studio "
 
 *  安装 1.18 版本的 k8s
 
-  ```shell
+  ```
   ./kk create cluster --with-kubernetes v1.18.8  --with-kubesphere v3.3.0
   ```
 

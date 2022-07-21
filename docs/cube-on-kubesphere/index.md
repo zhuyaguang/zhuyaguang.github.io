@@ -1,4 +1,4 @@
-# Cube on Kubesphere
+# 基于 kubesphere 搭建一站式云原生机器学习平台 
 
 
 <!--more-->
@@ -23,7 +23,7 @@
 
 *  安装 1.18 版本的 k8s
 
-  ```shell
+  ```
   ./kk create cluster --with-kubernetes v1.18.8  --with-kubesphere v3.3.0
   ```
 
