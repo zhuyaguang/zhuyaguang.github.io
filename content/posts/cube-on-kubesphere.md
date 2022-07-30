@@ -37,7 +37,7 @@ description: "在 kubesphere 上搭建 cube-studio "
 
 ### 部署注意事项
 
-#### mysql  
+#### mysql  遇到的坑
 
 *  标签未打成功
 
@@ -88,10 +88,81 @@ storageClassName: local
 
 
 
+#### notebook 遇到的坑
 
+* 清空 kubeconfig
 
+kubectl edit configmap kubernetes-config -n infra
 
+kubectl edit configmap kubernetes-config -n pipeline
+
+kubectl edit configmap kubernetes-config -n katib
 
 
 
 ## 使用 cube-studio
+
+
+
+### 快速使用
+
+* 创建项目，不要把用户都放在  public 项目组里面，会有问题。
+
+* 修改仓库
+
+如果是拉取 docker hub 上面的镜像的话，训练---仓库---hubsecret，修改你的 dockerhub 的用户名和密码
+
+如果是拉取 Harbor 镜像，新建一个仓库，填写 Harbor 服务器郁闷和用户名密码
+
+* 创建你的 任务 镜像
+
+设置镜像的仓库，完成名称带上版本号。
+
+你的镜像可以在开发环境上打好，然后上传到 Harbor 上。
+
+* 创建 任务模版 
+
+填写镜像，任务名称，启动命令
+
+
+
+
+
+
+
+### 使用 GPU
+
+* [安装 nvidia 驱动](https://wangjunjian.com/gpu/2020/11/03/install-nvidia-gpu-driver-on-ubuntu.html)
+* [安装 nvidia-docker2](https://wangjunjian.com/docker/2020/10/18/install-nvidia-docker2-on-ubuntu.html)
+* [Ubuntu18.04安装nvidia-docker2](https://www.cnblogs.com/l-hh/p/13451639.html)
+
+
+
+### 安装 Harbor 并配置证书
+
+[How to install and use VMware Harbor private registry with Kubernetes](https://blog.inkubate.io/how-to-use-harbor-private-registry-with-kubernetes/)
+
+[Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
+
+
+
+在 部署好的 Harbor 中添加 HTTPS 证书配置
+
+[harbor镜像仓库-https访问的证书配置](https://zhuanlan.zhihu.com/p/234918875)
+
+[x509: cannot validate certificate for 10.30.0.163 because it doesn't contain any IP SANs](https://blog.csdn.net/min19900718/article/details/87920254)
+
+
+
+最后 Docker login $harborIP
+
+
+
+### 使用BentozzMl快速发布一个 web 镜像
+
+
+
+## 参考文档
+
+* [腾讯音乐栾鹏：cube-studio开源一站式云原生机器学习平台](https://mp.weixin.qq.com/s/6uaUFS01W2lxnM-SU4PsfQ)
+

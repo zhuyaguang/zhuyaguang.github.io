@@ -152,7 +152,21 @@ GPU与CPU的解耦是智算中心建设的目标之一。GPU虚拟化以及GPU�
 
 
 
+7.灵雀云
+
+灵雀云企业级 MLOPS 解决方案中，依托于灵雀云 ACP 以及多项企业级容器平台产品之上，集成 Kubefow, SQLFlow 等组件将提供开箱即用，工业生产级别的 MLOPS 平台。我们希望能逐步开放以上能力，包括 4-Flow （Kubeflow, SQLFlow, MLFlow, ParaFlow），推动MLOPS 技术落地进程。
+
+https://mp.weixin.qq.com/s/rFmrtfZ9nOhHm1mFUL6bcw
+
+
+
 ## 资料
 
 [MLOps London](https://www.youtube.com/channel/UCSBfllj_pRPB36TAZJfjXWg)
+
+## 演讲分享
+
+[数算工程一体化机器学习平台助力 AI 算法敏捷开发](https://qcon.infoq.cn/2022/guangzhou/presentation/4811)
+
+[华为 AI 工程化探索与实践之一站式 MLOps 平台](https://qcon.infoq.cn/2022/guangzhou/presentation/4835)
 
