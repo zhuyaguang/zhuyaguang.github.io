@@ -136,6 +136,8 @@ kubectl edit configmap kubernetes-config -n katib
 
 ### 安装 Harbor 并配置证书
 
+  [Harbor在线安装：3分钟体验Harbor!](https://mp.weixin.qq.com/s/oj-C8ioIRfj9uYMDsDsA1w)
+
 [How to install and use VMware Harbor private registry with Kubernetes](https://blog.inkubate.io/how-to-use-harbor-private-registry-with-kubernetes/)
 
 [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
