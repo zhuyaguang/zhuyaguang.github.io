@@ -170,3 +170,5 @@ https://mp.weixin.qq.com/s/rFmrtfZ9nOhHm1mFUL6bcw
 
 [华为 AI 工程化探索与实践之一站式 MLOps 平台](https://qcon.infoq.cn/2022/guangzhou/presentation/4835)
 
+ [机器学习工程化，企业 AI 的下一个起点](https://mp.weixin.qq.com/s/2QEjAx3adB_PItJcn35qag)
+
