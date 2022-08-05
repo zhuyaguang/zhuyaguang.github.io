@@ -11,9 +11,9 @@ description: "在 kubesphere 上搭建 cube-studio "
 
 ## 搭建 kubesphere 
 
-> 注意机器 最低规格为：8C16G  kubectl版本要1.24
+> 注意机器 最低规格为：8C16G  kubectl 版本要1.24 之前安装过 KS 要提前清理下环境
 
-* 卸载kubesphere，k8s版本太新有问题，会导致部分 CRD 不能安装
+* 卸载 kubesphere，k8s 版本太新有问题，[会导致部分 CRD 不能安装](https://github.com/tencentmusic/cube-studio/issues/47)
 
   ```shell
   ./kk delete cluster
@@ -28,7 +28,7 @@ description: "在 kubesphere 上搭建 cube-studio "
 *  安装 1.18 版本的 k8s
 
   ```
-  ./kk create cluster --with-kubernetes v1.18.8  --with-kubesphere v3.3.0
+  ./kk create cluster --with-kubernetes v1.20.10  --with-kubesphere v3.3.0
   ```
 
 ## 部署 cube-studio
@@ -36,6 +36,12 @@ description: "在 kubesphere 上搭建 cube-studio "
 
 
 ### 部署注意事项
+
+#### 替换kubectl
+
+Kubesphere 的 kubectl 默认在 `/usr/local/bin/kubectl` 目录下面
+
+
 
 #### mysql  遇到的坑
 
@@ -90,7 +96,7 @@ storageClassName: local
 
 #### notebook 遇到的坑
 
-* 清空 kubeconfig
+* notebook 无法运行，需要清空 kubeconfig
 
 kubectl edit configmap kubernetes-config -n infra
 
@@ -106,23 +112,26 @@ kubectl edit configmap kubernetes-config -n katib
 
 ### 快速使用
 
-* 创建项目，不要把用户都放在  public 项目组里面，会有问题。
+* 添加项目分组，不要把用户都放在  public 项目组里面，会有问题。
 
-* 修改仓库
+* 添加模版分类 
+* 添加仓库
 
 如果是拉取 docker hub 上面的镜像的话，训练---仓库---hubsecret，修改你的 dockerhub 的用户名和密码
 
 如果是拉取 Harbor 镜像，新建一个仓库，填写 Harbor 服务器郁闷和用户名密码
 
-* 创建你的 任务 镜像
+* 镜像管理，创建你的 任务 镜像
 
-设置镜像的仓库，完成名称带上版本号。
+设置镜像的仓库，完全名称带上版本号。
 
 你的镜像可以在开发环境上打好，然后上传到 Harbor 上。
 
-* 创建 任务模版 
+* 添加 任务模版 
 
 填写镜像，任务名称，启动命令
+
+* 创建任务流
 
 
 
@@ -140,7 +149,7 @@ kubectl edit configmap kubernetes-config -n katib
 
 ### 安装 Harbor 并配置证书
 
-  [Harbor在线安装：3分钟体验Harbor!](https://mp.weixin.qq.com/s/oj-C8ioIRfj9uYMDsDsA1w)
+ [Harbor在线安装：3分钟体验Harbor!](https://mp.weixin.qq.com/s/oj-C8ioIRfj9uYMDsDsA1w)
 
 [How to install and use VMware Harbor private registry with Kubernetes](https://blog.inkubate.io/how-to-use-harbor-private-registry-with-kubernetes/)
 
@@ -160,7 +169,13 @@ kubectl edit configmap kubernetes-config -n katib
 
 
 
-### 使用BentozzMl快速发布一个 web 镜像
+### 使用 BentoMl 快速发布一个 web 镜像
+
+
+
+## 遗留问题
+
+* 监控冲突
 
 
 

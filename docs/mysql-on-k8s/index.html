@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/mysql-on-k8s\/"
-        },"genre": "posts","wordcount":  784 ,
+        },"genre": "posts","wordcount":  791 ,
         "url": "https:\/\/zhuyaguang.github.io\/mysql-on-k8s\/","datePublished": "2022-07-16T13:53:33+08:00","dateModified": "2022-07-16T13:53:33+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">K8s 上的中间件</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-16">2022-07-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 784 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-16">2022-07-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 791 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -96,7 +96,8 @@
     </li>
     <li><a href="#operator-部署">operator 部署</a>
       <ul>
-        <li><a href="#radondb">RadonDB</a></li>
+        <li><a href="#radondb-for-mysql">RadonDB for mysql</a></li>
+        <li><a href="#备份恢复">备份、恢复</a></li>
       </ul>
     </li>
   </ul>
@@ -211,7 +212,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="operator-部署">operator 部署</h2>
-<h3 id="radondb">RadonDB</h3>
+<h3 id="radondb-for-mysql">RadonDB for mysql</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -303,7 +304,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">secretKey</span><span class="p">:</span><span class="w"> </span><span class="l">pwdForSample </span><span class="w"> </span><span class="c"># 密钥键，一个密钥可以保存多个用户的密码，以键区分。</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h3 id="备份恢复">备份、恢复</h3></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

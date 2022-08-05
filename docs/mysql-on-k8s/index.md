@@ -82,7 +82,7 @@ docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=admin -d mysql:5.7
 
 ## operator 部署
 
-### RadonDB
+### RadonDB for mysql
 
 ```
 helm repo add radondb https://radondb.github.io/radondb-mysql-kubernetes/
@@ -136,5 +136,11 @@ spec:
     secretName: sample-user-password  # 密钥名称。   
     secretKey: pwdForSample  # 密钥键，一个密钥可以保存多个用户的密码，以键区分。
 ```
+
+
+
+### 备份、恢复
+
+
 
 
