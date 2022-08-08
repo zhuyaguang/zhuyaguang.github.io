@@ -29,7 +29,26 @@
 
 ## 部署 cube-studio
 
+1. 下载 cube-studio 源码
 
+   ```shell
+   git clone https://github.com/tencentmusic/cube-studio.git
+   ```
+
+2. 安装
+
+   将k8s集群的 kubeconfig 文件复制到 install/kubernetes/config 文件中，然后执行如下命令，其中xx.xx.xx.xx为机器内网的ip
+
+   ```shell
+   cp $HOME/.kube/config install/kubernetes/config
+   ```
+
+   安装
+
+   ```shell
+   # 在k8s worker机器上执行
+   sh start.sh xx.xx.xx.xx
+   ```
 
 ### 部署注意事项
 

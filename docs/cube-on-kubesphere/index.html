@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/cube-on-kubesphere\/"
-        },"genre": "posts","wordcount":  812 ,
+        },"genre": "posts","wordcount":  898 ,
         "url": "https:\/\/zhuyaguang.github.io\/cube-on-kubesphere\/","datePublished": "2022-07-18T11:31:10+08:00","dateModified": "2022-07-18T11:31:10+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">基于 kubesphere 搭建一站式云原生机器学习平台 </h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 812 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 898 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -153,6 +153,42 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="部署-cube-studio">部署 cube-studio</h2>
+<ol>
+<li>
+<p>下载 cube-studio 源码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/tencentmusic/cube-studio.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>安装</p>
+<p>将k8s集群的 kubeconfig 文件复制到 install/kubernetes/config 文件中，然后执行如下命令，其中xx.xx.xx.xx为机器内网的ip</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cp <span class="nv">$HOME</span>/.kube/config install/kubernetes/config
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 在k8s worker机器上执行</span>
+</span></span><span class="line"><span class="cl">sh start.sh xx.xx.xx.xx
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
 <h3 id="部署注意事项">部署注意事项</h3>
 <h4 id="替换kubectl">替换kubectl</h4>
 <p>Kubesphere 的 kubectl 默认在 <code>/usr/local/bin/kubectl</code> 目录下面</p>
