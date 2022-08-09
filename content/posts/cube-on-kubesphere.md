@@ -47,7 +47,7 @@ description: "在 kubesphere 上搭建 cube-studio "
    cp $HOME/.kube/config install/kubernetes/config
    ```
 
-   安装
+   安装之前记得替换 kubectl 
 
    ```shell
    # 在k8s worker机器上执行
@@ -58,7 +58,21 @@ description: "在 kubesphere 上搭建 cube-studio "
 
 #### 替换kubectl
 
+Kubectl 版本部署 CRD 会报错，导致 istio-system 下面的 svc 创建不成功
+
+```shell
+customresourcedefinition.apiextensions.k8s.io/applications.app.k8s.io condition met
+error: json: cannot unmarshal object into Go struct field Kustomization.patchesStrategicMerge of type patch.StrategicMerge
+error: rawResources failed to read Resources: Load from path ../../base failed: '../../base' must be a file (got d='/home/zjlab/zyg/cube-studio-master/install/kubernetes/kubeflow/train-operator/manifests/base')
+```
+
 Kubesphere 的 kubectl 默认在 `/usr/local/bin/kubectl` 目录下面
+
+```shell
+cp /usr/bin/kubectl /usr/local/bin/
+```
+
+
 
 
 
@@ -101,6 +115,8 @@ claimRef:
     name: infra-mysql-pvc
     namespace: infra
 storageClassName: local
+
+
 ```
 
 * 重启 mysql
@@ -119,9 +135,7 @@ storageClassName: local
 
 kubectl edit configmap kubernetes-config -n infra
 
-kubectl edit configmap kubernetes-config -n pipeline
-
-kubectl edit configmap kubernetes-config -n katib
+kubectl edit configmap kubernetes-config -n pipelinekubectl edit configmap kubernetes-config -n katib
 
 
 
@@ -164,6 +178,14 @@ kubectl edit configmap kubernetes-config -n katib
 * [安装 nvidia-docker2](https://wangjunjian.com/docker/2020/10/18/install-nvidia-docker2-on-ubuntu.html)
 * [Ubuntu18.04安装nvidia-docker2](https://www.cnblogs.com/l-hh/p/13451639.html)
 
+打标签
+
+```
+kubectl label node worker-1 gpu=true gpu-type=V100 --overwrite
+```
+
+
+
 
 
 ### 安装 Harbor 并配置证书
@@ -195,6 +217,11 @@ kubectl edit configmap kubernetes-config -n katib
 ## 遗留问题
 
 * 监控冲突
+
+  1. 删掉 kubesphere 和 cube 其中之一的 node-exporter  的 ds
+  2. 将 kubesphere 和 cube 其中之一的 prometheus-operator deploy  replixas 设置为 0
+
+  
 
 
 

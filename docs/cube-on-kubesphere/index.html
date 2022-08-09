@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/cube-on-kubesphere\/"
-        },"genre": "posts","wordcount":  898 ,
+        },"genre": "posts","wordcount":  1007 ,
         "url": "https:\/\/zhuyaguang.github.io\/cube-on-kubesphere\/","datePublished": "2022-07-18T11:31:10+08:00","dateModified": "2022-07-18T11:31:10+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">基于 kubesphere 搭建一站式云原生机器学习平台 </h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 898 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1007 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -176,7 +176,7 @@
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cp <span class="nv">$HOME</span>/.kube/config install/kubernetes/config
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>安装</p>
+</div><p>安装之前记得替换 kubectl</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -191,8 +191,29 @@
 </ol>
 <h3 id="部署注意事项">部署注意事项</h3>
 <h4 id="替换kubectl">替换kubectl</h4>
-<p>Kubesphere 的 kubectl 默认在 <code>/usr/local/bin/kubectl</code> 目录下面</p>
-<h4 id="mysql--遇到的坑">mysql  遇到的坑</h4>
+<p>Kubectl 版本部署 CRD 会报错，导致 istio-system 下面的 svc 创建不成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">customresourcedefinition.apiextensions.k8s.io/applications.app.k8s.io condition met
+</span></span><span class="line"><span class="cl">error: json: cannot unmarshal object into Go struct field Kustomization.patchesStrategicMerge of <span class="nb">type</span> patch.StrategicMerge
+</span></span><span class="line"><span class="cl">error: rawResources failed to <span class="nb">read</span> Resources: Load from path ../../base failed: <span class="s1">&#39;../../base&#39;</span> must be a file <span class="o">(</span>got <span class="nv">d</span><span class="o">=</span><span class="s1">&#39;/home/zjlab/zyg/cube-studio-master/install/kubernetes/kubeflow/train-operator/manifests/base&#39;</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Kubesphere 的 kubectl 默认在 <code>/usr/local/bin/kubectl</code> 目录下面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cp /usr/bin/kubectl /usr/local/bin/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="mysql--遇到的坑">mysql  遇到的坑</h4>
 <ul>
 <li>标签未打成功</li>
 </ul>
@@ -261,8 +282,7 @@
 <li>notebook 无法运行，需要清空 kubeconfig</li>
 </ul>
 <p>kubectl edit configmap kubernetes-config -n infra</p>
-<p>kubectl edit configmap kubernetes-config -n pipeline</p>
-<p>kubectl edit configmap kubernetes-config -n katib</p>
+<p>kubectl edit configmap kubernetes-config -n pipelinekubectl edit configmap kubernetes-config -n katib</p>
 <h2 id="使用-cube-studio">使用 cube-studio</h2>
 <h3 id="快速使用">快速使用</h3>
 <ul>
@@ -296,7 +316,16 @@
 <li><a href="https://wangjunjian.com/docker/2020/10/18/install-nvidia-docker2-on-ubuntu.html" target="_blank" rel="noopener noreffer">安装 nvidia-docker2</a></li>
 <li><a href="https://www.cnblogs.com/l-hh/p/13451639.html" target="_blank" rel="noopener noreffer">Ubuntu18.04安装nvidia-docker2</a></li>
 </ul>
-<h3 id="安装-harbor-并配置证书">安装 Harbor 并配置证书</h3>
+<p>打标签</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl label node worker-1 gpu=true gpu-type=V100 --overwrite
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装-harbor-并配置证书">安装 Harbor 并配置证书</h3>
 <p><a href="https://mp.weixin.qq.com/s/oj-C8ioIRfj9uYMDsDsA1w" target="_blank" rel="noopener noreffer">Harbor在线安装：3分钟体验Harbor!</a></p>
 <p><a href="https://blog.inkubate.io/how-to-use-harbor-private-registry-with-kubernetes/" target="_blank" rel="noopener noreffer">How to install and use VMware Harbor private registry with Kubernetes</a></p>
 <p><a href="https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/" target="_blank" rel="noopener noreffer">Pull an Image from a Private Registry</a></p>
@@ -307,7 +336,13 @@
 <h3 id="使用-bentoml-快速发布一个-web-镜像">使用 BentoMl 快速发布一个 web 镜像</h3>
 <h2 id="遗留问题">遗留问题</h2>
 <ul>
-<li>监控冲突</li>
+<li>
+<p>监控冲突</p>
+<ol>
+<li>删掉 kubesphere 和 cube 其中之一的 node-exporter  的 ds</li>
+<li>将 kubesphere 和 cube 其中之一的 prometheus-operator deploy  replixas 设置为 0</li>
+</ol>
+</li>
 </ul>
 <h2 id="参考文档">参考文档</h2>
 <ul>
