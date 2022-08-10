@@ -3,7 +3,7 @@
 
 <!--more-->
 
-# 基于 kubesphere 搭建一站式云原生机器学习平台 
+ 
 
 ## 搭建 kubesphere 
 
@@ -207,6 +207,12 @@ kubectl label node worker-1 gpu=true gpu-type=V100 --overwrite
 
 
 ### 使用 BentoMl 快速发布一个 web 镜像
+
+
+
+### 构建分布式存储
+
+* JuiceFS
 
 
 
