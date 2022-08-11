@@ -7,7 +7,17 @@
 
 关注M小姐的公众号是因为她的一篇关于Hashicorp（terraform的母公司，开发了一系列 Infra-as-code 的工具）总结性文章，写的非常好。[【年度公司】Hashicorp：160亿美金的开源标杆，15000字的研究笔记，2021年不遗憾](https://mp.weixin.qq.com/s/Y2A7-Ui2nzUgodkEbgR6lQ)
 
-## [databricks](https://databricks.com/)
+## 一、名词解释
+
+
+
+MLOps：
+
+CD4ML：机器学习的持续交付
+
+CT：Continuous Training
+
+## 二、[databricks](https://databricks.com/)
 
 >  All your data, analytics and AI on one platform
 
@@ -27,7 +37,7 @@
 
 [Mlfow 官方文档](https://mlflow.org/docs/latest/quickstart.html)
 
-## argo+volcano+(seldon/BentoML)搭建云原生机器学习平台
+## 三、argo+volcano+(seldon/BentoML)搭建云原生机器学习平台
 
 ### Argo CD
 
@@ -65,7 +75,7 @@ An open source platform to deploy your machine learning models on Kubernetes at 
 
 安装 seldom
 
-* 安装helm
+* 安装 helm
 * [安装istio](https://istio.io/latest/docs/setup/install/helm/)
 
 
@@ -80,7 +90,7 @@ An open source platform to deploy your machine learning models on Kubernetes at 
 
 
 
-## 其它产品
+## 四、其它产品
 
 ### **Metaflow**
 
@@ -108,13 +118,19 @@ An open source platform to deploy your machine learning models on Kubernetes at 
 
 ### valohai
 
+## 五、付费产品
+
+### AIFLOW
+
+ https://www.aiflow.ltd/
+
+### Neptune
+
+https://neptune.ai/
 
 
 
-
-
-
-## 平台
+## 六、平台
 
 1.[Cube Studio](https://github.com/tencentmusic/cube-studio)
 
@@ -160,15 +176,27 @@ https://mp.weixin.qq.com/s/rFmrtfZ9nOhHm1mFUL6bcw
 
 
 
-## 资料
+## 七、资料
+
+### 文章
+
+[AI工程与实践](https://www.zhihu.com/column/c_1488835248573706240)
+
+MindSpore架构师 王磊的文章
+
+### 演讲分享
 
 [MLOps London](https://www.youtube.com/channel/UCSBfllj_pRPB36TAZJfjXWg)
-
-## 演讲分享
 
 [数算工程一体化机器学习平台助力 AI 算法敏捷开发](https://qcon.infoq.cn/2022/guangzhou/presentation/4811)
 
 [华为 AI 工程化探索与实践之一站式 MLOps 平台](https://qcon.infoq.cn/2022/guangzhou/presentation/4835)
 
- [机器学习工程化，企业 AI 的下一个起点](https://mp.weixin.qq.com/s/2QEjAx3adB_PItJcn35qag)
+[机器学习工程化，企业 AI 的下一个起点](https://mp.weixin.qq.com/s/2QEjAx3adB_PItJcn35qag)
+
+[Flink在AI流程中的应用](https://mp.weixin.qq.com/s/VkVd0AOQwfAUiMYFmO63og)
+
+### 公众号
+
+* **[MLOps工程实践](https://mp.weixin.qq.com/s/Bh-_9N4JY3MvbJ5Iw6bWwQ)**
 

@@ -7,7 +7,7 @@
 
 ## 搭建 kubesphere 
 
-> 注意机器 最低规格为：8C16G  kubectl 版本要1.24 之前安装过 KS 要提前清理下环境
+> 注意：机器最低规格为：8C16G ；kubectl 版本要1.24 ；之前安装过 KS 要提前清理下环境。
 
 * 卸载 kubesphere，k8s 版本太新有问题，[会导致部分 CRD 不能安装](https://github.com/tencentmusic/cube-studio/issues/47)
 
@@ -21,7 +21,7 @@
   rm -rf  /root/.kube/config
   ```
 
-*  安装 1.18 版本的 k8s
+*  安装 1.20 版本的 k8s
 
   ```
   ./kk create cluster --with-kubernetes v1.20.10  --with-kubesphere v3.3.0
