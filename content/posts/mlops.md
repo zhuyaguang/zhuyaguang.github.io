@@ -15,7 +15,9 @@ description: "MLops 产品大汇总"
 
 
 
-MLOps：
+MLOps：Machine learning + DevOps + Data Engineering = MLOps
+
+![image-20220811091106723](/Users/zhuyaguang/Library/Application Support/typora-user-images/image-20220811091106723.png)
 
 CD4ML：机器学习的持续交付
 
