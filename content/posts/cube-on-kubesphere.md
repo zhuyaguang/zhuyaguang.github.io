@@ -165,8 +165,9 @@ kubectl edit configmap kubernetes-config -n pipelinekubectl edit configmap kuber
 填写镜像，任务名称，启动命令
 
 * 创建任务流
+* 部署服务上线
 
-
+部署生产，平台会生成一个 `EXTERNAL-IP` 对外暴露服务
 
 
 
@@ -217,6 +218,8 @@ kubectl label node worker-1 gpu=true gpu-type=V100 --overwrite
 ### 构建分布式存储
 
 * JuiceFS
+
+  [AI 企业多云存储架构实践 | 深势科技分享](https://mp.weixin.qq.com/s/Ks_qaEVp0W28532wjzqe5Q)
 
 
 
