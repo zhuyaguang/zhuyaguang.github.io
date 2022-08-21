@@ -205,3 +205,17 @@ MindSpore架构师 王磊的文章
 ### 公众号
 
 * **[MLOps工程实践](https://mp.weixin.qq.com/s/Bh-_9N4JY3MvbJ5Iw6bWwQ)**
+
+### 课程
+
+https://fullstackdeeplearning.com/course/2022/
+
+### 社区
+
+https://neptune.ai/blog
+
+https://valohai.com/mlops/
+
+https://about.mlreef.com/blog/
+
+https://ml-ops.org/
