@@ -9,7 +9,14 @@
 
 > 注意：机器最低规格为：8C16G ；kubectl 版本要1.24 ；之前安装过 KS 要提前清理下环境。
 
-* 卸载 kubesphere，k8s 版本太新有问题，[会导致部分 CRD 不能安装](https://github.com/tencentmusic/cube-studio/issues/47)
+* 下载 KubeKey 
+
+  ```shell
+  export KKZONE=cn
+  curl -sfL https://get-kk.kubesphere.io | VERSION=v2.2.1 sh -
+  ```
+
+*  如果机器上之前安装过 KubeSphere 或者 KubeSphere 版本太高 ， 先卸载 KubeSphere，k8s 版本太高有问题，[会导致部分 CRD 不能安装](https://github.com/tencentmusic/cube-studio/issues/47)
 
   ```shell
   ./kk delete cluster
@@ -27,6 +34,8 @@
   ./kk create cluster --with-kubernetes v1.20.10  --with-kubesphere v3.3.0
   ```
 
+详细安装步骤可以参考 KubeSphere [官方文档](https://kubesphere.io/zh/docs/v3.3/quick-start/all-in-one-on-linux/)
+
 ## 部署 cube-studio
 
 1. 下载 cube-studio 源码
@@ -41,20 +50,18 @@
 
    ```shell
    cp $HOME/.kube/config install/kubernetes/config
-   ```
-
-   安装之前记得替换 kubectl 
-
-   ```shell
+   
    # 在k8s worker机器上执行
    sh start.sh xx.xx.xx.xx
+   
    ```
+   
 
 ### 部署注意事项
 
-#### 替换kubectl
+#### 注意 kubectl 版本是否是最新的
 
-Kubectl 版本部署 CRD 会报错，导致 istio-system 下面的 svc 创建不成功
+Kubectl 版本太低可能会导致部署 CRD 会报错，导致 istio-system 下面的 svc 创建不成功
 
 ```shell
 customresourcedefinition.apiextensions.k8s.io/applications.app.k8s.io condition met
@@ -62,13 +69,11 @@ error: json: cannot unmarshal object into Go struct field Kustomization.patchesS
 error: rawResources failed to read Resources: Load from path ../../base failed: '../../base' must be a file (got d='/home/zjlab/zyg/cube-studio-master/install/kubernetes/kubeflow/train-operator/manifests/base')
 ```
 
-Kubesphere 的 kubectl 默认在 `/usr/local/bin/kubectl` 目录下面
+Kubesphere 的 kubectl 默认在 `/usr/local/bin/kubectl` 目录下面，cube-studio 的 kubectl 默认在 `/usr/bin` 下面
 
 ```shell
 cp /usr/bin/kubectl /usr/local/bin/
 ```
-
-
 
 
 
@@ -111,8 +116,6 @@ claimRef:
     name: infra-mysql-pvc
     namespace: infra
 storageClassName: local
-
-
 ```
 
 * 重启 mysql
@@ -143,29 +146,52 @@ kubectl edit configmap kubernetes-config -n pipelinekubectl edit configmap kuber
 
 * 添加项目分组，不要把用户都放在  public 项目组里面，会有问题。
 
+  ![image-20220824154753135](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220824154753135.png)
+
 * 添加模版分类 
+
+  ![image-20220903145320312](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145320312.png)
+
 * 添加仓库
+
+  ![image-20220903145421237](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145421237.png)
 
 如果是拉取 docker hub 上面的镜像的话，训练---仓库---hubsecret，修改你的 dockerhub 的用户名和密码
 
-如果是拉取 Harbor 镜像，新建一个仓库，填写 Harbor 服务器郁闷和用户名密码
+如果是拉取 Harbor 镜像，新建一个仓库，填写 Harbor 服务器域名或者 IP 和用户名密码
 
 * 镜像管理，创建你的 任务 镜像
 
-设置镜像的仓库，完全名称带上版本号。
+  ![image-20220903145533135](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145533135.png)
+
+设置镜像的仓库，完全名称并带上版本号。
 
 你的镜像可以在开发环境上打好，然后上传到 Harbor 上。
 
 * 添加 任务模版 
 
+  ![image-20220903145645393](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145645393.png)
+
 填写镜像，任务名称，启动命令
 
 * 创建任务流
+
+  ![image-20220903145918835](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145918835.png)
+
 * 部署服务上线
 
-部署生产，平台会生成一个 `EXTERNAL-IP` 对外暴露服务
+  1. 提前构建一个 web app 的镜像，可以对外暴露 http rest 接口
+  2. 使用 官方的 模型服务化-deploy-service 模版
 
+  ![image-20220903150604506](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903150604506.png)
 
+  3. 填写 服务类型为 serving ，镜像和暴露的端口号。
+
+      ![image-20220903151221785](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903151221785.png)
+
+     4. 运行任务流，部署生产，部署生产，平台会生成一个 `EXTERNAL-IP` 对外暴露服务，即可通过 IP 栏地址进行访问服务。
+
+        ![image-20220903151636034](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903151636034.png)
 
 
 
@@ -183,11 +209,9 @@ kubectl label node worker-1 gpu=true gpu-type=V100 --overwrite
 
 
 
-
-
 ### 安装 Harbor 并配置证书
 
- [Harbor在线安装：3分钟体验Harbor!](https://mp.weixin.qq.com/s/oj-C8ioIRfj9uYMDsDsA1w)
+[Harbor在线安装：3分钟体验Harbor!](https://mp.weixin.qq.com/s/oj-C8ioIRfj9uYMDsDsA1w)
 
 [How to install and use VMware Harbor private registry with Kubernetes](https://blog.inkubate.io/how-to-use-harbor-private-registry-with-kubernetes/)
 
@@ -201,9 +225,7 @@ kubectl label node worker-1 gpu=true gpu-type=V100 --overwrite
 
 [x509: cannot validate certificate for 10.30.0.163 because it doesn't contain any IP SANs](https://blog.csdn.net/min19900718/article/details/87920254)
 
-
-
-最后 Docker login $harborIP
+最后 Docker login $harborIP，就可以 docker pull 拉取服务。
 
 
 
@@ -216,6 +238,8 @@ kubectl label node worker-1 gpu=true gpu-type=V100 --overwrite
 * JuiceFS
 
   [AI 企业多云存储架构实践 | 深势科技分享](https://mp.weixin.qq.com/s/Ks_qaEVp0W28532wjzqe5Q)
+  
+* 网易 curve 
 
 
 
@@ -224,7 +248,7 @@ kubectl label node worker-1 gpu=true gpu-type=V100 --overwrite
 * 监控冲突
 
   1. 删掉 kubesphere 和 cube 其中之一的 node-exporter  的 ds
-  2. 将 kubesphere 和 cube 其中之一的 prometheus-operator deploy  replixas 设置为 0
+  2. 将 kubesphere 和 cube 其中之一的 prometheus-operator deploy  replicas 设置为 0
 
   
 
