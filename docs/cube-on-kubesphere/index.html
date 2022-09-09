@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/cube-on-kubesphere\/"
-        },"genre": "posts","wordcount":  1242 ,
+        },"genre": "posts","wordcount":  1280 ,
         "url": "https:\/\/zhuyaguang.github.io\/cube-on-kubesphere\/","datePublished": "2022-07-18T11:31:10+08:00","dateModified": "2022-07-18T11:31:10+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">基于 kubesphere 搭建一站式云原生机器学习平台 </h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1242 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1280 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -109,7 +109,11 @@
         <li><a href="#构建分布式存储">构建分布式存储</a></li>
       </ul>
     </li>
-    <li><a href="#遗留问题">遗留问题</a></li>
+    <li><a href="#遗留问题">遗留问题</a>
+      <ul>
+        <li><a href="#监控冲突">监控冲突</a></li>
+      </ul>
+    </li>
     <li><a href="#参考文档">参考文档</a></li>
   </ul>
 </nav></div>
@@ -282,11 +286,19 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="l">local</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220908194945477.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220908194945477.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220908194945477.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220908194945477.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220908194945477.png"
+        title="image-20220908194945477" /></p>
+<ul>
 <li>重启 mysql</li>
 </ul>
 <p><code>kubectl edit  deploy -n infra mysql</code> 设置 replicas=0</p>
-<p>然后清理 <code>/data/k8s/infra/mysql</code> 残余数据</p>
+<p>然后清理 <code>/data/k8s/infra/mysql</code> 残余数据（慎用！！！）</p>
 <p>最后  replicas=1 坐等 infra 命名空间下面的 pod 都 running</p>
 <h4 id="notebook-遇到的坑">notebook 遇到的坑</h4>
 <ul>
@@ -451,15 +463,33 @@
 </li>
 </ul>
 <h2 id="遗留问题">遗留问题</h2>
+<h3 id="监控冲突">监控冲突</h3>
 <ul>
 <li>
-<p>监控冲突</p>
+<p>使用 kubesphere 监控</p>
+<p>卸载 cube-studio</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl delete configmap grafana-config all-grafana-dashboards --namespace<span class="o">=</span>monitoring
+</span></span><span class="line"><span class="cl">kubectl delete -f ./grafana/grafana-dp.yml
+</span></span><span class="line"><span class="cl">kubectl delete -f ./prometheus/prometheus-main.yml
+</span></span><span class="line"><span class="cl">kubectl delete -f ./operator/operator-crd.yml
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
 <ol>
 <li>删掉 kubesphere 和 cube 其中之一的 node-exporter  的 ds</li>
 <li>将 kubesphere 和 cube 其中之一的 prometheus-operator deploy  replicas 设置为 0</li>
 </ol>
-</li>
-</ul>
 <h2 id="参考文档">参考文档</h2>
 <ul>
 <li><a href="https://mp.weixin.qq.com/s/6uaUFS01W2lxnM-SU4PsfQ" target="_blank" rel="noopener noreffer">腾讯音乐栾鹏：cube-studio开源一站式云原生机器学习平台</a></li>
@@ -489,7 +519,7 @@
     </div>
 
     <div class="post-nav"><a href="/mysql-on-k8s/" class="prev" rel="prev" title="K8s 上的中间件"><i class="fas fa-angle-left fa-fw"></i>K8s 上的中间件</a>
-            <a href="/gitlab-printer/" class="next" rel="next" title="Gitlab Printer">Gitlab Printer<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/gitlab-printer/" class="next" rel="next" title="我用 **极狐** Gitlab 议题 来点菜">我用 **极狐** Gitlab 议题 来点菜<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">

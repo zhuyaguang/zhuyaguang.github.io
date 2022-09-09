@@ -1,7 +1,7 @@
-# Gitlab Printer
+# 我用 **极狐** Gitlab 议题 来点菜
 
 
-
+<!--more-->
 
 # 我用 **极狐** Gitlab 议题 来点菜
 

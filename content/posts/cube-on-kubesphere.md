@@ -122,11 +122,13 @@ claimRef:
 storageClassName: local
 ```
 
+![image-20220908194945477](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220908194945477.png)
+
 * 重启 mysql
 
 `kubectl edit  deploy -n infra mysql` 设置 replicas=0
 
-然后清理 `/data/k8s/infra/mysql` 残余数据
+然后清理 `/data/k8s/infra/mysql` 残余数据（慎用！！！）
 
 最后  replicas=1 坐等 infra 命名空间下面的 pod 都 running
 
@@ -249,12 +251,28 @@ kubectl label node worker-1 gpu=true gpu-type=V100 --overwrite
 
 ## 遗留问题
 
-* 监控冲突
+###  监控冲突
 
-  1. 删掉 kubesphere 和 cube 其中之一的 node-exporter  的 ds
-  2. 将 kubesphere 和 cube 其中之一的 prometheus-operator deploy  replicas 设置为 0
+* 使用 kubesphere 监控
+
+  卸载 cube-studio
+
+  ```shell
+  
+  kubectl delete configmap grafana-config all-grafana-dashboards --namespace=monitoring
+  kubectl delete -f ./grafana/grafana-dp.yml
+  kubectl delete -f ./prometheus/prometheus-main.yml
+  kubectl delete -f ./operator/operator-crd.yml
+  ```
 
   
+
+1. 删掉 kubesphere 和 cube 其中之一的 node-exporter  的 ds
+2. 将 kubesphere 和 cube 其中之一的 prometheus-operator deploy  replicas 设置为 0
+
+
+
+
 
 
 
