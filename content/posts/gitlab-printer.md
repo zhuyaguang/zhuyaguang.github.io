@@ -2,12 +2,12 @@
 title: "我用 **极狐** Gitlab 议题 来点菜"
 date: 2022-09-05T16:19:39+08:00
 draft: false
-description: "mysql上k8s方案汇总"
+description: "gitlab 101 "
 ---
 
 <!--more-->
 
-# 我用 **极狐** Gitlab 议题 来点菜
+# 我用 极狐 Gitlab 议题 来点菜
 
 
 
