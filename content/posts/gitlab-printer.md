@@ -1,5 +1,5 @@
 ---
-title: "我用 **极狐** Gitlab 议题 来点菜"
+title: "我用 极狐 Gitlab 议题 来点菜"
 date: 2022-09-05T16:19:39+08:00
 draft: false
 description: "gitlab 101 "
