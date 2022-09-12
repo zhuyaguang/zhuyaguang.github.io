@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/plg-on-multi-cluster\/"
-        },"genre": "posts","wordcount":  209 ,
+        },"genre": "posts","wordcount":  692 ,
         "url": "https:\/\/zhuyaguang.github.io\/plg-on-multi-cluster\/","datePublished": "2022-09-07T11:04:28+08:00","dateModified": "2022-09-07T11:04:28+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">多集群实现 PLG 日志收集</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-07">2022-09-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 209 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-07">2022-09-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 692 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -93,7 +93,17 @@
         <li><a href="#标签使用方法">标签使用方法</a></li>
       </ul>
     </li>
+    <li><a href="#helm-安装微服务模式的-loki"> Helm 安装微服务模式的 Loki</a></li>
+    <li><a href="#helm-安装简单可扩展模式的-loki">Helm 安装简单可扩展模式的 Loki</a></li>
+    <li><a href="#helm-安装-loki-全家桶">Helm 安装 Loki 全家桶</a></li>
+    <li><a href="#多集群-loki-方案">多集群 Loki 方案</a>
+      <ul>
+        <li><a href="#一主多备">一主多备</a></li>
+        <li><a href="#单主">单主</a></li>
+      </ul>
+    </li>
     <li><a href="#参考文档">参考文档</a></li>
+    <li><a href="#遗留问题">遗留问题</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="多集群实现-plg-日志收集">多集群实现 PLG 日志收集</h1>
@@ -119,7 +129,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/grafana/loki/v2.6.1/cmd/loki/loki-local-config.yaml -O loki-config.yaml
-</span></span><span class="line"><span class="cl">docker run --name loki -d -v /data/loki/config :/mnt/config -p 3100:3100 grafana/loki:2.6.1 -config.file<span class="o">=</span>/mnt/config/loki-config.yaml
+</span></span><span class="line"><span class="cl">docker run --name loki -d -v /data/loki/config:/mnt/config -p 3100:3100 grafana/loki:2.6.1 -config.file<span class="o">=</span>/mnt/config/loki-config.yaml
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -310,10 +320,190 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">__path__</span><span class="p">:</span><span class="w"> </span><span class="l">/var/log/apache.log</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="参考文档">参考文档</h2>
+</div><h2 id="helm-安装微服务模式的-loki"> Helm 安装微服务模式的 Loki</h2>
+<p>Loki 的部署方式有很多种也非常灵活，有微服务部署模式，就是每个组件单独部署，也可以单进程部署。单模块部署相对比较复杂, 每个模块可以单独启动, 不同的模块间通过gRPC服务互相配合提供服务.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220911064555570.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220911064555570.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220911064555570.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220911064555570.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220911064555570.png"
+        title="image-20220911064555570" /></p>
+<ol>
+<li>
+<p>下载 chart 包，因为网络原因在线 helm 安装会失败，所以先下载下来。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm pull  grafana/loki-distributed
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm install loki ./loki-distributed-0.56.7.tgz
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="helm-安装简单可扩展模式的-loki">Helm 安装简单可扩展模式的 Loki</h2>
+<ol>
+<li>
+<p>下载 chart 包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">helm pull grafana/loki-simple-scalable
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="helm-安装-loki-全家桶">Helm 安装 Loki 全家桶</h2>
+<ol>
+<li>
+<p>下载 chart 包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm pull grafana/loki-stack
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">重装之前，先清理下资源
+</span></span><span class="line"><span class="cl">kubectl delete all --all -n loki
+</span></span><span class="line"><span class="cl">kubectl delete ns loki
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create namespace loki
+</span></span><span class="line"><span class="cl">helm upgrade --install loki --namespace<span class="o">=</span>loki loki-stack-2.8.2.tgz  --set grafana.enabled<span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 只安装 Loki 和 promtail
+</span></span><span class="line"><span class="cl">helm install loki ./loki-stack --namespace<span class="o">=</span>loki --create-namespace
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>获取密码登录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl get secret --namespace loki loki-grafana -o jsonpath=&#34;{.data.admin-password}&#34; | base64 --decode ; echo
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>访问</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl port-forward --address 0.0.0.0 --namespace loki service/loki-grafana 3000:80
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p>检查 loki 的状态</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl -G -s &#34;http://10.101.32.33:30389/loki/api/v1/label&#34; | jq .
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="多集群-loki-方案">多集群 Loki 方案</h2>
+<h3 id="一主多备">一主多备</h3>
+<p>主要思路来自 <a href="https://github.com/grafana/loki/issues/5948" target="_blank" rel="noopener noreffer">issue</a></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912085452061.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912085452061.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912085452061.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912085452061.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912085452061.png"
+        title="image-20220912085452061" /></p>
+<p><code>promtail</code> 不仅向本集群 Loki 发送日志，也向主集群 Loki 发送日志。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912085928750.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912085928750.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912085928750.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912085928750.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912085928750.png"
+        title="image-20220912085928750" /></p>
+<h3 id="单主">单主</h3>
+<p>所有集群的 promtail  只向主集群发送日志</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912090036641.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912090036641.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912090036641.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912090036641.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912090036641.png"
+        title="image-20220912090036641" /></p>
+<h2 id="参考文档">参考文档</h2>
 <ol>
 <li><a href="https://github.com/grafana/loki/issues/1866" target="_blank" rel="noopener noreffer">https://github.com/grafana/loki/issues/1866</a></li>
 <li><a href="https://github.com/grafana/loki/issues/5948" target="_blank" rel="noopener noreffer">https://github.com/grafana/loki/issues/5948</a></li>
+<li><a href="https://kubernetes.io/zh-cn/docs/concepts/cluster-administration/logging/" target="_blank" rel="noopener noreffer">K8s 日志架构</a></li>
+<li>PLG 实现 Kubernetes Pod 日志收集和展示 <a href="https://cloud.tencent.com/developer/article/1915207?from=article.detail.1941023" target="_blank" rel="noopener noreffer">https://cloud.tencent.com/developer/article/1915207?from=article.detail.1941023</a></li>
+<li><a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;__biz=MzU4MjQ0MTU4Ng==&amp;scene=1&amp;album_id=1851417660249407499&amp;count=3#wechat_redirect" target="_blank" rel="noopener noreffer">Loki 使用系列</a></li>
+<li>Loki生产环境集群方案  <a href="https://cloud.tencent.com/developer/article/1837819?from=article.detail.1941023" target="_blank" rel="noopener noreffer">https://cloud.tencent.com/developer/article/1837819?from=article.detail.1941023</a></li>
+</ol>
+<h2 id="遗留问题">遗留问题</h2>
+<ol>
+<li>
+<p>有些节点的 promtail 健康检查一直失败。</p>
+<p>主要原因是，/var/log/pods/ 目录里面的日志 都是软链接，导致 promtail 收集不到日志。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912093848062.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912093848062.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912093848062.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912093848062.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220912093848062.png"
+        title="image-20220912093848062" /></p>
+</li>
+<li>
+<p>微服务和简单可扩展模式中的 Gateway pods 起不来。</p>
+</li>
+<li>
+<p>helm 部署 Loki 怎么增加自定义标签。</p>
+</li>
+<li>
+<p>主 Loki模式 和 多主模式 那个更优。</p>
+</li>
 </ol>
 <p> 　</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
