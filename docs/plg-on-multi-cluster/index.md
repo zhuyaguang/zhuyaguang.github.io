@@ -198,14 +198,11 @@ Loki 的部署方式有很多种也非常灵活，有微服务部署模式，就
    kubectl port-forward --address 0.0.0.0 --namespace loki service/loki-grafana 3000:80
    ```
 
-
-
-
 检查 loki 的状态
 
-```
-curl -G -s "http://10.101.32.33:30389/loki/api/v1/label" | jq .
-```
+​		```curl -G -s "http://10.101.32.33:30389/loki/api/v1/label" | jq .```
+
+
 
 ## 多集群 Loki 方案
 
@@ -234,9 +231,9 @@ curl -G -s "http://10.101.32.33:30389/loki/api/v1/label" | jq .
 1. https://github.com/grafana/loki/issues/1866
 2. https://github.com/grafana/loki/issues/5948
 3. [K8s 日志架构](https://kubernetes.io/zh-cn/docs/concepts/cluster-administration/logging/)
-4. PLG 实现 Kubernetes Pod 日志收集和展示 https://cloud.tencent.com/developer/article/1915207?from=article.detail.1941023
+4. [PLG 实现 Kubernetes Pod 日志收集和展示](https://cloud.tencent.com/developer/article/1915207?from=article.detail.1941023)
 5. [Loki 使用系列](https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzU4MjQ0MTU4Ng==&scene=1&album_id=1851417660249407499&count=3#wechat_redirect)
-6. Loki生产环境集群方案  https://cloud.tencent.com/developer/article/1837819?from=article.detail.1941023
+6. [Loki生产环境集群方案 ](https://cloud.tencent.com/developer/article/1837819?from=article.detail.1941023)
 
 
 
@@ -259,6 +256,8 @@ curl -G -s "http://10.101.32.33:30389/loki/api/v1/label" | jq .
    在 promtail  value.yaml 里面设置
 
 4. 主 Loki模式 和 多主模式 那个更优。
+
+   建议用 微服务部署主Loki，实现高可用和高性能。
 
  　
 

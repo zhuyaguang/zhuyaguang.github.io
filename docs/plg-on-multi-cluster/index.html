@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/plg-on-multi-cluster\/"
-        },"genre": "posts","wordcount":  711 ,
+        },"genre": "posts","wordcount":  733 ,
         "url": "https:\/\/zhuyaguang.github.io\/plg-on-multi-cluster\/","datePublished": "2022-09-07T11:04:28+08:00","dateModified": "2022-09-07T11:04:28+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">多集群实现 PLG 日志收集</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-07">2022-09-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 711 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-07">2022-09-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 733 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -445,15 +445,8 @@
 </div></li>
 </ol>
 <p>检查 loki 的状态</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl -G -s &#34;http://10.101.32.33:30389/loki/api/v1/label&#34; | jq .
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="多集群-loki-方案">多集群 Loki 方案</h2>
+<p>​		<code>curl -G -s &quot;http://10.101.32.33:30389/loki/api/v1/label&quot; | jq .</code></p>
+<h2 id="多集群-loki-方案">多集群 Loki 方案</h2>
 <h3 id="一主多备">一主多备</h3>
 <p>主要思路来自 <a href="https://github.com/grafana/loki/issues/5948" target="_blank" rel="noopener noreffer">issue</a></p>
 <p><img
@@ -488,9 +481,9 @@
 <li><a href="https://github.com/grafana/loki/issues/1866" target="_blank" rel="noopener noreffer">https://github.com/grafana/loki/issues/1866</a></li>
 <li><a href="https://github.com/grafana/loki/issues/5948" target="_blank" rel="noopener noreffer">https://github.com/grafana/loki/issues/5948</a></li>
 <li><a href="https://kubernetes.io/zh-cn/docs/concepts/cluster-administration/logging/" target="_blank" rel="noopener noreffer">K8s 日志架构</a></li>
-<li>PLG 实现 Kubernetes Pod 日志收集和展示 <a href="https://cloud.tencent.com/developer/article/1915207?from=article.detail.1941023" target="_blank" rel="noopener noreffer">https://cloud.tencent.com/developer/article/1915207?from=article.detail.1941023</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1915207?from=article.detail.1941023" target="_blank" rel="noopener noreffer">PLG 实现 Kubernetes Pod 日志收集和展示</a></li>
 <li><a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;__biz=MzU4MjQ0MTU4Ng==&amp;scene=1&amp;album_id=1851417660249407499&amp;count=3#wechat_redirect" target="_blank" rel="noopener noreffer">Loki 使用系列</a></li>
-<li>Loki生产环境集群方案  <a href="https://cloud.tencent.com/developer/article/1837819?from=article.detail.1941023" target="_blank" rel="noopener noreffer">https://cloud.tencent.com/developer/article/1837819?from=article.detail.1941023</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1837819?from=article.detail.1941023" target="_blank" rel="noopener noreffer">Loki生产环境集群方案 </a></li>
 </ol>
 <h2 id="遗留问题">遗留问题</h2>
 <ol>
@@ -524,6 +517,7 @@
 </li>
 <li>
 <p>主 Loki模式 和 多主模式 那个更优。</p>
+<p>建议用 微服务部署主Loki，实现高可用和高性能。</p>
 </li>
 </ol>
 <p> 　</p></div><div class="post-footer" id="post-footer">
