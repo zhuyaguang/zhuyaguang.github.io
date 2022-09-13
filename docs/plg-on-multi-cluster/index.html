@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/plg-on-multi-cluster\/"
-        },"genre": "posts","wordcount":  692 ,
+        },"genre": "posts","wordcount":  711 ,
         "url": "https:\/\/zhuyaguang.github.io\/plg-on-multi-cluster\/","datePublished": "2022-09-07T11:04:28+08:00","dateModified": "2022-09-07T11:04:28+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">多集群实现 PLG 日志收集</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-07">2022-09-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 692 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-07">2022-09-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 711 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -367,8 +367,19 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
+<li>
+<p>安装</p>
+</li>
 </ol>
-<h2 id="helm-安装-loki-全家桶">Helm 安装 Loki 全家桶</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">helm install loki ./loki-simple-scalable-0.56.7.tgz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="helm-安装-loki-全家桶">Helm 安装 Loki 全家桶</h2>
 <ol>
 <li>
 <p>下载 chart 包</p>
@@ -497,9 +508,19 @@
 </li>
 <li>
 <p>微服务和简单可扩展模式中的 Gateway pods 起不来。</p>
+<p>修改 kube-dns 为 coredns</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220913104752889.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220913104752889.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220913104752889.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220913104752889.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220913104752889.png"
+        title="image-20220913104752889" /></p>
 </li>
 <li>
 <p>helm 部署 Loki 怎么增加自定义标签。</p>
+<p>在 promtail  value.yaml 里面设置</p>
 </li>
 <li>
 <p>主 Loki模式 和 多主模式 那个更优。</p>

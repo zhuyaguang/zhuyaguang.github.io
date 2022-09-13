@@ -156,6 +156,13 @@ Loki 的部署方式有很多种也非常灵活，有微服务部署模式，就
    helm pull grafana/loki-simple-scalable
    ```
 
+2.  安装
+
+   ```
+   helm install loki ./loki-simple-scalable-0.56.7.tgz
+   ```
+
+   
 
 ## Helm 安装 Loki 全家桶
 
@@ -247,9 +254,13 @@ curl -G -s "http://10.101.32.33:30389/loki/api/v1/label" | jq .
 
 2. 微服务和简单可扩展模式中的 Gateway pods 起不来。
 
-   
+   修改 kube-dns 为 coredns
+
+   ![image-20220913104752889](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220913104752889.png)
 
 3. helm 部署 Loki 怎么增加自定义标签。
+
+   在 promtail  value.yaml 里面设置
 
 4. 主 Loki模式 和 多主模式 那个更优。
 
