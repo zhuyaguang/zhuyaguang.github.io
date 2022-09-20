@@ -228,7 +228,9 @@ Loki 的部署方式有很多种也非常灵活，有微服务部署模式，就
 
 
 
+### 多主互备
 
+![image-20220920100311606](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220920100311606.png)
 
 ##  参考文档
 
