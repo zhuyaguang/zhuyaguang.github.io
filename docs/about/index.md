@@ -1,7 +1,7 @@
 # About
 
 
-### About zhuyagung
+### About zhuyaguang
 
 - Software developer
 - Part time translator
