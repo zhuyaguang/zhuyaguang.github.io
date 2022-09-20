@@ -1,0 +1,78 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>所有文章 - 朱亚光的博客</title>
+        <link>https://zhuyaguang.github.io/posts/</link>
+        <description>所有文章 | 朱亚光的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Wed, 07 Sep 2022 11:04:28 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>多集群实现 PLG 日志收集</title>
+    <link>https://zhuyaguang.github.io/plg-on-multi-cluster/</link>
+    <pubDate>Wed, 07 Sep 2022 11:04:28 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/plg-on-multi-cluster/</guid>
+    <description><![CDATA[多集群日志收集系统]]></description>
+</item><item>
+    <title>我用 极狐 Gitlab 议题 来点菜</title>
+    <link>https://zhuyaguang.github.io/gitlab-printer/</link>
+    <pubDate>Mon, 05 Sep 2022 16:19:39 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/gitlab-printer/</guid>
+    <description><![CDATA[gitlab 101 ]]></description>
+</item><item>
+    <title>基于 kubesphere 搭建一站式云原生机器学习平台 </title>
+    <link>https://zhuyaguang.github.io/cube-on-kubesphere/</link>
+    <pubDate>Mon, 18 Jul 2022 11:31:10 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/cube-on-kubesphere/</guid>
+    <description><![CDATA[在 kubesphere 上搭建 cube-studio ]]></description>
+</item><item>
+    <title>K8s 上的中间件</title>
+    <link>https://zhuyaguang.github.io/mysql-on-k8s/</link>
+    <pubDate>Sat, 16 Jul 2022 13:53:33 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/mysql-on-k8s/</guid>
+    <description><![CDATA[mysql上k8s方案汇总]]></description>
+</item><item>
+    <title>2021年总结</title>
+    <link>https://zhuyaguang.github.io/2021/</link>
+    <pubDate>Wed, 18 May 2022 14:53:27 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/2021/</guid>
+    <description><![CDATA[2021年总结]]></description>
+</item><item>
+    <title>Mlops 产品研习录</title>
+    <link>https://zhuyaguang.github.io/mlops/</link>
+    <pubDate>Mon, 09 May 2022 10:13:22 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/mlops/</guid>
+    <description><![CDATA[MLops 产品大汇总]]></description>
+</item><item>
+    <title>分布式系统学习</title>
+    <link>https://zhuyaguang.github.io/distributed-systems/</link>
+    <pubDate>Wed, 04 May 2022 11:02:29 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/distributed-systems/</guid>
+    <description><![CDATA[分布式系统学习博客、课程、学习笔记汇总]]></description>
+</item><item>
+    <title>向量检索落地场景探索</title>
+    <link>https://zhuyaguang.github.io/milvus-action/</link>
+    <pubDate>Mon, 18 Apr 2022 17:23:48 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/milvus-action/</guid>
+    <description><![CDATA[向量检索落地场景探索]]></description>
+</item><item>
+    <title>Kubeflow实践笔记</title>
+    <link>https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</link>
+    <pubDate>Sun, 10 Apr 2022 08:47:52 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</guid>
+    <description><![CDATA[kubeflow介绍、安装和使用]]></description>
+</item><item>
+    <title>Hugo Command</title>
+    <link>https://zhuyaguang.github.io/hugo-command/</link>
+    <pubDate>Sun, 10 Apr 2022 08:41:30 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/hugo-command/</guid>
+    <description><![CDATA[Hugo 常用命令]]></description>
+</item></channel>
+</rss>
