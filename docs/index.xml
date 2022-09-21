@@ -13,7 +13,7 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/serverless-meetup/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="https://bartlomiejmika.com/img/2022/07/ian-taylor-jOqJbvo1P9g-unsplash.jpg" referrerpolicy="no-referrer">
+                <img src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/640-20220921083621330.jpeg" referrerpolicy="no-referrer">
             </div>今年是第二次参加 Serverless Meetup 了。这是本次 Meetup 的活动文章。 Serverless Developer Meetup 杭州站精彩回顾！【附赠PPT】 Serverless 每个大厂都在搞，目前 Serverless 社区就只有阿里巴巴一直在坚持运营。]]></description>
 </item><item>
     <title>多集群实现 PLG 日志收集</title>
@@ -42,7 +42,9 @@
     <pubDate>Sat, 16 Jul 2022 13:53:33 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/mysql-on-k8s/</guid>
-    <description><![CDATA[mysql上k8s方案汇总]]></description>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://bartlomiejmika.com/img/2022/07/ian-taylor-jOqJbvo1P9g-unsplash.jpg" referrerpolicy="no-referrer">
+            </div>mysql上k8s方案汇总]]></description>
 </item><item>
     <title>2021年总结</title>
     <link>https://zhuyaguang.github.io/2021/</link>

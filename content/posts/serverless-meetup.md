@@ -2,10 +2,8 @@
 title: "9.17 Serverless 杭州 Meetup"
 date: 2022-09-20T16:06:16+08:00
 draft: true
-featuredImage: https://bartlomiejmika.com/img/2022/07/ian-taylor-jOqJbvo1P9g-unsplash.jpg
+featuredImage: https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/640-20220921083621330.jpeg
 ---
-
-
 
 今年是第二次参加 Serverless Meetup 了。这是本次 Meetup 的活动文章。
 
@@ -20,9 +18,21 @@ Serverless 场景目前也是大厂在推，主要有以下几个场景：
 - 短暂、无状态的应用，对冷启动时间不敏感的场景。
 - 需要快速开发、迭代的业务。
 
+主要优点就是省成本
+
+![image-20220921084020099](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220921084020099.png)
+
+## serverless 使用场景
+
+### 汽车出行-车联网平台
+
+![image-20220921083923535](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220921083923535.png)
 
 
 
+### 游戏行业
+
+![image-20220921084057838](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220921084057838.png)
 
 
 
