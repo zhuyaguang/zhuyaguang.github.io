@@ -202,6 +202,8 @@ MindSpore架构师 王磊的文章
 
 [Flink在AI流程中的应用](https://mp.weixin.qq.com/s/VkVd0AOQwfAUiMYFmO63og)
 
+[理解云原生MLOps技术](https://mp.weixin.qq.com/s/U4zaB-JpOa9455aPQOlN3A)
+
 ### 公众号
 
 * **[MLOps工程实践](https://mp.weixin.qq.com/s/Bh-_9N4JY3MvbJ5Iw6bWwQ)**
