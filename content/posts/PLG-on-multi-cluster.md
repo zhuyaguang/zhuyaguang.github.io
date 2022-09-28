@@ -9,6 +9,14 @@ description: "多集群日志收集系统"
 
 # 多集群实现 PLG 日志收集
 
+## PLG介绍
+
+![loki diagram](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/logs-loki-diagram.svg)
+
+
+
+
+
 ## 快速部署 PLG 环境
 
 1. 新建目录保存配置文件
