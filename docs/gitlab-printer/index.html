@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/gitlab-printer\/"
-        },"genre": "posts","wordcount":  1184 ,
+        },"genre": "posts","wordcount":  1220 ,
         "url": "https:\/\/zhuyaguang.github.io\/gitlab-printer\/","datePublished": "2022-09-05T16:19:39+08:00","dateModified": "2022-09-05T16:19:39+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">我用 极狐 Gitlab 议题 来点菜</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-05">2022-09-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1184 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-05">2022-09-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1220 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -92,6 +92,7 @@
     <li><a href="#发送数据给打印机">发送数据给打印机</a></li>
     <li><a href="#链接-gitlab">链接 Gitlab</a>
       <ul>
+        <li><a href="#部署docker版本的-gitlab">部署docker版本的 Gitlab</a></li>
         <li><a href="#添加-webhooks">添加 Webhooks</a></li>
         <li><a href="#需要允许对本地网络的请求">需要允许对本地网络的请求</a></li>
         <li><a href="#添加本地请求的许可名单">添加本地请求的许可名单</a></li>
@@ -322,7 +323,16 @@
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220905131952437.png"
         title="image-20220905131952437" /></p>
 <h2 id="链接-gitlab">链接 Gitlab</h2>
-<h3 id="添加-webhooks">添加 Webhooks</h3>
+<h3 id="部署docker版本的-gitlab">部署docker版本的 Gitlab</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">sudo docker run --detach --hostname gitlab.example.com --publish 8929:8929 --publish 2289:22 --name gitlab --restart always --volume <span class="nv">$GITLAB_HOME</span>/config:/etc/gitlab --volume <span class="nv">$GITLAB_HOME</span>/logs:/var/log/gitlab --volume <span class="nv">$GITLAB_HOME</span>/data:/var/opt/gitlab --shm-size 256m registry.gitlab.cn/omnibus/gitlab-jh:latest
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="添加-webhooks">添加 Webhooks</h3>
 <p>这个时候，发送一个 curl 请求，就可以调试打印了。但是想要从 Gitlab 议题触发，就要用到 Gitlab 的 Webhooks 。Gitlab Webhooks 使用起来也很方便。进入 <strong>设置</strong>&mdash;<strong>Webhooks</strong>，输入要请求的 URL 和出发事件。</p>
 <p><img
         class="lazyload"

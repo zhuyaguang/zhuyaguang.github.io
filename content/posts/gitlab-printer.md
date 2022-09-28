@@ -142,6 +142,12 @@ type GitlabIssue struct {
 
 ## 链接 Gitlab
 
+### 部署docker版本的 Gitlab
+
+```sh
+sudo docker run --detach --hostname gitlab.example.com --publish 8929:8929 --publish 2289:22 --name gitlab --restart always --volume $GITLAB_HOME/config:/etc/gitlab --volume $GITLAB_HOME/logs:/var/log/gitlab --volume $GITLAB_HOME/data:/var/opt/gitlab --shm-size 256m registry.gitlab.cn/omnibus/gitlab-jh:latest
+```
+
 ### 添加 Webhooks
 
 这个时候，发送一个 curl 请求，就可以调试打印了。但是想要从 Gitlab 议题触发，就要用到 Gitlab 的 Webhooks 。Gitlab Webhooks 使用起来也很方便。进入 **设置**---**Webhooks**，输入要请求的 URL 和出发事件。
