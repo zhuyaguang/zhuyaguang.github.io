@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/storage-on-ai\/"
-        },"genre": "posts","wordcount":  550 ,
+        },"genre": "posts","wordcount":  611 ,
         "url": "https:\/\/zhuyaguang.github.io\/storage-on-ai\/","datePublished": "2022-09-28T09:26:16+08:00","dateModified": "2022-09-28T09:26:16+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">AI 场景下的分布式存储方案</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-28">2022-09-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 550 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-28">2022-09-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 611 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -95,6 +95,8 @@
         <li><a href="#在-cube-studio-上改造原有的本地分布式存储为-juicefs">在 cube-studio 上改造原有的本地分布式存储为 JuiceFS</a></li>
       </ul>
     </li>
+    <li><a href="#curve">Curve</a></li>
+    <li><a href="#参考文章">参考文章</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>AI 训练的时候经常要拷贝数据集来训练，之前在前项目组发现是一人配一台性能比较好的台式机，然后就是共享几台 A100 的服务器。分布式存储的目的就是访问远程数据集就像访问本地磁盘一样方便、安全、速度快。目前在数据库赛道国产涌现了许多优秀作品。</p>
@@ -423,7 +425,12 @@
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928105034910.png"
         title="image-20220928105034910" /></p>
 </li>
-</ol></div><div class="post-footer" id="post-footer">
+</ol>
+<h2 id="curve">Curve</h2>
+<h2 id="参考文章">参考文章</h2>
+<p><a href="https://mp.weixin.qq.com/s/gGnYZq27R3Kp0idue07yzg" target="_blank" rel="noopener noreffer">同时支撑8千并发，Alluxio在腾讯游戏AI的应用与优化实践</a></p>
+<p><a href="https://juicefs.com/zh-cn/blog/solutions/fluid-with-juicefs/" target="_blank" rel="noopener noreffer">如何在 Kubernetes 集群中玩转 Fluid + JuiceFS</a></p>
+<p><a href="https://juicefs.com/docs/zh/csi/examples/static-provisioning" target="_blank" rel="noopener noreffer">在 Kubernetes 中使用 JuiceFS 的静态配置方法</a></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

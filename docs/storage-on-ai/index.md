@@ -182,3 +182,31 @@ kubectl delete  pv jupyter-kubeflow-archives
 
    ![image-20220928105034910](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928105034910.png)
 
+
+
+## Curve
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 参考文章
+
+[同时支撑8千并发，Alluxio在腾讯游戏AI的应用与优化实践](https://mp.weixin.qq.com/s/gGnYZq27R3Kp0idue07yzg)
+
+[如何在 Kubernetes 集群中玩转 Fluid + JuiceFS](https://juicefs.com/zh-cn/blog/solutions/fluid-with-juicefs/)
+
+[在 Kubernetes 中使用 JuiceFS 的静态配置方法](https://juicefs.com/docs/zh/csi/examples/static-provisioning)
+
