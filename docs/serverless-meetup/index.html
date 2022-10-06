@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>9.17 Serverless 杭州 Meetup - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="9.17 Serverless 杭州 Meetup" />
-<meta property="og:description" content="今年是第二次参加 Serverless Meetup 了。这是本次 Meetup 的活动文章。 Serverless Developer Meetup 杭州站精彩回顾！【附赠PPT】 Serverless 每个大厂都在搞，目前 Serverless 社区就只有阿里巴巴一直在坚持运营。" />
+        <title>Meetup 2022 - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="Meetup 2022" />
+<meta property="og:description" content="6.11 kubesphere走进企业-之江站 这应该是之江实验室第一个社区技术分享会。对接社区和实验室。很开心这次活动能顺利举办。 活动详情：Kube" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/serverless-meetup/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-09-20T16:06:16+08:00" />
@@ -15,8 +15,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
-<meta name="twitter:title" content="9.17 Serverless 杭州 Meetup"/>
-<meta name="twitter:description" content="今年是第二次参加 Serverless Meetup 了。这是本次 Meetup 的活动文章。 Serverless Developer Meetup 杭州站精彩回顾！【附赠PPT】 Serverless 每个大厂都在搞，目前 Serverless 社区就只有阿里巴巴一直在坚持运营。"/>
+<meta name="twitter:title" content="Meetup 2022"/>
+<meta name="twitter:description" content="6.11 kubesphere走进企业-之江站 这应该是之江实验室第一个社区技术分享会。对接社区和实验室。很开心这次活动能顺利举办。 活动详情：Kube"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -24,12 +24,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "9.17 Serverless 杭州 Meetup",
+        "headline": "Meetup 2022",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/serverless-meetup\/"
-        },"genre": "posts","wordcount":  299 ,
+        },"genre": "posts","wordcount":  851 ,
         "url": "https:\/\/zhuyaguang.github.io\/serverless-meetup\/","datePublished": "2022-09-20T16:06:16+08:00","dateModified": "2022-09-20T16:06:16+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -77,10 +77,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">9.17 Serverless 杭州 Meetup</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">Meetup 2022</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-20">2022-09-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 299 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-20">2022-09-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 851 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -99,11 +99,60 @@
       <ul>
         <li><a href="#汽车出行-车联网平台">汽车出行-车联网平台</a></li>
         <li><a href="#游戏行业">游戏行业</a></li>
+        <li><a href="#互娱行业">互娱行业</a></li>
+        <li><a href="#消费电子">消费电子</a></li>
+        <li><a href="#企业困境解析">企业困境解析</a></li>
+        <li><a href="#响应时间优化">响应时间优化</a></li>
+        <li><a href="#通用-faas-平台架构设计">通用 FaaS 平台架构设计</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>今年是第二次参加 Serverless Meetup 了。这是本次 Meetup 的活动文章。</p>
+            </div><div class="content" id="content"><h1 id="611-kubesphere走进企业-之江站">6.11 kubesphere走进企业-之江站</h1>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006092951136.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006092951136.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006092951136.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006092951136.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006092951136.png"
+        title="image-20221006092951136" /></p>
+<p>这应该是之江实验室第一个社区技术分享会。对接社区和实验室。很开心这次活动能顺利举办。</p>
+<p>活动详情：<a href="https://mp.weixin.qq.com/s/9Pvbbq2P0wEIkGEiqjwz2w" target="_blank" rel="noopener noreffer">KubeSphere 社区走进企业第二站 – 之江实验室</a></p>
+<h1 id="618-星汉未来线下-meetup">6.18 星汉未来线下 Meetup</h1>
+<p>之前学习过 胡老师的微服务课程，星汉未来也是一家小而美的创业公司。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006100101908.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006100101908.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006100101908.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006100101908.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006100101908.png"
+        title="image-20221006100101908" /></p>
+<h1 id="827-云原生-meetup-杭州站">8.27 云原生 Meetup 杭州站</h1>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006092502456.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006092502456.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006092502456.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006092502456.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006092502456.png"
+        title="image-20221006092502456" /></p>
+<p>第一次做分享，挑战了自己。提前准备了很久，稿子也背了好几次，演讲稿的包袱也准备了很多。体会到 做分享还是内容为王。</p>
+<p>下面是活动总结：<a href="https://mp.weixin.qq.com/s/uBjffU5EgcpEucOtqr9fjA" target="_blank" rel="noopener noreffer">云原生 Meetup 杭州站精彩回顾（视频回放 + PPT）</a></p>
+<h1 id="813-user-group-开源遇上大数据">8.13 User Group 开源遇上大数据</h1>
+<p><a href="https://mp.weixin.qq.com/s/NaI8kutqacaoZ0uOQNK_0w" target="_blank" rel="noopener noreffer">8月13日杭州站-开源遇上大数据</a></p>
+<p>感觉亚马逊把活动外包了，所以感觉不是很专业。但是这个场地是属于五常街道的，可以免费看书做分享。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006093831204.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006093831204.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006093831204.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006093831204.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006093831204.png"
+        title="image-20221006093831204" /></p>
+<h1 id="917-serverless-杭州-meetup">9.17 Serverless 杭州 Meetup</h1>
+<p>今年是第二次参加 Serverless Meetup 了。这是本次 Meetup 的活动文章。</p>
 <p><a href="https://mp.weixin.qq.com/s/uN1Aa0L_Sd7noPZXM3RuSw" target="_blank" rel="noopener noreffer">Serverless Developer Meetup 杭州站精彩回顾！【附赠PPT】</a></p>
 <p>Serverless 每个大厂都在搞，目前 Serverless 社区就只有阿里巴巴一直在坚持运营。Serverless 钉钉群都有 2000+ 了，但是阿里的 Serverless 服务和阿里云绑定太严重了，所以每年我都是 workshop 体验下，用完就删了。（这次忘记删了，扣了30多块钱，心疼。还还好参加活动拿了一些福利羊毛😁）。</p>
 <p>Serverless 场景目前也是大厂在推，主要有以下几个场景：</p>
@@ -141,8 +190,104 @@
         data-sizes="auto"
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220921084057838.png"
         title="image-20220921084057838" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134603655.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134603655.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134603655.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134603655.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134603655.png"
+        title="image-20220928134603655" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134712753.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134712753.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134712753.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134712753.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134712753.png"
+        title="image-20220928134712753" /></p>
+<h3 id="互娱行业">互娱行业</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134739674.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134739674.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134739674.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134739674.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134739674.png"
+        title="image-20220928134739674" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134751548.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134751548.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134751548.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134751548.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134751548.png"
+        title="image-20220928134751548" /></p>
+<h3 id="消费电子">消费电子</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134811094.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134811094.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134811094.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134811094.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134811094.png"
+        title="image-20220928134811094" /></p>
+<h3 id="企业困境解析">企业困境解析</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134840217.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134840217.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134840217.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134840217.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134840217.png"
+        title="image-20220928134840217" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134856225.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134856225.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134856225.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134856225.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134856225.png"
+        title="image-20220928134856225" /></p>
+<h3 id="响应时间优化">响应时间优化</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928135012707.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928135012707.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928135012707.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928135012707.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928135012707.png"
+        title="image-20220928135012707" /></p>
+<h3 id="通用-faas-平台架构设计">通用 FaaS 平台架构设计</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134923976.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134923976.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134923976.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134923976.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220928134923976.png"
+        title="image-20220928134923976" /></p>
 <p>参考文章</p>
 <p><a href="https://mp.weixin.qq.com/s/6XfUdtneBEuGYelVKhIGKQ" target="_blank" rel="noopener noreffer">详解 Serverless 架构的 6 大应用场景</a></p>
+<h1 id="924-apache-apisix--apache-dubbo-联合-meetup-杭州站">9.24 Apache APISIX × Apache Dubbo 联合 Meetup 杭州站</h1>
+<p>第一次了解 Apache 社区。</p>
+<p>初识头哥。20多年的老程序员，还能这么有激情与活力，看来健身起到很大作用。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006095119281.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006095119281.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006095119281.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006095119281.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006095119281.png"
+        title="image-20221006095119281" /></p>
+<p><a href="https://github.com/KomachiSion/APISIX-Dubbo-Nacos" target="_blank" rel="noopener noreffer">APISIX+Dubbo+Nacos 最佳实践</a></p>
+<h1 id="926-aicon-2022">9.26 AICON 2022</h1>
+<p>趁着体检的完，跑到滨江参加了 AICON ，和小凡面了基。拿到了一些周边。下午又赶回去上班了。下午的分论坛就错过了😭。</p>
+<p>活动详情：<a href="https://mp.weixin.qq.com/s/gsfkCExHFgMITzZ3iMCqfA" target="_blank" rel="noopener noreffer">AICON 2022成功举办！全球人工智能领域专家齐聚一堂</a></p>
+<h1 id="1015-curve--polardb-meetup">10.15 Curve &amp; PolarDB Meetup</h1>
+<h1 id="1105-阿里云栖大会">11.05 阿里云栖大会</h1>
+<h1 id="总结">总结</h1>
+<p>线上的会议今年也有很多，华为的边缘云大会等，忘记了做笔记。发现线上会议收获还是比较少。听的过程中也很容易分神。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -156,7 +301,7 @@
                             <a class="link-to-markdown" href="/serverless-meetup/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="9.17 Serverless 杭州 Meetup" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/serverless-meetup/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="9.17 Serverless 杭州 Meetup" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="9.17 Serverless 杭州 Meetup"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="9.17 Serverless 杭州 Meetup" data-image="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/640-20220921083621330.jpeg"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="9.17 Serverless 杭州 Meetup" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="9.17 Serverless 杭州 Meetup" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="9.17 Serverless 杭州 Meetup"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="Meetup 2022" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/serverless-meetup/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="Meetup 2022" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="Meetup 2022"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="Meetup 2022" data-image="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/640-20220921083621330.jpeg"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="Meetup 2022" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="Meetup 2022" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/serverless-meetup/" data-title="Meetup 2022"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
