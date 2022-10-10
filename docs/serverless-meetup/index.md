@@ -17,13 +17,7 @@
 
 ![image-20221006100101908](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006100101908.png)
 
-## 8.27 云原生 Meetup 杭州站
 
-![image-20221006092502456](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006092502456.png)
-
-第一次做分享，挑战了自己。提前准备了很久，稿子也背了好几次，演讲稿的包袱也准备了很多。体会到 做分享还是内容为王。
-
-下面是活动总结：[云原生 Meetup 杭州站精彩回顾（视频回放 + PPT）](https://mp.weixin.qq.com/s/uBjffU5EgcpEucOtqr9fjA)
 
 ## 8.13 User Group 开源遇上大数据
 
@@ -32,6 +26,18 @@
 感觉亚马逊把活动外包了，所以感觉不是很专业。但是这个场地是属于五常街道的，可以免费看书做分享。
 
 ![image-20221006093831204](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006093831204.png)
+
+
+
+## 8.27 云原生 Meetup 杭州站
+
+![image-20221006092502456](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221006092502456.png)
+
+第一次做分享，挑战了自己。提前准备了很久，稿子也背了好几次，演讲稿的包袱也准备了很多。体会到 做分享还是内容为王。
+
+下面是活动总结：[云原生 Meetup 杭州站精彩回顾（视频回放 + PPT）](https://mp.weixin.qq.com/s/uBjffU5EgcpEucOtqr9fjA)
+
+
 
 ## 9.17 Serverless 杭州 Meetup
 
@@ -143,6 +149,10 @@ Serverless 场景目前也是大厂在推，主要有以下几个场景：
 
 
 ## 11.05 阿里云栖大会
+
+
+
+## 11.06 第三届「中国云计算基础架构开发者大会」
 
 
 
