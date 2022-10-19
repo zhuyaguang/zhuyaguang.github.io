@@ -150,6 +150,28 @@ Serverless 场景目前也是大厂在推，主要有以下几个场景：
 
 ## 10.15 Curve & PolarDB Meetup
 
+去滨江网易参加了慧姐搞的 Curve 分布式数据库，用了 最强RPC BRPC
+
+![image-20221019170636821](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221019170636821.png)
+
+![image-20221019170625149](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221019170625149.png)
+
+![image-20221019170524899](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221019170524899.png)
+
+
+
+![image-20221019170539828](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221019170539828.png)
+
+
+
+![image-20221019170550678](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221019170550678.png)
+
+![image-20221019170602215](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221019170602215.png)
+
+
+
+![image-20221019170612291](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221019170612291.png)
+
 
 
 ## 11.05 阿里云栖大会
