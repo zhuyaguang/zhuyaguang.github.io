@@ -150,6 +150,8 @@ Serverless 场景目前也是大厂在推，主要有以下几个场景：
 
 ## 10.15 Curve & PolarDB Meetup
 
+ [Curve x PolarDB Meetup 杭州站](https://mp.weixin.qq.com/s/Pxl0FAu2X9nbVqMz_2CWTg)
+
 去滨江网易参加了慧姐搞的 Curve 分布式数据库，用了 最强RPC BRPC
 
 ![image-20221019170636821](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221019170636821.png)
@@ -171,6 +173,10 @@ Serverless 场景目前也是大厂在推，主要有以下几个场景：
 
 
 ![image-20221019170612291](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221019170612291.png)
+
+
+
+## 10.29 **2022 第七届中国开源年会（COSCon 2022）杭州线下分会场**
 
 
 
