@@ -178,15 +178,59 @@ Serverless 场景目前也是大厂在推，主要有以下几个场景：
 
 ## 10.29 **2022 第七届中国开源年会（COSCon 2022）杭州线下分会场**
 
+好久没参加 年会了 抽奖挺开心的。老婆中了一个蓝牙键盘。
 
+开源这杯酒，谁喝都会醉。
 
 ## 11.05 阿里云栖大会
 
-
+第一次 参加 云栖大会。适合拍照打卡。另外 去一些大厂展台 福利都很不错，比如 英特尔。
 
 ## 11.06 第三届「中国云计算基础架构开发者大会」
 
+* 大会议程：
 
+![image-20221107102200661](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221107102200661.png)
+
+
+
+#### 上午主论坛
+
+* 氦卡-字节跳动自研DPU的技术揭秘
+
+![image-20221107144602600](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221107144602600.png)
+
+![image-20221107144725903](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221107144725903.png)
+
+![image-20221107144739398](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221107144739398.png)
+
+
+
+![image-20221107144850972](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221107144850972.png)
+
+![image-20221107145024746](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221107145024746.png)
+
+![image-20221107145033864](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221107145033864.png)
+
+![image-20221107145047236](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221107145047236.png)
+
+![image-20221107145059175](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221107145059175.png)
+
+#### 下午分论坛
+
+* 性能优化
+
+https://live.juejin.cn/4354/chinacidflt1
+
+* 系统框架
+
+https://live.juejin.cn/4354/chinacidflt2
+
+* 平台管理
+
+https://live.juejin.cn/4354/9344513
+
+* 探索与实践
 
 
 
