@@ -55,6 +55,12 @@ https://zhuanlan.zhihu.com/p/110168818
 
 https://mit-public-courses-cn-translatio.gitbook.io/mit6-824/
 
+### Youtube
+
+DDIA 作者 [@martinkl](https://twitter.com/martinkl)关于分布式系统的公开课，质量非常高。涉及到的主题有CAP理论、拜占庭将军问题、RPC、分布式系统逻辑时钟、容错、Raft、分布式事务、最终一致性、CRDT、广播算法等，共不到7小时的时长。
+
+https://www.youtube.com/playlist?list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB
+
 ### 极客时间
 
 分布式金融架构
