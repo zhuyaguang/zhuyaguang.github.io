@@ -196,7 +196,9 @@ Serverless 场景目前也是大厂在推，主要有以下几个场景：
 
 #### 上午主论坛
 
-* 氦卡-字节跳动自研DPU的技术揭秘
+视频：https://juejin.cn/live/chinacid
+
+##### 氦卡-字节跳动自研DPU的技术揭秘
 
 ![image-20221107144602600](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221107144602600.png)
 
@@ -216,21 +218,86 @@ Serverless 场景目前也是大厂在推，主要有以下几个场景：
 
 ![image-20221107145059175](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20221107145059175.png)
 
+
+
+##### 阿里云无影
+
+![image-20221129093058032](../../../Library/Application%20Support/typora-user-images/image-20221129093058032.png)
+
+##### Intel DTX 基于硬件的机密计算
+
+![image-20221129093224142](../../../Library/Application%20Support/typora-user-images/image-20221129093224142.png)
+
+##### 腾讯的 open could OS
+
+![image-20221129093745344](../../../Library/Application%20Support/typora-user-images/image-20221129093745344.png)
+
+![image-20221129093801778](../../../Library/Application%20Support/typora-user-images/image-20221129093801778.png)
+
+![image-20221129093821213](../../../Library/Application%20Support/typora-user-images/image-20221129093821213.png)
+
+
+
+![image-20221129093836512](../../../Library/Application%20Support/typora-user-images/image-20221129093836512.png)
+
+![image-20221129093913339](../../../Library/Application%20Support/typora-user-images/image-20221129093913339.png)
+
+
+
+![image-20221129093935074](../../../Library/Application%20Support/typora-user-images/image-20221129093935074.png)
+
+
+
+![image-20221129093947537](../../../Library/Application%20Support/typora-user-images/image-20221129093947537.png)
+
+
+
+![image-20221129094007750](../../../Library/Application%20Support/typora-user-images/image-20221129094007750.png)
+
+![image-20221129094034904](../../../Library/Application%20Support/typora-user-images/image-20221129094034904.png)
+
+
+
+##### 操作系统在云领域的探索与实践
+
+![image-20221129094351770](../../../Library/Application%20Support/typora-user-images/image-20221129094351770.png)
+
+![image-20221129094411023](../../../Library/Application%20Support/typora-user-images/image-20221129094411023.png)
+
+![image-20221129094452441](../../../Library/Application%20Support/typora-user-images/image-20221129094452441.png)
+
+###### ![image-20221129094508447](../../../Library/Application%20Support/typora-user-images/image-20221129094508447.png)
+
+![image-20221129094523552](../../../Library/Application%20Support/typora-user-images/image-20221129094523552.png)
+
+
+
+![image-20221129094548020](../../../Library/Application%20Support/typora-user-images/image-20221129094548020.png)
+
+
+
+![image-20221129094605316](../../../Library/Application%20Support/typora-user-images/image-20221129094605316.png)
+
+![image-20221129094618524](../../../Library/Application%20Support/typora-user-images/image-20221129094618524.png)
+
+![image-20221129094643837](../../../Library/Application%20Support/typora-user-images/image-20221129094643837.png)
+
+![image-20221129094702713](../../../Library/Application%20Support/typora-user-images/image-20221129094702713.png)
+
+![image-20221129094716902](../../../Library/Application%20Support/typora-user-images/image-20221129094716902.png)
+
+![image-20221129094730445](../../../Library/Application%20Support/typora-user-images/image-20221129094730445.png)
+
+![image-20221129094743322](../../../Library/Application%20Support/typora-user-images/image-20221129094743322.png)
+
+
+
 #### 下午分论坛
 
-* 性能优化
-
-https://live.juejin.cn/4354/chinacidflt1
-
-* 系统框架
-
-https://live.juejin.cn/4354/chinacidflt2
-
-* 平台管理
-
-https://live.juejin.cn/4354/9344513
-
-* 探索与实践
+* 分论坛1性能优化：https://live.juejin.cn/4354/chinacidflt1
+* 分论坛2系统框架：https://live.juejin.cn/4354/chinacidflt2
+* 分论坛3平台管理：https://live.juejin.cn/4354/chinacidflt3
+* 分论坛4探索与实践：https://live.juejin.cn/4354/9344513
 
 
 

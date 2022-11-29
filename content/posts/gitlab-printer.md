@@ -15,6 +15,8 @@ description: "gitlab 101 "
 
 话不多说，先看看效果。
 
+[B站地址](https://www.bilibili.com/video/BV1fP4y1f7CZ/?spm_id_from=333.999.0.0&vd_source=7c01ef1291401ab5794ad05282544242)
+
 
 
 <iframe src="//player.bilibili.com/player.html?bvid=BV1fP4y1f7CZ&cid=824450453&page=1" scrolling="no" border="0" frameborder="no" framespacing="0"></iframe>
@@ -36,7 +38,7 @@ description: "gitlab 101 "
 
 我这里是用 Mac 直接连接添加的网络打印机，可以通过 `lp filename` 直接打印文件。
 
-![image-20220905130647468](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220905130647468.png)
+![image-20220905130647468](../../../Desktop/image-20220905130647468.png)
 
 ## 发送数据给打印机
 

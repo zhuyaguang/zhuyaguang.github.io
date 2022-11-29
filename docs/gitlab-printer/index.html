@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/gitlab-printer\/"
-        },"genre": "posts","wordcount":  1220 ,
+        },"genre": "posts","wordcount":  1224 ,
         "url": "https:\/\/zhuyaguang.github.io\/gitlab-printer\/","datePublished": "2022-09-05T16:19:39+08:00","dateModified": "2022-09-05T16:19:39+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">我用 极狐 Gitlab 议题 来点菜</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-05">2022-09-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1220 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-09-05">2022-09-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1224 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -107,6 +107,7 @@
             </div><div class="content" id="content"><h1 id="我用-极狐-gitlab-议题-来点菜">我用 极狐 Gitlab 议题 来点菜</h1>
 <p>虽然我是一个程序员，但是我一直想开一个餐厅。希望开一个极客范儿的餐厅，大家通过 issue 来点菜。受到推特上一位<a href="https://aschmelyun.com/blog/i-built-a-receipt-printer-for-github-issues/" target="_blank" rel="noopener noreffer">大佬 <em>Andrew Schmelyun</em> 的影响</a>，我在 Gitlab 上实现了该功能。</p>
 <p>话不多说，先看看效果。</p>
+<p><a href="https://www.bilibili.com/video/BV1fP4y1f7CZ/?spm_id_from=333.999.0.0&amp;vd_source=7c01ef1291401ab5794ad05282544242" target="_blank" rel="noopener noreffer">B站地址</a></p>
 <iframe src="//player.bilibili.com/player.html?bvid=BV1fP4y1f7CZ&cid=824450453&page=1" scrolling="no" border="0" frameborder="no" framespacing="0"></iframe>
 <p>接下来，我来介绍下是怎么实现的。</p>
 <h2 id="硬件列表">硬件列表</h2>
@@ -127,10 +128,10 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220905130647468.png"
-        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220905130647468.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220905130647468.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220905130647468.png 2x"
+        data-src="../../../Desktop/image-20220905130647468.png"
+        data-srcset="../../../Desktop/image-20220905130647468.png, ../../../Desktop/image-20220905130647468.png 1.5x, ../../../Desktop/image-20220905130647468.png 2x"
         data-sizes="auto"
-        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220905130647468.png"
+        alt="../../../Desktop/image-20220905130647468.png"
         title="image-20220905130647468" /></p>
 <h2 id="发送数据给打印机">发送数据给打印机</h2>
 <p>作为一个 Go 的开发者，很容易就想到用 Gin 框架起一个 http 服务。用来接受 客户的菜单请求。</p>
