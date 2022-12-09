@@ -4,9 +4,16 @@
         <link>https://zhuyaguang.github.io/</link>
         <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Wed, 28 Sep 2022 09:26:16 &#43;0800</lastBuildDate>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Fri, 09 Dec 2022 11:22:27 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Bytebase SQL 编辑器文档体验报告</title>
+    <link>https://zhuyaguang.github.io/bytebase/</link>
+    <pubDate>Fri, 09 Dec 2022 11:22:27 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/bytebase/</guid>
+    <description><![CDATA[好用的数据库管理 SaaS 产品]]></description>
+</item><item>
     <title>AI 场景下的分布式存储方案</title>
     <link>https://zhuyaguang.github.io/storage-on-ai/</link>
     <pubDate>Wed, 28 Sep 2022 09:26:16 &#43;0800</pubDate>
@@ -73,12 +80,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/distributed-systems/</guid>
     <description><![CDATA[分布式系统学习博客、课程、学习笔记汇总]]></description>
-</item><item>
-    <title>向量检索落地场景探索</title>
-    <link>https://zhuyaguang.github.io/milvus-action/</link>
-    <pubDate>Mon, 18 Apr 2022 17:23:48 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/milvus-action/</guid>
-    <description><![CDATA[向量检索落地场景探索]]></description>
 </item></channel>
 </rss>

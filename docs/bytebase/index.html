@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Bytebase SQL 编辑器文档体验报告 - 朱亚光的博客</title><meta name="Description" content="好用的数据库管理 SaaS 产品"><meta property="og:title" content="Bytebase SQL 编辑器文档体验报告" />
+<meta property="og:description" content="好用的数据库管理 SaaS 产品" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhuyaguang.github.io/bytebase/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-09T11:22:27+08:00" />
+<meta property="article:modified_time" content="2022-12-09T11:22:27+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Bytebase SQL 编辑器文档体验报告"/>
+<meta name="twitter:description" content="好用的数据库管理 SaaS 产品"/>
+<meta name="application-name" content="朱亚光的博客">
+<meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/bytebase/" /><link rel="prev" href="https://zhuyaguang.github.io/storage-on-ai/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Bytebase SQL 编辑器文档体验报告",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/zhuyaguang.github.io\/bytebase\/"
+        },"genre": "posts","wordcount":  812 ,
+        "url": "https:\/\/zhuyaguang.github.io\/bytebase\/","datePublished": "2022-12-09T11:22:27+08:00","dateModified": "2022-12-09T11:22:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "朱亚光"
+            },"description": "好用的数据库管理 SaaS 产品"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="/reading/"> 书单 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="/reading/" title="">书单</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Bytebase SQL 编辑器文档体验报告</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-12-09">2022-12-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 812 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#bytebase-介绍">Bytebase 介绍</a></li>
+    <li><a href="#bytebase-安装">Bytebase 安装</a>
+      <ul>
+        <li><a href="#创建环境">创建环境</a></li>
+        <li><a href="#添加实例">添加实例</a></li>
+        <li><a href="#新建项目">新建项目</a></li>
+      </ul>
+    </li>
+    <li><a href="#体验sql-编辑器">体验SQL 编辑器</a>
+      <ul>
+        <li><a href="#创建表">创建表</a></li>
+        <li><a href="#插入表">插入表</a></li>
+        <li><a href="#查询表">查询表</a></li>
+        <li><a href="#管理员模式">管理员模式</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="bytebase-介绍">Bytebase 介绍</h2>
+<p>Bytebase 官网的 slogan是： 面向开发者 可靠的 数据库 CI/CD。把数据库 和 DevOps 结合起来了。这对于 DBA 来说确实是一个福音。</p>
+<p>作为一个开发之前部署了 mysql ，调试的时候想去看看数据库的数据，通常都是下载一个 Navicat。但是不同的电脑需要下载不同的版本，而且还是收费的，去找破解版的话，又要折腾一番。有没有浏览器就能用的开源的数据库可视化管理产品呢。</p>
+<p>Bytebase 他来了！审核，变更，留档，回滚。源自 Google 的数据库 DevOps 最佳实践。</p>
+<h2 id="bytebase-安装">Bytebase 安装</h2>
+<p>安装很简单，一个命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run --init <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --name bytebase <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --restart always <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --publish 5678:8080 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --health-cmd <span class="s2">&#34;curl --fail http://localhost:5678/healthz || exit 1&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --health-interval 5m <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --health-timeout 60s <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --volume ~/.bytebase/data:/var/opt/bytebase <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  bytebase/bytebase:1.9.0 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --data /var/opt/bytebase <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --port <span class="m">8080</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后 http://IP:5678/ 就可以直接访问了。</p>
+<p>如果你有数据库实例的话，那你可以连接你自己的数据库实例。如果没有的话，可以自己创建一个，也是一条命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run --name mysqldtest   --publish 3307:3306   -e <span class="nv">MYSQL_ROOT_HOST</span><span class="o">=</span>172.17.0.1   -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>testpwd1   mysql/mysql-server:8.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209114153992.png"
+        data-srcset="../img/image-20221209114153992.png, ../img/image-20221209114153992.png 1.5x, ../img/image-20221209114153992.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209114153992.png"
+        title="image-20221209114153992" /></p>
+<p>Bytebase 主界面如上图所示，主要是区分环境（测试环境、生产环境），环境里面有实例，实例里面包括了数据库。项目则是一个逻辑概念，包含了你自己的业务需要处理哪些数据库和处理记录。</p>
+<h3 id="创建环境">创建环境</h3>
+<p>首先我们去创建环境，默认已经创建好了两个环境，在不同的环境可以定义不同的审批策略和备份策略。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209122630056.png"
+        data-srcset="../img/image-20221209122630056.png, ../img/image-20221209122630056.png 1.5x, ../img/image-20221209122630056.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209122630056.png"
+        title="image-20221209122630056" /></p>
+<h3 id="添加实例">添加实例</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209122843635.png"
+        data-srcset="../img/image-20221209122843635.png, ../img/image-20221209122843635.png 1.5x, ../img/image-20221209122843635.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209122843635.png"
+        title="image-20221209122843635" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209122913076.png"
+        data-srcset="../img/image-20221209122913076.png, ../img/image-20221209122913076.png 1.5x, ../img/image-20221209122913076.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209122913076.png"
+        title="image-20221209122913076" /></p>
+<p>填入必要的参数就可以将数据库实例接入进来。</p>
+<h3 id="新建项目">新建项目</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209123636903.png"
+        data-srcset="../img/image-20221209123636903.png, ../img/image-20221209123636903.png 1.5x, ../img/image-20221209123636903.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209123636903.png"
+        title="image-20221209123636903" /></p>
+<p>新建好项目之后，就可以通过创建数据库或者转移数据库，来对想要操作的数据库进行，增删改查操作了。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209123946386.png"
+        data-srcset="../img/image-20221209123946386.png, ../img/image-20221209123946386.png 1.5x, ../img/image-20221209123946386.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209123946386.png"
+        title="image-20221209123946386" /></p>
+<h2 id="体验sql-编辑器">体验SQL 编辑器</h2>
+<h3 id="创建表">创建表</h3>
+<ul>
+<li>左侧选择数据库实例，创建表 t3 ，有 SQL 语句补全功能很赞！</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209124619842.png"
+        data-srcset="../img/image-20221209124619842.png, ../img/image-20221209124619842.png 1.5x, ../img/image-20221209124619842.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209124619842.png"
+        title="image-20221209124619842" /></p>
+<ul>
+<li>点击运行，由于是生产环境的实例，所以只能执行 SELECT 语句，不过可以提交工单审批来创建表，点击 变更 Schema</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209124725821.png"
+        data-srcset="../img/image-20221209124725821.png, ../img/image-20221209124725821.png 1.5x, ../img/image-20221209124725821.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209124725821.png"
+        title="image-20221209124725821" /></p>
+<ul>
+<li>创建工单</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209124919719.png"
+        data-srcset="../img/image-20221209124919719.png, ../img/image-20221209124919719.png 1.5x, ../img/image-20221209124919719.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209124919719.png"
+        title="image-20221209124919719" /></p>
+<ul>
+<li>等待批准</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209125008925.png"
+        data-srcset="../img/image-20221209125008925.png, ../img/image-20221209125008925.png 1.5x, ../img/image-20221209125008925.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209125008925.png"
+        title="image-20221209125008925" /></p>
+<ul>
+<li>由于我是 <strong>Owner（工作空间所有者）</strong> 所以我可以审批，点击批准</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209125129815.png"
+        data-srcset="../img/image-20221209125129815.png, ../img/image-20221209125129815.png 1.5x, ../img/image-20221209125129815.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209125129815.png"
+        title="image-20221209125129815" /></p>
+<ul>
+<li>成功创建 t3 表</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209125229901.png"
+        data-srcset="../img/image-20221209125229901.png, ../img/image-20221209125229901.png 1.5x, ../img/image-20221209125229901.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209125229901.png"
+        title="image-20221209125229901" /></p>
+<h3 id="插入表">插入表</h3>
+<p>向 t3里面插入一条数据</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209133732650.png"
+        data-srcset="../img/image-20221209133732650.png, ../img/image-20221209133732650.png 1.5x, ../img/image-20221209133732650.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209133732650.png"
+        title="image-20221209133732650" /></p>
+<p>⚠️：这里有一个注意地方，数据库名字一般不要用数字开头，不然的话插入数据要用 单引号 ` 扩起来。另外Bytebase 也会在审批的时候校验你的 SQL 语法，这点对于不熟悉 SQL 语法的开发来说还是很赞的！</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209134943569.png"
+        data-srcset="../img/image-20221209134943569.png, ../img/image-20221209134943569.png 1.5x, ../img/image-20221209134943569.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209134943569.png"
+        title="image-20221209134943569" /></p>
+<h3 id="查询表">查询表</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209133824079.png"
+        data-srcset="../img/image-20221209133824079.png, ../img/image-20221209133824079.png 1.5x, ../img/image-20221209133824079.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209133824079.png"
+        title="image-20221209133824079" /></p>
+<h3 id="管理员模式">管理员模式</h3>
+<p>如果嫌审批太麻烦的话，可以使用管理员模式</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209134026051.png"
+        data-srcset="../img/image-20221209134026051.png, ../img/image-20221209134026051.png 1.5x, ../img/image-20221209134026051.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209134026051.png"
+        title="image-20221209134026051" /></p>
+<p>直接命令行操作</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20221209134100285.png"
+        data-srcset="../img/image-20221209134100285.png, ../img/image-20221209134100285.png 1.5x, ../img/image-20221209134100285.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20221209134100285.png"
+        title="image-20221209134100285" /></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-12-09</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/bytebase/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/bytebase/" data-title="Bytebase SQL 编辑器文档体验报告" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/bytebase/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/bytebase/" data-title="Bytebase SQL 编辑器文档体验报告" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/bytebase/" data-title="Bytebase SQL 编辑器文档体验报告"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/bytebase/" data-title="Bytebase SQL 编辑器文档体验报告"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/bytebase/" data-title="Bytebase SQL 编辑器文档体验报告" data-description="好用的数据库管理 SaaS 产品"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/bytebase/" data-title="Bytebase SQL 编辑器文档体验报告" data-description="好用的数据库管理 SaaS 产品"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/bytebase/" data-title="Bytebase SQL 编辑器文档体验报告"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/storage-on-ai/" class="prev" rel="prev" title="AI 场景下的分布式存储方案"><i class="fas fa-angle-left fa-fw"></i>AI 场景下的分布式存储方案</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
