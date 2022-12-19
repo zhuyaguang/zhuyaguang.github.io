@@ -4,9 +4,16 @@
         <link>https://zhuyaguang.github.io/</link>
         <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Fri, 09 Dec 2022 11:22:27 &#43;0800</lastBuildDate>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Sun, 18 Dec 2022 10:00:20 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>2022 年终总结</title>
+    <link>https://zhuyaguang.github.io/2022/</link>
+    <pubDate>Sun, 18 Dec 2022 10:00:20 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/2022/</guid>
+    <description><![CDATA[达芬奇综合症指的是，不停地想学新东西，做了很多新项目，但是实际完成的很少。 更糟糕的是，你完全没有达芬奇的才华，却得了达芬奇的这种病。 2022 我好像]]></description>
+</item><item>
     <title>Bytebase SQL 编辑器文档体验报告</title>
     <link>https://zhuyaguang.github.io/bytebase/</link>
     <pubDate>Fri, 09 Dec 2022 11:22:27 &#43;0800</pubDate>
@@ -73,12 +80,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/mlops/</guid>
     <description><![CDATA[MLops 产品大汇总]]></description>
-</item><item>
-    <title>分布式系统学习</title>
-    <link>https://zhuyaguang.github.io/distributed-systems/</link>
-    <pubDate>Wed, 04 May 2022 11:02:29 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/distributed-systems/</guid>
-    <description><![CDATA[分布式系统学习博客、课程、学习笔记汇总]]></description>
 </item></channel>
 </rss>
