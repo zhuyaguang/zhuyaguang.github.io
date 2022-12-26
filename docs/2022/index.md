@@ -73,7 +73,7 @@ https://ossinsight.io/analyze/zhuyaguang 这个网站可以看具体情况，界
 
 今年拿到的书也蛮多的。
 
-![img](https://img2.doubanio.com/view/status/medium/public/135ffda41c5ae52.webp)
+![img](../img/135ffda41c5ae52.png)
 
 周边也是：已经统计不过来了，下面是线上拿的部分福利，没有打勾的是2022.12.19号快递还没到的。
 
@@ -109,7 +109,9 @@ https://ossinsight.io/analyze/zhuyaguang 这个网站可以看具体情况，界
 
 游戏没怎么玩，还是不知道自己喜欢那种游戏。魂类的游戏估计费时间，又考验操作。比如只狼，对马岛之魂。
 
-美国世界末日也不错。双人成行老婆估计不感兴趣。所以一直没买PSN的会员。
+美国世界末日也不错。双人成行老婆估计不感兴趣。所以一直没买PSN的会员。打算玩玩TGA年度游戏。
+
+双人成行、最后的生还者1，2、只狼、战神5。
 
 ## 2023 规划
 
