@@ -115,17 +115,21 @@ https://ossinsight.io/analyze/zhuyaguang 这个网站可以看具体情况，界
 
 ## 2023 规划
 
-* 可观测性与多集群
+* 可观测性与多集群（opentelemetry）
 
 * rust
 
 * eBPF https://mp.weixin.qq.com/s/5kGaFHgQqDKmmVDyZ-PGVQ
 
+* WASM 
+
 * 图数据库、知识图谱、图计算工程化落地与专利输出
 
-* 社区深度参与
+* 社区深度参与（cube-studio & 星汉未来）
 
 * 还清除房贷以外所有债务。（10W）
+
+* Severless Knative
 
   
   
