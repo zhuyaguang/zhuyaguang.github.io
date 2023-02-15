@@ -1,8 +1,11 @@
 ---
-title: "Bytabase2"
+title: "Bytebase 体验官之勇闯新手村"
 date: 2023-02-15T14:10:52+08:00
-draft: true
+draft: false
+description: "新手村我来了"
 ---
+
+<!--more-->
 
 # Bytebase 体验官之勇闯新手村
 
