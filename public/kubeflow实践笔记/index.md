@@ -629,6 +629,7 @@ spec:
 ### 问题
 
 * 如果访问界面403，请删除 kubectl delete  pods authservice-0  -n istio-system 重启
+* [如果 notebook 不能访问问题 ](https://github.com/kubeflow/kubeflow/issues/5803)
 
 
 

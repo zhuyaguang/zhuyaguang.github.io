@@ -4,9 +4,16 @@
         <link>https://zhuyaguang.github.io/</link>
         <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Sun, 18 Dec 2022 10:00:20 &#43;0800</lastBuildDate>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Wed, 15 Feb 2023 14:10:52 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Bytabase2</title>
+    <link>https://zhuyaguang.github.io/bytabase2/</link>
+    <pubDate>Wed, 15 Feb 2023 14:10:52 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/bytabase2/</guid>
+    <description><![CDATA[Bytebase 体验官之勇闯新手村 作为一个后端开发，看到微信群里一直在传要干掉 DBA 。于是我踏上了 Bytebase 体验官之旅。想看看 DBA 的尽头是什么。 个人信息 朱亚光 之江实验室]]></description>
+</item><item>
     <title>2022 年终总结</title>
     <link>https://zhuyaguang.github.io/2022/</link>
     <pubDate>Sun, 18 Dec 2022 10:00:20 &#43;0800</pubDate>
@@ -73,12 +80,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/2021/</guid>
     <description><![CDATA[2021年总结]]></description>
-</item><item>
-    <title>Mlops 产品研习录</title>
-    <link>https://zhuyaguang.github.io/mlops/</link>
-    <pubDate>Mon, 09 May 2022 10:13:22 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/mlops/</guid>
-    <description><![CDATA[MLops 产品大汇总]]></description>
 </item></channel>
 </rss>
