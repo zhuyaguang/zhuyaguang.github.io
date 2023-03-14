@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/cube-on-kubesphere\/"
-        },"genre": "posts","wordcount":  1280 ,
+        },"genre": "posts","wordcount":  1345 ,
         "url": "https:\/\/zhuyaguang.github.io\/cube-on-kubesphere\/","datePublished": "2022-07-18T11:31:10+08:00","dateModified": "2022-07-18T11:31:10+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">基于 kubesphere 搭建一站式云原生机器学习平台 </h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1280 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1345 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -131,7 +131,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KKZONE</span><span class="o">=</span>cn
-</span></span><span class="line"><span class="cl">curl -sfL https://get-kk.kubesphere.io <span class="p">|</span> <span class="nv">VERSION</span><span class="o">=</span>v2.2.1 sh -
+</span></span><span class="line"><span class="cl">curl -sfL https://get-kk.kubesphere.io <span class="p">|</span> <span class="nv">VERSION</span><span class="o">=</span>v3.0.2 sh -
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -160,7 +160,7 @@
 </div>
 </div></li>
 <li>
-<p>安装 1.20 版本的 k8s</p>
+<p>安装 1.22 版本的 k8s</p>
 </li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -168,7 +168,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">./kk create cluster --with-kubernetes v1.20.10  --with-kubesphere v3.3.0
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">./kk create cluster --with-kubernetes v1.22.12 --with-kubesphere v3.3.1
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>详细安装步骤可以参考 KubeSphere <a href="https://kubesphere.io/zh/docs/v3.3/quick-start/all-in-one-on-linux/" target="_blank" rel="noopener noreffer">官方文档</a></p>
@@ -342,10 +342,55 @@
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145421237.png"
         title="image-20220903145421237" /></p>
 </li>
-</ul>
+<li>
 <p>如果是拉取 docker hub 上面的镜像的话，训练&mdash;仓库&mdash;hubsecret，修改你的 dockerhub 的用户名和密码</p>
+</li>
+<li>
 <p>如果是拉取 Harbor 镜像，新建一个仓库，填写 Harbor 服务器域名或者 IP 和用户名密码</p>
-<ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">名称：
+</span></span><span class="line"><span class="cl">harbor
+</span></span><span class="line"><span class="cl">域名：
+</span></span><span class="line"><span class="cl">http://10.100.29.41:30080/
+</span></span><span class="line"><span class="cl">用户名：
+</span></span><span class="line"><span class="cl">admin
+</span></span><span class="line"><span class="cl">k8s hubsecret：
+</span></span><span class="line"><span class="cl">zjflab
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中 k8s hubsecret 的创建的命令为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret docker-registry zjflab <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     --docker-server<span class="o">=</span>10.100.29.41:30080 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     --docker-username<span class="o">=</span>admin <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     --docker-password<span class="o">=</span>Harbor12345 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     --docker-email<span class="o">=</span>zhuyaguang1368@163.com <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     --namespace<span class="o">=</span><span class="s2">&#34;pipeline&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>
 <p>镜像管理，创建你的 任务 镜像</p>
 <p><img

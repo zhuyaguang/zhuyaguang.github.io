@@ -13,7 +13,7 @@
 
   ```shell
   export KKZONE=cn
-  curl -sfL https://get-kk.kubesphere.io | VERSION=v2.2.1 sh -
+  curl -sfL https://get-kk.kubesphere.io | VERSION=v3.0.2 sh -
   ```
 
 *  如果机器上之前安装过 KubeSphere 或者 KubeSphere 版本太高 ， 先卸载 KubeSphere，k8s 版本太高有问题，[会导致部分 CRD 不能安装](https://github.com/tencentmusic/cube-studio/issues/47)
@@ -28,10 +28,10 @@
   rm -rf  /root/.kube/config
   ```
 
-*  安装 1.20 版本的 k8s
+*  安装 1.22 版本的 k8s
 
   ```
-  ./kk create cluster --with-kubernetes v1.20.10  --with-kubesphere v3.3.0
+  ./kk create cluster --with-kubernetes v1.22.12 --with-kubesphere v3.3.1
   ```
 
 详细安装步骤可以参考 KubeSphere [官方文档](https://kubesphere.io/zh/docs/v3.3/quick-start/all-in-one-on-linux/)
@@ -158,9 +158,32 @@ kubectl edit configmap kubernetes-config -n pipelinekubectl edit configmap kuber
 
   ![image-20220903145421237](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145421237.png)
 
-如果是拉取 docker hub 上面的镜像的话，训练---仓库---hubsecret，修改你的 dockerhub 的用户名和密码
+* 如果是拉取 docker hub 上面的镜像的话，训练---仓库---hubsecret，修改你的 dockerhub 的用户名和密码
+* 如果是拉取 Harbor 镜像，新建一个仓库，填写 Harbor 服务器域名或者 IP 和用户名密码
 
-如果是拉取 Harbor 镜像，新建一个仓库，填写 Harbor 服务器域名或者 IP 和用户名密码
+```shell
+名称：
+harbor
+域名：
+http://10.100.29.41:30080/
+用户名：
+admin
+k8s hubsecret：
+zjflab
+```
+
+其中 k8s hubsecret 的创建的命令为
+
+```shell
+kubectl create secret docker-registry zjflab \
+     --docker-server=10.100.29.41:30080 \
+     --docker-username=admin \
+     --docker-password=Harbor12345 \
+     --docker-email=zhuyaguang1368@163.com \
+     --namespace="pipeline"
+```
+
+
 
 * 镜像管理，创建你的 任务 镜像
 
