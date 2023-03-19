@@ -1,5 +1,5 @@
 ---
-title: "Bytebase03"
+title: "Bytebase 体验官之狂飙的 ChatGPT"
 date: 2023-03-18T22:38:02+08:00
 draft: true
 ---
@@ -21,7 +21,7 @@ draft: true
 2.创建 mysql 实例 
 3.创建项目 
 4.创建数据库，建表
-5.插入数据并查
+5.插入数据并查询
 ```
 
 详细内容可查看 [Bytebase 体验官之勇闯新手村](https://zhuyaguang.github.io/bytabase2/)
