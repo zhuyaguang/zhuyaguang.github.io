@@ -67,3 +67,13 @@
 
 是不是很简单！
 
+那今天的题目和狂飙和 ChatGPT 有什么关系呢
+
+Bytebase 针对具体业务场景，初步集成了 ChatGPT 的功能，在使用 Bytebase 过程中遇到不会写的 SQL 语句。直接问 AI 小助手了。
+
+我把我体验的过程，做了一个[小视频](https://xie.infoq.cn/article/432f88db614513217a520bf9f)，欢迎大家收看。
+
+
+
+![图片](https://mmbiz.qpic.cn/sz_mmbiz_png/MYlicw4Vl5Sj8D8tQezoZWh681jatGe9QDkh5tHB1xDl9sB7OD0jiazK58GMibP4ZJ6247Bk4NVJ0u0A1iaiaic43GDA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+
