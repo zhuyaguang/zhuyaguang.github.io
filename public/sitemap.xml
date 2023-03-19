@@ -2,9 +2,10 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>https://zhuyaguang.github.io/bytabase2/</loc><lastmod>2023-02-15T14:10:52&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://zhuyaguang.github.io/posts/</loc><lastmod>2023-02-15T14:10:52&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://zhuyaguang.github.io/</loc><lastmod>2023-02-15T14:10:52&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
             <loc>https://zhuyaguang.github.io/2022/</loc><lastmod>2022-12-18T10:00:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://zhuyaguang.github.io/posts/</loc><lastmod>2022-12-18T10:00:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://zhuyaguang.github.io/</loc><lastmod>2022-12-18T10:00:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/bytebase/</loc><lastmod>2022-12-09T11:22:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/storage-on-ai/</loc><lastmod>2022-09-28T09:26:16&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/plg-on-multi-cluster/</loc><lastmod>2022-09-07T11:04:28&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

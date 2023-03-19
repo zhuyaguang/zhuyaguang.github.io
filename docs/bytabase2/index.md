@@ -40,7 +40,7 @@ docker run --init \
 安装 mysql 实例
 
 ```shell
-docker run --name mysqldtest   --publish 3307:3306   -e MYSQL_ROOT_HOST=172.17.0.1   -e MYSQL_ROOT_PASSWORD=testpwd1   mysql/mysql-server:8.0
+docker run -itd --name mysql-test -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
 ```
 
 

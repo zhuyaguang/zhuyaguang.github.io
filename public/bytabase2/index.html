@@ -20,7 +20,7 @@
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/bytabase2/" /><link rel="prev" href="https://zhuyaguang.github.io/2022/" /><link rel="next" href="https://zhuyaguang.github.io/bytebase03/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/bytabase2/" /><link rel="prev" href="https://zhuyaguang.github.io/2022/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/bytabase2\/"
-        },"genre": "posts","wordcount":  470 ,
+        },"genre": "posts","wordcount":  471 ,
         "url": "https:\/\/zhuyaguang.github.io\/bytabase2\/","datePublished": "2023-02-15T14:10:52+08:00","dateModified": "2023-02-15T14:10:52+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Bytebase 体验官之勇闯新手村</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-02-15">2023-02-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 470 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-02-15">2023-02-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 471 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -140,7 +140,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run -itd --name mysql-test -p 3306:3306 -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="m">123456</span> mysql
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run --name mysqldtest   --publish 3307:3306   -e <span class="nv">MYSQL_ROOT_HOST</span><span class="o">=</span>172.17.0.1   -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>testpwd1   mysql/mysql-server:8.0
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="准备环境">准备环境</h2>
@@ -256,8 +256,7 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/2022/" class="prev" rel="prev" title="2022 年终总结"><i class="fas fa-angle-left fa-fw"></i>2022 年终总结</a>
-            <a href="/bytebase03/" class="next" rel="next" title="Bytebase03">Bytebase03<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/2022/" class="prev" rel="prev" title="2022 年终总结"><i class="fas fa-angle-left fa-fw"></i>2022 年终总结</a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">

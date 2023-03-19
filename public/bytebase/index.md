@@ -3,8 +3,6 @@
 
 <!--more-->
 
-
-
 ## Bytebase 介绍
 
 Bytebase 官网的 slogan是： 面向开发者 可靠的 数据库 CI/CD。把数据库 和 DevOps 结合起来了。这对于 DBA 来说确实是一个福音。

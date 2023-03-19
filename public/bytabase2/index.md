@@ -1,9 +1,5 @@
----
-title: "Bytebase 体验官之勇闯新手村"
-date: 2023-02-15T14:10:52+08:00
-draft: false
-description: "新手村我来了"
----
+# Bytebase 体验官之勇闯新手村
+
 
 <!--more-->
 
@@ -44,7 +40,7 @@ docker run --init \
 安装 mysql 实例
 
 ```shell
-docker run -itd --name mysql-test -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
+docker run --name mysqldtest   --publish 3307:3306   -e MYSQL_ROOT_HOST=172.17.0.1   -e MYSQL_ROOT_PASSWORD=testpwd1   mysql/mysql-server:8.0
 ```
 
 
@@ -104,3 +100,4 @@ docker run -itd --name mysql-test -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mys
 首先，我没有参考新手指南。整个流程走下来相当丝滑。只要理解 **环境 实例 数据库 项目** 这几个概念就行。
 
 而且每个步骤都有工单记录，操作起来很放心。
+
