@@ -4,15 +4,22 @@
         <link>https://zhuyaguang.github.io/</link>
         <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Mon, 20 Mar 2023 10:37:28 &#43;0800</lastBuildDate>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Mon, 03 Apr 2023 17:19:44 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>BigModel实践之旅</title>
+    <title>Azure OpenAI</title>
+    <link>https://zhuyaguang.github.io/azure-openai/</link>
+    <pubDate>Mon, 03 Apr 2023 17:19:44 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/azure-openai/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>大模型实践之旅</title>
     <link>https://zhuyaguang.github.io/bigmodel/</link>
     <pubDate>Mon, 20 Mar 2023 10:37:28 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/bigmodel/</guid>
-    <description><![CDATA[工具集 cursor https://www.cursor.so/ Pandagpt https://www.pandagpt.io/ 大模型 Llama.cpp https://github.com/ggerganov/llama.cpp 用C++来做llama的推理 文档 Prompt Engineering Guide https://github.com/f/awesome-chatgpt-prompts]]></description>
+    <description><![CDATA[大模型成为开发者必备的工具]]></description>
 </item><item>
     <title>Bytebase 体验官之狂飙的 ChatGPT</title>
     <link>https://zhuyaguang.github.io/bytebase03/</link>
@@ -71,12 +78,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/gitlab-printer/</guid>
     <description><![CDATA[gitlab 101 ]]></description>
-</item><item>
-    <title>基于 kubesphere 搭建一站式云原生机器学习平台 </title>
-    <link>https://zhuyaguang.github.io/cube-on-kubesphere/</link>
-    <pubDate>Mon, 18 Jul 2022 11:31:10 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/cube-on-kubesphere/</guid>
-    <description><![CDATA[在 kubesphere 上搭建 cube-studio ]]></description>
 </item></channel>
 </rss>

@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>BigModel实践之旅 - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="BigModel实践之旅" />
-<meta property="og:description" content="工具集 cursor https://www.cursor.so/ Pandagpt https://www.pandagpt.io/ 大模型 Llama.cpp https://github.com/ggerganov/llama.cpp 用C&#43;&#43;来做llama的推理 文档 Prompt Engineering Guide https://github.com/f/awesome-chatgpt-prompts" />
+        <title>大模型实践之旅 - 朱亚光的博客</title><meta name="Description" content="大模型成为开发者必备的工具"><meta property="og:title" content="大模型实践之旅" />
+<meta property="og:description" content="大模型成为开发者必备的工具" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/bigmodel/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-03-20T10:37:28+08:00" />
@@ -15,27 +15,27 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
-<meta name="twitter:title" content="BigModel实践之旅"/>
-<meta name="twitter:description" content="工具集 cursor https://www.cursor.so/ Pandagpt https://www.pandagpt.io/ 大模型 Llama.cpp https://github.com/ggerganov/llama.cpp 用C&#43;&#43;来做llama的推理 文档 Prompt Engineering Guide https://github.com/f/awesome-chatgpt-prompts"/>
+<meta name="twitter:title" content="大模型实践之旅"/>
+<meta name="twitter:description" content="大模型成为开发者必备的工具"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/bigmodel/" /><link rel="prev" href="https://zhuyaguang.github.io/bytebase03/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/bigmodel/" /><link rel="prev" href="https://zhuyaguang.github.io/bytebase03/" /><link rel="next" href="https://zhuyaguang.github.io/azure-openai/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "BigModel实践之旅",
+        "headline": "大模型实践之旅",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/bigmodel\/"
-        },"genre": "posts","wordcount":  32 ,
+        },"genre": "posts","wordcount":  132 ,
         "url": "https:\/\/zhuyaguang.github.io\/bigmodel\/","datePublished": "2023-03-20T10:37:28+08:00","dateModified": "2023-03-20T10:37:28+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "朱亚光"
-            },"description": ""
+            },"description": "大模型成为开发者必备的工具"
     }
     </script></head>
     <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -77,9 +77,9 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">BigModel实践之旅</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">大模型实践之旅</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-03-20">2023-03-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 32 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-03-20">2023-03-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 132 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -90,7 +90,11 @@
   <ul>
     <li><a href="#工具集">工具集</a></li>
     <li><a href="#大模型">大模型</a></li>
-    <li><a href="#文档">文档</a></li>
+    <li><a href="#prompt文档">Prompt文档</a>
+      <ul>
+        <li><a href="#网站">网站</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="工具集">工具集</h2>
@@ -102,6 +106,22 @@
 <li>Pandagpt</li>
 </ul>
 <p><a href="https://www.pandagpt.io/" target="_blank" rel="noopener noreffer">https://www.pandagpt.io/</a></p>
+<ul>
+<li>chatbase</li>
+</ul>
+<p><a href="https://www.chatbase.co/" target="_blank" rel="noopener noreffer">https://www.chatbase.co/</a></p>
+<ul>
+<li>copilothub</li>
+</ul>
+<p>如何基于 ChatGPT 创建个人的知识库 AI</p>
+<p><a href="https://app.copilothub.co/" target="_blank" rel="noopener noreffer">https://app.copilothub.co/</a></p>
+<ul>
+<li>
+<p><a href="https://bearly.ai/#" target="_blank" rel="noopener noreffer">https://bearly.ai/#</a></p>
+<p>bing 图像生成工具</p>
+<p><a href="https://www.bing.com/images/create?form=FLPGEN" target="_blank" rel="noopener noreffer">https://www.bing.com/images/create?form=FLPGEN</a></p>
+</li>
+</ul>
 <h2 id="大模型">大模型</h2>
 <ul>
 <li>
@@ -109,12 +129,53 @@
 <p><a href="https://github.com/ggerganov/llama.cpp" target="_blank" rel="noopener noreffer">https://github.com/ggerganov/llama.cpp</a></p>
 <p>用C++来做llama的推理</p>
 </li>
-<li></li>
+<li>
+<p>alpaca.cpp</p>
+<p><a href="https://github.com/antimatter15/alpaca.cpp" target="_blank" rel="noopener noreffer">https://github.com/antimatter15/alpaca.cpp</a></p>
+</li>
+<li>
+<p>骆驼:A Chinese finetuned instruction LLaMA</p>
+</li>
 </ul>
-<h2 id="文档">文档</h2>
+<p>​		https://github.com/LC1332/Chinese-alpaca-lora</p>
+<ul>
+<li>
+<p>web-ui</p>
+<p><a href="https://github.com/oobabooga/text-generation-webui" target="_blank" rel="noopener noreffer">https://github.com/oobabooga/text-generation-webui</a></p>
+<p>大模型的界面</p>
+</li>
+<li>
+<p>Alpaca 的界面</p>
+<p><a href="https://github.com/nsarrazin/serge" target="_blank" rel="noopener noreffer">https://github.com/nsarrazin/serge</a></p>
+</li>
+<li>
+<p>Databricks’ Dolly</p>
+<p><a href="https://github.com/databrickslabs/dolly" target="_blank" rel="noopener noreffer">https://github.com/databrickslabs/dolly</a></p>
+</li>
+<li>
+<p>BELLE: BE Large Language model Engine（开源中文对话大模型）</p>
+<p><a href="https://github.com/LianjiaTech/BELLE" target="_blank" rel="noopener noreffer">https://github.com/LianjiaTech/BELLE</a></p>
+</li>
+</ul>
+<h2 id="prompt文档">Prompt文档</h2>
 <p><a href="https://www.promptingguide.ai/" target="_blank" rel="noopener noreffer">Prompt Engineering Guide</a></p>
 <p><a href="https://github.com/f/awesome-chatgpt-prompts" target="_blank" rel="noopener noreffer">https://github.com/f/awesome-chatgpt-prompts</a></p>
-</div><div class="post-footer" id="post-footer">
+<p><a href="https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api" target="_blank" rel="noopener noreffer">https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api</a></p>
+<p><a href="https://docs.qq.com/sheet/DT1FBVlhPclpLc3RG?tab=BB08J2&amp;u=33dbef431a254b85bdb800086ae341dd" target="_blank" rel="noopener noreffer">https://docs.qq.com/sheet/DT1FBVlhPclpLc3RG?tab=BB08J2&u=33dbef431a254b85bdb800086ae341dd</a></p>
+<p><a href="https://learningprompt.wiki/" target="_blank" rel="noopener noreffer">https://learningprompt.wiki/</a></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://pbs.twimg.com/media/FrwJWCRaAAAeGfr?format=jpg&amp;name=900x900"
+        data-srcset="https://pbs.twimg.com/media/FrwJWCRaAAAeGfr?format=jpg&amp;name=900x900, https://pbs.twimg.com/media/FrwJWCRaAAAeGfr?format=jpg&amp;name=900x900 1.5x, https://pbs.twimg.com/media/FrwJWCRaAAAeGfr?format=jpg&amp;name=900x900 2x"
+        data-sizes="auto"
+        alt="https://pbs.twimg.com/media/FrwJWCRaAAAeGfr?format=jpg&amp;name=900x900"
+        title="Image" /></p>
+<h3 id="网站">网站</h3>
+<ul>
+<li><a href="https://arthub.ai/" target="_blank" rel="noopener noreffer">https://arthub.ai/</a></li>
+<li></li>
+</ul></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -127,7 +188,7 @@
                             <a class="link-to-markdown" href="/bigmodel/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="BigModel实践之旅" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/bigmodel/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="BigModel实践之旅" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="BigModel实践之旅"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="BigModel实践之旅"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="BigModel实践之旅" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="BigModel实践之旅" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="BigModel实践之旅"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/bigmodel/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅" data-description="大模型成为开发者必备的工具"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅" data-description="大模型成为开发者必备的工具"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
@@ -139,7 +200,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/bytebase03/" class="prev" rel="prev" title="Bytebase 体验官之狂飙的 ChatGPT"><i class="fas fa-angle-left fa-fw"></i>Bytebase 体验官之狂飙的 ChatGPT</a></div>
+    <div class="post-nav"><a href="/bytebase03/" class="prev" rel="prev" title="Bytebase 体验官之狂飙的 ChatGPT"><i class="fas fa-angle-left fa-fw"></i>Bytebase 体验官之狂飙的 ChatGPT</a>
+            <a href="/azure-openai/" class="next" rel="next" title="Azure OpenAI">Azure OpenAI<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">
