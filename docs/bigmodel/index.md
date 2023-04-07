@@ -5,9 +5,31 @@
 
 ## 工具集
 
-* cursor
+### chatGPT UI
 
-​		https://www.cursor.so/
+* 开源的ChatGPT UI
+
+  https://github.com/mckaywrigley/chatbot-ui
+
+* 一键拥有你自己的 ChatGPT 网页服务。
+
+  https://github.com/Yidadaa/ChatGPT-Next-Web
+
+* 用 Express 和 Vue3 搭建的 ChatGPT 演示网页
+
+  https://github.com/Chanzhaoyu/chatgpt-web
+
+### 个人知识库
+
+* 贾维斯，私人AI助理
+
+​		https://github.com/microsoft/JARVIS
+
+* copilothub
+
+​	   如何基于 ChatGPT 创建个人的知识库 AI 
+
+​       https://app.copilothub.co/
 
 * Pandagpt 
 
@@ -17,11 +39,21 @@
 
 ​		https://www.chatbase.co/
 
-* copilothub
+* myGPTReader
 
-​	   如何基于 ChatGPT 创建个人的知识库 AI 
+  https://github.com/madawei2699/myGPTReader
 
-​       https://app.copilothub.co/
+* 
+
+
+
+
+
+### IDE
+
+* cursor
+
+​		https://www.cursor.so/
 
 * Bearly 综合AI笔记本 不免费
 
@@ -31,21 +63,9 @@
 
   https://www.bing.com/images/create?form=FLPGEN
 
-* 贾维斯，私人AI助理
-
-  https://github.com/microsoft/JARVIS
-
 * New bing 客户端桌面
 
   https://github.com/dice2o/BingGPT
-
-* 开源的ChatGPT UI
-
-  https://github.com/mckaywrigley/chatbot-ui
-
-* 一键拥有你自己的 ChatGPT 网页服务。
-
-  https://github.com/Yidadaa/ChatGPT-Next-Web
 
 * CLI for chatGPT
 
@@ -63,6 +83,8 @@
 
 ## 大模型
 
+### 模型
+
 * Llama.cpp
 
   https://github.com/ggerganov/llama.cpp
@@ -77,6 +99,22 @@
 
 ​		https://github.com/LC1332/Chinese-alpaca-lora
 
+* Vicuna: An Open Chatbot Impressing GPT-4 
+
+  Vicuna: An Open-Source Chatbot Impressing GPT-4 with 90%* ChatGPT Quality
+
+  https://github.com/lm-sys/FastChat
+
+* Databricks’ Dolly
+
+  https://github.com/databrickslabs/dolly
+
+* BELLE: BE Large Language model Engine（开源中文对话大模型）
+
+  https://github.com/LianjiaTech/BELLE
+
+### UI
+
 * web-ui 大模型的界面UI
 
   https://github.com/oobabooga/text-generation-webui
@@ -88,14 +126,6 @@
 * Alpaca 的界面
 
   https://github.com/nsarrazin/serge
-
-* Databricks’ Dolly
-
-  https://github.com/databrickslabs/dolly
-
-* BELLE: BE Large Language model Engine（开源中文对话大模型）
-
-  https://github.com/LianjiaTech/BELLE
 
 ## Prompt文档
 
@@ -120,5 +150,6 @@ https://learningprompt.wiki/
 ### 网站
 
 * https://arthub.ai/
-* 
+
+  
 

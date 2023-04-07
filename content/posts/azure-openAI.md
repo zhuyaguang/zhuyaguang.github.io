@@ -10,7 +10,7 @@ draft: true
 
 ## 注册Azure
 
-
+[Azure 国际版](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service?WT.mc_id=DT-MVP-5003133)
 
 ## 申请 openAI service 
 
@@ -23,3 +23,9 @@ draft: true
 [快速入门：开始使用 Azure OpenAI 服务生成文本](https://learn.microsoft.com/zh-cn/azure/cognitive-services/openai/quickstart?tabs=command-line&pivots=programming-language-python)
 
 [杭州超普&微软 Azure OpenAI线上会议](http://s6e.cn/AYtG3)
+
+
+
+
+
+[使用 Azure OpenAI 打造自己的 ChatGPT ](https://www.cnblogs.com/stulzq/p/17271937.html)
