@@ -47,7 +47,9 @@ description: "大模型成为开发者必备的工具"
 
   https://github.com/madawei2699/myGPTReader
 
-* 
+* LlamaIndex (GPT Index) 
+
+  https://github.com/jerryjliu/llama_index
 
 
 
@@ -116,6 +118,12 @@ description: "大模型成为开发者必备的工具"
 * BELLE: BE Large Language model Engine（开源中文对话大模型）
 
   https://github.com/LianjiaTech/BELLE
+  
+* ChatGLM-6B：开源双语对话语言模型
+
+  https://github.com/THUDM/ChatGLM-6B
+  
+  在线体验地址：https://huggingface.co/spaces/multimodalart/ChatGLM-6B
 
 ### UI
 
@@ -144,6 +152,8 @@ https://docs.qq.com/sheet/DT1FBVlhPclpLc3RG?tab=BB08J2&u=33dbef431a254b85bdb8000
 https://learningprompt.wiki/
 
 [The Ultimate GPT-4 Guid](https://doc.clickup.com/37456139/d/h/13q28b-324/e2a22b0c164b1f9)
+
+[Prompt 学习和微调综述 (Prompt Learning and Tuning)](https://mp.weixin.qq.com/s/feDX92qil7BLFPZRNs5_fg)
 
 
 
