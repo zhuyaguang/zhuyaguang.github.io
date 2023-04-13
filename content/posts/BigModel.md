@@ -11,7 +11,7 @@ description: "大模型成为开发者必备的工具"
 
 ### chatGPT UI
 
-* 开源的ChatGPT UI
+* 开源的ChatGPT UI 
 
   https://github.com/mckaywrigley/chatbot-ui
 
@@ -19,9 +19,15 @@ description: "大模型成为开发者必备的工具"
 
   https://github.com/Yidadaa/ChatGPT-Next-Web
 
-* 用 Express 和 Vue3 搭建的 ChatGPT 演示网页
+* 用 Express 和 Vue3 搭建的 ChatGPT 演示网页 ✅
 
   https://github.com/Chanzhaoyu/chatgpt-web
+  
+* 使用ChatGPT搭建微信聊天机器人
+
+  https://github.com/zhayujie/chatgpt-on-wechat
+  
+* 
 
 ### 个人知识库
 
@@ -50,6 +56,14 @@ description: "大模型成为开发者必备的工具"
 * LlamaIndex (GPT Index) 
 
   https://github.com/jerryjliu/llama_index
+  
+* Have a conversation with files ｜与你的文件对话
+
+  https://github.com/guangzhengli/ChatFiles
+
+* 基于向量数据库与GPT3.5的通用本地知识库方案 ✅
+
+  https://github.com/GanymedeNil/document.ai
 
 
 
@@ -84,6 +98,10 @@ description: "大模型成为开发者必备的工具"
 * openAI To Azure openAI proxy
 
   https://github.com/stulzq/azure-openai-proxy
+  
+* Use AI to translate code from one language to another.
+
+  https://github.com/mckaywrigley/ai-code-translator
 
 
 
@@ -124,6 +142,10 @@ description: "大模型成为开发者必备的工具"
   https://github.com/THUDM/ChatGLM-6B
   
   在线体验地址：https://huggingface.co/spaces/multimodalart/ChatGLM-6B
+  
+* 中文LLaMA&Alpaca大语言模型+本地CPU部署 (Chinese LLaMA & Alpaca LLMs)
+
+  https://github.com/ymcui/Chinese-LLaMA-Alpaca
 
 ### UI
 
@@ -138,6 +160,10 @@ description: "大模型成为开发者必备的工具"
 * Alpaca 的界面
 
   https://github.com/nsarrazin/serge
+  
+* chatGPTBox 将ChatGPT深度集成到浏览器中, 你所需要的一切均在于此
+
+  https://github.com/josStorer/chatGPTBox/blob/master/README_ZH.md
 
 ## Prompt文档
 
@@ -157,6 +183,23 @@ https://learningprompt.wiki/
 
 
 
+[Mckay Wrigley](https://twitter.com/mckaywrigley)
+
+```shell
+You are a world class software engineer.
+
+I need you to draft a technical software spec for building the following:
+{{description}}
+
+Think through how you would build it step by step.
+
+Then, respond with the complete spec as a well-organized markdown file.
+
+I will then reply with "build," and you will proceed to implement the exact spec, writing all of the code needed. I will periodically interject with "continue" to prompt you to keep going. Continue until complete.
+```
+
+
+
 ![Image](https://pbs.twimg.com/media/FrwJWCRaAAAeGfr?format=jpg&name=900x900)
 
 
@@ -164,5 +207,9 @@ https://learningprompt.wiki/
 ### 网站
 
 * https://arthub.ai/
+
+
+
+* https://github.com/stars/acheong08/lists/awesome-chatgpt
 
   
