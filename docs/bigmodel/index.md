@@ -61,6 +61,18 @@
 
   https://github.com/GanymedeNil/document.ai
 
+* 基于本地知识的 ChatGLM 问答
+
+  https://github.com/imClumsyPanda/langchain-ChatGLM
+
+* file-q-and-a
+
+  https://github.com/openai/openai-cookbook/tree/main/apps/file-q-and-a
+
+
+
+、、
+
 
 
 
@@ -142,6 +154,10 @@
 * 中文LLaMA&Alpaca大语言模型+本地CPU部署 (Chinese LLaMA & Alpaca LLMs)
 
   https://github.com/ymcui/Chinese-LLaMA-Alpaca
+  
+* Web-llm
+
+  https://github.com/mlc-ai/web-llm
 
 ### UI
 
@@ -204,9 +220,29 @@ I will then reply with "build," and you will proceed to implement the exact spec
 
 * https://arthub.ai/
 
+  open ai cookbook
+
+* https://github.com/openai/openai-cookbook
+
 
 
 * https://github.com/stars/acheong08/lists/awesome-chatgpt
 
   
+
+  
+
+### 硬件
+
+https://github.com/longbai/xiaobot
+
+
+
+### 框架
+
+* LlamaIndex
+
+https://gpt-index.readthedocs.io/en/latest/index.html
+
+* Langchain
 
