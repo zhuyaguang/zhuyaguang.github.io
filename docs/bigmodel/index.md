@@ -23,7 +23,7 @@
 
   https://github.com/zhayujie/chatgpt-on-wechat
   
-* 
+  
 
 ### 个人知识库
 
@@ -71,13 +71,11 @@
 
 
 
-、、
 
 
 
 
-
-### IDE
+### 工具
 
 * cursor
 
@@ -110,6 +108,10 @@
 * Use AI to translate code from one language to another.
 
   https://github.com/mckaywrigley/ai-code-translator
+  
+* 桌面端AI语言练习应用
+
+  https://github.com/liou666/polyglot
 
 
 
@@ -212,6 +214,12 @@ I will then reply with "build," and you will proceed to implement the exact spec
 
 
 
+```
+“请帮我写一篇有关AI对软件工程影响的文章，你在写之前可以先思考怎么写，有需要我补充信息的地方，把问题列出来，我会回答你的问题。”
+```
+
+
+
 ![Image](https://pbs.twimg.com/media/FrwJWCRaAAAeGfr?format=jpg&name=900x900)
 
 
@@ -223,8 +231,6 @@ I will then reply with "build," and you will proceed to implement the exact spec
   open ai cookbook
 
 * https://github.com/openai/openai-cookbook
-
-
 
 * https://github.com/stars/acheong08/lists/awesome-chatgpt
 
