@@ -23,6 +23,8 @@
 
 整个流程也可以参考这篇博客：[使用 Azure OpenAI 打造自己的 ChatGPT ](https://www.cnblogs.com/stulzq/p/17271937.html)
 
+[Azure OpenAI Service 注册申请与配置心得](https://atlassc.net/2023/04/25/azure-openai-service)
+
 ## 使用
 
 ### 文档
