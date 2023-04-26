@@ -9,9 +9,7 @@
 
 [Azure 国际版](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service?WT.mc_id=DT-MVP-5003133)
 
-我是用 GitHub 注册的
-
-注册完绑定一张 visa 信用卡
+我是用 GitHub 注册的,注册完绑定一张 visa 信用卡
 
 ## 申请 openAI service 
 
@@ -19,9 +17,9 @@
 
 就一五一十填写，地址填中国也没关系
 
+整个流程也可以参考下面博客：
 
-
-整个流程也可以参考这篇博客：[使用 Azure OpenAI 打造自己的 ChatGPT ](https://www.cnblogs.com/stulzq/p/17271937.html)
+[使用 Azure OpenAI 打造自己的 ChatGPT ](https://www.cnblogs.com/stulzq/p/17271937.html)
 
 [Azure OpenAI Service 注册申请与配置心得](https://atlassc.net/2023/04/25/azure-openai-service)
 
@@ -34,5 +32,13 @@
 [杭州超普&微软 Azure OpenAI线上会议](http://s6e.cn/AYtG3)
 
 
+
+## 支持 Azure openAI API
+
+现在很多开源项目都支持 openAI 的API，不支持 Azure openAI API，有几个办法解决。
+
+1. 通过 proxy 项目解决，例如 https://github.com/stulzq/azure-openai-proxy
+2. 通过 cloudflare 代理解决，例如 https://github.com/haibbo/cf-openai-azure-proxy
+3. 通过修改源码解决，这个方案不通用，每个项目改的地方都不一样，需要去 issue 里面找办法。例如  [Azure修改源码支持](https://github.com/Yidadaa/ChatGPT-Next-Web/issues/371)
 
 
