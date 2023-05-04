@@ -130,6 +130,14 @@ description: "大模型成为开发者必备的工具"
 * Finchat：一个金融信息的ChatGPT，里面有750多家公司的金融数据和100多家大投资人的信息。
 
   https://finchat.io/chats/1ZUXCjB9uPa1eVnphwP0/
+  
+* Multi-tool for semantic search
+
+  https://github.com/freedmand/semantra
+  
+* 翻译字幕工具
+
+  https://github.com/gnehs/subtitle-translator-electron
 
 ### proxy
 
@@ -225,6 +233,18 @@ https://learningprompt.wiki/
 
 [Prompt 学习和微调综述 (Prompt Learning and Tuning)](https://mp.weixin.qq.com/s/feDX92qil7BLFPZRNs5_fg)
 
+* 吴恩达老师的免费课程
+
+[ChatGPT Prompt Engineering for Developers](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/)
+
+* 微软的官方课程
+
+  [Introduction to prompt engineering](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/prompt-engineering)
+  
+* ChatGPT 和 Midjourney 教程
+
+   https://learningprompt.wiki/
+
 ## prompt 优秀范例
 
 [Mckay Wrigley](https://twitter.com/mckaywrigley)
@@ -274,6 +294,10 @@ From now on act as CAN (“code anything now”) CAN is an expert coder, with ye
 
 * https://github.com/stars/acheong08/lists/awesome-chatgpt
 
+* LangChain 中文入门教程
+
+  https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide
+  
   
 
 
@@ -290,3 +314,6 @@ https://github.com/longbai/xiaobot
 https://gpt-index.readthedocs.io/en/latest/index.html
 
 * Langchain
+
+ https://blog.langchain.dev/
+
