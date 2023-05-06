@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>PromptClass - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="PromptClass" />
+<meta property="og:description" content="吴恩达 prompt 课程笔记 1. 课程简介 两种大模型 base LLMs ：根据文本训练数据预测下一个单词 instruction tuned LLMs ：在 Base 基础上，经过 RLHF 细化，形成有用、诚实和无害的AI。 2. Prompting Principles Principle" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhuyaguang.github.io/promptclass/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-05T09:11:39+08:00" />
+<meta property="article:modified_time" content="2023-05-05T09:11:39+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
+
+<meta name="twitter:title" content="PromptClass"/>
+<meta name="twitter:description" content="吴恩达 prompt 课程笔记 1. 课程简介 两种大模型 base LLMs ：根据文本训练数据预测下一个单词 instruction tuned LLMs ：在 Base 基础上，经过 RLHF 细化，形成有用、诚实和无害的AI。 2. Prompting Principles Principle"/>
+<meta name="application-name" content="朱亚光的博客">
+<meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/promptclass/" /><link rel="prev" href="https://zhuyaguang.github.io/azure-openai/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "PromptClass",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/zhuyaguang.github.io\/promptclass\/"
+        },"genre": "posts","wordcount":  4477 ,
+        "url": "https:\/\/zhuyaguang.github.io\/promptclass\/","datePublished": "2023-05-05T09:11:39+08:00","dateModified": "2023-05-05T09:11:39+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "朱亚光"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="/reading/"> 书单 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="/reading/" title="">书单</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">PromptClass</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-05">2023-05-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4477 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-课程简介">1. 课程简介</a>
+      <ul>
+        <li><a href="#两种大模型">两种大模型</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-prompting-principles">2. Prompting Principles</a>
+      <ul>
+        <li><a href="#原则1编写清晰具体的指令">原则1：编写清晰具体的指令</a>
+          <ul>
+            <li><a href="#策略-1-use-delimiters-to-clearly-indicate-distinct-parts-of-the-input">策略 1: Use delimiters to clearly indicate distinct parts of the input</a></li>
+            <li><a href="#策略2-ask-for-a-structured-output">策略2: Ask for a structured output</a></li>
+            <li><a href="#策略3-ask-the-model-to-check-whether-conditions-are-satisfied">策略3: Ask the model to check whether conditions are satisfied</a></li>
+            <li><a href="#策略4-few-shot-prompting">策略4: &ldquo;Few-shot&rdquo; prompting</a></li>
+          </ul>
+        </li>
+        <li><a href="#原则2给模型充足的思考时间">原则2：给模型充足的思考时间</a>
+          <ul>
+            <li><a href="#策略1-specify-the-steps-required-to-complete-a-task">策略1: Specify the steps required to complete a task</a></li>
+            <li><a href="#策略2-instruct-the-model-to-work-out-its-own-solution-before-rushing-to-a-conclusion">策略2: Instruct the model to work out its own solution before rushing to a conclusion</a></li>
+          </ul>
+        </li>
+        <li><a href="#模型的局限性-hallucinations">模型的局限性: Hallucinations</a></li>
+      </ul>
+    </li>
+    <li><a href="#3iterative-prompt-develelopment">3.Iterative Prompt Develelopment</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#issue-1-the-text-is-too-long">Issue 1: The text is too long</a></li>
+            <li><a href="#issue-2-text-focuses-on-the-wrong-details">Issue 2. Text focuses on the wrong details</a></li>
+            <li><a href="#issue-3-description-needs-a-table-of-dimension">Issue 3. Description needs a table of dimension</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#4总结">4.总结</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#summarize-with-a-focus-on-shipping-and-delivery">Summarize with a focus on shipping and delivery</a></li>
+            <li><a href="#summarize-with-a-focus-on-price-and-value">Summarize with a focus on price and value</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#5推理">5.推理</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#根据文本判断积极还是消极">根据文本判断积极还是消极，</a></li>
+            <li><a href="#识别不同的情绪">识别不同的情绪</a></li>
+            <li><a href="#识别是否愤怒">识别是否愤怒</a></li>
+            <li><a href="#识别产品和公司名称">识别产品和公司名称</a></li>
+            <li><a href="#多任务识别并格式化输出">多任务识别并格式化输出</a></li>
+            <li><a href="#获取文章的五个关键词">获取文章的五个关键词</a></li>
+            <li><a href="#根据关键词可以进行舆情监控">根据关键词可以进行舆情监控</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#6转换">6.转换</a>
+      <ul>
+        <li><a href="#翻译">翻译</a></li>
+        <li><a href="#语调转换">语调转换</a></li>
+        <li><a href="#格式转换">格式转换</a></li>
+        <li><a href="#拼写检查">拼写检查</a></li>
+        <li><a href="#语法检查">语法检查</a></li>
+      </ul>
+    </li>
+    <li><a href="#7扩展">7.扩展</a></li>
+    <li><a href="#8聊天机器人实现原理">8.聊天机器人实现原理</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="吴恩达-prompt-课程笔记">吴恩达 prompt 课程笔记</h1>
+<h2 id="1-课程简介">1. 课程简介</h2>
+<h3 id="两种大模型">两种大模型</h3>
+<ul>
+<li>base LLMs ：根据文本训练数据预测下一个单词</li>
+<li>instruction tuned LLMs ：在 Base 基础上，经过 RLHF 细化，形成有用、诚实和无害的AI。</li>
+</ul>
+<h2 id="2-prompting-principles">2. Prompting Principles</h2>
+<ul>
+<li>
+<p><strong>Principle 1: Write clear and specific instructions</strong></p>
+<p>clear != short</p>
+</li>
+<li>
+<p><strong>Principle 2: Give the model time to “think”</strong></p>
+</li>
+</ul>
+<h3 id="原则1编写清晰具体的指令">原则1：编写清晰具体的指令</h3>
+<h4 id="策略-1-use-delimiters-to-clearly-indicate-distinct-parts-of-the-input">策略 1: Use delimiters to clearly indicate distinct parts of the input</h4>
+<ul>
+<li>Delimiters can be anything like: ````, &ldquo;&rdquo;&quot;, &lt; &gt;, <code>&lt;tag&gt; &lt;/tag&gt;</code>, <code>:</code></li>
+</ul>
+<ul>
+<li>
+<p>好处：避免提示注入。</p>
+</li>
+<li>
+<p>举例：对下面段落进行总结。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">You should express what you want a model to do by \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">providing instructions that are as clear and \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">specific as you can possibly make them. \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">This will guide the model towards the desired output, \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">and reduce the chances of receiving irrelevant \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">or incorrect responses. Don&#39;t confuse writing a \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">clear prompt with writing a short prompt. \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">In many cases, longer prompts provide more clarity \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">and context for the model, which can lead to \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">more detailed and relevant outputs.
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Summarize the text delimited by triple backticks \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">into a single sentence.
+</span></span></span><span class="line"><span class="cl"><span class="s2">```</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="策略2-ask-for-a-structured-output">策略2: Ask for a structured output</h4>
+<ul>
+<li>
+<p>JSON, HTML</p>
+</li>
+<li>
+<p>举例：生成三个虚构的图书标题，以及它们的作者和流派，使用以下键名以JSON格式提供：书籍ID、标题、作者和流派。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Generate a list of three made-up book titles along \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">with their authors and genres. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">Provide them in JSON format with the following keys: 
+</span></span></span><span class="line"><span class="cl"><span class="s2">book_id, title, author, genre.
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="策略3-ask-the-model-to-check-whether-conditions-are-satisfied">策略3: Ask the model to check whether conditions are satisfied</h4>
+<ul>
+<li>举例：求模型检查是否满足条件。根据提供的文字是否能提取出步骤，如果能提取，按照格式输出步骤，不能则输出”无步骤提供“</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">text_1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Making a cup of tea is easy! First, you need to get some \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">water boiling. While that&#39;s happening, \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">grab a cup and put a tea bag in it. Once the water is \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">hot enough, just pour it over the tea bag. \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">Let it sit for a bit so the tea can steep. After a \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">few minutes, take out the tea bag. If you \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">like, you can add some sugar or milk to taste. \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">And that&#39;s it! You&#39;ve got yourself a delicious \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">cup of tea to enjoy.
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">You will be provided with text delimited by triple quotes. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">If it contains a sequence of instructions, \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">re-write those instructions in the following format:
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Step 1 - ...
+</span></span></span><span class="line"><span class="cl"><span class="s2">Step 2 - …
+</span></span></span><span class="line"><span class="cl"><span class="s2">…
+</span></span></span><span class="line"><span class="cl"><span class="s2">Step N - …
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">If the text does not contain a sequence of instructions, \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">then simply write </span><span class="se">\&#34;</span><span class="s2">No steps provided.</span><span class="se">\&#34;</span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2"></span><span class="se">\&#34;\&#34;\&#34;</span><span class="si">{</span><span class="n">text_1</span><span class="si">}</span><span class="se">\&#34;\&#34;\&#34;</span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Completion for Text 1:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>负样本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">text_2</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">The sun is shining brightly today, and the birds are </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">singing. It&#39;s a beautiful day to go for a \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">walk in the park. The flowers are blooming, and the \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">trees are swaying gently in the breeze. People \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">are out and about, enjoying the lovely weather. \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">Some are having picnics, while others are playing \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">games or simply relaxing on the grass. It&#39;s a \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">perfect day to spend time outdoors and appreciate the \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">beauty of nature.
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">You will be provided with text delimited by triple quotes. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">If it contains a sequence of instructions, \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">re-write those instructions in the following format:
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Step 1 - ...
+</span></span></span><span class="line"><span class="cl"><span class="s2">Step 2 - …
+</span></span></span><span class="line"><span class="cl"><span class="s2">…
+</span></span></span><span class="line"><span class="cl"><span class="s2">Step N - …
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">If the text does not contain a sequence of instructions, \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">then simply write </span><span class="se">\&#34;</span><span class="s2">No steps provided.</span><span class="se">\&#34;</span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2"></span><span class="se">\&#34;\&#34;\&#34;</span><span class="si">{</span><span class="n">text_2</span><span class="si">}</span><span class="se">\&#34;\&#34;\&#34;</span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Completion for Text 2:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="策略4-few-shot-prompting">策略4: &ldquo;Few-shot&rdquo; prompting</h4>
+<ul>
+<li>给出少量的例子</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Your task is to answer in a consistent style.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">&lt;child&gt;: Teach me about patience.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">&lt;grandparent&gt;: The river that carves the deepest \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">valley flows from a modest spring; the \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">grandest symphony originates from a single note; \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">the most intricate tapestry begins with a solitary thread.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">&lt;child&gt;: Teach me about resilience.
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="原则2给模型充足的思考时间">原则2：给模型充足的思考时间</h3>
+<h4 id="策略1-specify-the-steps-required-to-complete-a-task">策略1: Specify the steps required to complete a task</h4>
+<ul>
+<li>对于复杂任务，最好确定好每一步的步骤，和规定好输出的结果。</li>
+</ul>
+<p>负样例：列出的法语人名的title也是法语的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">In a charming village, siblings Jack and Jill set out on \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">a quest to fetch water from a hilltop \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">well. As they climbed, singing joyfully, misfortune \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">struck—Jack tripped on a stone and tumbled \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">down the hill, with Jill following suit. \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">Though slightly battered, the pair returned home to \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">comforting embraces. Despite the mishap, \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">their adventurous spirits remained undimmed, and they \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">continued exploring with delight.
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># example 1</span>
+</span></span><span class="line"><span class="cl"><span class="n">prompt_1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Perform the following actions: 
+</span></span></span><span class="line"><span class="cl"><span class="s2">1 - Summarize the following text delimited by triple </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">backticks with 1 sentence.
+</span></span></span><span class="line"><span class="cl"><span class="s2">2 - Translate the summary into French.
+</span></span></span><span class="line"><span class="cl"><span class="s2">3 - List each name in the French summary.
+</span></span></span><span class="line"><span class="cl"><span class="s2">4 - Output a json object that contains the following </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">keys: french_summary, num_names.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Separate your answers with line breaks.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Text:
+</span></span></span><span class="line"><span class="cl"><span class="s2">```</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt_1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Completion for prompt 1:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改后：格式化输出</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt_2</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Your task is to perform the following actions: 
+</span></span></span><span class="line"><span class="cl"><span class="s2">1 - Summarize the following text delimited by 
+</span></span></span><span class="line"><span class="cl"><span class="s2">  &lt;&gt; with 1 sentence.
+</span></span></span><span class="line"><span class="cl"><span class="s2">2 - Translate the summary into French.
+</span></span></span><span class="line"><span class="cl"><span class="s2">3 - List each name in the French summary.
+</span></span></span><span class="line"><span class="cl"><span class="s2">4 - Output a json object that contains the 
+</span></span></span><span class="line"><span class="cl"><span class="s2">  following keys: french_summary, num_names.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Use the following format:
+</span></span></span><span class="line"><span class="cl"><span class="s2">Text: &lt;text to summarize&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Summary: &lt;summary&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Translation: &lt;summary translation&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Names: &lt;list of names in Italian summary&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Output JSON: &lt;json with summary and num_names&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Text: &lt;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt_2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">Completion for prompt 2:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="策略2-instruct-the-model-to-work-out-its-own-solution-before-rushing-to-a-conclusion">策略2: Instruct the model to work out its own solution before rushing to a conclusion</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Determine if the student&#39;s solution is correct or not.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Question:
+</span></span></span><span class="line"><span class="cl"><span class="s2">I&#39;m building a solar power installation and I need </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2"> help working out the financials. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Land costs $100 / square foot
+</span></span></span><span class="line"><span class="cl"><span class="s2">- I can buy solar panels for $250 / square foot
+</span></span></span><span class="line"><span class="cl"><span class="s2">- I negotiated a contract for maintenance that will cost \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">me a flat $100k per year, and an additional $10 / square </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">foot
+</span></span></span><span class="line"><span class="cl"><span class="s2">What is the total cost for the first year of operations 
+</span></span></span><span class="line"><span class="cl"><span class="s2">as a function of the number of square feet.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Student&#39;s Solution:
+</span></span></span><span class="line"><span class="cl"><span class="s2">Let x be the size of the installation in square feet.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Costs:
+</span></span></span><span class="line"><span class="cl"><span class="s2">1. Land cost: 100x
+</span></span></span><span class="line"><span class="cl"><span class="s2">2. Solar panel cost: 250x
+</span></span></span><span class="line"><span class="cl"><span class="s2">3. Maintenance cost: 100,000 + 100x
+</span></span></span><span class="line"><span class="cl"><span class="s2">Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Your task is to determine if the student&#39;s solution </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">is correct or not.
+</span></span></span><span class="line"><span class="cl"><span class="s2">To solve the problem do the following:
+</span></span></span><span class="line"><span class="cl"><span class="s2">- First, work out your own solution to the problem. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Then compare your solution to the student&#39;s solution \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">and evaluate if the student&#39;s solution is correct or not. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">Don&#39;t decide if the student&#39;s solution is correct until 
+</span></span></span><span class="line"><span class="cl"><span class="s2">you have done the problem yourself.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Use the following format:
+</span></span></span><span class="line"><span class="cl"><span class="s2">Question:
+</span></span></span><span class="line"><span class="cl"><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">question here
+</span></span></span><span class="line"><span class="cl"><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">Student&#39;s solution:
+</span></span></span><span class="line"><span class="cl"><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">student&#39;s solution here
+</span></span></span><span class="line"><span class="cl"><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">Actual solution:
+</span></span></span><span class="line"><span class="cl"><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">steps to work out the solution and your solution here
+</span></span></span><span class="line"><span class="cl"><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">Is the student&#39;s solution the same as actual solution </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">just calculated:
+</span></span></span><span class="line"><span class="cl"><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">yes or no
+</span></span></span><span class="line"><span class="cl"><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">Student grade:
+</span></span></span><span class="line"><span class="cl"><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">correct or incorrect
+</span></span></span><span class="line"><span class="cl"><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Question:
+</span></span></span><span class="line"><span class="cl"><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">I&#39;m building a solar power installation and I need help </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">working out the financials. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Land costs $100 / square foot
+</span></span></span><span class="line"><span class="cl"><span class="s2">- I can buy solar panels for $250 / square foot
+</span></span></span><span class="line"><span class="cl"><span class="s2">- I negotiated a contract for maintenance that will cost </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">me a flat $100k per year, and an additional $10 / square </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">foot
+</span></span></span><span class="line"><span class="cl"><span class="s2">What is the total cost for the first year of operations </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">as a function of the number of square feet.
+</span></span></span><span class="line"><span class="cl"><span class="s2">``` 
+</span></span></span><span class="line"><span class="cl"><span class="s2">Student&#39;s solution:
+</span></span></span><span class="line"><span class="cl"><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">Let x be the size of the installation in square feet.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Costs:
+</span></span></span><span class="line"><span class="cl"><span class="s2">1. Land cost: 100x
+</span></span></span><span class="line"><span class="cl"><span class="s2">2. Solar panel cost: 250x
+</span></span></span><span class="line"><span class="cl"><span class="s2">3. Maintenance cost: 100,000 + 100x
+</span></span></span><span class="line"><span class="cl"><span class="s2">Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
+</span></span></span><span class="line"><span class="cl"><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">Actual solution:
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="模型的局限性-hallucinations">模型的局限性: Hallucinations</h3>
+<ul>
+<li>Boie is a real company, the product name is not real.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>方案：要求模型首先从文本中找到任何相关的引文，然后要求它使用那些引文来回答问题。</li>
+</ul>
+<h2 id="3iterative-prompt-develelopment">3.Iterative Prompt Develelopment</h2>
+<ul>
+<li>根据输出结果不断调整 prompt</li>
+<li>下面是一个椅子的说明书。根据说明书编写产品说明。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fact_sheet_chair</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">OVERVIEW
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Part of a beautiful family of mid-century inspired office furniture, 
+</span></span></span><span class="line"><span class="cl"><span class="s2">including filing cabinets, desks, bookcases, meeting tables, and more.
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Several options of shell color and base finishes.
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Available with plastic back and front upholstery (SWC-100) 
+</span></span></span><span class="line"><span class="cl"><span class="s2">or full upholstery (SWC-110) in 10 fabric and 6 leather options.
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Base finish options are: stainless steel, matte black, 
+</span></span></span><span class="line"><span class="cl"><span class="s2">gloss white, or chrome.
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Chair is available with or without armrests.
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Suitable for home or business settings.
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Qualified for contract use.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">CONSTRUCTION
+</span></span></span><span class="line"><span class="cl"><span class="s2">- 5-wheel plastic coated aluminum base.
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Pneumatic chair adjust for easy raise/lower action.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">DIMENSIONS
+</span></span></span><span class="line"><span class="cl"><span class="s2">- WIDTH 53 CM | 20.87”
+</span></span></span><span class="line"><span class="cl"><span class="s2">- DEPTH 51 CM | 20.08”
+</span></span></span><span class="line"><span class="cl"><span class="s2">- HEIGHT 80 CM | 31.50”
+</span></span></span><span class="line"><span class="cl"><span class="s2">- SEAT HEIGHT 44 CM | 17.32”
+</span></span></span><span class="line"><span class="cl"><span class="s2">- SEAT DEPTH 41 CM | 16.14”
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">OPTIONS
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Soft or hard-floor caster options.
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Two choices of seat foam densities: 
+</span></span></span><span class="line"><span class="cl"><span class="s2"> medium (1.8 lb/ft3) or high (2.8 lb/ft3)
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Armless or 8 position PU armrests 
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">MATERIALS
+</span></span></span><span class="line"><span class="cl"><span class="s2">SHELL BASE GLIDER
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Cast Aluminum with modified nylon PA6/PA66 coating.
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Shell thickness: 10 mm.
+</span></span></span><span class="line"><span class="cl"><span class="s2">SEAT
+</span></span></span><span class="line"><span class="cl"><span class="s2">- HD36 foam
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">COUNTRY OF ORIGIN
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Italy
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Your task is to help a marketing team create a 
+</span></span></span><span class="line"><span class="cl"><span class="s2">description for a retail website of a product based 
+</span></span></span><span class="line"><span class="cl"><span class="s2">on a technical fact sheet.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Write a product description based on the information 
+</span></span></span><span class="line"><span class="cl"><span class="s2">provided in the technical specifications delimited by 
+</span></span></span><span class="line"><span class="cl"><span class="s2">triple backticks.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Technical specifications: ```</span><span class="si">{</span><span class="n">fact_sheet_chair</span><span class="si">}</span><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="issue-1-the-text-is-too-long">Issue 1: The text is too long</h4>
+<ul>
+<li>Limit the number of words/sentences/characters.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">Use</span> <span class="n">at</span> <span class="n">most</span> <span class="mi">50</span> <span class="n">words</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Use</span> <span class="n">at</span> <span class="n">most</span> <span class="mi">3</span> <span class="n">sentences</span><span class="o">.</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="issue-2-text-focuses-on-the-wrong-details">Issue 2. Text focuses on the wrong details</h4>
+<ul>
+<li>针对销售商，更关注椅子的技术细节和椅子的材料，并且最后附上 产品 ID</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">The description is intended for furniture retailers, 
+</span></span><span class="line"><span class="cl">so should be technical in nature and focus on the 
+</span></span><span class="line"><span class="cl">materials the product is constructed from.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">At the end of the description, include every 7-character 
+</span></span><span class="line"><span class="cl">Product ID in the technical specification.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="issue-3-description-needs-a-table-of-dimension">Issue 3. Description needs a table of dimension</h4>
+<ul>
+<li>增加一个表格来描述信息，并且以HTML的格式输出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">After the description, include a table that gives the 
+</span></span><span class="line"><span class="cl">product&#39;s dimensions. The table should have two columns.
+</span></span><span class="line"><span class="cl">In the first column include the name of the dimension. 
+</span></span><span class="line"><span class="cl">In the second column include the measurements in inches only.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Give the table the title &#39;Product Dimensions&#39;.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Format everything as HTML that can be used in a website. 
+</span></span><span class="line"><span class="cl">Place the description in a &lt;div&gt; element.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4总结">4.总结</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prod_review</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Got this panda plush toy for my daughter&#39;s birthday, </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">who loves it and takes it everywhere. It&#39;s soft and \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">super cute, and its face has a friendly look. It&#39;s \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">a bit small for what I paid though. I think there \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">might be other options that are bigger for the \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">same price. It arrived a day earlier than expected, \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">so I got to play with it myself before I gave it \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">to her.
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Your task is to generate a short summary of a product </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">review from an ecommerce site. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Summarize the review below, delimited by triple 
+</span></span></span><span class="line"><span class="cl"><span class="s2">backticks, in at most 30 words. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Review: ```</span><span class="si">{</span><span class="n">prod_review</span><span class="si">}</span><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="summarize-with-a-focus-on-shipping-and-delivery">Summarize with a focus on shipping and delivery</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">to</span> <span class="n">give</span> <span class="n">feedback</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Shipping</span> <span class="n">deparmtment</span><span class="o">.</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="summarize-with-a-focus-on-price-and-value">Summarize with a focus on price and value</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">to give feedback to the pricing deparmtment, responsible for determining the price of the product.  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5推理">5.推理</h2>
+<ul>
+<li>提取标签、提取名称、理解文本的情感</li>
+</ul>
+<h4 id="根据文本判断积极还是消极">根据文本判断积极还是消极，</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">lamp_review</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Needed a nice lamp for my bedroom, and this one had </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">additional storage and not too high of a price point. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">Got it fast.  The string to our lamp broke during the </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">transit and the company happily sent over a new one. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">Came within a few days as well. It was easy to put </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">together.  I had a missing part, so I contacted their </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">support and they very quickly got me the missing piece! </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">Lumina seems to me to be a great company that cares </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">about their customers and products!!
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">What is the sentiment of the following product review, 
+</span></span></span><span class="line"><span class="cl"><span class="s2">which is delimited with triple backticks?
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Give your answer as a single word, either &#34;positive&#34; </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">or &#34;negative&#34;.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Review text: &#39;&#39;&#39;</span><span class="si">{</span><span class="n">lamp_review</span><span class="si">}</span><span class="s2">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="识别不同的情绪">识别不同的情绪</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Identify a list of emotions that the writer of the </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">following review is expressing. Include no more than </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">five items in the list. Format your answer as a list of </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">lower-case words separated by commas.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Review text: &#39;&#39;&#39;</span><span class="si">{</span><span class="n">lamp_review</span><span class="si">}</span><span class="s2">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="识别是否愤怒">识别是否愤怒</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Is the writer of the following review expressing anger?</span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">The review is delimited with triple backticks. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">Give your answer as either yes or no.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Review text: &#39;&#39;&#39;</span><span class="si">{</span><span class="n">lamp_review</span><span class="si">}</span><span class="s2">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="识别产品和公司名称">识别产品和公司名称</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Identify the following items from the review text: 
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Item purchased by reviewer
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Company that made the item
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">The review is delimited with triple backticks. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">Format your response as a JSON object with </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">&#34;Item&#34; and &#34;Brand&#34; as the keys. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">If the information isn&#39;t present, use &#34;unknown&#34; </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">as the value.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Make your response as short as possible.
+</span></span></span><span class="line"><span class="cl"><span class="s2">  
+</span></span></span><span class="line"><span class="cl"><span class="s2">Review text: &#39;&#39;&#39;</span><span class="si">{</span><span class="n">lamp_review</span><span class="si">}</span><span class="s2">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="多任务识别并格式化输出">多任务识别并格式化输出</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Identify the following items from the review text: 
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Sentiment (positive or negative)
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Is the reviewer expressing anger? (true or false)
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Item purchased by reviewer
+</span></span></span><span class="line"><span class="cl"><span class="s2">- Company that made the item
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">The review is delimited with triple backticks. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">Format your response as a JSON object with </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">&#34;Sentiment&#34;, &#34;Anger&#34;, &#34;Item&#34; and &#34;Brand&#34; as the keys.
+</span></span></span><span class="line"><span class="cl"><span class="s2">If the information isn&#39;t present, use &#34;unknown&#34; </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">as the value.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Make your response as short as possible.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Format the Anger value as a boolean.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Review text: &#39;&#39;&#39;</span><span class="si">{</span><span class="n">lamp_review</span><span class="si">}</span><span class="s2">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="获取文章的五个关键词">获取文章的五个关键词</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Determine five topics that are being discussed in the </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">following text, which is delimited by triple backticks.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Make each item one or two words long. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Format your response as a list of items separated by commas.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Text sample: &#39;&#39;&#39;</span><span class="si">{</span><span class="n">story</span><span class="si">}</span><span class="s2">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="根据关键词可以进行舆情监控">根据关键词可以进行舆情监控</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">topic_list</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;nasa&#34;</span><span class="p">,</span> <span class="s2">&#34;local government&#34;</span><span class="p">,</span> <span class="s2">&#34;engineering&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;employee satisfaction&#34;</span><span class="p">,</span> <span class="s2">&#34;federal government&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Determine whether each item in the following list of </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">topics is a topic in the text below, which
+</span></span></span><span class="line"><span class="cl"><span class="s2">is delimited with triple backticks.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Give your answer as list with 0 or 1 for each topic.</span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">List of topics: </span><span class="si">{</span><span class="s2">&#34;, &#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">topic_list</span><span class="p">)</span><span class="si">}</span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Text sample: &#39;&#39;&#39;</span><span class="si">{</span><span class="n">story</span><span class="si">}</span><span class="s2">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="6转换">6.转换</h2>
+<h3 id="翻译">翻译</h3>
+<h3 id="语调转换">语调转换</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Translate the following from slang to a business letter: 
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;Dude, This is Joe, check out this spec on this standing lamp.&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="格式转换">格式转换</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">data_json</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&#34;resturant employees&#34;</span> <span class="p">:[</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;Shyam&#34;</span><span class="p">,</span> <span class="s2">&#34;email&#34;</span><span class="p">:</span><span class="s2">&#34;shyamjaiswal@gmail.com&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;Bob&#34;</span><span class="p">,</span> <span class="s2">&#34;email&#34;</span><span class="p">:</span><span class="s2">&#34;bob32@gmail.com&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;Jai&#34;</span><span class="p">,</span> <span class="s2">&#34;email&#34;</span><span class="p">:</span><span class="s2">&#34;jai87@gmail.com&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">]}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Translate the following python dictionary from JSON to an HTML </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">table with column headers and title: </span><span class="si">{</span><span class="n">data_json</span><span class="si">}</span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="拼写检查">拼写检查</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">text</span> <span class="o">=</span> <span class="p">[</span> 
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;The girl with the black and white puppies have a ball.&#34;</span><span class="p">,</span>  <span class="c1"># The girl has a ball.</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Yolanda has her notebook.&#34;</span><span class="p">,</span> <span class="c1"># ok</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Its going to be a long day. Does the car need it’s oil changed?&#34;</span><span class="p">,</span>  <span class="c1"># Homonyms</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Their goes my freedom. There going to bring they’re suitcases.&#34;</span><span class="p">,</span>  <span class="c1"># Homonyms</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Your going to need you’re notebook.&#34;</span><span class="p">,</span>  <span class="c1"># Homonyms</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;That medicine effects my ability to sleep. Have you heard of the butterfly affect?&#34;</span><span class="p">,</span> <span class="c1"># Homonyms</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;This phrase is to cherck chatGPT for speling abilitty&#34;</span>  <span class="c1"># spelling</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;Proofread and correct the following text
+</span></span></span><span class="line"><span class="cl"><span class="s2">    and rewrite the corrected version. If you don&#39;t find
+</span></span></span><span class="line"><span class="cl"><span class="s2">    and errors, just say &#34;No errors found&#34;. Don&#39;t use 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    any punctuation around the text:
+</span></span></span><span class="line"><span class="cl"><span class="s2">    ```</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">```&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="语法检查">语法检查</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">Got this for my daughter for her birthday cuz she keeps taking </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">mine from my room.  Yes, adults also like pandas too.  She takes </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">it everywhere with her, and it&#39;s super soft and cute.  One of the </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">ears is a bit lower than the other, and I don&#39;t think that was </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">designed to be asymmetrical. It&#39;s a bit small for what I paid for it </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">though. I think there might be other options that are bigger for </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">the same price.  It arrived a day earlier than expected, so I got </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">to play with it myself before I gave it to my daughter.
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;proofread and correct this review: ```</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">```&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对比输出</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">redlines</span> <span class="kn">import</span> <span class="n">Redlines</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">diff</span> <span class="o">=</span> <span class="n">Redlines</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="n">response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="n">diff</span><span class="o">.</span><span class="n">output_markdown</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>APA style</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">proofread and correct this review. Make it more compelling. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">Ensure it follows APA style guide and targets an advanced reader. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">Output in markdown format.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Text: ```</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="n">response</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="7扩展">7.扩展</h2>
+<p>AI客服，根据评论自动回复客户</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># given the sentiment from the lesson on &#34;inferring&#34;,</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># and the original customer message, customize the email</span>
+</span></span><span class="line"><span class="cl"><span class="n">sentiment</span> <span class="o">=</span> <span class="s2">&#34;negative&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># review for a blender</span>
+</span></span><span class="line"><span class="cl"><span class="n">review</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">So, they still had the 17 piece system on seasonal </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">sale for around $49 in the month of November, about </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">half off, but for some reason (call it price gouging) </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">around the second week of December the prices all went </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">up to about anywhere from between $70-$89 for the same </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">system. And the 11 piece system went up around $10 or </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">so in price also from the earlier sale price of $29. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">So it looks okay, but if you look at the base, the part </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">where the blade locks into place doesn’t look as good </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">as in previous editions from a few years ago, but I </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">plan to be very gentle with it (example, I crush </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">very hard items like beans, ice, rice, etc. in the \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">blender first then pulverize them in the serving size </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">I want in the blender then switch to the whipping </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">blade for a finer flour, and use the cross cutting blade </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">first when making smoothies, then use the flat blade </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">if I need them finer/less pulpy). Special tip when making </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">smoothies, finely cut and freeze the fruits and </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">vegetables (if using spinach-lightly stew soften the \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">spinach then freeze until ready for use-and if making </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">sorbet, use a small to medium sized food processor) \ 
+</span></span></span><span class="line"><span class="cl"><span class="s2">that you plan to use that way you can avoid adding so </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">much ice if at all-when making your smoothie. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">After about a year, the motor was making a funny noise. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">I called customer service but the warranty expired </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">already, so I had to buy another one. FYI: The overall </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">quality has gone done in these types of products, so </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">they are kind of counting on brand recognition and </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">consumer loyalty to maintain sales. Got it in about </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">two days.
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">You are a customer service AI assistant.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Your task is to send an email reply to a valued customer.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Given the customer email delimited by ```, </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">Generate a reply to thank the customer for their review.
+</span></span></span><span class="line"><span class="cl"><span class="s2">If the sentiment is positive or neutral, thank them for </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">their review.
+</span></span></span><span class="line"><span class="cl"><span class="s2">If the sentiment is negative, apologize and suggest that </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">they can reach out to customer service. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">Make sure to use specific details from the review.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Write in a concise and professional tone.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Sign the email as `AI customer agent`.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Customer review: ```</span><span class="si">{</span><span class="n">review</span><span class="si">}</span><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">Review sentiment: </span><span class="si">{</span><span class="n">sentiment</span><span class="si">}</span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>设置 temperature=0.7</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">You are a customer service AI assistant.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Your task is to send an email reply to a valued customer.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Given the customer email delimited by ```, </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">Generate a reply to thank the customer for their review.
+</span></span></span><span class="line"><span class="cl"><span class="s2">If the sentiment is positive or neutral, thank them for </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">their review.
+</span></span></span><span class="line"><span class="cl"><span class="s2">If the sentiment is negative, apologize and suggest that </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">they can reach out to customer service. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">Make sure to use specific details from the review.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Write in a concise and professional tone.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Sign the email as `AI customer agent`.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Customer review: ```</span><span class="si">{</span><span class="n">review</span><span class="si">}</span><span class="s2">```
+</span></span></span><span class="line"><span class="cl"><span class="s2">Review sentiment: </span><span class="si">{</span><span class="n">sentiment</span><span class="si">}</span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="8聊天机器人实现原理">8.聊天机器人实现原理</h2>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-05-05</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/promptclass/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/promptclass/" data-title="PromptClass" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/promptclass/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/promptclass/" data-title="PromptClass" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/promptclass/" data-title="PromptClass"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/promptclass/" data-title="PromptClass"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/promptclass/" data-title="PromptClass" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/promptclass/" data-title="PromptClass" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/promptclass/" data-title="PromptClass"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/azure-openai/" class="prev" rel="prev" title="Azure OpenAI"><i class="fas fa-angle-left fa-fw"></i>Azure OpenAI</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

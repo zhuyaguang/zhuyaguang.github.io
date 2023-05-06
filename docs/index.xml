@@ -4,9 +4,16 @@
         <link>https://zhuyaguang.github.io/</link>
         <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Mon, 03 Apr 2023 17:19:44 &#43;0800</lastBuildDate>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Fri, 05 May 2023 09:11:39 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>PromptClass</title>
+    <link>https://zhuyaguang.github.io/promptclass/</link>
+    <pubDate>Fri, 05 May 2023 09:11:39 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/promptclass/</guid>
+    <description><![CDATA[吴恩达 prompt 课程笔记 1. 课程简介 两种大模型 base LLMs ：根据文本训练数据预测下一个单词 instruction tuned LLMs ：在 Base 基础上，经过 RLHF 细化，形成有用、诚实和无害的AI。 2. Prompting Principles Principle]]></description>
+</item><item>
     <title>Azure OpenAI</title>
     <link>https://zhuyaguang.github.io/azure-openai/</link>
     <pubDate>Mon, 03 Apr 2023 17:19:44 &#43;0800</pubDate>
@@ -71,12 +78,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/plg-on-multi-cluster/</guid>
     <description><![CDATA[多集群日志收集系统]]></description>
-</item><item>
-    <title>我用 极狐 Gitlab 议题 来点菜</title>
-    <link>https://zhuyaguang.github.io/gitlab-printer/</link>
-    <pubDate>Mon, 05 Sep 2022 16:19:39 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/gitlab-printer/</guid>
-    <description><![CDATA[gitlab 101 ]]></description>
 </item></channel>
 </rss>
