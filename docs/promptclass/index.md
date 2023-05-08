@@ -1,4 +1,4 @@
-# PromptClass
+# 吴恩达 prompt 课程笔记
 
 
 # 吴恩达 prompt 课程笔记
@@ -12,7 +12,7 @@
 
 
 
-## 2. Prompting Principles
+## 2. 提示原则
 - **Principle 1: Write clear and specific instructions**
 
   clear != short
@@ -336,7 +336,7 @@ print(response)
 
 * 方案：要求模型首先从文本中找到任何相关的引文，然后要求它使用那些引文来回答问题。
 
-## 3.Iterative Prompt Develelopment
+## 3.迭代提示开发
 
 * 根据输出结果不断调整 prompt
 * 下面是一个椅子的说明书。根据说明书编写产品说明。
