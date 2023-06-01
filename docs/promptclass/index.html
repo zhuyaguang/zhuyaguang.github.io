@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/promptclass\/"
-        },"genre": "posts","wordcount":  4484 ,
+        },"genre": "posts","wordcount":  5127 ,
         "url": "https:\/\/zhuyaguang.github.io\/promptclass\/","datePublished": "2023-05-05T09:11:39+08:00","dateModified": "2023-05-05T09:11:39+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">吴恩达 prompt 课程笔记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-05">2023-05-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4484 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-05">2023-05-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5127 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 11 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -1611,6 +1611,15 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="8聊天机器人实现原理">8.聊天机器人实现原理</h2>
+<p>下面&lt;&gt;文本代表的是专利权利要求书，请根据以下步骤处理：</p>
+<ol>
+<li>提取出文本中的技术实体，技术实体指的是有关技术描述的实体，如设备、装置、机械零部件。</li>
+<li>根据第一步得到的技术实体，提取它们之间的关系，用三元组（Eh，Re，Et）形式表示，Eh、Et必须都是第一步中得到的技术实体，如果不是可以不生成这个三元组。</li>
+</ol>
+<p>下面是一个例子：</p>
+<p>文本：&lt;一种机器人，其特征在于，包括：机器人主体；图像采集组件，设于所述机器人主体，所述图像采集组件包括图像采集器；传声组件，设于所述机器人主体，且围设于所述图像采集器。&gt;</p>
+<p>答案：技术实体：机器人、机器人主体、图像采集组件、图像采集器、传声组件\n 这些技术实体之间的关系：(机器人,包括,机器人主体)、(机器人,包括,图像采集组件)、(图像采集组件,设于,机器人主体)、(图像采集组件,包括,图像采集器)、(机器人,包括,传声组件)、(传声组件,设于,机器人主体)、(传声组件,围设于,图像采集器)</p>
+<p>文本：&lt;一种关节模组的驱动总成，其特征在于，包括：固定壳，所述固定壳具有相对的第一端和第二端；输入轴，沿所述第一端至所述第二端的方向穿设于所述固定壳，所述输入轴设有第一轴肩；第一轴承，套设于所述输入轴，并连接于所述第一端和所述输入轴之间，所述第一轴承的内圈与所述第一轴肩相抵接；以及限位套，套设于所述输入轴，且位于所述第一轴承背离所述第一轴肩的一侧，所述限位套抵接于所述第一轴承的内圈，以与所述第一轴肩共同限制所述第一轴承的内圈的轴向位移。&gt;</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

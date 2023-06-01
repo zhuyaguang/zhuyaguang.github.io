@@ -82,6 +82,10 @@ description: "大模型成为开发者必备的工具"
 * AI 法律助手
 
   https://github.com/lvwzhen/law-cn-ai
+  
+* 微软官方的 Copilot-chat
+
+  https://github.com/microsoft/semantic-kernel/tree/main/samples/apps/copilot-chat-app/webapp
 
 ### AutoGPT
 
@@ -138,6 +142,8 @@ description: "大模型成为开发者必备的工具"
 * 翻译字幕工具
 
   https://github.com/gnehs/subtitle-translator-electron
+  
+* [教你打造属于自己的AI孙燕姿，AI歌手模型使用及训练保姆级课程](https://mp.weixin.qq.com/s/bXD1u6ysYkTEamt-PYI1RA)
 
 ### proxy
 
@@ -235,7 +241,7 @@ https://learningprompt.wiki/
 
 * 吴恩达老师的免费课程
 
-[ChatGPT Prompt Engineering for Developers](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/)
+​		[ChatGPT Prompt Engineering for Developers](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/)
 
 * 微软的官方课程
 
@@ -244,6 +250,10 @@ https://learningprompt.wiki/
 * ChatGPT 和 Midjourney 教程
 
    https://learningprompt.wiki/
+   
+* 提示工程师指南
+
+   https://www.promptingguide.ai/zh
 
 ## prompt 优秀范例
 
@@ -311,9 +321,16 @@ https://github.com/longbai/xiaobot
 
 * LlamaIndex
 
-https://gpt-index.readthedocs.io/en/latest/index.html
+  https://gpt-index.readthedocs.io/en/latest/index.html
 
 * Langchain
 
- https://blog.langchain.dev/
+   https://blog.langchain.dev/
 
+* LangChain 中文入门教程
+
+​		https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide
+
+* 吴恩达 利用 chatgpt 构建系统 
+
+  https://learn.deeplearning.ai/chatgpt-building-system/lesson/1/introduction
