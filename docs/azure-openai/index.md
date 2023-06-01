@@ -5,11 +5,13 @@
 
 
 
-## 注册Azure
+## 第一步：注册Azure
 
-[Azure 国际版](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service?WT.mc_id=DT-MVP-5003133)
+注册地址：[Azure 国际版](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service?WT.mc_id=DT-MVP-5003133)
 
-我是用 GitHub 注册的,注册完绑定一张 visa 信用卡
+![image-20230601091221976](../img/image-20230601091221976.png)
+
+>  我是用 GitHub 注册的,注册完绑定一张 visa 信用卡
 
 ## 申请 openAI service 
 
