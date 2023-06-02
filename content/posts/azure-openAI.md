@@ -20,7 +20,9 @@ draft: true
 
 [申请链接](https://customervoice.microsoft.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR7en2Ais5pxKtso_Pz4b1_xUOFA5Qk1UWDRBMjg0WFhPMkIzTzhKQ1dWNyQlQCN0PWcu)
 
-就一五一十填写，地址填中国也没关系
+就一五一十填写，地址填中国也没关系，公司邮箱填 zhejianglab.com 那个邮箱，公司域名填  https://www.zhejianglab.com/
+
+
 
 整个流程也可以参考下面博客：
 

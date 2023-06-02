@@ -5,7 +5,7 @@
         <description>所有文章 | 朱亚光的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
             <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Thu, 01 Jun 2023 14:08:20 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>2023meetup</title>
+    <title>meetup 2023</title>
     <link>https://zhuyaguang.github.io/2023meetup/</link>
     <pubDate>Thu, 01 Jun 2023 14:08:20 &#43;0800</pubDate>
     <author>作者</author>
@@ -24,7 +24,7 @@
     <pubDate>Mon, 03 Apr 2023 17:19:44 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/azure-openai/</guid>
-    <description><![CDATA[第一步：注册Azure 注册地址：Azure 国际版 我是用 GitHub 注册的,注册完绑定一张 visa 信用卡 申请 openAI service 申请链接 就一五一十填写，地址填中国也没关系 整个]]></description>
+    <description><![CDATA[第一步：注册Azure 注册地址：Azure 国际版 我是用 GitHub 注册的,注册完绑定一张 visa 信用卡 申请 openAI service 申请链接 就一五一十填写，地址填中国也没关系，公]]></description>
 </item><item>
     <title>大模型实践之旅</title>
     <link>https://zhuyaguang.github.io/bigmodel/</link>

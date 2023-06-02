@@ -1,4 +1,4 @@
-# 2023meetup
+# meetup 2023
 
 
 # 线下
@@ -6,6 +6,10 @@
 ## 3.11 寻找 Milvus 的第 N+1 种可能
 
 [寻找 Milvus 的第 N+1 种可能](https://mp.weixin.qq.com/s/ZVhAh6hUNpEAAFXLk_oLYw)
+
+
+
+![image-20230602083254206](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230602083254206.png)
 
 
 
@@ -19,7 +23,7 @@
 
 [JuiceFS 在大规模 AI 训练、大模型中的应用](https://mp.weixin.qq.com/s/1S1ukT-WfnvqtEf4VfgECg)
 
-
+![test](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/WechatIMG9.jpeg)
 
 # 线上
 
