@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>吴恩达-使用ChatGPT API构建系统-笔记 - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="吴恩达-使用ChatGPT API构建系统-笔记" />
-<meta property="og:description" content="使用ChatGPT API构建系统 翻转字符串得到的结果不对，因为大模型是根据 token 来处理下一个单词的，而不是 word。 1 2 response = get_completion(&#34;Take the letters in lollipop \ and reverse them&#34;) token" />
+<meta property="og:description" content="使用ChatGPT API构建系统 Language Models, the Chat Format and Tokens 翻转字符串得到的结果不对，因为大模型是根据 token 来预测下一个单词的，而不是 word。 1 2 response = get_completion(&#34;Take the letters" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/wuclass2/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-06-02T09:47:18+08:00" />
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
 <meta name="twitter:title" content="吴恩达-使用ChatGPT API构建系统-笔记"/>
-<meta name="twitter:description" content="使用ChatGPT API构建系统 翻转字符串得到的结果不对，因为大模型是根据 token 来处理下一个单词的，而不是 word。 1 2 response = get_completion(&#34;Take the letters in lollipop \ and reverse them&#34;) token"/>
+<meta name="twitter:description" content="使用ChatGPT API构建系统 Language Models, the Chat Format and Tokens 翻转字符串得到的结果不对，因为大模型是根据 token 来预测下一个单词的，而不是 word。 1 2 response = get_completion(&#34;Take the letters"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/wuclass2\/"
-        },"genre": "posts","wordcount":  95 ,
+        },"genre": "posts","wordcount":  318 ,
         "url": "https:\/\/zhuyaguang.github.io\/wuclass2\/","datePublished": "2023-06-02T09:47:18+08:00","dateModified": "2023-06-02T09:47:18+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,16 +79,26 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">吴恩达-使用ChatGPT API构建系统-笔记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-06-02">2023-06-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 95 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-06-02">2023-06-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 318 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#language-models-the-chat-format-and-tokens">Language Models, the Chat Format and Tokens</a>
+      <ul>
+        <li><a href="#chat-format-工作原理">chat format 工作原理</a></li>
+      </ul>
+    </li>
+    <li><a href="#统计-token-使用量">统计 token 使用量</a></li>
+  </ul>
+</nav></div>
             </div><div class="content" id="content"><h1 id="使用chatgpt-api构建系统">使用ChatGPT API构建系统</h1>
-<p>翻转字符串得到的结果不对，因为大模型是根据 token 来处理下一个单词的，而不是 word。</p>
+<h2 id="language-models-the-chat-format-and-tokens">Language Models, the Chat Format and Tokens</h2>
+<p>翻转字符串得到的结果不对，因为大模型是根据 token 来预测下一个单词的，而不是 word。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -121,7 +131,148 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>加了横杠就可以了。</p>
-</div><div class="post-footer" id="post-footer">
+<h3 id="chat-format-工作原理">chat format 工作原理</h3>
+<p>你可以在 system 指定 风格和长度或者全制定</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">messages</span> <span class="o">=</span>  <span class="p">[</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="s1">&#39;system&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;content&#39;</span><span class="p">:</span><span class="s2">&#34;&#34;&#34;You are an assistant who</span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2"> responds in the style of Dr Seuss.&#34;&#34;&#34;</span><span class="p">},</span>    
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;content&#39;</span><span class="p">:</span><span class="s2">&#34;&#34;&#34;write me a very short poem</span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2"> about a happy carrot&#34;&#34;&#34;</span><span class="p">},</span>  
+</span></span><span class="line"><span class="cl"><span class="p">]</span> 
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion_from_messages</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># length</span>
+</span></span><span class="line"><span class="cl"><span class="n">messages</span> <span class="o">=</span>  <span class="p">[</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="s1">&#39;system&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;content&#39;</span><span class="p">:</span><span class="s1">&#39;All your responses must be </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s1">one sentence long.&#39;</span><span class="p">},</span>    
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="s1">&#39;user&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;content&#39;</span><span class="p">:</span><span class="s1">&#39;write me a story about a happy carrot&#39;</span><span class="p">},</span>  
+</span></span><span class="line"><span class="cl"><span class="p">]</span> 
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion_from_messages</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> <span class="n">temperature</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># combined</span>
+</span></span><span class="line"><span class="cl"><span class="n">messages</span> <span class="o">=</span>  <span class="p">[</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="s1">&#39;system&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;content&#39;</span><span class="p">:</span><span class="s2">&#34;&#34;&#34;You are an assistant who </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">responds in the style of Dr Seuss. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">All your responses must be one sentence long.&#34;&#34;&#34;</span><span class="p">},</span>    
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="s1">&#39;user&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;content&#39;</span><span class="p">:</span><span class="s2">&#34;&#34;&#34;write me a story about a happy carrot&#34;&#34;&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span> 
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">get_completion_from_messages</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                                        <span class="n">temperature</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230602100646325.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230602100646325.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230602100646325.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230602100646325.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230602100646325.png"
+        title="image-20230602100646325" /></p>
+<h2 id="统计-token-使用量">统计 token 使用量</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_completion_and_token_count</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                                   <span class="n">model</span><span class="o">=</span><span class="s2">&#34;gpt-3.5-turbo&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                                   <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                                   <span class="n">max_tokens</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">max_tokens</span><span class="o">=</span><span class="n">max_tokens</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="p">[</span><span class="s2">&#34;content&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">token_dict</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;prompt_tokens&#39;</span><span class="p">:</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;usage&#39;</span><span class="p">][</span><span class="s1">&#39;prompt_tokens&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;completion_tokens&#39;</span><span class="p">:</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;usage&#39;</span><span class="p">][</span><span class="s1">&#39;completion_tokens&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;total_tokens&#39;</span><span class="p">:</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;usage&#39;</span><span class="p">][</span><span class="s1">&#39;total_tokens&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">content</span><span class="p">,</span> <span class="n">token_dict</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -152,6 +303,15 @@
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
+        
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZMX6LNNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9ZMX6LNNGD');
+</script>
     </footer></div>
 
         <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">

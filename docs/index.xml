@@ -12,7 +12,7 @@
     <pubDate>Fri, 02 Jun 2023 09:47:18 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/wuclass2/</guid>
-    <description><![CDATA[使用ChatGPT API构建系统 翻转字符串得到的结果不对，因为大模型是根据 token 来处理下一个单词的，而不是 word。 1 2 response = get_completion(&#34;Take the letters in lollipop \ and reverse them&#34;) token]]></description>
+    <description><![CDATA[使用ChatGPT API构建系统 Language Models, the Chat Format and Tokens 翻转字符串得到的结果不对，因为大模型是根据 token 来预测下一个单词的，而不是 word。 1 2 response = get_completion(&#34;Take the letters]]></description>
 </item><item>
     <title>meetup 2023</title>
     <link>https://zhuyaguang.github.io/2023meetup/</link>
