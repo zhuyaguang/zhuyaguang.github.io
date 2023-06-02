@@ -42,7 +42,6 @@
 
 ### Status
 
-- 🌱 I’m currently learning rust\distributed-system
--  🌱 I’m currently reading kubeflow and mlops
+- 🌱 I’m currently learning AI native and LLM 
 
 
