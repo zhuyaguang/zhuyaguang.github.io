@@ -334,3 +334,5 @@ https://github.com/longbai/xiaobot
 * 吴恩达 利用 chatgpt 构建系统 
 
   https://learn.deeplearning.ai/chatgpt-building-system/lesson/1/introduction
+  
+  字幕：https://www.youtube.com/@baoyu_
