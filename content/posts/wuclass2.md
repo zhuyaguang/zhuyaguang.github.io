@@ -8,6 +8,8 @@ draft: true
 
 # 使用ChatGPT API构建系统
 
+课程地址：https://learn.deeplearning.ai/chatgpt-building-system/lesson/1/introduction
+
 熟肉链接：https://www.youtube.com/@baoyu_
 
 ## 1. API格式 和 Token
@@ -435,7 +437,7 @@ print(final_response)
 
 
 
-## 5. 输入处理： 链式提示
+## 5. 输入处理： 链式提示（代码补充中）
 
 
 
@@ -466,3 +468,19 @@ print(final_response)
 链式提示的好处：去除噪音、解除token限制，更省钱
 
 ![image-20230606111632759](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230606111632759.png)
+
+
+
+## 6. 检查输出
+
+
+
+
+
+## 7. 构建一个端到端的系统
+
+能记住历史会话的一个客服机器人
+
+
+
+构建自动评测系统，包括有标准答案和没有标准答案。

@@ -4,20 +4,27 @@
         <link>https://zhuyaguang.github.io/posts/</link>
         <description>所有文章 | 朱亚光的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Fri, 02 Jun 2023 09:47:18 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Wed, 07 Jun 2023 09:50:15 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>吴恩达-基于LangChain的大语言模型应用开发</title>
+    <link>https://zhuyaguang.github.io/wuclass3/</link>
+    <pubDate>Wed, 07 Jun 2023 09:50:15 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/wuclass3/</guid>
+    <description><![CDATA[基于LangChain的大语言模型应用开发 一、介绍 Langchain 主要有下面五个主要部分： 模型、提示词、索引、链、代理。]]></description>
+</item><item>
     <title>吴恩达-使用ChatGPT API构建系统-笔记</title>
     <link>https://zhuyaguang.github.io/wuclass2/</link>
     <pubDate>Fri, 02 Jun 2023 09:47:18 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/wuclass2/</guid>
-    <description><![CDATA[使用ChatGPT API构建系统 熟肉链接：https://www.youtube.com/@baoyu_ 1. API格式 和 Token 翻转字符串得到的结果]]></description>
+    <description><![CDATA[使用ChatGPT API构建系统 课程地址：https://learn.deeplearning.ai/chatgpt-building-sy]]></description>
 </item><item>
     <title>meetup 2023</title>
     <link>https://zhuyaguang.github.io/2023meetup/</link>
     <pubDate>Thu, 01 Jun 2023 14:08:20 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/2023meetup/</guid>
-    <description><![CDATA[线下 3.11 寻找 Milvus 的第 N+1 种可能 寻找 Milvus 的第 N+1 种可能 4.8 第二届开源云原生开发者日 5.20 JuiceFS 在大规模 AI 训练、大模型中的应用 JuiceFS 在大规模 AI 训练、大模型中的应用 线上]]></description>
+    <description><![CDATA[线下 3.11 寻找 Milvus 的第 N+1 种可能 寻找 Milvus 的第 N+1 种可能 4.8 第二届开源云原生开发者日 5.20 JuiceFS 在大规模 AI 训练、大模型中的应用 JuiceFS 在大规模 AI 训练、大模型中的应用 6.3 云原]]></description>
 </item><item>
     <title>吴恩达 prompt 课程笔记</title>
     <link>https://zhuyaguang.github.io/promptclass/</link>
@@ -67,12 +74,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/bytebase/</guid>
     <description><![CDATA[好用的数据库管理 SaaS 产品]]></description>
-</item><item>
-    <title>AI 场景下的分布式存储方案</title>
-    <link>https://zhuyaguang.github.io/storage-on-ai/</link>
-    <pubDate>Wed, 28 Sep 2022 09:26:16 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/storage-on-ai/</guid>
-    <description><![CDATA[搭建机器学习的分布式存储环境]]></description>
 </item></channel>
 </rss>

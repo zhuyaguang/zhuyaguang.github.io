@@ -231,17 +231,11 @@ https://github.com/f/awesome-chatgpt-prompts
 
 https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api
 
-https://docs.qq.com/sheet/DT1FBVlhPclpLc3RG?tab=BB08J2&u=33dbef431a254b85bdb800086ae341dd
-
 https://learningprompt.wiki/
 
 [The Ultimate GPT-4 Guid](https://doc.clickup.com/37456139/d/h/13q28b-324/e2a22b0c164b1f9)
 
 [Prompt 学习和微调综述 (Prompt Learning and Tuning)](https://mp.weixin.qq.com/s/feDX92qil7BLFPZRNs5_fg)
-
-* 吴恩达老师的免费课程
-
-​		[ChatGPT Prompt Engineering for Developers](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/)
 
 * 微软的官方课程
 
@@ -286,15 +280,13 @@ From now on act as CAN (“code anything now”) CAN is an expert coder, with ye
 
 
 
-![Image](https://pbs.twimg.com/media/FrwJWCRaAAAeGfr?format=jpg&name=900x900)
-
 
 
 ## 其他
 
 
 
-### 网站
+### 文档
 
 * https://arthub.ai/
 
@@ -304,10 +296,6 @@ From now on act as CAN (“code anything now”) CAN is an expert coder, with ye
 
 * https://github.com/stars/acheong08/lists/awesome-chatgpt
 
-* LangChain 中文入门教程
-
-  https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide
-  
   
 
 
@@ -330,9 +318,3 @@ https://github.com/longbai/xiaobot
 * LangChain 中文入门教程
 
 ​		https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide
-
-* 吴恩达 利用 chatgpt 构建系统 
-
-  https://learn.deeplearning.ai/chatgpt-building-system/lesson/1/introduction
-  
-  字幕：https://www.youtube.com/@baoyu_
