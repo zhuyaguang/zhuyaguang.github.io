@@ -34,8 +34,95 @@ draft: true
 
 [精彩回顾](https://mp.weixin.qq.com/s/KQLW1uXDDhmfgxnKTVm8Ng)
 
+# 6.10 全球人工智能技术大会
 
+会场离我家很近，花了两块钱坐公交车去的，提了两个问题。
+
+第一个问题是问 卿老师 关于 基于国外大模型接口的AI应用的安全与法规问题。
+
+第二个是问了 李戈 老师 关于 AI native 应用的形态是什么样的。
+
+最后 唐杰老师的报告十分精彩，哈哈！
+
+![image-20230611074349994](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074349994.png)
+
+
+
+![image-20230611074558844](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074558844.png)
+
+![image-20230611074618055](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074618055.png)
+
+![image-20230611074630157](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074630157.png)
+
+
+
+![image-20230611074640859](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074640859.png)
+
+
+
+![image-20230611074652002](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074652002.png)
+
+
+
+![image-20230611074659886](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074659886.png)
+
+
+
+![image-20230611074710089](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074710089.png)
+
+
+
+![image-20230611074718180](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074718180.png)
+
+![image-20230611074727335](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074727335.png)
+
+
+
+![image-20230611074745877](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074745877.png)
+
+
+
+![image-20230611074755831](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074755831.png)
+
+
+
+![image-20230611074814226](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074814226.png)
+
+
+
+![image-20230611074826852](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074826852.png)
+
+
+
+![image-20230611074839764](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074839764.png)
+
+
+
+![image-20230611074858382](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074858382.png)
+
+
+
+![image-20230611074923426](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074923426.png)
+
+![image-20230611074943798](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074943798.png)
+
+
+
+![image-20230611074953318](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611074953318.png)
+
+
+
+![image-20230611075002719](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611075002719.png)
 
 
 
 # 线上
+
+2023 北京智源大会
+
+https://2023.baai.ac.cn/schedule
+
+2023 全球人工智能技术大会
+
+https://www.itdks.com/Home/mobile/topic_detail?id=403
+

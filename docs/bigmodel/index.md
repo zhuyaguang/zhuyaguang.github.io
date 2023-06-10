@@ -311,7 +311,5 @@ https://github.com/longbai/xiaobot
 
    https://blog.langchain.dev/
 
-* LangChain 中文入门教程
-
-​		https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide
+* 
 
