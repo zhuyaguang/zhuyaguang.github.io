@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/wuclass2\/"
-        },"genre": "posts","wordcount":  1966 ,
+        },"genre": "posts","wordcount":  4309 ,
         "url": "https:\/\/zhuyaguang.github.io\/wuclass2\/","datePublished": "2023-06-02T09:47:18+08:00","dateModified": "2023-06-02T09:47:18+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">吴恩达-使用ChatGPT API构建系统-笔记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-06-02">2023-06-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1966 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-06-02">2023-06-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4309 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -105,7 +105,7 @@
         <li><a href="#消除-过程中的-内心独白">消除 过程中的 内心独白</a></li>
       </ul>
     </li>
-    <li><a href="#5-输入处理-链式提示代码补充中">5. 输入处理： 链式提示（代码补充中）</a></li>
+    <li><a href="#5-输入处理-链式提示笔记待整理">5. 输入处理： 链式提示(笔记待整理)</a></li>
     <li><a href="#6-检查输出">6. 检查输出</a></li>
     <li><a href="#7-构建一个端到端的系统">7. 构建一个端到端的系统</a></li>
   </ul>
@@ -845,7 +845,7 @@
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">final_response</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="5-输入处理-链式提示代码补充中">5. 输入处理： 链式提示（代码补充中）</h2>
+</div><h2 id="5-输入处理-链式提示笔记待整理">5. 输入处理： 链式提示(笔记待整理)</h2>
 <p>链式提示例子：</p>
 <p><img
         class="lazyload"
@@ -855,7 +855,1043 @@
         data-sizes="auto"
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230606100341922.png"
         title="image-20230606100341922" /></p>
-<p>链式提示的好处：去除噪音、解除token限制，更省钱</p>
+<p>implement a complex task with multiple prompts</p>
+<p>Extract relevant product and category names<a href="https://s172-31-4-92p57562.lab-aws-production.deeplearning.ai/notebooks/L5_student.ipynb#Extract-relevant-product-and-category-names" target="_blank" rel="noopener noreffer">¶</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">delimiter</span> <span class="o">=</span> <span class="s2">&#34;####&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">system_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">You will be provided with customer service queries. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">The customer service query will be delimited with </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="si">{</span><span class="n">delimiter</span><span class="si">}</span><span class="s2"> characters.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Output a python list of objects, where each object has </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">the following format:
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#39;category&#39;: &lt;one of Computers and Laptops, </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">    Smartphones and Accessories, </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">    Televisions and Home Theater Systems, </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">    Gaming Consoles and Accessories, 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Audio Equipment, Cameras and Camcorders&gt;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">OR
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#39;products&#39;: &lt;a list of products that must </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">    be found in the allowed products below&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Where the categories and products must be found in </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">the customer service query.
+</span></span></span><span class="line"><span class="cl"><span class="s2">If a product is mentioned, it must be associated with </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">the correct category in the allowed products list below.
+</span></span></span><span class="line"><span class="cl"><span class="s2">If no products or categories are found, output an </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">empty list.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Allowed products: 
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Computers and Laptops category:
+</span></span></span><span class="line"><span class="cl"><span class="s2">TechPro Ultrabook
+</span></span></span><span class="line"><span class="cl"><span class="s2">BlueWave Gaming Laptop
+</span></span></span><span class="line"><span class="cl"><span class="s2">PowerLite Convertible
+</span></span></span><span class="line"><span class="cl"><span class="s2">TechPro Desktop
+</span></span></span><span class="line"><span class="cl"><span class="s2">BlueWave Chromebook
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Smartphones and Accessories category:
+</span></span></span><span class="line"><span class="cl"><span class="s2">SmartX ProPhone
+</span></span></span><span class="line"><span class="cl"><span class="s2">MobiTech PowerCase
+</span></span></span><span class="line"><span class="cl"><span class="s2">SmartX MiniPhone
+</span></span></span><span class="line"><span class="cl"><span class="s2">MobiTech Wireless Charger
+</span></span></span><span class="line"><span class="cl"><span class="s2">SmartX EarBuds
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Televisions and Home Theater Systems category:
+</span></span></span><span class="line"><span class="cl"><span class="s2">CineView 4K TV
+</span></span></span><span class="line"><span class="cl"><span class="s2">SoundMax Home Theater
+</span></span></span><span class="line"><span class="cl"><span class="s2">CineView 8K TV
+</span></span></span><span class="line"><span class="cl"><span class="s2">SoundMax Soundbar
+</span></span></span><span class="line"><span class="cl"><span class="s2">CineView OLED TV
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Gaming Consoles and Accessories category:
+</span></span></span><span class="line"><span class="cl"><span class="s2">GameSphere X
+</span></span></span><span class="line"><span class="cl"><span class="s2">ProGamer Controller
+</span></span></span><span class="line"><span class="cl"><span class="s2">GameSphere Y
+</span></span></span><span class="line"><span class="cl"><span class="s2">ProGamer Racing Wheel
+</span></span></span><span class="line"><span class="cl"><span class="s2">GameSphere VR Headset
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Audio Equipment category:
+</span></span></span><span class="line"><span class="cl"><span class="s2">AudioPhonic Noise-Canceling Headphones
+</span></span></span><span class="line"><span class="cl"><span class="s2">WaveSound Bluetooth Speaker
+</span></span></span><span class="line"><span class="cl"><span class="s2">AudioPhonic True Wireless Earbuds
+</span></span></span><span class="line"><span class="cl"><span class="s2">WaveSound Soundbar
+</span></span></span><span class="line"><span class="cl"><span class="s2">AudioPhonic Turntable
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Cameras and Camcorders category:
+</span></span></span><span class="line"><span class="cl"><span class="s2">FotoSnap DSLR Camera
+</span></span></span><span class="line"><span class="cl"><span class="s2">ActionCam 4K
+</span></span></span><span class="line"><span class="cl"><span class="s2">FotoSnap Mirrorless Camera
+</span></span></span><span class="line"><span class="cl"><span class="s2">ZoomMaster Camcorder
+</span></span></span><span class="line"><span class="cl"><span class="s2">FotoSnap Instant Camera
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Only output the list of objects, with nothing else.
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_message_1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2"> tell me about the smartx pro phone and </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2"> the fotosnap camera, the dslr one. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2"> Also tell me about your tvs &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">messages</span> <span class="o">=</span>  <span class="p">[</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="s1">&#39;system&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">system_message</span><span class="p">},</span>    
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">delimiter</span><span class="si">}{</span><span class="n">user_message_1</span><span class="si">}{</span><span class="n">delimiter</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">},</span>  
+</span></span><span class="line"><span class="cl"><span class="p">]</span> 
+</span></span><span class="line"><span class="cl"><span class="n">category_and_product_response_1</span> <span class="o">=</span> <span class="n">get_completion_from_messages</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">category_and_product_response_1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Retrieve detailed product information for extracted products and categories</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
+</span><span class="lnt">256
+</span><span class="lnt">257
+</span><span class="lnt">258
+</span><span class="lnt">259
+</span><span class="lnt">260
+</span><span class="lnt">261
+</span><span class="lnt">262
+</span><span class="lnt">263
+</span><span class="lnt">264
+</span><span class="lnt">265
+</span><span class="lnt">266
+</span><span class="lnt">267
+</span><span class="lnt">268
+</span><span class="lnt">269
+</span><span class="lnt">270
+</span><span class="lnt">271
+</span><span class="lnt">272
+</span><span class="lnt">273
+</span><span class="lnt">274
+</span><span class="lnt">275
+</span><span class="lnt">276
+</span><span class="lnt">277
+</span><span class="lnt">278
+</span><span class="lnt">279
+</span><span class="lnt">280
+</span><span class="lnt">281
+</span><span class="lnt">282
+</span><span class="lnt">283
+</span><span class="lnt">284
+</span><span class="lnt">285
+</span><span class="lnt">286
+</span><span class="lnt">287
+</span><span class="lnt">288
+</span><span class="lnt">289
+</span><span class="lnt">290
+</span><span class="lnt">291
+</span><span class="lnt">292
+</span><span class="lnt">293
+</span><span class="lnt">294
+</span><span class="lnt">295
+</span><span class="lnt">296
+</span><span class="lnt">297
+</span><span class="lnt">298
+</span><span class="lnt">299
+</span><span class="lnt">300
+</span><span class="lnt">301
+</span><span class="lnt">302
+</span><span class="lnt">303
+</span><span class="lnt">304
+</span><span class="lnt">305
+</span><span class="lnt">306
+</span><span class="lnt">307
+</span><span class="lnt">308
+</span><span class="lnt">309
+</span><span class="lnt">310
+</span><span class="lnt">311
+</span><span class="lnt">312
+</span><span class="lnt">313
+</span><span class="lnt">314
+</span><span class="lnt">315
+</span><span class="lnt">316
+</span><span class="lnt">317
+</span><span class="lnt">318
+</span><span class="lnt">319
+</span><span class="lnt">320
+</span><span class="lnt">321
+</span><span class="lnt">322
+</span><span class="lnt">323
+</span><span class="lnt">324
+</span><span class="lnt">325
+</span><span class="lnt">326
+</span><span class="lnt">327
+</span><span class="lnt">328
+</span><span class="lnt">329
+</span><span class="lnt">330
+</span><span class="lnt">331
+</span><span class="lnt">332
+</span><span class="lnt">333
+</span><span class="lnt">334
+</span><span class="lnt">335
+</span><span class="lnt">336
+</span><span class="lnt">337
+</span><span class="lnt">338
+</span><span class="lnt">339
+</span><span class="lnt">340
+</span><span class="lnt">341
+</span><span class="lnt">342
+</span><span class="lnt">343
+</span><span class="lnt">344
+</span><span class="lnt">345
+</span><span class="lnt">346
+</span><span class="lnt">347
+</span><span class="lnt">348
+</span><span class="lnt">349
+</span><span class="lnt">350
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># product information</span>
+</span></span><span class="line"><span class="cl"><span class="n">products</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;TechPro Ultrabook&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;TechPro Ultrabook&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Computers and Laptops&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;TechPro&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;TP-UB100&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;13.3-inch display&#34;</span><span class="p">,</span> <span class="s2">&#34;8GB RAM&#34;</span><span class="p">,</span> <span class="s2">&#34;256GB SSD&#34;</span><span class="p">,</span> <span class="s2">&#34;Intel Core i5 processor&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A sleek and lightweight ultrabook for everyday use.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">799.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;BlueWave Gaming Laptop&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;BlueWave Gaming Laptop&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Computers and Laptops&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;BlueWave&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;BW-GL200&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;2 years&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.7</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;15.6-inch display&#34;</span><span class="p">,</span> <span class="s2">&#34;16GB RAM&#34;</span><span class="p">,</span> <span class="s2">&#34;512GB SSD&#34;</span><span class="p">,</span> <span class="s2">&#34;NVIDIA GeForce RTX 3060&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A high-performance gaming laptop for an immersive experience.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">1199.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;PowerLite Convertible&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;PowerLite Convertible&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Computers and Laptops&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;PowerLite&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;PL-CV300&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;14-inch touchscreen&#34;</span><span class="p">,</span> <span class="s2">&#34;8GB RAM&#34;</span><span class="p">,</span> <span class="s2">&#34;256GB SSD&#34;</span><span class="p">,</span> <span class="s2">&#34;360-degree hinge&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A versatile convertible laptop with a responsive touchscreen.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">699.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;TechPro Desktop&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;TechPro Desktop&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Computers and Laptops&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;TechPro&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;TP-DT500&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;Intel Core i7 processor&#34;</span><span class="p">,</span> <span class="s2">&#34;16GB RAM&#34;</span><span class="p">,</span> <span class="s2">&#34;1TB HDD&#34;</span><span class="p">,</span> <span class="s2">&#34;NVIDIA GeForce GTX 1660&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A powerful desktop computer for work and play.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">999.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;BlueWave Chromebook&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;BlueWave Chromebook&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Computers and Laptops&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;BlueWave&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;BW-CB100&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;11.6-inch display&#34;</span><span class="p">,</span> <span class="s2">&#34;4GB RAM&#34;</span><span class="p">,</span> <span class="s2">&#34;32GB eMMC&#34;</span><span class="p">,</span> <span class="s2">&#34;Chrome OS&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A compact and affordable Chromebook for everyday tasks.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">249.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;SmartX ProPhone&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;SmartX ProPhone&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Smartphones and Accessories&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;SmartX&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;SX-PP10&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.6</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;6.1-inch display&#34;</span><span class="p">,</span> <span class="s2">&#34;128GB storage&#34;</span><span class="p">,</span> <span class="s2">&#34;12MP dual camera&#34;</span><span class="p">,</span> <span class="s2">&#34;5G&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A powerful smartphone with advanced camera features.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">899.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;MobiTech PowerCase&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;MobiTech PowerCase&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Smartphones and Accessories&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;MobiTech&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;MT-PC20&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;5000mAh battery&#34;</span><span class="p">,</span> <span class="s2">&#34;Wireless charging&#34;</span><span class="p">,</span> <span class="s2">&#34;Compatible with SmartX ProPhone&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A protective case with built-in battery for extended usage.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">59.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;SmartX MiniPhone&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;SmartX MiniPhone&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Smartphones and Accessories&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;SmartX&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;SX-MP5&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;4.7-inch display&#34;</span><span class="p">,</span> <span class="s2">&#34;64GB storage&#34;</span><span class="p">,</span> <span class="s2">&#34;8MP camera&#34;</span><span class="p">,</span> <span class="s2">&#34;4G&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A compact and affordable smartphone for basic tasks.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">399.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;MobiTech Wireless Charger&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;MobiTech Wireless Charger&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Smartphones and Accessories&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;MobiTech&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;MT-WC10&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;10W fast charging&#34;</span><span class="p">,</span> <span class="s2">&#34;Qi-compatible&#34;</span><span class="p">,</span> <span class="s2">&#34;LED indicator&#34;</span><span class="p">,</span> <span class="s2">&#34;Compact design&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A convenient wireless charger for a clutter-free workspace.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">29.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;SmartX EarBuds&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;SmartX EarBuds&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Smartphones and Accessories&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;SmartX&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;SX-EB20&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;True wireless&#34;</span><span class="p">,</span> <span class="s2">&#34;Bluetooth 5.0&#34;</span><span class="p">,</span> <span class="s2">&#34;Touch controls&#34;</span><span class="p">,</span> <span class="s2">&#34;24-hour battery life&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Experience true wireless freedom with these comfortable earbuds.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">99.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;CineView 4K TV&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;CineView 4K TV&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Televisions and Home Theater Systems&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;CineView&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;CV-4K55&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;2 years&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.8</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;55-inch display&#34;</span><span class="p">,</span> <span class="s2">&#34;4K resolution&#34;</span><span class="p">,</span> <span class="s2">&#34;HDR&#34;</span><span class="p">,</span> <span class="s2">&#34;Smart TV&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A stunning 4K TV with vibrant colors and smart features.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">599.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;SoundMax Home Theater&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;SoundMax Home Theater&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Televisions and Home Theater Systems&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;SoundMax&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;SM-HT100&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;5.1 channel&#34;</span><span class="p">,</span> <span class="s2">&#34;1000W output&#34;</span><span class="p">,</span> <span class="s2">&#34;Wireless subwoofer&#34;</span><span class="p">,</span> <span class="s2">&#34;Bluetooth&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A powerful home theater system for an immersive audio experience.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">399.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;CineView 8K TV&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;CineView 8K TV&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Televisions and Home Theater Systems&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;CineView&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;CV-8K65&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;2 years&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.9</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;65-inch display&#34;</span><span class="p">,</span> <span class="s2">&#34;8K resolution&#34;</span><span class="p">,</span> <span class="s2">&#34;HDR&#34;</span><span class="p">,</span> <span class="s2">&#34;Smart TV&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Experience the future of television with this stunning 8K TV.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">2999.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;SoundMax Soundbar&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;SoundMax Soundbar&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Televisions and Home Theater Systems&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;SoundMax&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;SM-SB50&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;2.1 channel&#34;</span><span class="p">,</span> <span class="s2">&#34;300W output&#34;</span><span class="p">,</span> <span class="s2">&#34;Wireless subwoofer&#34;</span><span class="p">,</span> <span class="s2">&#34;Bluetooth&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Upgrade your TV&#39;s audio with this sleek and powerful soundbar.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">199.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;CineView OLED TV&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;CineView OLED TV&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Televisions and Home Theater Systems&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;CineView&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;CV-OLED55&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;2 years&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.7</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;55-inch display&#34;</span><span class="p">,</span> <span class="s2">&#34;4K resolution&#34;</span><span class="p">,</span> <span class="s2">&#34;HDR&#34;</span><span class="p">,</span> <span class="s2">&#34;Smart TV&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Experience true blacks and vibrant colors with this OLED TV.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">1499.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;GameSphere X&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;GameSphere X&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Gaming Consoles and Accessories&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;GameSphere&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;GS-X&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.9</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;4K gaming&#34;</span><span class="p">,</span> <span class="s2">&#34;1TB storage&#34;</span><span class="p">,</span> <span class="s2">&#34;Backward compatibility&#34;</span><span class="p">,</span> <span class="s2">&#34;Online multiplayer&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A next-generation gaming console for the ultimate gaming experience.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">499.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ProGamer Controller&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;ProGamer Controller&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Gaming Consoles and Accessories&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;ProGamer&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;PG-C100&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;Ergonomic design&#34;</span><span class="p">,</span> <span class="s2">&#34;Customizable buttons&#34;</span><span class="p">,</span> <span class="s2">&#34;Wireless&#34;</span><span class="p">,</span> <span class="s2">&#34;Rechargeable battery&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A high-quality gaming controller for precision and comfort.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">59.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;GameSphere Y&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;GameSphere Y&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Gaming Consoles and Accessories&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;GameSphere&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;GS-Y&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.8</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;4K gaming&#34;</span><span class="p">,</span> <span class="s2">&#34;500GB storage&#34;</span><span class="p">,</span> <span class="s2">&#34;Backward compatibility&#34;</span><span class="p">,</span> <span class="s2">&#34;Online multiplayer&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A compact gaming console with powerful performance.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">399.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ProGamer Racing Wheel&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;ProGamer Racing Wheel&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Gaming Consoles and Accessories&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;ProGamer&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;PG-RW200&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;Force feedback&#34;</span><span class="p">,</span> <span class="s2">&#34;Adjustable pedals&#34;</span><span class="p">,</span> <span class="s2">&#34;Paddle shifters&#34;</span><span class="p">,</span> <span class="s2">&#34;Compatible with GameSphere X&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Enhance your racing games with this realistic racing wheel.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">249.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;GameSphere VR Headset&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;GameSphere VR Headset&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Gaming Consoles and Accessories&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;GameSphere&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;GS-VR&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.6</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;Immersive VR experience&#34;</span><span class="p">,</span> <span class="s2">&#34;Built-in headphones&#34;</span><span class="p">,</span> <span class="s2">&#34;Adjustable headband&#34;</span><span class="p">,</span> <span class="s2">&#34;Compatible with GameSphere X&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Step into the world of virtual reality with this comfortable VR headset.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">299.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;AudioPhonic Noise-Canceling Headphones&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;AudioPhonic Noise-Canceling Headphones&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Audio Equipment&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;AudioPhonic&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;AP-NC100&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.6</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;Active noise-canceling&#34;</span><span class="p">,</span> <span class="s2">&#34;Bluetooth&#34;</span><span class="p">,</span> <span class="s2">&#34;20-hour battery life&#34;</span><span class="p">,</span> <span class="s2">&#34;Comfortable fit&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Experience immersive sound with these noise-canceling headphones.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">199.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;WaveSound Bluetooth Speaker&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;WaveSound Bluetooth Speaker&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Audio Equipment&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;WaveSound&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;WS-BS50&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;Portable&#34;</span><span class="p">,</span> <span class="s2">&#34;10-hour battery life&#34;</span><span class="p">,</span> <span class="s2">&#34;Water-resistant&#34;</span><span class="p">,</span> <span class="s2">&#34;Built-in microphone&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A compact and versatile Bluetooth speaker for music on the go.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">49.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;AudioPhonic True Wireless Earbuds&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;AudioPhonic True Wireless Earbuds&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Audio Equipment&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;AudioPhonic&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;AP-TW20&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;True wireless&#34;</span><span class="p">,</span> <span class="s2">&#34;Bluetooth 5.0&#34;</span><span class="p">,</span> <span class="s2">&#34;Touch controls&#34;</span><span class="p">,</span> <span class="s2">&#34;18-hour battery life&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Enjoy music without wires with these comfortable true wireless earbuds.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">79.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;WaveSound Soundbar&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;WaveSound Soundbar&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Audio Equipment&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;WaveSound&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;WS-SB40&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;2.0 channel&#34;</span><span class="p">,</span> <span class="s2">&#34;80W output&#34;</span><span class="p">,</span> <span class="s2">&#34;Bluetooth&#34;</span><span class="p">,</span> <span class="s2">&#34;Wall-mountable&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Upgrade your TV&#39;s audio with this slim and powerful soundbar.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">99.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;AudioPhonic Turntable&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;AudioPhonic Turntable&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Audio Equipment&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;AudioPhonic&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;AP-TT10&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;3-speed&#34;</span><span class="p">,</span> <span class="s2">&#34;Built-in speakers&#34;</span><span class="p">,</span> <span class="s2">&#34;Bluetooth&#34;</span><span class="p">,</span> <span class="s2">&#34;USB recording&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Rediscover your vinyl collection with this modern turntable.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">149.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;FotoSnap DSLR Camera&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;FotoSnap DSLR Camera&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Cameras and Camcorders&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;FotoSnap&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;FS-DSLR200&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.7</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;24.2MP sensor&#34;</span><span class="p">,</span> <span class="s2">&#34;1080p video&#34;</span><span class="p">,</span> <span class="s2">&#34;3-inch LCD&#34;</span><span class="p">,</span> <span class="s2">&#34;Interchangeable lenses&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Capture stunning photos and videos with this versatile DSLR camera.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">599.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ActionCam 4K&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;ActionCam 4K&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Cameras and Camcorders&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;ActionCam&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;AC-4K&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;4K video&#34;</span><span class="p">,</span> <span class="s2">&#34;Waterproof&#34;</span><span class="p">,</span> <span class="s2">&#34;Image stabilization&#34;</span><span class="p">,</span> <span class="s2">&#34;Wi-Fi&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Record your adventures with this rugged and compact 4K action camera.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">299.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;FotoSnap Mirrorless Camera&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;FotoSnap Mirrorless Camera&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Cameras and Camcorders&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;FotoSnap&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;FS-ML100&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.6</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;20.1MP sensor&#34;</span><span class="p">,</span> <span class="s2">&#34;4K video&#34;</span><span class="p">,</span> <span class="s2">&#34;3-inch touchscreen&#34;</span><span class="p">,</span> <span class="s2">&#34;Interchangeable lenses&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;A compact and lightweight mirrorless camera with advanced features.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">799.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ZoomMaster Camcorder&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;ZoomMaster Camcorder&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Cameras and Camcorders&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;ZoomMaster&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;ZM-CM50&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;1080p video&#34;</span><span class="p">,</span> <span class="s2">&#34;30x optical zoom&#34;</span><span class="p">,</span> <span class="s2">&#34;3-inch LCD&#34;</span><span class="p">,</span> <span class="s2">&#34;Image stabilization&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Capture life&#39;s moments with this easy-to-use camcorder.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">249.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;FotoSnap Instant Camera&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;FotoSnap Instant Camera&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;category&#34;</span><span class="p">:</span> <span class="s2">&#34;Cameras and Camcorders&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;brand&#34;</span><span class="p">:</span> <span class="s2">&#34;FotoSnap&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;model_number&#34;</span><span class="p">:</span> <span class="s2">&#34;FS-IC10&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warranty&#34;</span><span class="p">:</span> <span class="s2">&#34;1 year&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;rating&#34;</span><span class="p">:</span> <span class="mf">4.1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;features&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;Instant prints&#34;</span><span class="p">,</span> <span class="s2">&#34;Built-in flash&#34;</span><span class="p">,</span> <span class="s2">&#34;Selfie mirror&#34;</span><span class="p">,</span> <span class="s2">&#34;Battery-powered&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Create instant memories with this fun and portable instant camera.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mf">69.99</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_product_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">products</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_products_by_category</span><span class="p">(</span><span class="n">category</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="n">product</span> <span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">products</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">product</span><span class="p">[</span><span class="s2">&#34;category&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="n">category</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"> <span class="nb">print</span><span class="p">(</span><span class="n">get_product_by_name</span><span class="p">(</span><span class="s2">&#34;TechPro Ultrabook&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">get_products_by_category</span><span class="p">(</span><span class="s2">&#34;Computers and Laptops&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">user_message_1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">category_and_product_response_1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Read Python string into Python list of dictionaries</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">read_string_to_list</span><span class="p">(</span><span class="n">input_string</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">input_string</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">input_string</span> <span class="o">=</span> <span class="n">input_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;&#39;&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="se">\&#34;</span><span class="s2">&#34;</span><span class="p">)</span>  <span class="c1"># Replace single quotes with double quotes for valid JSON</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">input_string</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">data</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Error: Invalid JSON string&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">None</span>   
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl"><span class="n">category_and_product_list</span> <span class="o">=</span> <span class="n">read_string_to_list</span><span class="p">(</span><span class="n">category_and_product_response_1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">category_and_product_list</span><span class="p">)</span>        
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Retrieve detailed product information for the relevant products and categories</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">generate_output_string</span><span class="p">(</span><span class="n">data_list</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output_string</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">data_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">output_string</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">data_list</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="s2">&#34;products&#34;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">products_list</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;products&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">product_name</span> <span class="ow">in</span> <span class="n">products_list</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">product</span> <span class="o">=</span> <span class="n">get_product_by_name</span><span class="p">(</span><span class="n">product_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="n">product</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">output_string</span> <span class="o">+=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Error: Product &#39;</span><span class="si">{</span><span class="n">product_name</span><span class="si">}</span><span class="s2">&#39; not found&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">elif</span> <span class="s2">&#34;category&#34;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">category_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;category&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="n">category_products</span> <span class="o">=</span> <span class="n">get_products_by_category</span><span class="p">(</span><span class="n">category_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">category_products</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">output_string</span> <span class="o">+=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Error: Invalid object format&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">output_string</span> 
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"> <span class="n">product_information_for_user_message_1</span> <span class="o">=</span> <span class="n">generate_output_string</span><span class="p">(</span><span class="n">category_and_product_list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">product_information_for_user_message_1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Generate answer to user query based on detailed product information</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">system_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">You are a customer service assistant for a </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">large electronic store. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">Respond in a friendly and helpful tone, </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">with very concise answers. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">Make sure to ask the user relevant follow up questions.
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_message_1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">tell me about the smartx pro phone and </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">the fotosnap camera, the dslr one. </span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">Also tell me about your tvs&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">messages</span> <span class="o">=</span>  <span class="p">[</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="s1">&#39;system&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">system_message</span><span class="p">},</span>   
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="s1">&#39;user&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">user_message_1</span><span class="p">},</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&#34;&#34;&#34;Relevant product information:</span><span class="se">\n\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2"> </span><span class="si">{</span><span class="n">product_information_for_user_message_1</span><span class="si">}</span><span class="s2">&#34;&#34;&#34;</span><span class="p">},</span>   
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">final_response</span> <span class="o">=</span> <span class="n">get_completion_from_messages</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">final_response</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>链式提示的好处：去除噪音、解除token限制，更省钱</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"

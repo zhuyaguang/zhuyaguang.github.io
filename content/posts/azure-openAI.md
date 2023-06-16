@@ -50,3 +50,14 @@ draft: true
 2. 通过 cloudflare 代理解决，例如 https://github.com/haibbo/cf-openai-azure-proxy
 3. 通过修改源码解决，这个方案不通用，每个项目改的地方都不一样，需要去 issue 里面找办法。例如  [Azure修改源码支持](https://github.com/Yidadaa/ChatGPT-Next-Web/issues/371)
 
+
+
+### Microsoft build 
+
+![image-20230615135442613](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230615135442613.png)
+
+![image-20230615141917606](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230615141917606.png)
+
+![image-20230615141948435](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230615141948435.png)
+
+![image-20230615142032073](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230615142032073.png)

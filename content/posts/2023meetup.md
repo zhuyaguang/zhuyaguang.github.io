@@ -118,6 +118,10 @@ draft: true
 
 
 
+王怀民院士谈开源
+
+![image-20230611093920460](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611093920460.png)
+
 # 线上
 
 2023 北京智源大会
