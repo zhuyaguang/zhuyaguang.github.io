@@ -1,6 +1,8 @@
 # Bytebase 体验官之狂飙的 ChatGPT
 
 
+<!--more-->
+
 ## Bytebase 体验官之狂飙的 ChatGPT
 
 ### 个人信息

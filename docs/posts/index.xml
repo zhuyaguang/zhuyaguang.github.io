@@ -10,28 +10,28 @@
     <pubDate>Wed, 07 Jun 2023 09:50:15 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/wuclass3/</guid>
-    <description><![CDATA[基于LangChain的大语言模型应用开发 视频教程地址 https://learn.deeplearning.ai/langchain/lesson/1/introduction 熟肉地址 https://www.youtube.com/watch?v=gUcYC0Iuw2g&list=PLiuLMb-dLdWIYYBF3k5JI_6Od593EIuEG&index=1 Langchain 官方文档 https://blog.langchain.dev/ LangChain 中文入门教程 ​ https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide LangChain 保姆级别教程 https://dev.to/mikeyoung44/a-plain-english-guide-to-reverse-engineering-the-twitter-algorithm-with-langchain-activeloop-and-deepinfra-47fh 一、介绍 Langchain 主要有下面五个主要]]></description>
+    <description><![CDATA[吴恩达老师的langchain课]]></description>
 </item><item>
     <title>吴恩达-使用ChatGPT API构建系统-笔记</title>
     <link>https://zhuyaguang.github.io/wuclass2/</link>
     <pubDate>Fri, 02 Jun 2023 09:47:18 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/wuclass2/</guid>
-    <description><![CDATA[使用ChatGPT API构建系统 课程地址：https://learn.deeplearning.ai/chatgpt-building-sy]]></description>
+    <description><![CDATA[吴恩达老师的ChatGPT API课]]></description>
 </item><item>
     <title>meetup 2023</title>
     <link>https://zhuyaguang.github.io/2023meetup/</link>
     <pubDate>Thu, 01 Jun 2023 14:08:20 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/2023meetup/</guid>
-    <description><![CDATA[线下 3.11 寻找 Milvus 的第 N+1 种可能 寻找 Milvus 的第 N+1 种可能 4.8 第二届开源云原生开发者日 5.20 JuiceFS 在大规模 AI 训练、大模型中的应用 JuiceFS 在大规模 AI 训练、大模型中的应用 6.3 云原]]></description>
+    <description><![CDATA[没有疫情了，活动多起来了]]></description>
 </item><item>
     <title>吴恩达 prompt 课程笔记</title>
     <link>https://zhuyaguang.github.io/promptclass/</link>
     <pubDate>Fri, 05 May 2023 09:11:39 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/promptclass/</guid>
-    <description><![CDATA[吴恩达 prompt 课程笔记 1. 课程简介 两种大模型 base LLMs ：根据文本训练数据预测下一个单词 instruction tuned LLMs ：在 Base 基础上，经过 RLHF 细化，形成有用、诚实和无害的AI。 2. 提示原]]></description>
+    <description><![CDATA[吴恩达老师的prompt课]]></description>
 </item><item>
     <title>Azure OpenAI</title>
     <link>https://zhuyaguang.github.io/azure-openai/</link>
@@ -52,7 +52,7 @@
     <pubDate>Sat, 18 Mar 2023 22:38:02 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/bytebase03/</guid>
-    <description><![CDATA[Bytebase 体验官之狂飙的 ChatGPT 个人信息 朱亚光 最近在研究大模型的Prompt Engineer GitHub 地址 Schema 变更 开启今天的体验官之旅之前，先回忆下我们上期在新手村学到的内容： 1]]></description>
+    <description><![CDATA[Bytebase 体验官系列]]></description>
 </item><item>
     <title>Bytebase 体验官之勇闯新手村</title>
     <link>https://zhuyaguang.github.io/bytabase2/</link>

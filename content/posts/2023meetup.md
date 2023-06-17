@@ -2,7 +2,10 @@
 title: "meetup 2023"
 date: 2023-06-01T14:08:20+08:00
 draft: true
+description: "没有疫情了，活动多起来了"
 ---
+
+<!--more-->
 
 # 线下
 

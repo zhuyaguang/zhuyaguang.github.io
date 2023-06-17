@@ -86,6 +86,10 @@ description: "大模型成为开发者必备的工具"
 * 微软官方的 Copilot-chat
 
   https://github.com/microsoft/semantic-kernel/tree/main/samples/apps/copilot-chat-app/webapp
+  
+* ChatFiles
+
+  https://github.com/guangzhengli/ChatFiles/blob/main/README.zh.md
 
 ### AutoGPT
 

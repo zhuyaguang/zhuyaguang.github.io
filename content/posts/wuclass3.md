@@ -2,7 +2,10 @@
 title: "吴恩达-基于LangChain的大语言模型应用开发"
 date: 2023-06-07T09:50:15+08:00
 draft: true
+description: "吴恩达老师的langchain课"
 ---
+
+<!--more-->
 
 # 基于LangChain的大语言模型应用开发
 

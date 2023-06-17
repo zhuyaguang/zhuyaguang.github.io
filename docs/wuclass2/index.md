@@ -1,7 +1,7 @@
 # 吴恩达-使用ChatGPT API构建系统-笔记
 
 
-
+<!--more-->
 
 # 使用ChatGPT API构建系统
 

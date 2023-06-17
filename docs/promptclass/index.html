@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>吴恩达 prompt 课程笔记 - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="吴恩达 prompt 课程笔记" />
-<meta property="og:description" content="吴恩达 prompt 课程笔记 1. 课程简介 两种大模型 base LLMs ：根据文本训练数据预测下一个单词 instruction tuned LLMs ：在 Base 基础上，经过 RLHF 细化，形成有用、诚实和无害的AI。 2. 提示原" />
+        <title>吴恩达 prompt 课程笔记 - 朱亚光的博客</title><meta name="Description" content="吴恩达老师的prompt课"><meta property="og:title" content="吴恩达 prompt 课程笔记" />
+<meta property="og:description" content="吴恩达老师的prompt课" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/promptclass/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-05-05T09:11:39+08:00" />
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
 <meta name="twitter:title" content="吴恩达 prompt 课程笔记"/>
-<meta name="twitter:description" content="吴恩达 prompt 课程笔记 1. 课程简介 两种大模型 base LLMs ：根据文本训练数据预测下一个单词 instruction tuned LLMs ：在 Base 基础上，经过 RLHF 细化，形成有用、诚实和无害的AI。 2. 提示原"/>
+<meta name="twitter:description" content="吴恩达老师的prompt课"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -35,7 +35,7 @@
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "朱亚光"
-            },"description": ""
+            },"description": "吴恩达老师的prompt课"
     }
     </script></head>
     <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -1619,8 +1619,7 @@
 <p>下面是一个例子：</p>
 <p>文本：&lt;一种机器人，其特征在于，包括：机器人主体；图像采集组件，设于所述机器人主体，所述图像采集组件包括图像采集器；传声组件，设于所述机器人主体，且围设于所述图像采集器。&gt;</p>
 <p>答案：技术实体：机器人、机器人主体、图像采集组件、图像采集器、传声组件\n 这些技术实体之间的关系：(机器人,包括,机器人主体)、(机器人,包括,图像采集组件)、(图像采集组件,设于,机器人主体)、(图像采集组件,包括,图像采集器)、(机器人,包括,传声组件)、(传声组件,设于,机器人主体)、(传声组件,围设于,图像采集器)</p>
-<p>文本：&lt;一种关节模组的驱动总成，其特征在于，包括：固定壳，所述固定壳具有相对的第一端和第二端；输入轴，沿所述第一端至所述第二端的方向穿设于所述固定壳，所述输入轴设有第一轴肩；第一轴承，套设于所述输入轴，并连接于所述第一端和所述输入轴之间，所述第一轴承的内圈与所述第一轴肩相抵接；以及限位套，套设于所述输入轴，且位于所述第一轴承背离所述第一轴肩的一侧，所述限位套抵接于所述第一轴承的内圈，以与所述第一轴肩共同限制所述第一轴承的内圈的轴向位移。&gt;</p>
-</div><div class="post-footer" id="post-footer">
+<p>文本：&lt;一种关节模组的驱动总成，其特征在于，包括：固定壳，所述固定壳具有相对的第一端和第二端；输入轴，沿所述第一端至所述第二端的方向穿设于所述固定壳，所述输入轴设有第一轴肩；第一轴承，套设于所述输入轴，并连接于所述第一端和所述输入轴之间，所述第一轴承的内圈与所述第一轴肩相抵接；以及限位套，套设于所述输入轴，且位于所述第一轴承背离所述第一轴肩的一侧，所述限位套抵接于所述第一轴承的内圈，以与所述第一轴肩共同限制所述第一轴承的内圈的轴向位移。&gt;</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -1633,7 +1632,7 @@
                             <a class="link-to-markdown" href="/promptclass/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/promptclass/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/promptclass/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记" data-description="吴恩达老师的prompt课"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记" data-description="吴恩达老师的prompt课"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/promptclass/" data-title="吴恩达 prompt 课程笔记"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>

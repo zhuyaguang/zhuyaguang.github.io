@@ -2,7 +2,10 @@
 title: "吴恩达 prompt 课程笔记"
 date: 2023-05-05T09:11:39+08:00
 draft: true
+description: "吴恩达老师的prompt课"
 ---
+
+<!--more-->
 
 # 吴恩达 prompt 课程笔记
 

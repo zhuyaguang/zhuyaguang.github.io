@@ -2,7 +2,10 @@
 title: "Bytebase 体验官之狂飙的 ChatGPT"
 date: 2023-03-18T22:38:02+08:00
 draft: true
+description: "Bytebase 体验官系列"
 ---
+
+<!--more-->
 
 ## Bytebase 体验官之狂飙的 ChatGPT
 

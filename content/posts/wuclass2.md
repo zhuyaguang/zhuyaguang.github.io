@@ -2,9 +2,10 @@
 title: "吴恩达-使用ChatGPT API构建系统-笔记"
 date: 2023-06-02T09:47:18+08:00
 draft: true
+description: "吴恩达老师的ChatGPT API课"
 ---
 
-
+<!--more-->
 
 # 使用ChatGPT API构建系统
 
