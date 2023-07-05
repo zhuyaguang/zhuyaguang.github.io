@@ -14,7 +14,7 @@ draft: true
 
 ![image-20230601091221976](../img/image-20230601091221976.png)
 
->  我是用 GitHub 注册的,注册完绑定一张 visa 信用卡
+>  我是用 GitHub 注册的,注册完绑定一张 [visa 信用卡](https://signup.azure.com/signup?offer=ms-azr-0044p&appId=102&ref=&redirectURL=https:%2F%2Fazure.microsoft.com%2Fget-started%2Fwelcome-to-azure%2F&l=zh-cn)
 
 ## 申请 openAI service 
 

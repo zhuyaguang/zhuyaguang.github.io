@@ -19,7 +19,7 @@
 
 * LangChain 中文入门教程
 
-​		https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide
+  https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide
 
 * LangChain 保姆级别教程
 

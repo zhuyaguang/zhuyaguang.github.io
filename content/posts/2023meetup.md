@@ -125,6 +125,44 @@ description: "没有疫情了，活动多起来了"
 
 ![image-20230611093920460](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230611093920460.png)
 
+## 6.30 孙凝晖院士，智能计算技术的发展
+
+
+
+![image-20230705091538105](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230705091538105.png)
+
+
+
+![image-20230705091627028](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230705091627028.png)
+
+![image-20230705091644512](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230705091644512.png)
+
+
+
+![image-20230705091656413](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230705091656413.png)
+
+![image-20230705091706426](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230705091706426.png)
+
+
+
+![image-20230705091714536](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230705091714536.png)
+
+![image-20230705091724315](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230705091724315.png)
+
+
+
+![image-20230705091730028](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230705091730028.png)
+
+
+
+## 7.1 阿里云用户组
+
+来了三墩的阿里云总部
+
+![image-20230705091210466](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230705091210466.png)
+
+
+
 # 线上
 
 2023 北京智源大会
