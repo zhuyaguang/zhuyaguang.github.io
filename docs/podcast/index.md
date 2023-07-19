@@ -3,6 +3,8 @@
 
 <!--more-->
 
+[成稿后的地址](https://mp.weixin.qq.com/s/1UFfIWEBV4An336xLFvSvw)
+
 1. 个人简介
 
    大家好，我叫朱亚光，是之江实验室的一名工程师。是 kubesphere 杭州用户委员会的委员。GitLink 技术委员会的委员。 目前从事于基于大模型的应用开发。之前一直在从事云原生开发相关的工作。
