@@ -165,6 +165,10 @@
 
 
 
+## 7.22 云边数据智能
+
+![image-20230724101021783](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230724101021783.png)
+
 
 
 # 线上
