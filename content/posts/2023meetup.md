@@ -173,7 +173,7 @@ description: "没有疫情了，活动多起来了"
 
 ![image-20230724101021783](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230724101021783.png)
 
-
+[云智能数据的无限未来 - Greptime 首次参办的线下技术沙龙精彩回顾](https://mp.weixin.qq.com/s/iBQJnPV16QxTNFZJO6N8wA)
 
 # 线上
 
