@@ -175,6 +175,14 @@ description: "没有疫情了，活动多起来了"
 
 [云智能数据的无限未来 - Greptime 首次参办的线下技术沙龙精彩回顾](https://mp.weixin.qq.com/s/iBQJnPV16QxTNFZJO6N8wA)
 
+## 8.5 开源数据库技术沙龙杭州站
+
+[活动预告](https://mp.weixin.qq.com/s/Z_MXuo9v105TEZNic8FRSg)
+
+![image-20230806092947896](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230806092947896.png)
+
+![image-20230806093005392](../../../Library/Application%20Support/typora-user-images/image-20230806093005392.png)
+
 # 线上
 
 2023 北京智源大会
