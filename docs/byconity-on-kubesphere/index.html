@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Byconity on Kubesphere - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="Byconity on Kubesphere" />
+<meta property="og:description" content="基于 KubeSphere 搭建生产级云原生数仓 ByConity 环境准备 1. K8s 环境 我这里主要推荐 kubesphere 来部署 k8s 环境。为啥呢？ 安装简单，简单三步就可以部署一个高可用的 k8s 环境 下载 KubeKey 1 2 export" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhuyaguang.github.io/byconity-on-kubesphere/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-09T15:00:54+08:00" />
+<meta property="article:modified_time" content="2023-08-09T15:00:54+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Byconity on Kubesphere"/>
+<meta name="twitter:description" content="基于 KubeSphere 搭建生产级云原生数仓 ByConity 环境准备 1. K8s 环境 我这里主要推荐 kubesphere 来部署 k8s 环境。为啥呢？ 安装简单，简单三步就可以部署一个高可用的 k8s 环境 下载 KubeKey 1 2 export"/>
+<meta name="application-name" content="朱亚光的博客">
+<meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/byconity-on-kubesphere/" /><link rel="prev" href="https://zhuyaguang.github.io/x-notes/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Byconity on Kubesphere",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/zhuyaguang.github.io\/byconity-on-kubesphere\/"
+        },"genre": "posts","wordcount":  692 ,
+        "url": "https:\/\/zhuyaguang.github.io\/byconity-on-kubesphere\/","datePublished": "2023-08-09T15:00:54+08:00","dateModified": "2023-08-09T15:00:54+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "朱亚光"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="/reading/"> 书单 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="/reading/" title="">书单</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Byconity on Kubesphere</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-09">2023-08-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 692 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#环境准备">环境准备</a>
+      <ul>
+        <li><a href="#1--k8s-环境">1.  K8s 环境</a></li>
+        <li><a href="#2配置存储">2、配置存储</a></li>
+      </ul>
+    </li>
+    <li><a href="#环境部署">环境部署</a>
+      <ul>
+        <li><a href="#第零步-下载-chart-包">第零步 下载 chart 包</a></li>
+        <li><a href="#第一步-部署-fdb-operator">第一步 部署 fdb-operator</a></li>
+        <li><a href="#第二步-部署服务">第二步 部署服务</a></li>
+      </ul>
+    </li>
+    <li><a href="#布署工具的使用感受评价">布署工具的使用感受&amp;评价</a></li>
+    <li><a href="#发现问题">发现问题</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="基于-kubesphere-搭建生产级云原生数仓-byconity">基于 KubeSphere 搭建生产级云原生数仓 ByConity</h1>
+<h2 id="环境准备">环境准备</h2>
+<h3 id="1--k8s-环境">1.  K8s 环境</h3>
+<p>我这里主要推荐 kubesphere 来部署 k8s 环境。为啥呢？</p>
+<p>安装简单，简单三步就可以部署一个高可用的 k8s 环境</p>
+<ul>
+<li>下载 KubeKey</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KKZONE</span><span class="o">=</span>cn
+</span></span><span class="line"><span class="cl">curl -sfL https://get-kk.kubesphere.io <span class="p">|</span> <span class="nv">VERSION</span><span class="o">=</span>v3.0.2 sh -
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>创建并配置集群文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">./kk create config config.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>编辑 config.yaml ，添加节点的 IP 、用户名、密码，并指定节点的角色</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809184804017.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809184804017.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809184804017.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809184804017.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809184804017.png"
+        title="image-20230809184804017" /></p>
+<ul>
+<li>
+<p>创建集群</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">./kk create cluster -f config.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>以上步骤有问题可以参考 <a href="https://www.kubesphere.io/zh/docs/v3.3/installing-on-linux/introduction/multioverview/" target="_blank" rel="noopener noreffer">kubesphere 官方文档</a></p>
+<p>还有一个原因就是，颜值高，可以方便管理应用。</p>
+<p>下面是 ByConity 部署的所有的工作负载，包括 deployment、statefulset ，都可以方便查看。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809185123419.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809185123419.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809185123419.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809185123419.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809185123419.png"
+        title="image-20230809185123419" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809185206530.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809185206530.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809185206530.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809185206530.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809185206530.png"
+        title="image-20230809185206530" /></p>
+<h3 id="2配置存储">2、配置存储</h3>
+<p>kubesphere 的集群安装好之后，默认有一个 local 的 storageClass</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809190322941.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809190322941.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809190322941.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809190322941.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809190322941.png"
+        title="image-20230809190322941" /></p>
+<p>需要 将 chart 包 中 <a href="https://github.com/ByConity/byconity-deploy/blob/master/examples/k8s/values.yaml" target="_blank" rel="noopener noreffer">value.yaml</a> 中 <strong>所有</strong> 的 storageClassName 由 <code>openebs-hostpath</code>  替换成 <code>local</code></p>
+<h2 id="环境部署">环境部署</h2>
+<p>有了 k8s 集群，现在要做的是就是 利用 helm 来部署 ByConity 了。</p>
+<p>因为上一个步骤中，部署 kubesphere 过程中，会自动给你安装一个 helm ,所以这一步就不用安装 helm 了，如果你是用 kind 或者其他方式部署的 k8s ，记得手动安装 helm</p>
+<h3 id="第零步-下载-chart-包">第零步 下载 chart 包</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/ByConity/byconity-deploy.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> byconity-deploy
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第一步-部署-fdb-operator">第一步 部署 fdb-operator</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm upgrade --install --create-namespace --namespace byconity -f ./examples/k8s/values.yaml byconity ./chart/byconity --set fdb.enabled<span class="o">=</span><span class="nb">false</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>byconity-fdb-operator running 后开启第二步操作</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809173246296.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809173246296.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809173246296.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809173246296.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809173246296.png"
+        title="image-20230809173246296" /></p>
+<h3 id="第二步-部署服务">第二步 部署服务</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm upgrade --install --create-namespace --namespace byconity -f ./examples/k8s/values.yaml byconity ./chart/byconity --set fdb.enabled<span class="o">=</span><span class="nb">false</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809182438437.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809182438437.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809182438437.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809182438437.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809182438437.png"
+        title="image-20230809182438437" /></p>
+<p>看到 pod 都 running 起来，说明就部署成功了，我们</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809182954602.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809182954602.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809182954602.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809182954602.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809182954602.png"
+        title="image-20230809182954602" /></p>
+<h2 id="布署工具的使用感受评价">布署工具的使用感受&amp;评价</h2>
+<p>整个过程整体还是比较顺利的，有几个地方需要注意下</p>
+<ul>
+<li>
+<p>手动拉取镜像</p>
+<p>fdb-operator pod 要 running 的话，依赖 4 个镜像，所以一直没有起来，需要到其对应节点，手动拉取。</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">docker pull foundationdb/foundationdb-kubernetes-sidecar:6.2.30-1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker pull foundationdb/foundationdb-kubernetes-sidecar:6.3.23-1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker pull foundationdb/foundationdb-kubernetes-sidecar:7.1.15-1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker pull foundationdb/fdb-kubernetes-operator:v1.9.0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker pull byconity/byconity:0.1.0-GA
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>手动清理 PVC</p>
+<p>在 配置存储 步骤中，如果你 忘记 一两个 替换 storageClass ，需要你卸载 ByConity</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm uninstall --namespace byconity byconity
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同时要清理 错误的 PVC</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl delete pvc <span class="o">{</span>pvcname<span class="o">}</span> -n byconity
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="发现问题">发现问题</h2>
+<p>部署过程中，发现 byconity-server-0 健康检查一直失败。根据日志 发现是 ipv6 的支持问题，将 ：： 改成 0.0.0.0 就可以了。</p>
+<p>issue地址 ：https://github.com/ByConity/ByConity/issues/593</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-08-09</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/byconity-on-kubesphere/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/byconity-on-kubesphere/" data-title="Byconity on Kubesphere" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/byconity-on-kubesphere/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/byconity-on-kubesphere/" data-title="Byconity on Kubesphere" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/byconity-on-kubesphere/" data-title="Byconity on Kubesphere"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/byconity-on-kubesphere/" data-title="Byconity on Kubesphere"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/byconity-on-kubesphere/" data-title="Byconity on Kubesphere" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/byconity-on-kubesphere/" data-title="Byconity on Kubesphere" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/byconity-on-kubesphere/" data-title="Byconity on Kubesphere"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/x-notes/" class="prev" rel="prev" title="冲浪笔记"><i class="fas fa-angle-left fa-fw"></i>冲浪笔记</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZMX6LNNGD"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-9ZMX6LNNGD');
+            </script>
+        </div>
+        
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -4,9 +4,16 @@
         <link>https://zhuyaguang.github.io/</link>
         <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Sat, 29 Jul 2023 19:13:15 &#43;0800</lastBuildDate>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Wed, 09 Aug 2023 15:00:54 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Byconity on Kubesphere</title>
+    <link>https://zhuyaguang.github.io/byconity-on-kubesphere/</link>
+    <pubDate>Wed, 09 Aug 2023 15:00:54 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/byconity-on-kubesphere/</guid>
+    <description><![CDATA[基于 KubeSphere 搭建生产级云原生数仓 ByConity 环境准备 1. K8s 环境 我这里主要推荐 kubesphere 来部署 k8s 环境。为啥呢？ 安装简单，简单三步就可以部署一个高可用的 k8s 环境 下载 KubeKey 1 2 export]]></description>
+</item><item>
     <title>冲浪笔记</title>
     <link>https://zhuyaguang.github.io/x-notes/</link>
     <pubDate>Sat, 29 Jul 2023 19:13:15 &#43;0800</pubDate>
@@ -69,12 +76,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/bigmodel/</guid>
     <description><![CDATA[大模型成为开发者必备的工具]]></description>
-</item><item>
-    <title>Bytebase 体验官之狂飙的 ChatGPT</title>
-    <link>https://zhuyaguang.github.io/bytebase03/</link>
-    <pubDate>Sat, 18 Mar 2023 22:38:02 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/bytebase03/</guid>
-    <description><![CDATA[Bytebase 体验官系列]]></description>
 </item></channel>
 </rss>
