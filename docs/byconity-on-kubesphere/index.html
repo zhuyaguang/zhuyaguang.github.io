@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/byconity-on-kubesphere\/"
-        },"genre": "posts","wordcount":  702 ,
+        },"genre": "posts","wordcount":  724 ,
         "url": "https:\/\/zhuyaguang.github.io\/byconity-on-kubesphere\/","datePublished": "2023-08-09T15:00:54+08:00","dateModified": "2023-08-09T15:00:54+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Byconity on Kubesphere</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-09">2023-08-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 702 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-09">2023-08-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 724 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -186,6 +186,8 @@
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809190322941.png"
         title="image-20230809190322941" /></p>
 <p>需要 将 chart 包 中 <a href="https://github.com/ByConity/byconity-deploy/blob/master/examples/k8s/values.yaml" target="_blank" rel="noopener noreffer">value.yaml</a> 中 <strong>所有</strong> 的 storageClassName 由 <code>openebs-hostpath</code>  替换成 <code>local</code></p>
+<p>当然 如果你没有 默认的  storageClass</p>
+<p>可以部署一个  OpenEBS  <a href="https://openebs.io/docs/user-guides/localpv-hostpath" target="_blank" rel="noopener noreffer">部署步骤</a></p>
 <h2 id="环境部署">环境部署</h2>
 <p>有了 k8s 集群，现在要做的是就是 利用 helm 来部署 ByConity 了。</p>
 <p>因为上一个步骤中，部署 kubesphere 过程中，会自动给你安装一个 helm ,所以这一步就不用安装 helm 了，如果你是用 kind 或者其他方式部署的 k8s ，记得手动安装 helm</p>

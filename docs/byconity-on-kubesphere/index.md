@@ -62,6 +62,12 @@ kubesphere 的集群安装好之后，默认有一个 local 的 storageClass
 
 
 
+当然 如果你没有 默认的  storageClass
+
+可以部署一个  OpenEBS  [部署步骤](https://openebs.io/docs/user-guides/localpv-hostpath)
+
+
+
 ## 环境部署
 
 有了 k8s 集群，现在要做的是就是 利用 helm 来部署 ByConity 了。
