@@ -104,7 +104,7 @@ helm upgrade --install --create-namespace --namespace byconity -f ./examples/k8s
 
 
 
-看到 pod 都 running 起来，说明就部署成功了，我们
+看到 pod 都 running 起来，说明就部署成功了，我们进去 byconity-server 里面试试功能。
 
 ![image-20230809182954602](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230809182954602.png)
 
