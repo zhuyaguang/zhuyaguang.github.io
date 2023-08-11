@@ -10,7 +10,7 @@
     <pubDate>Wed, 09 Aug 2023 15:00:54 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/byconity-on-kubesphere/</guid>
-    <description><![CDATA[基于 KubeSphere 搭建生产级云原生数仓 ByConity 环境准备 1. K8s 环境 我这里主要推荐 kubesphere 来部署 k8s 环境。为啥呢？ 安装简单，简单三步就可以部署一个高可用的 k8s 环境 下载 KubeKey 1 2 export]]></description>
+    <description><![CDATA[基于 KubeSphere 搭建生产级云原生数仓 ByConity 什么是 KubeSphere KubeSphere 是在 Kubernetes 之上构建的面向云原生应用的分布式操作系统，完全开源，支持多云与多集群管理，提供全栈的 IT 自动化运维]]></description>
 </item><item>
     <title>冲浪笔记</title>
     <link>https://zhuyaguang.github.io/x-notes/</link>
