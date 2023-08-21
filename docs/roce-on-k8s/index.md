@@ -15,7 +15,9 @@
 
 ## 部署 RDMA 插件
 
+### 方案一：使用阿里的镜像
 
+来自文章：[在Kubernetes上使用RDMA](https://developer.aliyun.com/article/664961)
 
 ```yaml
 apiVersion: v1
@@ -47,8 +49,6 @@ spec:
         name: rdma-sriov-dp-ds
     spec:
       hostNetwork: true
-    #   nodeSelector:
-    #     aliyun.accelerator/rdma: "true"
       tolerations:
       - key: CriticalAddonsOnly
         operator: Exists
@@ -77,53 +77,292 @@ spec:
 
 
 
-### 测试
+### 结论 
+
+镜像版本太老了，而且没有 device plugin 的源代码，无法维护。但是设置 hostNetwork pod 是可以 running 起来的，节点上也有 hca 资源。所以该
+
+
+
+### 方案二 k8s-rdma-shared-dev-plugin
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rdma-devices
+  namespace: kube-system
+data:
+  config.json: |
+    {
+        "periodicUpdateInterval": 300,
+        "configList": [
+           {
+             "resourceName": "hca_shared_devices_b",
+             "rdmaHcaMax": 500,
+             "selectors": {
+               "deviceIDs": ["101b"]
+             }
+           }
+        ]
+    }
+
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: rdma-shared-dp-ds
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: rdma-shared-dp-ds
+  template:
+    metadata:
+      labels:
+        name: rdma-shared-dp-ds
+    spec:
+      hostNetwork: true
+      priorityClassName: system-node-critical
+      containers:
+      - image: ghcr.io/mellanox/k8s-rdma-shared-dev-plugin
+        name: k8s-rdma-shared-dp-ds
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - name: device-plugin
+            mountPath: /var/lib/kubelet/
+          - name: config
+            mountPath: /k8s-rdma-shared-dev-plugin
+          - name: devs
+            mountPath: /dev/
+      volumes:
+        - name: device-plugin
+          hostPath:
+            path: /var/lib/kubelet/
+        - name: config
+          configMap:
+            name: rdma-devices
+            items:
+            - key: config.json
+              path: config.json
+        - name: devs
+          hostPath:
+            path: /dev/
+```
+
+
+
+> 上面配置中，"deviceIDs": ["101b"] 通过  cat /sys/class/infiniband/mlx5_2/device/device 命令查出来。
+
+如何判断，device plugin 安装成功呢，describe node 发现资源挂载成功就可以了
+
+![image-20230821142528961](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230821142528961.png)
+
+
+
+### 方案二 测试
 
 ```yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: rdma-test-pod
+  name: mofed-test-pod
 spec:
   restartPolicy: OnFailure
+  nodeName: 10.106.124.3
+  hostNetwork: true
   containers:
-  - image: mellanox/centos_7_4_mofed_4_2_1_2_0_0_60
+  - image: mellanox/rping-test
     name: mofed-test-ctr
     securityContext:
       capabilities:
         add: [ "IPC_LOCK" ]
     resources:
       limits:
-        rdma/hca: 1
+        rdma/hca_shared_devices_b: 1
     command:
     - sh
     - -c
     - |
-      ls -l /dev/infiniband /sys/class/net
+      ls -l /dev/infiniband /sys/class/infiniband /sys/class/net
       sleep 1000000
----
 
+---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: rdma-test-pod-1
+  name: mofed-test-pod2
 spec:
   restartPolicy: OnFailure
+  nodeName: 10.106.124.4
+  hostNetwork: true
   containers:
-  - image: mellanox/centos_7_4_mofed_4_2_1_2_0_0_60
+  - image: mellanox/rping-test
     name: mofed-test-ctr
     securityContext:
       capabilities:
         add: [ "IPC_LOCK" ]
     resources:
       limits:
-        rdma/hca: 1
+        rdma/hca_shared_devices_b: 1
     command:
     - sh
     - -c
     - |
-      ls -l /dev/infiniband /sys/class/net
+      ls -l /dev/infiniband /sys/class/infiniband /sys/class/net
       sleep 1000000
+```
+
+* 测试命令1
+
+```
+ib\_read\_bw -q 30
+
+ib\_read\_bw -q 30 10.106.156.3
+```
+
+
+
+![image-20230821142703589](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230821142703589.png)
+
+
+
+* 测试命令2
+
+```
+ib_write_bw -d mlx5_2  -F --report_gbits
+
+ib_write_bw -d mlx5_2 -F --report_gbits 10.106.156.3
+```
+
+
+
+![image-20230821143421094](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230821143421094.png)
+
+
+
+
+
+### 常用命令
+
+* 查看设备
+
+  ls /dev/infiniband/
+
+* 查看网卡
+
+  ibdev2netdev   
+
+* 查看设备ID
+
+  cat /sys/class/infiniband/mlx5_bond_0/device/device
+
+  cat /sys/class/infiniband/mlx5_2/device/device
+
+*  查看网卡型号
+
+  `lspci -s 0000:17:00.0`
+
+![image-20230821113834360](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230821113834360.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+RDMA 接口和架构介绍
+
+1. 双边操作 send
+
+2. 单边操作 write/read/atomic
+
+3. 内存管理机制
+
+4. 队列机制
+
+5. 重试与错误处理机制
+
+RDMA 软件开发接口 libverbs
+
+1. 四种传输方式
+
+2. 内存管理
+
+3. 发送与接收 API
+
+4. 完成消息处理
+
+5. 用 C 语言写一个 libverbs 的样例
+
+用 Rust 异步开发 RDMA 应用 async-rdma
+1. Rust 异步编程
+
+2. async-rdma 的内存管理
+
+3. async-rdma 对 ibverbs 的 API 封装
+
+4. 用 Rust 语言写一个 RDMA 的样例
+
+RDMA 内核模块
+
+1. RDMA 网卡硬件接口
+
+2. 软硬件接口设计和样例
+
+3. 使用 C 语言写一个简单驱动样例
+
+用 Rust 4 Linux 开发 RDMA 设备驱动
+
+1. Rust 4 Linux 的介绍和样例
+
+2. 使用 Rust 语言开发 RDMA 简单样例
+
+硬件开发语言 Bluespec
+
+1. Bluespec 与 SystemVerilog 的关系
+
+2. 冲突矩阵与优先级
+
+3. 基于 Bluespec 的流水线、状态机设计
+
+RDMA 发送队列硬件实现
+
+1. 发送队列流水线架构2. Controller 架构
+
+3. DMA 出错处理
+
+RDMA 接收队列硬件实现
+
+1. 接收队列流水线架构
+
+2. 错误请求处理
+
+3. 重传处理
+
+RDMA 响应处理硬件实现
+1. 响应处理流水线架构
+
+2. 错误响应处理
+
+3. 重试响应处理
+
+RDMA 其他功能硬件实现
+
+1. 完成队列架构
+
+2. 虚实地址转换处理
+
+3. 元数据管理
 ```
 
 

@@ -12,7 +12,7 @@
     <pubDate>Wed, 16 Aug 2023 17:07:52 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/roce-on-k8s/</guid>
-    <description><![CDATA[部署 k8s 集群 选择 合适的 容器网络 部署 k8s-device-plugin 选择最新的版本 https://github.com/NVIDIA/k8s-device-plugin 部署 RDMA 插件 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40]]></description>
+    <description><![CDATA[部署 k8s 集群 选择 合适的 容器网络 部署 k8s-device-plugin 选择最新的版本 https://github.com/NVIDIA/k8s-device-plugin 部署 RDMA 插件 方案一：使用阿里的镜像 来自文章：在Kubernetes上使用RDMA 1 2 3 4 5 6]]></description>
 </item><item>
     <title>Byconity on Kubesphere</title>
     <link>https://zhuyaguang.github.io/byconity-on-kubesphere/</link>
