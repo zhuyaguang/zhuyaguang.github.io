@@ -242,6 +242,8 @@ ib_write_bw -d mlx5_2 -F --report_gbits 10.106.156.3
 
 
 
+![image-20230821171553969](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230821171553969.png)
+
 * 测试命令3
 
   ```
@@ -249,6 +251,14 @@ ib_write_bw -d mlx5_2 -F --report_gbits 10.106.156.3
   
   
   ib_send_bw -d mlx5_3 -i 1 -R --report_gbits 10.106.156.4
+  ```
+
+* 测试命令4
+
+  ```
+  ib_write_bw -d mlx5_3 -a -F
+  
+  ib_write_bw  -F -d mlx5_3 10.233.92.6 -D 10 --cpu_util --report_gbits
   ```
 
   
