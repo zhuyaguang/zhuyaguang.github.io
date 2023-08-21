@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/roce-on-k8s\/"
-        },"genre": "posts","wordcount":  997 ,
+        },"genre": "posts","wordcount":  1083 ,
         "url": "https:\/\/zhuyaguang.github.io\/roce-on-k8s\/","datePublished": "2023-08-16T17:07:52+08:00","dateModified": "2023-08-16T17:07:52+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">RoCe on K8s 实践</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-16">2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 997 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-16">2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1083 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -231,7 +231,7 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="结论">结论</h3>
-<p>镜像版本太老了，而且没有 device plugin 的源代码，无法维护。但是设置 hostNetwork pod 是可以 running 起来的，节点上也有 hca 资源。所以该</p>
+<p>镜像版本太老了，而且没有 device plugin 的源代码，无法维护。但是设置 hostNetwork pod 是可以 running 起来的，节点上也有 hca 资源。所以该方案不推荐！</p>
 <h3 id="方案二-k8s-rdma-shared-dev-plugin">方案二 k8s-rdma-shared-dev-plugin</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -526,15 +526,38 @@
         data-sizes="auto"
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230821143421094.png"
         title="image-20230821143421094" /></p>
+<ul>
+<li>
+<p>测试命令3</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ib_send_bw -d mlx5_3 -i 1 -R --report_gbits
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ib_send_bw -d mlx5_3 -i 1 -R --report_gbits 10.106.156.4
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
 <h3 id="常用命令">常用命令</h3>
 <ul>
 <li>
-<p>查看设备</p>
+<p>查看存储 InfiniBand 设备节点的目录</p>
 <p>ls /dev/infiniband/</p>
 </li>
 <li>
 <p>查看网卡</p>
 <p>ibdev2netdev</p>
+</li>
+<li>
+<p>查询网卡 IP</p>
+<p>ip a show dev enp88s0</p>
 </li>
 <li>
 <p>查看设备ID</p>
@@ -554,6 +577,16 @@
         data-sizes="auto"
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230821113834360.png"
         title="image-20230821113834360" /></p>
+<ul>
+<li>
+<p>查看设备和网卡</p>
+<p>ls -la /dev/infiniband /sys/class/net</p>
+</li>
+<li>
+<p>查询 InfiniBand（IB）设备的状态和配置信息</p>
+<p>ibv_devinfo</p>
+</li>
+</ul>
 <h2 id="参考文档">参考文档</h2>
 <p><a href="https://blog.csdn.net/sunshuying1010/article/details/124951208" target="_blank" rel="noopener noreffer">k8s RoCE 部署: k8s-rdma-shared-dev-plugin + macvlan cni</a></p>
 <p><a href="https://developer.aliyun.com/article/664961" target="_blank" rel="noopener noreffer">在Kubernetes上使用RDMA</a></p>

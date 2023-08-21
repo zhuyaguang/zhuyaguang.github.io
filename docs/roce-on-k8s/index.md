@@ -79,7 +79,7 @@ spec:
 
 ### 结论 
 
-镜像版本太老了，而且没有 device plugin 的源代码，无法维护。但是设置 hostNetwork pod 是可以 running 起来的，节点上也有 hca 资源。所以该
+镜像版本太老了，而且没有 device plugin 的源代码，无法维护。但是设置 hostNetwork pod 是可以 running 起来的，节点上也有 hca 资源。所以该方案不推荐！
 
 
 
@@ -242,17 +242,30 @@ ib_write_bw -d mlx5_2 -F --report_gbits 10.106.156.3
 
 
 
+* 测试命令3
 
+  ```
+  ib_send_bw -d mlx5_3 -i 1 -R --report_gbits
+  
+  
+  ib_send_bw -d mlx5_3 -i 1 -R --report_gbits 10.106.156.4
+  ```
+
+  
 
 ### 常用命令
 
-* 查看设备
+* 查看存储 InfiniBand 设备节点的目录
 
   ls /dev/infiniband/
 
 * 查看网卡
 
   ibdev2netdev   
+
+* 查询网卡 IP
+
+  ip a show dev enp88s0
 
 * 查看设备ID
 
@@ -266,9 +279,13 @@ ib_write_bw -d mlx5_2 -F --report_gbits 10.106.156.3
 
 ![image-20230821113834360](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230821113834360.png)
 
+* 查看设备和网卡
 
+  ls -la /dev/infiniband /sys/class/net
 
+* 查询 InfiniBand（IB）设备的状态和配置信息
 
+  ibv_devinfo
 
 ## 参考文档
 
