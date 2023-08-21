@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/roce-on-k8s\/"
-        },"genre": "posts","wordcount":  946 ,
+        },"genre": "posts","wordcount":  997 ,
         "url": "https:\/\/zhuyaguang.github.io\/roce-on-k8s\/","datePublished": "2023-08-16T17:07:52+08:00","dateModified": "2023-08-16T17:07:52+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">RoCe on K8s 实践</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-16">2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 946 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-16">2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 997 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -97,6 +97,11 @@
         <li><a href="#方案二-k8s-rdma-shared-dev-plugin">方案二 k8s-rdma-shared-dev-plugin</a></li>
         <li><a href="#方案二-测试">方案二 测试</a></li>
         <li><a href="#常用命令">常用命令</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考文档">参考文档</a>
+      <ul>
+        <li><a href="#device-plugin">device plugin</a></li>
       </ul>
     </li>
   </ul>
@@ -549,6 +554,13 @@
         data-sizes="auto"
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230821113834360.png"
         title="image-20230821113834360" /></p>
+<h2 id="参考文档">参考文档</h2>
+<p><a href="https://blog.csdn.net/sunshuying1010/article/details/124951208" target="_blank" rel="noopener noreffer">k8s RoCE 部署: k8s-rdma-shared-dev-plugin + macvlan cni</a></p>
+<p><a href="https://developer.aliyun.com/article/664961" target="_blank" rel="noopener noreffer">在Kubernetes上使用RDMA</a></p>
+<h3 id="device-plugin">device plugin</h3>
+<p><a href="https://github.com/Mellanox/k8s-rdma-shared-dev-plugin" target="_blank" rel="noopener noreffer">https://github.com/Mellanox/k8s-rdma-shared-dev-plugin</a> 推荐</p>
+<p><strong><a href="https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin" target="_blank" rel="noopener noreffer">https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin</a></strong> 牛哥使用的，star数最高</p>
+<p><a href="https://github.com/hustcat/k8s-rdma-device-plugin" target="_blank" rel="noopener noreffer">https://github.com/hustcat/k8s-rdma-device-plugin</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1

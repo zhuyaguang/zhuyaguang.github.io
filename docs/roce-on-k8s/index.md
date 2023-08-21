@@ -270,6 +270,22 @@ ib_write_bw -d mlx5_2 -F --report_gbits 10.106.156.3
 
 
 
+## 参考文档
+
+[k8s RoCE 部署: k8s-rdma-shared-dev-plugin + macvlan cni](https://blog.csdn.net/sunshuying1010/article/details/124951208)
+
+[在Kubernetes上使用RDMA](https://developer.aliyun.com/article/664961)
+
+
+
+### device plugin 
+
+https://github.com/Mellanox/k8s-rdma-shared-dev-plugin 推荐
+
+**https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin** 牛哥使用的，star数最高
+
+https://github.com/hustcat/k8s-rdma-device-plugin
+
 
 
 
