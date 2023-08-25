@@ -328,6 +328,68 @@ https://docs.nvidia.com/networking/category/solutions
 
 
 
+## deepspeed 训练
+
+### 安装 arena
+
+
+
+### 安装存储
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: training-data-pv
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data"
+    
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: training-data
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+```
+
+
+
+### 提交训练任务
+
+
+
+```
+arena submit etjob \
+    --name=deepspeed-helloworld \
+    --gpus=1 \
+    --workers=1 \
+    --image=registry.cn-beijing.aliyuncs.com/acs/deepspeed:hello-deepspeed \
+    --data=training-data:/data \
+    --tensorboard \
+    --logdir=/data/deepspeed_data \
+    "deepspeed /workspace/DeepSpeedExamples/HelloDeepSpeed/train_bert_ds.py --checkpoint_dir /data/deepspeed_data"
+```
+
+
+
+
+
+
+
 
 
 
