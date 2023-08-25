@@ -318,6 +318,16 @@ https://github.com/hustcat/k8s-rdma-device-plugin
 
 
 
+### Nvidia 文档
+
+https://docs.nvidia.com/networking/display/COKAN10/K8s+on+Bare+Metal+-+Ethernet#
+
+https://docs.nvidia.com/networking/category/solutions
+
+
+
+
+
 
 
 
