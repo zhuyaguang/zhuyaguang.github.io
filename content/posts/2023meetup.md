@@ -181,7 +181,29 @@ description: "没有疫情了，活动多起来了"
 
 ![image-20230806092947896](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230806092947896.png)
 
-![image-20230806093005392](../../../Library/Application%20Support/typora-user-images/image-20230806093005392.png)
+![image-20230806093005392](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230806093005392.png)
+
+## 8.19 KubeBlocks × RisingWave × Sealos MeetUp
+
+[一文 Wrap Up 曹伟、吴英骏、方海涛、蔡松露现场演讲精华（内附回放及PPT）](https://mp.weixin.qq.com/s/j9kuNPKJyzy2sp8uvk6eiQ)
+
+
+
+整个杭州 搞 DB 的都来了，内容非常干。
+
+回答了 曹伟的一个问题 polarDB 是什么数据库，拿了一个杯子。下午要去朋友新家吃饭，刚好送给郑博，依依了。
+
+
+
+![image-20230826124330502](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230826124330502.png)
+
+![image-20230826124350119](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230826124350119.png)
+
+![image-20230826124405919](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230826124405919.png)
+
+![image-20230826124414844](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230826124414844.png)
+
+![image-20230826124500750](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230826124500750.png)
 
 # 线上
 
