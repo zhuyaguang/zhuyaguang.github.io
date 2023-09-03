@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/roce-on-k8s\/"
-        },"genre": "posts","wordcount":  1187 ,
+        },"genre": "posts","wordcount":  1408 ,
         "url": "https:\/\/zhuyaguang.github.io\/roce-on-k8s\/","datePublished": "2023-08-16T17:07:52+08:00","dateModified": "2023-08-16T17:07:52+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">RoCe on K8s 实践</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-16">2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1187 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-16">2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1408 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -105,11 +105,12 @@
         <li><a href="#nvidia-文档">Nvidia 文档</a></li>
       </ul>
     </li>
-    <li><a href="#deepspeed-训练">deepspeed 训练</a>
+    <li><a href="#deepspeed-训练方案一">deepspeed 训练方案一</a>
       <ul>
         <li><a href="#安装-arena">安装 arena</a></li>
         <li><a href="#安装存储">安装存储</a></li>
         <li><a href="#提交训练任务">提交训练任务</a></li>
+        <li><a href="#docker">docker</a></li>
       </ul>
     </li>
   </ul>
@@ -628,9 +629,26 @@
 <h3 id="nvidia-文档">Nvidia 文档</h3>
 <p><a href="https://docs.nvidia.com/networking/display/COKAN10/K8s&#43;on&#43;Bare&#43;Metal&#43;-&#43;Ethernet#" target="_blank" rel="noopener noreffer">https://docs.nvidia.com/networking/display/COKAN10/K8s+on+Bare+Metal+-+Ethernet#</a></p>
 <p><a href="https://docs.nvidia.com/networking/category/solutions" target="_blank" rel="noopener noreffer">https://docs.nvidia.com/networking/category/solutions</a></p>
-<h2 id="deepspeed-训练">deepspeed 训练</h2>
+<h2 id="deepspeed-训练方案一">deepspeed 训练方案一</h2>
 <h3 id="安装-arena">安装 arena</h3>
-<h3 id="安装存储">安装存储</h3>
+<p><a href="https://github.com/kubeflow/arena/releases" target="_blank" rel="noopener noreffer">下载链接</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tar -xvf arena-installer.tar.gz 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> arena-installer
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./install.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装存储">安装存储</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -705,15 +723,138 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">arena submit etjob \
-</span></span><span class="line"><span class="cl">    --name=deepspeed-helloworld \
-</span></span><span class="line"><span class="cl">    --gpus=1 \
-</span></span><span class="line"><span class="cl">    --workers=1 \
-</span></span><span class="line"><span class="cl">    --image=registry.cn-beijing.aliyuncs.com/acs/deepspeed:hello-deepspeed \
-</span></span><span class="line"><span class="cl">    --data=training-data:/data \
-</span></span><span class="line"><span class="cl">    --tensorboard \
-</span></span><span class="line"><span class="cl">    --logdir=/data/deepspeed_data \
-</span></span><span class="line"><span class="cl">    &#34;deepspeed /workspace/DeepSpeedExamples/HelloDeepSpeed/train_bert_ds.py --checkpoint_dir /data/deepspeed_data&#34;
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">arena submit etjob <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --name<span class="o">=</span>deepspeed-helloworld <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --gpus<span class="o">=</span><span class="m">1</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --workers<span class="o">=</span><span class="m">2</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --image<span class="o">=</span>registry.cn-beijing.aliyuncs.com/acs/deepspeed:hello-deepspeed <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --data<span class="o">=</span>training-data:/data <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --tensorboard <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --logdir<span class="o">=</span>/data/deepspeed_data <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="s2">&#34;deepspeed /workspace/DeepSpeedExamples/HelloDeepSpeed/train_bert_ds.py --checkpoint_dir /data/deepspeed_data&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">arena submit etjob <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --name<span class="o">=</span>deepspeed-helloworld <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --gpus<span class="o">=</span><span class="m">1</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --workers<span class="o">=</span><span class="m">3</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --image<span class="o">=</span>registry.cn-beijing.aliyuncs.com/acs/deepspeed:hello-deepspeed <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --data<span class="o">=</span>training-data:/data <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --tensorboard <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --logdir<span class="o">=</span>/data/deepspeed_data <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="s2">&#34;sleep 1000000000&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">arena submit etjob <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --name<span class="o">=</span>deepspeed-helloworld <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --gpus<span class="o">=</span><span class="m">1</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --workers<span class="o">=</span><span class="m">2</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --image-pull-policy<span class="o">=</span>IfNotPresent <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --image<span class="o">=</span>deepspeed/zjlab:v1 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --data<span class="o">=</span>training-data:/data <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --tensorboard <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --logdir<span class="o">=</span>/data/deepspeed_data <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="s2">&#34;sleep 1000000000&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="docker">docker</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">python -u -m torch.distributed.launch \
+</span></span><span class="line"><span class="cl">    --nproc_per_node=8 \
+</span></span><span class="line"><span class="cl">    --nnodes=3 \
+</span></span><span class="line"><span class="cl">    --node_rank=0 \
+</span></span><span class="line"><span class="cl">    --master_addr=10.106.124.3 \
+</span></span><span class="line"><span class="cl">    --master_port=1234 \
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nvidia-docker run --rm -d --gpus all --ipc<span class="o">=</span>host --ulimit <span class="nv">memlock</span><span class="o">=</span>-1 --ulimit <span class="nv">stack</span><span class="o">=</span><span class="m">67108864</span> --name<span class="o">=</span>work1 --net<span class="o">=</span>host  10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0 sleep infinity
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nvidia-docker run --rm -d --gpus all --ipc<span class="o">=</span>host --ulimit <span class="nv">memlock</span><span class="o">=</span>-1 --ulimit <span class="nv">stack</span><span class="o">=</span><span class="m">67108864</span> --name<span class="o">=</span>work2 --net<span class="o">=</span>host  10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0 sleep infinity
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nvidia-docker run --rm -d -v /data/:/data/ --gpus all --ipc<span class="o">=</span>host --ulimit <span class="nv">memlock</span><span class="o">=</span>-1 --ulimit <span class="nv">stack</span><span class="o">=</span><span class="m">67108864</span> --name<span class="o">=</span>master --net<span class="o">=</span>host --10.106.124.2<span class="o">=</span>/data/myhostfile 10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0 sleep infinity
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run -v /DeepSpeedExamples:/workspace --rm -d --gpus all --ipc<span class="o">=</span>host --ulimit <span class="nv">memlock</span><span class="o">=</span>-1 --ulimit <span class="nv">stack</span><span class="o">=</span><span class="m">67108864</span> --name<span class="o">=</span><span class="nb">test</span> --net<span class="o">=</span>host  10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0 sleep infinity 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker run -v /DeepSpeedExamples:/workspace  -d --gpus all --ipc<span class="o">=</span>host --ulimit <span class="nv">memlock</span><span class="o">=</span>-1 --ulimit <span class="nv">stack</span><span class="o">=</span><span class="m">67108864</span> --name<span class="o">=</span><span class="nb">test</span> --net<span class="o">=</span>host  10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0  cat hostfile
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Host deepspeed-helloworld-launcher
+</span></span><span class="line"><span class="cl">    Hostname 10.244.125.234
+</span></span><span class="line"><span class="cl">    Port 6001
+</span></span><span class="line"><span class="cl">    User root
+</span></span><span class="line"><span class="cl">Host deepspeed-helloworld-worker-0
+</span></span><span class="line"><span class="cl">    Hostname 10.244.125.233
+</span></span><span class="line"><span class="cl">    Port 6002
+</span></span><span class="line"><span class="cl">    User root
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
