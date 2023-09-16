@@ -87,17 +87,9 @@ Gin
 
 Deepflow 利用 eBPF zero code 做到
 
-
-
 DeepFlow [[GitHub](https://github.com/deepflowio/deepflow)] 旨在为复杂的云原生应用提供简单可落地的深度可观测性。DeepFlow 基于 eBPF 和 Wasm 技术实现了零侵扰（Zero Code）、全栈（Full Stack）的指标、追踪、调用日志、函数剖析数据采集，并通过智能标签技术实现了所有数据的全关联（Universal Tagging）和高效存取。使用 DeepFlow，可以让云原生应用自动具有深度可观测性，从而消除开发者不断插桩的沉重负担，并为 DevOps/SRE 团队提供从代码到基础设施的监控及诊断能力。
 
-
-
-
-
 在 kubesphere 部署就更简单了
-
-
 
 我理解最终的可观测性，是手动+自动双结合，服务自己的业务需求。
 
