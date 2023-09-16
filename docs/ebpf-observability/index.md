@@ -3,6 +3,16 @@
 
 ![image-20230915174106980](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230915174106980-20230915174122410.png)
 
+
+
+kubesphere 杭州用户委员会 
+
+广州 deepflow 合办 meetup 欢迎大家投稿参与
+
+
+
+最近开始学 可观测性 现在将学习的结果与大家一起分享。
+
 ## 介绍 kubesphere 以及其云原生可观测性
 
 KubeSphere 愿景是打造一个以 Kubernetes 为内核的云原生分布式操作系统，它的架构可以非常方便地使第三方应用与云原生生态组件进行即插即用（plug-and-play）的集成，支持云原生应用在多云与多集群的统一分发和运维管理。
@@ -15,6 +25,8 @@ KubeSphere 愿景是打造一个以 Kubernetes 为内核的云原生分布式操
 
 因此我们需要  OTel 来统一标准化。
 
+![1](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1.png)
+
 ## 介绍 Otel 的核心概念
 
 可观测性主要分三大块，日志、指标、和链路追踪。日志和指标基本上是成埃落定。（CNCF全景图）
@@ -25,8 +37,6 @@ Tracer Provider 构建 tracer ，tracer  包含众多 span。
 
 span 由 Trace Context 相互关联组装在一起，由不同语言的进程、虚拟机、数据中心。
 
-
-
 最核心的就是 collector ，是一个与厂商无关的实现方式，用于接受、处理、导出 遥测数据。
 
 receiver：将数据发送到收集器中。
@@ -34,6 +44,16 @@ receiver：将数据发送到收集器中。
 processor：处理数据
 
 exporter：导出数据
+
+![2](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/2.png)
+
+![3](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/3.png)
+
+## ![4](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/4.png)
+
+
+
+
 
 ## 微服务介绍
 
@@ -48,6 +68,10 @@ Otel 官网 和 deepflow 官网都有很复杂的demo 调用关系很复杂
 部署 collector 容器，进行配置
 
 部署 jaeger 容器，导出数据。
+
+
+
+目前是两层功力 
 
 
 
@@ -77,7 +101,13 @@ Node Golang  手动埋点
 
 Gin 
 
+![6](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/6.png)
 
+
+
+![7](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/7.png)
+
+![9](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/9.png)
 
 ## deep flow 解决方案
 
