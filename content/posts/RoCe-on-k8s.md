@@ -399,22 +399,8 @@ arena submit etjob \
     --name=deepspeed-helloworld \
     --gpus=1 \
     --workers=3 \
-    --image=registry.cn-beijing.aliyuncs.com/acs/deepspeed:hello-deepspeed \
-    --data=training-data:/data \
-    --tensorboard \
-    --logdir=/data/deepspeed_data \
-    "sleep 1000000000"
-```
-
-
-
-```shell
-arena submit etjob \
-    --name=deepspeed-helloworld \
-    --gpus=1 \
-    --workers=2 \
     --image-pull-policy=IfNotPresent \
-    --image=deepspeed/zjlab:v1 \
+    --image=deepspeed:v3 \
     --data=training-data:/data \
     --tensorboard \
     --logdir=/data/deepspeed_data \
@@ -422,38 +408,6 @@ arena submit etjob \
 ```
 
 
-
-### docker 
-
-```
-python -u -m torch.distributed.launch \
-    --nproc_per_node=8 \
-    --nnodes=3 \
-    --node_rank=0 \
-    --master_addr=10.106.124.3 \
-    --master_port=1234 \
-```
-
-
-
-```shell
-nvidia-docker run --rm -d --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --name=work1 --net=host  10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0 sleep infinity
-
-nvidia-docker run --rm -d --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --name=work2 --net=host  10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0 sleep infinity
-
-nvidia-docker run --rm -d -v /data/:/data/ --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --name=master --net=host --10.106.124.2=/data/myhostfile 10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0 sleep infinity
-
-```
-
-
-
-```shell
-docker run -v /DeepSpeedExamples:/workspace --rm -d --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --name=test --net=host  10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0 sleep infinity 
-
-
-
-docker run -v /DeepSpeedExamples:/workspace  -d --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --name=test --net=host  10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0  cat hostfile
-```
 
 
 

@@ -20,7 +20,7 @@
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/roce-on-k8s/" /><link rel="prev" href="https://zhuyaguang.github.io/byconity-on-kubesphere/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/roce-on-k8s/" /><link rel="prev" href="https://zhuyaguang.github.io/byconity-on-kubesphere/" /><link rel="next" href="https://zhuyaguang.github.io/ebpf-observability/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/roce-on-k8s\/"
-        },"genre": "posts","wordcount":  1408 ,
+        },"genre": "posts","wordcount":  1261 ,
         "url": "https:\/\/zhuyaguang.github.io\/roce-on-k8s\/","datePublished": "2023-08-16T17:07:52+08:00","dateModified": "2023-08-16T17:07:52+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">RoCe on K8s 实践</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-16">2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1408 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-16">2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1261 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -110,7 +110,6 @@
         <li><a href="#安装-arena">安装 arena</a></li>
         <li><a href="#安装存储">安装存储</a></li>
         <li><a href="#提交训练任务">提交训练任务</a></li>
-        <li><a href="#docker">docker</a></li>
       </ul>
     </li>
   </ul>
@@ -736,30 +735,6 @@
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">arena submit etjob <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --name<span class="o">=</span>deepspeed-helloworld <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --gpus<span class="o">=</span><span class="m">1</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --workers<span class="o">=</span><span class="m">3</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --image<span class="o">=</span>registry.cn-beijing.aliyuncs.com/acs/deepspeed:hello-deepspeed <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --data<span class="o">=</span>training-data:/data <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --tensorboard <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --logdir<span class="o">=</span>/data/deepspeed_data <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="s2">&#34;sleep 1000000000&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
@@ -775,64 +750,13 @@
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">arena submit etjob <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    --name<span class="o">=</span>deepspeed-helloworld <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    --gpus<span class="o">=</span><span class="m">1</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --workers<span class="o">=</span><span class="m">2</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --workers<span class="o">=</span><span class="m">3</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    --image-pull-policy<span class="o">=</span>IfNotPresent <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --image<span class="o">=</span>deepspeed/zjlab:v1 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --image<span class="o">=</span>deepspeed:v3 <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    --data<span class="o">=</span>training-data:/data <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    --tensorboard <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    --logdir<span class="o">=</span>/data/deepspeed_data <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="s2">&#34;sleep 1000000000&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="docker">docker</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">python -u -m torch.distributed.launch \
-</span></span><span class="line"><span class="cl">    --nproc_per_node=8 \
-</span></span><span class="line"><span class="cl">    --nnodes=3 \
-</span></span><span class="line"><span class="cl">    --node_rank=0 \
-</span></span><span class="line"><span class="cl">    --master_addr=10.106.124.3 \
-</span></span><span class="line"><span class="cl">    --master_port=1234 \
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nvidia-docker run --rm -d --gpus all --ipc<span class="o">=</span>host --ulimit <span class="nv">memlock</span><span class="o">=</span>-1 --ulimit <span class="nv">stack</span><span class="o">=</span><span class="m">67108864</span> --name<span class="o">=</span>work1 --net<span class="o">=</span>host  10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0 sleep infinity
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">nvidia-docker run --rm -d --gpus all --ipc<span class="o">=</span>host --ulimit <span class="nv">memlock</span><span class="o">=</span>-1 --ulimit <span class="nv">stack</span><span class="o">=</span><span class="m">67108864</span> --name<span class="o">=</span>work2 --net<span class="o">=</span>host  10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0 sleep infinity
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">nvidia-docker run --rm -d -v /data/:/data/ --gpus all --ipc<span class="o">=</span>host --ulimit <span class="nv">memlock</span><span class="o">=</span>-1 --ulimit <span class="nv">stack</span><span class="o">=</span><span class="m">67108864</span> --name<span class="o">=</span>master --net<span class="o">=</span>host --10.106.124.2<span class="o">=</span>/data/myhostfile 10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0 sleep infinity
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run -v /DeepSpeedExamples:/workspace --rm -d --gpus all --ipc<span class="o">=</span>host --ulimit <span class="nv">memlock</span><span class="o">=</span>-1 --ulimit <span class="nv">stack</span><span class="o">=</span><span class="m">67108864</span> --name<span class="o">=</span><span class="nb">test</span> --net<span class="o">=</span>host  10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0 sleep infinity 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">docker run -v /DeepSpeedExamples:/workspace  -d --gpus all --ipc<span class="o">=</span>host --ulimit <span class="nv">memlock</span><span class="o">=</span>-1 --ulimit <span class="nv">stack</span><span class="o">=</span><span class="m">67108864</span> --name<span class="o">=</span><span class="nb">test</span> --net<span class="o">=</span>host  10.130.10.165:5000/pytorch/ngc-pytorch-2212-ds083-fa028-g000geogpt:v0  cat hostfile
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -1056,7 +980,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/byconity-on-kubesphere/" class="prev" rel="prev" title="Byconity on Kubesphere"><i class="fas fa-angle-left fa-fw"></i>Byconity on Kubesphere</a></div>
+    <div class="post-nav"><a href="/byconity-on-kubesphere/" class="prev" rel="prev" title="Byconity on Kubesphere"><i class="fas fa-angle-left fa-fw"></i>Byconity on Kubesphere</a>
+            <a href="/ebpf-observability/" class="next" rel="next" title="DeepFlow 可观测性 Meetup">DeepFlow 可观测性 Meetup<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">
