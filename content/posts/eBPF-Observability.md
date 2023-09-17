@@ -8,11 +8,11 @@ draft: true
 
 
 
+报告[PPT](https://pan.quark.cn/s/1bc608a4d542)
+
 kubesphere 杭州用户委员会 
 
 广州 deepflow 合办 meetup 欢迎大家投稿参与
-
-
 
 最近开始学 可观测性 现在将学习的结果与大家一起分享。
 
