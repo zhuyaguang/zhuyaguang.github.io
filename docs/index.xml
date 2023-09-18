@@ -4,9 +4,16 @@
         <link>https://zhuyaguang.github.io/</link>
         <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Fri, 15 Sep 2023 17:25:47 &#43;0800</lastBuildDate>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Mon, 18 Sep 2023 10:04:09 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Book Recommended</title>
+    <link>https://zhuyaguang.github.io/book-recommended/</link>
+    <pubDate>Mon, 18 Sep 2023 10:04:09 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/book-recommended/</guid>
+    <description><![CDATA[标题 朱亚光 ：最有趣的诺贝尔奖得主，《别逗了，费曼先生》 视频文字 各位小朋友大家好，我是之江实验室的一名科研工作者朱亚光，聊起科研人员，大家印象]]></description>
+</item><item>
     <title>DeepFlow 可观测性 Meetup</title>
     <link>https://zhuyaguang.github.io/ebpf-observability/</link>
     <pubDate>Fri, 15 Sep 2023 17:25:47 &#43;0800</pubDate>
@@ -69,12 +76,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/2023meetup/</guid>
     <description><![CDATA[没有疫情了，活动多起来了]]></description>
-</item><item>
-    <title>吴恩达 prompt 课程笔记</title>
-    <link>https://zhuyaguang.github.io/promptclass/</link>
-    <pubDate>Fri, 05 May 2023 09:11:39 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/promptclass/</guid>
-    <description><![CDATA[吴恩达老师的prompt课]]></description>
 </item></channel>
 </rss>

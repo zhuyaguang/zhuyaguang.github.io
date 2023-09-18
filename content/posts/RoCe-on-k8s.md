@@ -464,23 +464,6 @@ deepspeed --master_addr=10.244.125.229 --hostfile=/job/hostfile /benchmarks/comm
 
 
 
-```
-Host deepspeed-helloworld-launcher
-    Hostname 10.244.125.234
-    Port 6001
-    User root
-Host deepspeed-helloworld-worker-0
-    Hostname 10.244.125.233
-    Port 6002
-    User root
-```
-
-
-
-
-
-
-
 
 
 

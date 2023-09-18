@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/roce-on-k8s\/"
-        },"genre": "posts","wordcount":  1449 ,
+        },"genre": "posts","wordcount":  1425 ,
         "url": "https:\/\/zhuyaguang.github.io\/roce-on-k8s\/","datePublished": "2023-08-16T17:07:52+08:00","dateModified": "2023-08-16T17:07:52+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">RoCe on K8s 实践</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-16">2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1449 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-16">2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1425 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -861,28 +861,6 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">deepspeed --master_addr<span class="o">=</span>10.244.125.229 --hostfile<span class="o">=</span>/job/hostfile /benchmarks/communication/all_reduce.py --scan
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Host deepspeed-helloworld-launcher
-</span></span><span class="line"><span class="cl">    Hostname 10.244.125.234
-</span></span><span class="line"><span class="cl">    Port 6001
-</span></span><span class="line"><span class="cl">    User root
-</span></span><span class="line"><span class="cl">Host deepspeed-helloworld-worker-0
-</span></span><span class="line"><span class="cl">    Hostname 10.244.125.233
-</span></span><span class="line"><span class="cl">    Port 6002
-</span></span><span class="line"><span class="cl">    User root
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
