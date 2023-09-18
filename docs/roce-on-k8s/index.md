@@ -325,7 +325,7 @@ https://docs.nvidia.com/networking/category/solutions
 
 
 
-## deepspeed 训练方案一
+## deepspeed 训练方案
 
 ### 安装 arena
 
@@ -375,9 +375,28 @@ spec:
 
 
 
+### 构建训练镜像
+
+```dockerfile
+From registry.cn-beijing.aliyuncs.com/acs/deepspeed:v072_base
+
+# Install OpenSSH
+RUN apt-get install -y --no-install-recommends openssh-client openssh-server && \
+    mkdir -p /var/run/sshd
+
+# Allow OpenSSH to talk to containers without asking for confirmation
+# by disabling StrictHostKeyChecking.
+RUN sed -i 's/[ #]\(.*StrictHostKeyChecking \).*/ \1no/g' /etc/ssh/ssh_config && \
+    echo "    UserKnownHostsFile /dev/null" >> /etc/ssh/ssh_config && \
+    sed -i 's/#\(StrictModes \).*/\1no/g' /etc/ssh/sshd_config
+
+RUN apt update
+RUN apt install -y ninja-build
+WORKDIR /workspace 
+COPY DeepSpeedExamples .
+```
+
 ### 提交训练任务
-
-
 
 ```shell
 arena submit etjob \
@@ -405,6 +424,40 @@ arena submit etjob \
 ```
 
 
+
+```shell
+arena submit etjob \
+    --name=deepspeed-helloworld \
+    --gpus=1 \
+    --workers=2 \
+    --image=registry.cn-beijing.aliyuncs.com/acs/deepspeed:hello-deepspeed \
+    --data=training-data:/data \
+    --tensorboard \
+    --logdir=/data/deepspeed_data \
+    "sleep 1000000000"
+```
+
+
+
+![image-20230918090640213](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918090640213.png)
+
+
+
+![image-20230918091618193](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918091618193.png)
+
+> 任务启动后，有一个 launcher pod ，在 pod /job/hostfile 里面有 worker 节点的信息。 按道理讲，launcher pod 可以 直接 ssh 到 其他 worker 节点的。但是集群的 DNS 有问题，只能在  **launcher pod** 修改 hostsfile
+
+
+
+![image-20230918091428675](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918091428675.png)
+
+
+
+#### 启动任务
+
+```shell
+deepspeed --master_addr=10.244.125.229 --hostfile=/job/hostfile /benchmarks/communication/all_reduce.py --scan
+```
 
 
 

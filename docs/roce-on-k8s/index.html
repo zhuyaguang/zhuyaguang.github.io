@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/roce-on-k8s\/"
-        },"genre": "posts","wordcount":  1261 ,
+        },"genre": "posts","wordcount":  1449 ,
         "url": "https:\/\/zhuyaguang.github.io\/roce-on-k8s\/","datePublished": "2023-08-16T17:07:52+08:00","dateModified": "2023-08-16T17:07:52+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">RoCe on K8s 实践</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-16">2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1261 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-08-16">2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1449 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -105,11 +105,16 @@
         <li><a href="#nvidia-文档">Nvidia 文档</a></li>
       </ul>
     </li>
-    <li><a href="#deepspeed-训练方案一">deepspeed 训练方案一</a>
+    <li><a href="#deepspeed-训练方案">deepspeed 训练方案</a>
       <ul>
         <li><a href="#安装-arena">安装 arena</a></li>
         <li><a href="#安装存储">安装存储</a></li>
-        <li><a href="#提交训练任务">提交训练任务</a></li>
+        <li><a href="#构建训练镜像">构建训练镜像</a></li>
+        <li><a href="#提交训练任务">提交训练任务</a>
+          <ul>
+            <li><a href="#启动任务">启动任务</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -628,7 +633,7 @@
 <h3 id="nvidia-文档">Nvidia 文档</h3>
 <p><a href="https://docs.nvidia.com/networking/display/COKAN10/K8s&#43;on&#43;Bare&#43;Metal&#43;-&#43;Ethernet#" target="_blank" rel="noopener noreffer">https://docs.nvidia.com/networking/display/COKAN10/K8s+on+Bare+Metal+-+Ethernet#</a></p>
 <p><a href="https://docs.nvidia.com/networking/category/solutions" target="_blank" rel="noopener noreffer">https://docs.nvidia.com/networking/category/solutions</a></p>
-<h2 id="deepspeed-训练方案一">deepspeed 训练方案一</h2>
+<h2 id="deepspeed-训练方案">deepspeed 训练方案</h2>
 <h3 id="安装-arena">安装 arena</h3>
 <p><a href="https://github.com/kubeflow/arena/releases" target="_blank" rel="noopener noreffer">下载链接</a></p>
 <div class="highlight"><div class="chroma">
@@ -708,6 +713,45 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">3Gi</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
+</div><h3 id="构建训练镜像">构建训练镜像</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">From</span><span class="s"> registry.cn-beijing.aliyuncs.com/acs/deepspeed:v072_base</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Install OpenSSH</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get install -y --no-install-recommends openssh-client openssh-server <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    mkdir -p /var/run/sshd<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Allow OpenSSH to talk to containers without asking for confirmation</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># by disabling StrictHostKeyChecking.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> sed -i <span class="s1">&#39;s/[ #]\(.*StrictHostKeyChecking \).*/ \1no/g&#39;</span> /etc/ssh/ssh_config <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nb">echo</span> <span class="s2">&#34;    UserKnownHostsFile /dev/null&#34;</span> &gt;&gt; /etc/ssh/ssh_config <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sed -i <span class="s1">&#39;s/#\(StrictModes \).*/\1no/g&#39;</span> /etc/ssh/sshd_config<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt update<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt install -y ninja-build<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /workspace </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> DeepSpeedExamples .<span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
 </div><h3 id="提交训练任务">提交训练任务</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -757,6 +801,66 @@
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    --tensorboard <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    --logdir<span class="o">=</span>/data/deepspeed_data <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="s2">&#34;sleep 1000000000&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">arena submit etjob <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --name<span class="o">=</span>deepspeed-helloworld <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --gpus<span class="o">=</span><span class="m">1</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --workers<span class="o">=</span><span class="m">2</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --image<span class="o">=</span>registry.cn-beijing.aliyuncs.com/acs/deepspeed:hello-deepspeed <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --data<span class="o">=</span>training-data:/data <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --tensorboard <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --logdir<span class="o">=</span>/data/deepspeed_data <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="s2">&#34;sleep 1000000000&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918090640213.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918090640213.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918090640213.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918090640213.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918090640213.png"
+        title="image-20230918090640213" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918091618193.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918091618193.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918091618193.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918091618193.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918091618193.png"
+        title="image-20230918091618193" /></p>
+<blockquote>
+<p>任务启动后，有一个 launcher pod ，在 pod /job/hostfile 里面有 worker 节点的信息。 按道理讲，launcher pod 可以 直接 ssh 到 其他 worker 节点的。但是集群的 DNS 有问题，只能在  <strong>launcher pod</strong> 修改 hostsfile</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918091428675.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918091428675.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918091428675.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918091428675.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230918091428675.png"
+        title="image-20230918091428675" /></p>
+<h4 id="启动任务">启动任务</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">deepspeed --master_addr<span class="o">=</span>10.244.125.229 --hostfile<span class="o">=</span>/job/hostfile /benchmarks/communication/all_reduce.py --scan
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
