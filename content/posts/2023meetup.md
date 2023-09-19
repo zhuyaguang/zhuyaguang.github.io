@@ -205,6 +205,10 @@ description: "没有疫情了，活动多起来了"
 
 ![image-20230826124500750](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230826124500750.png)
 
+## 9.16 Deepflow & 政采云 可观测性 meetup
+
+
+
 # 线上
 
 2023 北京智源大会

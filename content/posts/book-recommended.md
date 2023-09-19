@@ -2,7 +2,10 @@
 title: "Book Recommended"
 date: 2023-09-18T10:04:09+08:00
 draft: true
+description: "科普周活动"
 ---
+
+<!--more-->
 
 ### 标题
 

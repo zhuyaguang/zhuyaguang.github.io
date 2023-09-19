@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>DeepFlow 可观测性 Meetup - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="DeepFlow 可观测性 Meetup" />
-<meta property="og:description" content="报告PPT kubesphere 杭州用户委员会 广州 deepflow 合办 meetup 欢迎大家投稿参与 最近开始学 可观测性 现在将学习的结果与大家一起分享。 介绍 kubesphere 以及其云原生可观测性 KubeSphere 愿景是打" />
+        <title>DeepFlow 可观测性 Meetup - 朱亚光的博客</title><meta name="Description" content="今年第一次做分享"><meta property="og:title" content="DeepFlow 可观测性 Meetup" />
+<meta property="og:description" content="今年第一次做分享" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/ebpf-observability/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-09-15T17:25:47+08:00" />
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
 <meta name="twitter:title" content="DeepFlow 可观测性 Meetup"/>
-<meta name="twitter:description" content="报告PPT kubesphere 杭州用户委员会 广州 deepflow 合办 meetup 欢迎大家投稿参与 最近开始学 可观测性 现在将学习的结果与大家一起分享。 介绍 kubesphere 以及其云原生可观测性 KubeSphere 愿景是打"/>
+<meta name="twitter:description" content="今年第一次做分享"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -35,7 +35,7 @@
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "朱亚光"
-            },"description": ""
+            },"description": "今年第一次做分享"
     }
     </script></head>
     <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -90,7 +90,6 @@
   <ul>
     <li><a href="#介绍-kubesphere-以及其云原生可观测性">介绍 kubesphere 以及其云原生可观测性</a></li>
     <li><a href="#介绍-otel-的核心概念">介绍 Otel 的核心概念</a></li>
-    <li><a href="#4httpszhuyaguang-1308110266cosap-shanghaimyqcloudcomimg4png"><img src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/4.png" alt="4"></a></li>
     <li><a href="#微服务介绍">微服务介绍</a></li>
     <li><a href="#集成-otel">集成 OTel</a></li>
     <li><a href="#deep-flow-解决方案">deep flow 解决方案</a></li>
@@ -147,14 +146,14 @@
         data-sizes="auto"
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/3.png"
         title="3" /></p>
-<h2 id="4httpszhuyaguang-1308110266cosap-shanghaimyqcloudcomimg4png"><img
+<p><img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/4.png"
         data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/4.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/4.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/4.png 2x"
         data-sizes="auto"
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/4.png"
-        title="4" /></h2>
+        title="4" /></p>
 <h2 id="微服务介绍">微服务介绍</h2>
 <p>一个各种语言组成的购书微服务，包括目录服务，库存服务、支付服务、用户服务</p>
 <p>Otel 官网 和 deepflow 官网都有很复杂的demo 调用关系很复杂</p>
@@ -202,8 +201,7 @@
 <p>Deepflow 利用 eBPF zero code 做到</p>
 <p>DeepFlow [<a href="https://github.com/deepflowio/deepflow" target="_blank" rel="noopener noreffer">GitHub</a>] 旨在为复杂的云原生应用提供简单可落地的深度可观测性。DeepFlow 基于 eBPF 和 Wasm 技术实现了零侵扰（Zero Code）、全栈（Full Stack）的指标、追踪、调用日志、函数剖析数据采集，并通过智能标签技术实现了所有数据的全关联（Universal Tagging）和高效存取。使用 DeepFlow，可以让云原生应用自动具有深度可观测性，从而消除开发者不断插桩的沉重负担，并为 DevOps/SRE 团队提供从代码到基础设施的监控及诊断能力。</p>
 <p>在 kubesphere 部署就更简单了</p>
-<p>我理解最终的可观测性，是手动+自动双结合，服务自己的业务需求。</p>
-</div><div class="post-footer" id="post-footer">
+<p>我理解最终的可观测性，是手动+自动双结合，服务自己的业务需求。</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -216,7 +214,7 @@
                             <a class="link-to-markdown" href="/ebpf-observability/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/ebpf-observability/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/ebpf-observability/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup" data-description="今年第一次做分享"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup" data-description="今年第一次做分享"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/ebpf-observability/" data-title="DeepFlow 可观测性 Meetup"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
