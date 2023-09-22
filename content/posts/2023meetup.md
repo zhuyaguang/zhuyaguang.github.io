@@ -1,5 +1,5 @@
 ---
-title: "meetup 2023"
+title: "Meetup 2023"
 date: 2023-06-01T14:08:20+08:00
 draft: true
 description: "没有疫情了，活动多起来了"
@@ -207,7 +207,43 @@ description: "没有疫情了，活动多起来了"
 
 ## 9.16 Deepflow & 政采云 可观测性 meetup
 
+![](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/640-20230922083907190-20230922083952074.jpeg)
 
+## 9.26-9.28 **KubeCon + CloudNativeCon + Open Source Summit China 2023**
+
+### 活动前准备
+
+这次盛会有点曲折，之前提交议题失败，云猿生抽奖失败，最后突然半夜送我一张门票
+
+![image-20230922084214733](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230922084214733.png)
+
+
+
+![image-20230922084236519](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230922084236519.png)
+
+
+
+既然送我票了，那我要好好珍惜这次机会，把羊毛薅尽，认识更多大佬，学到更多云原生技术。所以充电宝带足，Go pro 充满电。
+
+
+
+### 考证优惠
+
+![图片](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/640.png)
+
+
+
+### 分论坛
+
+#### 亚马逊
+
+![image-20230922090226939](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230922090226939.png)
+
+
+
+#### 阿里
+
+ ![图片](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/640-20230922090803699.jpeg)
 
 # 线上
 

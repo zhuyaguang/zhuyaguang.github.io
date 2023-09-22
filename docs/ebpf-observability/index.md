@@ -7,6 +7,24 @@
 
 
 
+## 活动总结
+
+[**【活动回顾】探索基于 eBPF 的可观测性：从理论到实践！ DeepFlow 可观测性 Meetup·杭州站**](https://mp.weixin.qq.com/s/HLDA81N7uIYmyjOKrrnKpg)
+
+
+
+![图片](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/640.jpeg)
+
+
+
+![image-20230922083752302](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230922083752302.png)
+
+![图片](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/640-20230922083907190.jpeg)
+
+
+
+# 报告脚本
+
 报告[PPT](https://pan.quark.cn/s/1bc608a4d542)
 
 kubesphere 杭州用户委员会 

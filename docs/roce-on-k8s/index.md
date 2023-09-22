@@ -379,6 +379,8 @@ spec:
 
 ```dockerfile
 From registry.cn-beijing.aliyuncs.com/acs/deepspeed:v072_base
+From icmp.harbor/deepspeed/ngc:0905_1
+
 
 # Install OpenSSH
 RUN apt-get install -y --no-install-recommends openssh-client openssh-server && \
@@ -395,6 +397,15 @@ RUN apt install -y ninja-build
 WORKDIR /workspace 
 COPY DeepSpeedExamples .
 ```
+
+####     打镜像
+
+ ```shell
+ kubectl label node 10.106.124.75 gpu-use-type=exclusive 
+ kubectl label node 10.106.124.75 rdma=hca
+ ```
+
+
 
 ### 提交训练任务
 
@@ -413,14 +424,32 @@ arena submit etjob \
 ```shell
 arena submit etjob \
     --name=deepspeed-helloworld \
-    --gpus=1 \
-    --workers=3 \
+    --gpus=8 \
+    --workers=2 \
     --image-pull-policy=IfNotPresent \
-    --image=deepspeed:v3 \
+    --image=icmp.harbor/deepspeed/zyg:0920 \
     --data=training-data:/data \
     --tensorboard \
     --logdir=/data/deepspeed_data \
     "sleep 1000000000"
+```
+
+
+
+```shell
+arena submit etjob \
+    --name=deepspeed-helloworld \
+    --gpus=1 \
+    --workers=2 \
+    --image-pull-policy=IfNotPresent \
+    --image=deepspeedtest:v1 \
+    --data=training-data:/data \
+    --tensorboard \
+    --logdir=/data/deepspeed_data \
+    "sleep 1000000000"
+    
+      --hostNetwork=true\
+          --rdma=true\
 ```
 
 
@@ -456,12 +485,11 @@ arena submit etjob \
 #### 启动任务
 
 ```shell
-deepspeed --master_addr=10.244.125.229 --hostfile=/job/hostfile /benchmarks/communication/all_reduce.py --scan
+deepspeed --master_addr=10.244.125.253 --hostfile=/job/hostfile benchmarks/communication/all_reduce.py --scan
+
+
+deepspeed /workspace/DeepSpeedExamples/benchmarks/communication/all_reduce.py  --checkpoint_dir /data/deepspeed_data
 ```
-
-
-
-
 
 
 
@@ -553,5 +581,7 @@ RDMA 其他功能硬件实现
 
 3. 元数据管理
 ```
+
+
 
 
