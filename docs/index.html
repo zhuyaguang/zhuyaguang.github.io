@@ -84,7 +84,7 @@
         <a href="/ebpf-observability/">阅读全文</a></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/roce-on-k8s/">RoCe on K8s 实践</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2023-08-16">2023-08-16</time></span></div><div class="content">部署 k8s 集群 选择 合适的 容器网络 部署 k8s-device-plugin 选择最新的版本 https://github.com/NVIDIA/k8s-device-plugin 部署 RDMA 插件 方案一：使用阿里的镜像 来自文章：在Kubernetes上使用RDMA 1 2 3 4 5 6</div><div class="post-footer">
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2023-08-16">2023-08-16</time></span></div><div class="content">部署 k8s 集群 选择 合适的 容器网络 部署 k8s-device-plugin 选择最新的版本 https://github.com/NVIDIA/k8s-device-plugin 配置 Nvidia docker runtime 1 2 3 4 5 6 7 &#34;default-runtime&#34;: &#34;nvidia&#34;, &#34;runtimes&#34;: { &#34;nvidia&#34;: { &#34;path&#34;: &#34;nvidia-container-runtime&#34;, &#34;runtimeArgs&#34;: [] } }, 部署 RDMA 插件 方案一：使用阿里的镜像 来自文章：</div><div class="post-footer">
         <a href="/roce-on-k8s/">阅读全文</a></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/byconity-on-kubesphere/">Byconity on Kubesphere</a>

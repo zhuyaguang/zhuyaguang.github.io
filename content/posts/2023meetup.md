@@ -209,7 +209,9 @@ description: "没有疫情了，活动多起来了"
 
 ![](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/640-20230922083907190-20230922083952074.jpeg)
 
-## 9.26-9.28 **KubeCon + CloudNativeCon + Open Source Summit China 2023**
+## 9.26-9.28 **KubeCon**
+
+KubeCon + CloudNativeCon + Open Source Summit China 2023
 
 ### 活动前准备
 
@@ -244,6 +246,36 @@ description: "没有疫情了，活动多起来了"
 #### 阿里
 
  ![图片](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/640-20230922090803699.jpeg)
+
+
+
+### 9.27 参会
+
+凌晨5点起床，直奔杭州东站。
+
+看到这么多的熟悉的面孔，大家都笑的很开心，我就知道，云原生这条路我选对了。
+
+除了薅羊毛之外，认真听了两场演讲。
+
+
+
+![image-20230928083843586](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20230928083843586.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 线上
 

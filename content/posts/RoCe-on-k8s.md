@@ -14,7 +14,17 @@ draft: true
 
 * https://github.com/NVIDIA/k8s-device-plugin
 
-  
+配置 Nvidia docker runtime 
+
+```json
+"default-runtime": "nvidia",
+    "runtimes": {
+        "nvidia": {
+            "path": "nvidia-container-runtime",
+            "runtimeArgs": []
+        }
+    },
+```
 
 ## 部署 RDMA 插件
 
@@ -401,7 +411,7 @@ WORKDIR /workspace
 COPY DeepSpeedExamples .
 ```
 
-####     打镜像
+####     打 TAG 
 
  ```shell
  kubectl label node 10.106.124.75 gpu-use-type=exclusive 
