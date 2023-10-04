@@ -7,6 +7,14 @@ description: "科普周活动"
 
 <!--more-->
 
+### 潮新闻
+
+[“潮科技·悦科普”|朱亚光：读《别逗了，费曼先生》永葆科学好奇心](https://tianmunews.com/video.html?id=2591441&duration=107.0&isVertical=0&fsize=33102958&width=1280&height=720&video_h5_mode=1)
+
+
+
+## 拍摄脚本底稿
+
 ### 标题
 
 朱亚光 ：最有趣的诺贝尔奖得主，《别逗了，费曼先生》
