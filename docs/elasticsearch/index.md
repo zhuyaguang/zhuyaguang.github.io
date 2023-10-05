@@ -249,4 +249,40 @@ GET	/website/blog/123?_source=title,text
 GET	/website/blog/123/_source
 ```
 
+#### 更新整个文档
+
+```shell
+PUT	/website/blog/123
+{
+"title":	"My	first	blog	entry",
+"text":		"I	am	starting	to	get	the	hang	of	this...",
+"date":		"2014/01/02"
+}
+```
+
+#### 创建一个新文档
+
+```
+POST	/website/blog/
+{	...	}
+```
+
+不重复插入
+
+```
+PUT	/website/blog/123?op_type=create
+{	...	}
+```
+
+```
+PUT	/website/blog/123/_create
+{	...	}
+```
+
+#### 删除文档
+
+```
+DELETE	/website/blog/123
+```
+
 
