@@ -4,9 +4,16 @@
         <link>https://zhuyaguang.github.io/</link>
         <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Wed, 04 Oct 2023 08:49:45 &#43;0800</lastBuildDate>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Thu, 05 Oct 2023 08:44:30 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>ElasticSearch</title>
+    <link>https://zhuyaguang.github.io/elasticsearch/</link>
+    <pubDate>Thu, 05 Oct 2023 08:44:30 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/elasticsearch/</guid>
+    <description><![CDATA[ES 权威指南读书笔记]]></description>
+</item><item>
     <title>Rust 学习</title>
     <link>https://zhuyaguang.github.io/rust-note/</link>
     <pubDate>Wed, 04 Oct 2023 08:49:45 &#43;0800</pubDate>
@@ -69,12 +76,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/wuclass3/</guid>
     <description><![CDATA[吴恩达老师的langchain课]]></description>
-</item><item>
-    <title>吴恩达-使用ChatGPT API构建系统-笔记</title>
-    <link>https://zhuyaguang.github.io/wuclass2/</link>
-    <pubDate>Fri, 02 Jun 2023 09:47:18 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/wuclass2/</guid>
-    <description><![CDATA[吴恩达老师的ChatGPT API课]]></description>
 </item></channel>
 </rss>
