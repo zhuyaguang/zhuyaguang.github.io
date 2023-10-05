@@ -1,5 +1,5 @@
 ---
-title: "Podcast"
+title: "播客-KubeSphere Talk 第八期"
 date: 2023-07-05T08:10:57+08:00
 draft: true
 description: "第一次录播客"

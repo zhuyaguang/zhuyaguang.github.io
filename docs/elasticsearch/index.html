@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>ElasticSearch - 朱亚光的博客</title><meta name="Description" content="ES 权威指南读书笔记"><meta property="og:title" content="ElasticSearch" />
+        <title>ElasticSearch 权威指南笔记 - 朱亚光的博客</title><meta name="Description" content="ES 权威指南读书笔记"><meta property="og:title" content="ElasticSearch 权威指南笔记" />
 <meta property="og:description" content="ES 权威指南读书笔记" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/elasticsearch/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
@@ -15,7 +15,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
-<meta name="twitter:title" content="ElasticSearch"/>
+<meta name="twitter:title" content="ElasticSearch 权威指南笔记"/>
 <meta name="twitter:description" content="ES 权威指南读书笔记"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -24,12 +24,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "ElasticSearch",
+        "headline": "ElasticSearch 权威指南笔记",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/elasticsearch\/"
-        },"genre": "posts","wordcount":  612 ,
+        },"genre": "posts","wordcount":  813 ,
         "url": "https:\/\/zhuyaguang.github.io\/elasticsearch\/","datePublished": "2023-10-05T08:44:30+08:00","dateModified": "2023-10-05T08:44:30+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -77,9 +77,9 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">ElasticSearch</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">ElasticSearch 权威指南笔记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-10-05">2023-10-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 612 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-10-05">2023-10-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 813 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -88,7 +88,7 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#入门">入门</a>
       <ul>
         <li><a href="#简单搜索">简单搜索</a></li>
         <li><a href="#全文搜索">全文搜索</a>
@@ -99,9 +99,20 @@
         <li><a href="#分析">分析</a></li>
       </ul>
     </li>
+    <li><a href="#索引">索引</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#索引一个文档">索引一个文档</a></li>
+            <li><a href="#检索文档">检索文档</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h3 id="简单搜索">简单搜索</h3>
+            </div><div class="content" id="content"><h2 id="入门">入门</h2>
+<h3 id="简单搜索">简单搜索</h3>
 <p>检查 ES 集群状态</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -421,6 +432,85 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><p>查看集群健康状态</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">GET	/_cluster/health
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="索引">索引</h2>
+<h4 id="索引一个文档">索引一个文档</h4>
+<p>使用自己的<strong>ID</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">PUT	/<span class="o">{</span>index<span class="o">}</span>/<span class="o">{</span>type<span class="o">}</span>/<span class="o">{</span>id<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;field&#34;</span>:	<span class="s2">&#34;value&#34;</span>,
+</span></span><span class="line"><span class="cl">		...
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>自增<strong>ID</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">POST	/website/blog/
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;title&#34;</span>:	<span class="s2">&#34;My	second	blog	entry&#34;</span>,
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;text&#34;</span>:		<span class="s2">&#34;Still	trying	this	out...&#34;</span>,
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;date&#34;</span>:		<span class="s2">&#34;2014/01/01&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="检索文档">检索文档</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET	/website/blog/123?pretty
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><strong>pretty</strong></p>
+<p>在任意的查询字符串中增加	pretty	参数，类似于上面的例子。会让Elasticsearch美化输出**(pretty-print)** JSON 响应以</p>
+<p>便更加容易阅读。	_source	字段不会被美化，它的样子与我们输入的一致。</p>
+</blockquote>
+<p>检索文档的一部分</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET	/website/blog/123?_source=title,text
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>你只想得到	_source	字段而不要其他的元数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET	/website/blog/123/_source
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -434,7 +524,7 @@
                             <a class="link-to-markdown" href="/elasticsearch/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/elasticsearch/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch" data-description="ES 权威指南读书笔记"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch" data-description="ES 权威指南读书笔记"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch 权威指南笔记" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/elasticsearch/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch 权威指南笔记" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch 权威指南笔记"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch 权威指南笔记"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch 权威指南笔记" data-description="ES 权威指南读书笔记"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch 权威指南笔记" data-description="ES 权威指南读书笔记"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/elasticsearch/" data-title="ElasticSearch 权威指南笔记"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>

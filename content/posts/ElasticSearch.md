@@ -1,11 +1,13 @@
 ---
-title: "ElasticSearch"
+title: "ElasticSearch 权威指南笔记"
 date: 2023-10-05T08:44:30+08:00
 draft: true
 description: "ES 权威指南读书笔记"
 ---
 
 <!--more-->
+
+## 入门
 
 ### 简单搜索
 
@@ -192,5 +194,62 @@ GET	/megacorp/employee/_search
     }
   }
 }
+```
+
+查看集群健康状态
+
+```shell
+GET	/_cluster/health
+```
+
+
+
+## 索引
+
+#### 索引一个文档
+
+使用自己的**ID**
+
+```shell
+PUT	/{index}/{type}/{id}
+{
+"field":	"value",
+		...
+}
+```
+
+自增**ID**
+
+```shell
+POST	/website/blog/
+{
+"title":	"My	second	blog	entry",
+"text":		"Still	trying	this	out...",
+"date":		"2014/01/01"
+}
+```
+
+#### 检索文档
+
+```
+GET	/website/blog/123?pretty
+```
+
+> **pretty**	
+>
+> 在任意的查询字符串中增加	pretty	参数，类似于上面的例子。会让Elasticsearch美化输出**(pretty-print)** JSON 响应以
+>
+> 便更加容易阅读。	_source	字段不会被美化，它的样子与我们输入的一致。
+
+检索文档的一部分
+
+```
+GET	/website/blog/123?_source=title,text
+```
+
+你只想得到	_source	字段而不要其他的元数据
+
+```
+GET	/website/blog/123/_source
 ```
 
