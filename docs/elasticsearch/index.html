@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/elasticsearch\/"
-        },"genre": "posts","wordcount":  886 ,
+        },"genre": "posts","wordcount":  1329 ,
         "url": "https:\/\/zhuyaguang.github.io\/elasticsearch\/","datePublished": "2023-10-05T08:44:30+08:00","dateModified": "2023-10-05T08:44:30+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">ElasticSearch 权威指南笔记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-10-05">2023-10-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 886 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-10-05">2023-10-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1329 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -108,10 +108,17 @@
             <li><a href="#更新整个文档">更新整个文档</a></li>
             <li><a href="#创建一个新文档">创建一个新文档</a></li>
             <li><a href="#删除文档">删除文档</a></li>
+            <li><a href="#文档局部更新">文档局部更新</a></li>
+            <li><a href="#检索多个文档">检索多个文档</a></li>
+            <li><a href="#bulk-api">bulk API</a></li>
           </ul>
         </li>
       </ul>
     </li>
+    <li><a href="#搜索">搜索</a></li>
+    <li><a href="#映射及分析">映射及分析</a></li>
+    <li><a href="#结构化查询-query-dsl">结构化查询 <strong>Query DSL</strong></a></li>
+    <li><a href="#自定义分析器">自定义分析器</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="入门">入门</h2>
@@ -572,6 +579,260 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">DELETE	/website/blog/123
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="文档局部更新">文档局部更新</h4>
+<p>添加一个 tags 字段和一个 views 字段：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">POST	/website/blog/1/_update
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;doc&#34;</span>	:	<span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;tags&#34;</span>	:	<span class="o">[</span>	<span class="s2">&#34;testing&#34;</span>	<span class="o">]</span>,
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;views&#34;</span>:	<span class="m">0</span>
+</span></span><span class="line"><span class="cl">			<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="检索多个文档">检索多个文档</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">GET	/_mget
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;docs&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">    <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;_index&#34;</span>: <span class="s2">&#34;website&#34;</span>,
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;_type&#34;</span>: <span class="s2">&#34;blog&#34;</span>,
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;_id&#34;</span>: <span class="m">2</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">    <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;_index&#34;</span>: <span class="s2">&#34;website&#34;</span>,
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;_type&#34;</span>: <span class="s2">&#34;pageviews&#34;</span>,
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;_id&#34;</span>: 1,
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;_source&#34;</span>: <span class="s2">&#34;views&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果你想检索的文档在同一个 _index 中（甚至在同一个 _type 中），你就可以在URL中定义一个默认的  _index 或</p>
+<p>者 / <em>index/</em>  type 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">GET	/website/blog/_mget
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;docs&#34;</span>	:	<span class="o">[</span>
+</span></span><span class="line"><span class="cl">						<span class="o">{</span>	<span class="s2">&#34;_id&#34;</span>	:	2	<span class="o">}</span>,
+</span></span><span class="line"><span class="cl">						<span class="o">{</span>	<span class="s2">&#34;_type&#34;</span>	:	<span class="s2">&#34;pageviews&#34;</span>,	<span class="s2">&#34;_id&#34;</span>	:			1	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">			<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果所有文档具有相同	_index	和	_type</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">GET	/website/blog/_mget
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;ids&#34;</span>	:	<span class="o">[</span>	<span class="s2">&#34;2&#34;</span>,	<span class="s2">&#34;1&#34;</span>	<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="bulk-api">bulk API</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">{</span>	action:	<span class="o">{</span>	metadata	<span class="o">}}</span><span class="se">\n</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span>	request	body								<span class="o">}</span><span class="se">\n</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span>	action:	<span class="o">{</span>	metadata	<span class="o">}}</span><span class="se">\n</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span>	request	body								<span class="o">}</span><span class="se">\n</span>
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="搜索">搜索</h2>
+<p>空搜索</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET	/_search
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006083735036.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006083735036.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006083735036.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006083735036.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006083735036.png"
+        title="image-20231006083735036" /></p>
+<p>查询所有类型为 tweet 并在 tweet 字段中包含 elasticsearch 字符的文档</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET	/_all/tweet/_search?q=tweet:elasticsearch
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>返回包含	&ldquo;mary&rdquo;	字符的所有文档的简单搜索</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET	/_search?q=mary
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>用户的名字是“Mary”</p>
+<p>“Mary”发的六个推文</p>
+<p>针对“@mary”的一个推文</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006084627477.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006084627477.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006084627477.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006084627477.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006084627477.png"
+        title="image-20231006084627477" /></p>
+<h2 id="映射及分析">映射及分析</h2>
+<p>查看 mapping</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET	/gb/_mapping/tweet
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006090147087.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006090147087.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006090147087.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006090147087.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006090147087.png"
+        title="image-20231006090147087" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006090208053.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006090208053.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006090208053.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006090208053.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231006090208053.png"
+        title="image-20231006090208053" /></p>
+<h2 id="结构化查询-query-dsl">结构化查询 <strong>Query DSL</strong></h2>
+<p>匹配所有的文档</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">GET	/_search
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;query&#34;</span>:	<span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;match_all&#34;</span>:	<span class="o">{}</span>
+</span></span><span class="line"><span class="cl">				<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用 match 查询子句用来找寻在 tweet 字段中找寻包含 elasticsearch 的成员</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;match&#34;</span>:	<span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;tweet&#34;</span>:	<span class="s2">&#34;elasticsearch&#34;</span>
+</span></span><span class="line"><span class="cl">				<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="自定义分析器">自定义分析器</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">PUT	/my_index
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">				<span class="s2">&#34;settings&#34;</span>:	<span class="o">{</span>
+</span></span><span class="line"><span class="cl">								<span class="s2">&#34;analysis&#34;</span>:	<span class="o">{</span>
+</span></span><span class="line"><span class="cl">												<span class="s2">&#34;char_filter&#34;</span>:	<span class="o">{</span>	...	custom	character	filters	...	<span class="o">}</span>,
+</span></span><span class="line"><span class="cl">												<span class="s2">&#34;tokenizer&#34;</span>:			<span class="o">{</span>	...				custom	tokenizers					...	<span class="o">}</span>,
+</span></span><span class="line"><span class="cl">												<span class="s2">&#34;filter&#34;</span>:						<span class="o">{</span>	...			custom	token	filters			...	<span class="o">}</span>,
+</span></span><span class="line"><span class="cl">												<span class="s2">&#34;analyzer&#34;</span>:				<span class="o">{</span>	...				custom	analyzers						...	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">								<span class="o">}</span>
+</span></span><span class="line"><span class="cl">				<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">

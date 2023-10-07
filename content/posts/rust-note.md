@@ -46,6 +46,8 @@ description: "rust 打怪升级之路"
 
 [英文视频教程 Learning Rust by Working Through the Rustlings Exercises](https://egghead.io/courses/learning-rust-by-solving-the-rustlings-exercises-a722)
 
+[Google 的 Android 团队「免费 Rust 课程」](https://google.github.io/comprehensive-rust/index.html)
+
 
 
 ### 自动驾驶OS开发训练营
