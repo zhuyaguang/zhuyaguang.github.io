@@ -4,7 +4,21 @@
         <link>https://zhuyaguang.github.io/posts/</link>
         <description>所有文章 | 朱亚光的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Thu, 05 Oct 2023 08:44:30 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Tue, 07 Nov 2023 11:03:15 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>在 KubeSphere 上部署最新版的 KubeEdge</title>
+    <link>https://zhuyaguang.github.io/kubeedge-install/</link>
+    <pubDate>Tue, 07 Nov 2023 11:03:15 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/kubeedge-install/</guid>
+    <description><![CDATA[KubeEdge 安装使用笔记]]></description>
+</item><item>
+    <title>Hdu Speak</title>
+    <link>https://zhuyaguang.github.io/hdu-speak/</link>
+    <pubDate>Mon, 16 Oct 2023 11:24:39 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/hdu-speak/</guid>
+    <description><![CDATA[云原生时代的技术栈 自我介绍 云原生时代 什么是云原生 kubeSphere 为什么要参与开源社区 https://mp.weixin.qq.com/s/fsNYG5YtJbAkjaNrFLlfUw GLCC 开源之夏 个人成长 https://ppt.infoq.cn/slide/show?cid=136&pid=4453 工具分享]]></description>
+</item><item>
     <title>ElasticSearch 权威指南笔记</title>
     <link>https://zhuyaguang.github.io/elasticsearch/</link>
     <pubDate>Thu, 05 Oct 2023 08:44:30 &#43;0800</pubDate>
@@ -60,19 +74,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/readingnotes/</guid>
     <description><![CDATA[毕大师]]></description>
-</item><item>
-    <title>播客-KubeSphere Talk 第八期</title>
-    <link>https://zhuyaguang.github.io/podcast/</link>
-    <pubDate>Wed, 05 Jul 2023 08:10:57 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/podcast/</guid>
-    <description><![CDATA[第一次录播客]]></description>
-</item><item>
-    <title>吴恩达-基于LangChain的大语言模型应用开发</title>
-    <link>https://zhuyaguang.github.io/wuclass3/</link>
-    <pubDate>Wed, 07 Jun 2023 09:50:15 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/wuclass3/</guid>
-    <description><![CDATA[吴恩达老师的langchain课]]></description>
 </item></channel>
 </rss>
