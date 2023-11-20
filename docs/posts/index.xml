@@ -4,7 +4,14 @@
         <link>https://zhuyaguang.github.io/posts/</link>
         <description>所有文章 | 朱亚光的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Tue, 07 Nov 2023 11:03:15 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Mon, 20 Nov 2023 11:46:42 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Leetcode</title>
+    <link>https://zhuyaguang.github.io/leetcode/</link>
+    <pubDate>Mon, 20 Nov 2023 11:46:42 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/leetcode/</guid>
+    <description><![CDATA[溢出请用 %1000000007 1 8个0 7 遍历map的时候，不要用 k,v 要用 key,value 因为k可能与某个值冲突了 100 题已经养成刷题的习惯了，300 题以后基本看一眼就知道该用哪种算]]></description>
+</item><item>
     <title>在 KubeSphere 上部署最新版的 KubeEdge</title>
     <link>https://zhuyaguang.github.io/kubeedge-install/</link>
     <pubDate>Tue, 07 Nov 2023 11:03:15 &#43;0800</pubDate>
@@ -67,12 +74,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/x-notes/</guid>
     <description><![CDATA[]]></description>
-</item><item>
-    <title>对话毕玄-读书笔记</title>
-    <link>https://zhuyaguang.github.io/readingnotes/</link>
-    <pubDate>Wed, 19 Jul 2023 09:53:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/readingnotes/</guid>
-    <description><![CDATA[毕大师]]></description>
 </item></channel>
 </rss>
