@@ -10,8 +10,54 @@ description: "KubeEdge 安装使用笔记"
 ### 准备
 
 1. 一个 k8s 集群
+
+   ```
+   ./kk create config --with-kubernetes v1.26.0 --with-kubesphere
+   
+   
+   ./kk create cluster -f config-sample.yaml
+   ```
+
+   
+
 2. 一个 边缘节点 可以访问集群，contained 版本 >=1.6 
+
 3. 边缘节点 kubelet kubectl 
+
+
+
+#### 卸载 docker 安装contained
+
+卸载
+
+```shell
+systemctl stop docker
+systemctl stop docker.socket
+systemctl stop containerd
+
+yum list installed | grep docker
+
+yum -y remove containerd.io.x86_64 \
+              docker-ce.x86_64 \
+              docker-ce-cli.x86_64 \
+              docker-ce-rootless-extras.x86_64 \
+              docker-compose-plugin.x86_64 \
+              docker-scan-plugin.x86_64 \
+							docker-buildx-plugin.x86_64
+							
+
+```
+
+安装最新版
+
+```shell
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+sudo yum install docker-ce docker-ce-cli containerd.io
+```
+
+
 
 ### 安装 CloudCore
 

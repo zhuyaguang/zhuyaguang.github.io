@@ -2,10 +2,10 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://zhuyaguang.github.io/leetcode/</loc><lastmod>2023-11-20T11:46:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://zhuyaguang.github.io/posts/</loc><lastmod>2023-11-20T11:46:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://zhuyaguang.github.io/</loc><lastmod>2023-11-20T11:46:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://zhuyaguang.github.io/kubeedge-install/</loc><lastmod>2023-11-07T11:03:15&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://zhuyaguang.github.io/leetcode/</loc><lastmod>2023-11-20T11:46:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://zhuyaguang.github.io/posts/</loc><lastmod>2023-11-20T11:46:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://zhuyaguang.github.io/</loc><lastmod>2023-11-20T11:46:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://zhuyaguang.github.io/kubeedge-install/</loc><lastmod>2023-11-07T11:03:15&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
             <loc>https://zhuyaguang.github.io/hdu-speak/</loc><lastmod>2023-10-16T11:24:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/elasticsearch/</loc><lastmod>2023-10-05T08:44:30&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/rust-note/</loc><lastmod>2023-10-04T08:49:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

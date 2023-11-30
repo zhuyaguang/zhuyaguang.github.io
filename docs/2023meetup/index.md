@@ -261,7 +261,11 @@ KubeCon + CloudNativeCon + Open Source Summit China 2023
 
 
 
+# 10.27 2050恳谈会
 
+云栖小镇 遇到一群快乐的年轻人
+
+![image-20231130112004531](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231130112004531.png)
 
 
 

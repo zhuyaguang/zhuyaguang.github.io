@@ -7,12 +7,12 @@
             <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Mon, 20 Nov 2023 11:46:42 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>Leetcode</title>
+    <title>Leetcode 刷题笔记</title>
     <link>https://zhuyaguang.github.io/leetcode/</link>
     <pubDate>Mon, 20 Nov 2023 11:46:42 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/leetcode/</guid>
-    <description><![CDATA[溢出请用 %1000000007 1 8个0 7 遍历map的时候，不要用 k,v 要用 key,value 因为k可能与某个值冲突了 100 题已经养成刷题的习惯了，300 题以后基本看一眼就知道该用哪种算]]></description>
+    <description><![CDATA[最近在整理笔记，之前刷题的总结打包放上来了。这种算法题还是多刷，感觉并没有其他的好办法。 Write Code Every Day 这是大佬写的一篇文章，讲的是自己每天都在写代]]></description>
 </item><item>
     <title>在 KubeSphere 上部署最新版的 KubeEdge</title>
     <link>https://zhuyaguang.github.io/kubeedge-install/</link>
