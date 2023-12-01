@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/"
-        },"genre": "posts","wordcount":  311 ,
+        },"genre": "posts","wordcount":  1031 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/","datePublished": "2023-11-07T11:03:15+08:00","dateModified": "2023-11-07T11:03:15+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">在 KubeSphere 上部署最新版的 KubeEdge</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 311 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1031 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -95,6 +95,15 @@
             <li><a href="#卸载-docker-安装contained">卸载 docker 安装contained</a></li>
           </ul>
         </li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#使用限制">使用限制</a></li>
+    <li><a href="#设置云端kubeedge-主节点">设置云端（KubeEdge 主节点）</a>
+      <ul>
+        <li><a href="#keadm-init">keadm init</a></li>
         <li><a href="#安装-cloudcore">安装 CloudCore</a></li>
         <li><a href="#安装-edgecore">安装 EdgeCore</a></li>
       </ul>
@@ -178,13 +187,36 @@
 </span></span><span class="line"><span class="cl">sudo yum install docker-ce docker-ce-cli containerd.io
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="安装-cloudcore">安装 CloudCore</h3>
+</div><h1 id="使用keadm进行部署">使用Keadm进行部署</h1>
+<p>Keadm 是一款用于安装 KubeEdge 的工具。 Keadm 不负责 K8s 的安装和运行,在使用它之前，请先准备好一个 K8s 集群。</p>
+<p>KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 <a href="https://github.com/kubeedge/kubeedge#kubernetes-compatibility" target="_blank" rel="noopener noreffer">kubernetes-兼容性</a> 来了解，以此来确定安装哪个版本的 Kubernetes 以及 KubeEdge。</p>
+<h2 id="使用限制">使用限制</h2>
+<ul>
+<li><code>keadm</code> 目前支持 Ubuntu 和 CentOS OS。RaspberryPi 的支持正在进行中。</li>
+<li>需要超级用户权限（或 root 权限）才能运行。</li>
+<li><code>keadm beta</code>功能在 v1.10.0 上线，如果您需要使用相关功能，请使用 v1.10.0 及以上版本的 keadm。</li>
+</ul>
+<h2 id="设置云端kubeedge-主节点">设置云端（KubeEdge 主节点）</h2>
+<h3 id="keadm-init">keadm init</h3>
+<p>默认情况下边缘节点需要访问 cloudcore 中 <code>10000</code> ，<code>10002</code> 端口。 若要确保边缘节点可以成功地与集群通信，您需要创建防火墙规则以允许流量进入这些端口（10000 至 10004）。</p>
+<blockquote>
+<p><code>keadm init</code> 将安装并运行 cloudcore，生成证书并安装 CRD。它还提供了一个命令行参数，通过它可以设置特定的版本。不过需要注意的是：\ 在 v1.11.0 之前，<code>keadm init</code> 将以进程方式安装并运行 cloudcore，生成证书并安装 CRD。它还提供了一个命令行参数，通过它可以设置特定的版本。\ 在 v1.11.0 之后，<code>keadm init</code> 集成了 Helm Chart，这意味着 cloudcore 将以容器化的方式运行。\ 如果您仍需要使用进程的方式启动 cloudcore ，您可以使用<code>keadm deprecated init</code> 进行安装，或者使用 v1.10.0 之前的版本。</p>
+</blockquote>
+<p><strong>重要提示：</strong></p>
+<ol>
+<li>必须正确配置 kubeconfig 或 master 中的至少一个，以便可以将其用于验证 k8s 集群的版本和其他信息。</li>
+<li>请确保边缘节点可以使用云节点的本地 IP 连接云节点，或者需要使用 <code>--advertise-address</code> 标记指定云节点的公共 IP 。</li>
+<li><code>--advertise-address</code>（仅从 1.3 版本开始可用）是云端公开的地址（将添加到 CloudCore 证书的 SAN 中），默认值为本地 IP。</li>
+<li><code>keadm init</code> 将会使用二进制方式部署 cloudcore 为一个系统服务，如果您想实现容器化部署，可以参考 <code>keadm beta init</code> 。</li>
+</ol>
+<p>举个例子：</p>
+<h3 id="安装-cloudcore">安装 CloudCore</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm init --advertise-address<span class="o">=</span><span class="s2">&#34;10.108.96.16&#34;</span> --set cloudCore.service.enable<span class="o">=</span><span class="nb">true</span> --profile <span class="nv">version</span><span class="o">=</span>v1.14.0 --kube-config<span class="o">=</span>/root/.kube/config
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm init --advertise-address<span class="o">=</span><span class="s2">&#34;10.101.32.14&#34;</span> --set cloudCore.service.enable<span class="o">=</span><span class="nb">true</span> --profile <span class="nv">version</span><span class="o">=</span>v1.14.0 --kube-config<span class="o">=</span>/root/.kube/config
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="安装-edgecore">安装 EdgeCore</h3>
@@ -208,7 +240,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm  join --cloudcore-ipport<span class="o">=</span>10.108.96.16:10000 --token<span class="o">=</span>39c24e241019083090b68f0d7bac101ba870d52526d5d7b7b881ee261ad3ac67.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTk0MTA0Nzd9.rwdvDRBfU1hhzjCRoNzKhjNGx_aoVkC7U6tsYLfHP6w --kubeedge-version<span class="o">=</span>1.15.0 --runtimetype<span class="o">=</span>remote  --with-mqtt<span class="o">=</span><span class="nb">false</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm  join --cloudcore-ipport<span class="o">=</span>10.101.32.14:10000 --token<span class="o">=</span>9752be5758a57dad1fb0a817540881efe94b1cf527ad7549d61564a16d887f3d.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDE0MTY5ODZ9.lqbWNeMB-ZXCGPjqOIyu16XWLWglh31z-YydruaCa14 --kubeedge-version<span class="o">=</span>1.15.0 --runtimetype<span class="o">=</span>remote  --with-mqtt<span class="o">=</span><span class="nb">false</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
