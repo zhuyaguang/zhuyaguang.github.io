@@ -269,6 +269,12 @@ KubeCon + CloudNativeCon + Open Source Summit China 2023
 
 
 
+# 12.3 百度飞桨-星河5周年
+
+![img](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/202312031345716.png)
+
+
+
 
 
 
