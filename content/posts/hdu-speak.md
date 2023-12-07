@@ -1,5 +1,5 @@
 ---
-title: "Hdu Speak"
+title: "杭电校外导师讲座"
 date: 2023-10-16T11:24:39+08:00
 draft: true
 ---
