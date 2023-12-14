@@ -95,7 +95,15 @@ KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 [
 ### 安装 CloudCore
 
 ```shell
-keadm init --advertise-address="10.101.32.14" --set cloudCore.service.enable=true --profile version=v1.14.0 --kube-config=/root/.kube/config
+keadm init --advertise-address=10.101.32.14,10.101.32.15 --set cloudCore.service.enable=true --set cloudCore.hostNetWork=true --profile version=v1.14.0 --kube-config=/root/.kube/config
+```
+
+
+
+卸载
+
+```shell
+keadm reset --kube-config=/root/.kube/config
 ```
 
 
@@ -113,10 +121,21 @@ keadm init --advertise-address="10.101.32.14" --set cloudCore.service.enable=tru
 2. 纳管 边缘节点
 
    ```shell
-   keadm  join --cloudcore-ipport=10.101.32.14:10000 --token=9752be5758a57dad1fb0a817540881efe94b1cf527ad7549d61564a16d887f3d.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDE0MTY5ODZ9.lqbWNeMB-ZXCGPjqOIyu16XWLWglh31z-YydruaCa14 --kubeedge-version=1.15.0 --runtimetype=remote  --with-mqtt=false
+   keadm  join --cloudcore-ipport=10.101.32.15:10000 --token=0ae1a6f88da72648900f581fe8c9d9e1d9555cc6033abe7d7864bfdd8b09f0ad.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI2MzM1Nzl9.V7Ug3i2Aey1DAeO05Lr0VpkeyGazEXJDNs7HxoY07LE --kubeedge-version=1.15.0 --runtimetype=remote  --with-mqtt=false
    ```
 
 
+
+
+
+### 重启 containerd
+
+```
+
+systemctl daemon-reload
+
+systemctl restart containerd
+```
 
 
 
