@@ -121,7 +121,7 @@ keadm reset --kube-config=/root/.kube/config
 2. 纳管 边缘节点
 
    ```shell
-   keadm  join --cloudcore-ipport=10.101.32.15:10000 --token=0ae1a6f88da72648900f581fe8c9d9e1d9555cc6033abe7d7864bfdd8b09f0ad.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI2MzM1Nzl9.V7Ug3i2Aey1DAeO05Lr0VpkeyGazEXJDNs7HxoY07LE --kubeedge-version=1.15.0 --runtimetype=remote  --with-mqtt=false
+   keadm  join --cloudcore-ipport=10.101.32.15:10000 --token=0ae1a6f88da72648900f581fe8c9d9e1d9555cc6033abe7d7864bfdd8b09f0ad.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDM1NDA3Nzl9.oiBkJWAtQMTgg-3BMPCnZafnRrAHOCBv4Pp42ysQoMQ --kubeedge-version=1.15.0 --runtimetype=remote  --with-mqtt=false
    ```
 
 
@@ -135,10 +135,66 @@ keadm reset --kube-config=/root/.kube/config
 systemctl daemon-reload
 
 systemctl restart containerd
+
+systemctl restart containerd.service
 ```
 
 
 
+### 部署应用到边缘节点
+
+```yaml
+apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis-master
+spec:
+  selector:
+    matchLabels:
+      app: redis
+      role: master
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+        role: master
+        tier: backend
+    spec:
+      nodeName: node5
+      containers:
+      - name: master
+        image: registry.k8s.io/redis:e2e  # or just image: redis
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 6379
+```
 
 
-我的博客即将同步至腾讯云开发者社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=1wjhqgxhgrr3u
+
+###  问题汇总
+
+[常见问题](https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice):
+
+* CNI 网络问题，安装CNI插件，后重启。
+
+  [安装脚本地址](https://github.com/containerd/containerd/blob/main/script/setup/install-cni)
+
+  ![image-20231215085829040](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231215085829040.png)
+
+  1. `ctr -n k8s.io t ls`, 如果有残留的task，请执行`ctr -n k8s.io t kill {task id}`清理
+  2. `ctr -n k8s.io c ls`, 如果有残留的容器，请执行`ctr -n k8s.io c rm {container id}`清理
+  3. 执行`systemctl restart containerd.service`重启containerd
+
+* netstat -anpt |grep 10002 查看 cloudcore 是否能部署在这上面
+
+  
+
+更多问题可以访问[kubeedge FAQ ](https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice)
+
+
+

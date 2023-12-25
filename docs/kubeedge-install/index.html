@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/"
-        },"genre": "posts","wordcount":  1051 ,
+        },"genre": "posts","wordcount":  1182 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/","datePublished": "2023-11-07T11:03:15+08:00","dateModified": "2023-11-07T11:03:15+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">在 KubeSphere 上部署最新版的 KubeEdge</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1051 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1182 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -107,6 +107,8 @@
         <li><a href="#安装-cloudcore">安装 CloudCore</a></li>
         <li><a href="#安装-edgecore">安装 EdgeCore</a></li>
         <li><a href="#重启-containerd">重启 containerd</a></li>
+        <li><a href="#部署应用到边缘节点">部署应用到边缘节点</a></li>
+        <li><a href="#问题汇总">问题汇总</a></li>
       </ul>
     </li>
   </ul>
@@ -250,7 +252,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm  join --cloudcore-ipport<span class="o">=</span>10.101.32.15:10000 --token<span class="o">=</span>0ae1a6f88da72648900f581fe8c9d9e1d9555cc6033abe7d7864bfdd8b09f0ad.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI2MzM1Nzl9.V7Ug3i2Aey1DAeO05Lr0VpkeyGazEXJDNs7HxoY07LE --kubeedge-version<span class="o">=</span>1.15.0 --runtimetype<span class="o">=</span>remote  --with-mqtt<span class="o">=</span><span class="nb">false</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm  join --cloudcore-ipport<span class="o">=</span>10.101.32.15:10000 --token<span class="o">=</span>0ae1a6f88da72648900f581fe8c9d9e1d9555cc6033abe7d7864bfdd8b09f0ad.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDM1NDA3Nzl9.oiBkJWAtQMTgg-3BMPCnZafnRrAHOCBv4Pp42ysQoMQ --kubeedge-version<span class="o">=</span>1.15.0 --runtimetype<span class="o">=</span>remote  --with-mqtt<span class="o">=</span><span class="nb">false</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -262,15 +264,106 @@
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">systemctl daemon-reload
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">systemctl restart containerd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl restart containerd.service
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>我的博客即将同步至腾讯云开发者社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=1wjhqgxhgrr3u</p></div><div class="post-footer" id="post-footer">
+</div><h3 id="部署应用到边缘节点">部署应用到边缘节点</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w"> </span><span class="c">#  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">redis-master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="l">backend</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="l">backend</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nodeName</span><span class="p">:</span><span class="w"> </span><span class="l">node5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image: registry.k8s.io/redis:e2e  # or just image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">100m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">100Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">6379</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="问题汇总">问题汇总</h3>
+<p><a href="https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice" target="_blank" rel="noopener noreffer">常见问题</a>:</p>
+<ul>
+<li>
+<p>CNI 网络问题，安装CNI插件，后重启。</p>
+<p><a href="https://github.com/containerd/containerd/blob/main/script/setup/install-cni" target="_blank" rel="noopener noreffer">安装脚本地址</a></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231215085829040.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231215085829040.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231215085829040.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231215085829040.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231215085829040.png"
+        title="image-20231215085829040" /></p>
+<ol>
+<li><code>ctr -n k8s.io t ls</code>, 如果有残留的task，请执行<code>ctr -n k8s.io t kill {task id}</code>清理</li>
+<li><code>ctr -n k8s.io c ls</code>, 如果有残留的容器，请执行<code>ctr -n k8s.io c rm {container id}</code>清理</li>
+<li>执行<code>systemctl restart containerd.service</code>重启containerd</li>
+</ol>
+</li>
+<li>
+<p>netstat -anpt |grep 10002 查看 cloudcore 是否能部署在这上面</p>
+</li>
+</ul>
+<p>更多问题可以访问<a href="https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice" target="_blank" rel="noopener noreffer">kubeedge FAQ </a></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
