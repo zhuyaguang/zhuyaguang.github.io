@@ -110,21 +110,17 @@ keadm reset --kube-config=/root/.kube/config
 
 ### 安装 EdgeCore
 
-1. 安装 kubelet kubectl
-
-   [添加yum源并安装kubectl/kubeadm/kubelet组件](https://blog.csdn.net/qq_14910065/article/details/132069986)
+1. 纳管 边缘节点
 
    ```shell
-   yum install kubectl.x86_64 kubelet.x86_64 
+   keadm  join --cloudcore-ipport=10.101.32.15:10000 --token=0ae1a6f88da72648900f581fe8c9d9e1d9555cc6033abe7d7864bfdd8b09f0ad.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDM2MjcxNzl9.FuolRAPhjVSKKtnaoxOEbPu8zOZzP8MW3MRjGMEBGEQ --kubeedge-version=1.15.0 --runtimetype=remote  --with-mqtt=false
    ```
 
-2. 纳管 边缘节点
+2. 查看状态
 
-   ```shell
-   keadm  join --cloudcore-ipport=10.101.32.15:10000 --token=0ae1a6f88da72648900f581fe8c9d9e1d9555cc6033abe7d7864bfdd8b09f0ad.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDM1NDA3Nzl9.oiBkJWAtQMTgg-3BMPCnZafnRrAHOCBv4Pp42ysQoMQ --kubeedge-version=1.15.0 --runtimetype=remote  --with-mqtt=false
-   ```
-
-
+```shell
+systemctl status edgecore
+```
 
 
 
@@ -176,6 +172,10 @@ spec:
 
 
 
+### 查看太空端服务日志
+
+
+
 ###  问题汇总
 
 [常见问题](https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice):
@@ -190,9 +190,17 @@ spec:
   2. `ctr -n k8s.io c ls`, 如果有残留的容器，请执行`ctr -n k8s.io c rm {container id}`清理
   3. 执行`systemctl restart containerd.service`重启containerd
 
+* Cgroup driver 
+
+   删掉这行![image-20231225164747055](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231225164747055.png)
+
 * netstat -anpt |grep 10002 查看 cloudcore 是否能部署在这上面
 
-  
+* 注意 边缘节点的node id 和 cloud 节点名字不能重复
+
+
+
+
 
 更多问题可以访问[kubeedge FAQ ](https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice)
 

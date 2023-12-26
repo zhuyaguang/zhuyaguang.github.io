@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/"
-        },"genre": "posts","wordcount":  1182 ,
+        },"genre": "posts","wordcount":  1184 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/","datePublished": "2023-11-07T11:03:15+08:00","dateModified": "2023-11-07T11:03:15+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">在 KubeSphere 上部署最新版的 KubeEdge</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1182 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1184 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -108,6 +108,7 @@
         <li><a href="#安装-edgecore">安装 EdgeCore</a></li>
         <li><a href="#重启-containerd">重启 containerd</a></li>
         <li><a href="#部署应用到边缘节点">部署应用到边缘节点</a></li>
+        <li><a href="#查看太空端服务日志">查看太空端服务日志</a></li>
         <li><a href="#问题汇总">问题汇总</a></li>
       </ul>
     </li>
@@ -234,30 +235,29 @@
 </div><h3 id="安装-edgecore">安装 EdgeCore</h3>
 <ol>
 <li>
-<p>安装 kubelet kubectl</p>
-<p><a href="https://blog.csdn.net/qq_14910065/article/details/132069986" target="_blank" rel="noopener noreffer">添加yum源并安装kubectl/kubeadm/kubelet组件</a></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">yum install kubectl.x86_64 kubelet.x86_64 
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
-<li>
 <p>纳管 边缘节点</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm  join --cloudcore-ipport<span class="o">=</span>10.101.32.15:10000 --token<span class="o">=</span>0ae1a6f88da72648900f581fe8c9d9e1d9555cc6033abe7d7864bfdd8b09f0ad.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDM1NDA3Nzl9.oiBkJWAtQMTgg-3BMPCnZafnRrAHOCBv4Pp42ysQoMQ --kubeedge-version<span class="o">=</span>1.15.0 --runtimetype<span class="o">=</span>remote  --with-mqtt<span class="o">=</span><span class="nb">false</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm  join --cloudcore-ipport<span class="o">=</span>10.101.32.15:10000 --token<span class="o">=</span>0ae1a6f88da72648900f581fe8c9d9e1d9555cc6033abe7d7864bfdd8b09f0ad.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDM2MjcxNzl9.FuolRAPhjVSKKtnaoxOEbPu8zOZzP8MW3MRjGMEBGEQ --kubeedge-version<span class="o">=</span>1.15.0 --runtimetype<span class="o">=</span>remote  --with-mqtt<span class="o">=</span><span class="nb">false</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
+<li>
+<p>查看状态</p>
+</li>
 </ol>
-<h3 id="重启-containerd">重启 containerd</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemctl status edgecore
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="重启-containerd">重启 containerd</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -339,7 +339,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">6379</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="问题汇总">问题汇总</h3>
+</div><h3 id="查看太空端服务日志">查看太空端服务日志</h3>
+<h3 id="问题汇总">问题汇总</h3>
 <p><a href="https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice" target="_blank" rel="noopener noreffer">常见问题</a>:</p>
 <ul>
 <li>
@@ -360,7 +361,21 @@
 </ol>
 </li>
 <li>
+<p>Cgroup driver</p>
+<p>删掉这行<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231225164747055.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231225164747055.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231225164747055.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231225164747055.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231225164747055.png"
+        title="image-20231225164747055" /></p>
+</li>
+<li>
 <p>netstat -anpt |grep 10002 查看 cloudcore 是否能部署在这上面</p>
+</li>
+<li>
+<p>注意 边缘节点的node id 和 cloud 节点名字不能重复</p>
 </li>
 </ul>
 <p>更多问题可以访问<a href="https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice" target="_blank" rel="noopener noreffer">kubeedge FAQ </a></p></div><div class="post-footer" id="post-footer">

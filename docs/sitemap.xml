@@ -2,9 +2,9 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://zhuyaguang.github.io/posts/</loc><lastmod>2023-12-04T16:19:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://zhuyaguang.github.io/kubewharf/</loc><lastmod>2023-12-04T16:19:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://zhuyaguang.github.io/</loc><lastmod>2023-12-04T16:19:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>https://zhuyaguang.github.io/posts/</loc><lastmod>2023-12-04T16:19:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+            <loc>https://zhuyaguang.github.io/kubewharf/</loc><lastmod>2023-12-04T16:19:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+            <loc>https://zhuyaguang.github.io/</loc><lastmod>2023-12-04T16:19:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
             <loc>https://zhuyaguang.github.io/2023/</loc><lastmod>2023-12-01T17:24:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
             <loc>https://zhuyaguang.github.io/leetcode/</loc><lastmod>2023-11-20T11:46:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/kubeedge-install/</loc><lastmod>2023-11-07T11:03:15&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
