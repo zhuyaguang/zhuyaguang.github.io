@@ -12,23 +12,33 @@ description: "KubeEdge 安装使用笔记"
 1. 一个 k8s 集群
 
    ```
+   centos
+   
    ./kk create config --with-kubernetes v1.26.0 --with-kubesphere
    
-   
    ./kk create cluster -f config-sample.yaml
+   
+    低版本的k8s:./kk create cluster --with-kubernetes v1.22.12 --with-kubesphere v3.4.1
+   
+   
+   ubuntu 20.04
+   
+   ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd
    ```
 
    
 
 2. 一个 边缘节点 可以访问集群，contained 版本 >=1.6 
 
-3. 边缘节点 kubelet kubectl 
+
+
+![image-20240110145607680](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png)
 
 
 
 #### 卸载 docker 安装contained
 
-卸载
+如果之前安装了 docker ,使用下面命令卸载
 
 ```shell
 systemctl stop docker
@@ -48,14 +58,81 @@ yum -y remove containerd.io.x86_64 \
 
 ```
 
-安装最新版
+安装最新版 containerd
 
 ```shell
+centos
+
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
-sudo yum install docker-ce docker-ce-cli containerd.io
+sudo yum install  containerd.io
+
+ubuntu
+
+# Install containerd
+apt-get update && apt-get install -y containerd
+
+# Configure containerd
+mkdir -p /etc/containerd
+containerd config default > /etc/containerd/config.toml
+
+# Restart containerd
+systemctl restart containerd
 ```
+
+
+
+### 安装 CNI 插件
+
+```sh
+mkdir -p /opt/cni/bin
+
+tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.4.0.tgz
+
+mkdir -p /etc/cni/net.d/
+
+cat >/etc/cni/net.d/10-containerd-net.conflist <<EOF
+{
+  "cniVersion": "1.0.0",
+  "name": "containerd-net",
+  "plugins": [
+    {
+      "type": "bridge",
+      "bridge": "cni0",
+      "isGateway": true,
+      "ipMasq": true,
+      "promiscMode": true,
+      "ipam": {
+        "type": "host-local",
+        "ranges": [
+          [{
+            "subnet": "10.88.0.0/16"
+          }],
+          [{
+            "subnet": "2001:db8:4860::/64"
+          }]
+        ],
+        "routes": [
+          { "dst": "0.0.0.0/0" },
+          { "dst": "::/0" }
+        ]
+      }
+    },
+    {
+      "type": "portmap",
+      "capabilities": {"portMappings": true}
+    }
+  ]
+}
+EOF
+
+systemctl restart containerd
+```
+
+[CNI 安装参考链接](https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice)
+
+
 
 # 使用Keadm进行部署
 
@@ -67,9 +144,8 @@ KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 [
 
 ## 使用限制
 
-- `keadm` 目前支持 Ubuntu 和 CentOS OS。RaspberryPi 的支持正在进行中。
+- `keadm` 目前支持 Ubuntu 和 CentOS OS。
 - 需要超级用户权限（或 root 权限）才能运行。
-- `keadm beta`功能在 v1.10.0 上线，如果您需要使用相关功能，请使用 v1.10.0 及以上版本的 keadm。
 
 
 
@@ -79,8 +155,6 @@ KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 [
 
 默认情况下边缘节点需要访问 cloudcore 中 `10000` ，`10002` 端口。 若要确保边缘节点可以成功地与集群通信，您需要创建防火墙规则以允许流量进入这些端口（10000 至 10004）。
 
-> `keadm init` 将安装并运行 cloudcore，生成证书并安装 CRD。它还提供了一个命令行参数，通过它可以设置特定的版本。不过需要注意的是：\ 在 v1.11.0 之前，`keadm init` 将以进程方式安装并运行 cloudcore，生成证书并安装 CRD。它还提供了一个命令行参数，通过它可以设置特定的版本。\ 在 v1.11.0 之后，`keadm init` 集成了 Helm Chart，这意味着 cloudcore 将以容器化的方式运行。\ 如果您仍需要使用进程的方式启动 cloudcore ，您可以使用`keadm deprecated init` 进行安装，或者使用 v1.10.0 之前的版本。
-
 **重要提示：**
 
 1. 必须正确配置 kubeconfig 或 master 中的至少一个，以便可以将其用于验证 k8s 集群的版本和其他信息。
@@ -88,14 +162,13 @@ KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 [
 3. `--advertise-address`（仅从 1.3 版本开始可用）是云端公开的地址（将添加到 CloudCore 证书的 SAN 中），默认值为本地 IP。
 4. `keadm init` 将会使用二进制方式部署 cloudcore 为一个系统服务，如果您想实现容器化部署，可以参考 `keadm beta init` 。
 
-举个例子：
-
 
 
 ### 安装 CloudCore
 
 ```shell
 keadm init --advertise-address=10.101.32.14,10.101.32.15 --set cloudCore.service.enable=true --set cloudCore.hostNetWork=true --profile version=v1.14.0 --kube-config=/root/.kube/config
+
 ```
 
 
@@ -113,7 +186,7 @@ keadm reset --kube-config=/root/.kube/config
 1. 纳管 边缘节点
 
    ```shell
-   keadm  join --cloudcore-ipport=10.101.32.15:10000 --token=0ae1a6f88da72648900f581fe8c9d9e1d9555cc6033abe7d7864bfdd8b09f0ad.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDM2MjcxNzl9.FuolRAPhjVSKKtnaoxOEbPu8zOZzP8MW3MRjGMEBGEQ --kubeedge-version=1.15.0 --runtimetype=remote  --with-mqtt=false
+   keadm  join --cloudcore-ipport=10.108.96.24:10000 --token=c96621fc3d5280337aced5dcb63be7382eeedd764fbdd21c892ec8b47053f394.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDU2MzQxNzJ9.ThpOYdoO9MZEouFuKf9dKEuQKTyeuIqrNrrR7OPhVJk --kubeedge-version=1.15.1 --runtimetype=remote  --with-mqtt=false
    ```
 
 2. 查看状态
@@ -174,6 +247,22 @@ spec:
 
 ### 查看太空端服务日志
 
+1.开启日志
+
+![image-20231226105650084](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231226105650084.png)
+
+2.重启 edgecore
+
+service edgecore restart
+
+
+
+### 使用 kubesphere 添加边缘节点
+
+```
+arch=$(uname -m); if [[ $arch != x86_64 ]]; then arch='arm64'; fi;  curl -LO https://kubeedge.pek3b.qingstor.com/bin/v1.13.0/$arch/keadm-v1.13.0-linux-$arch.tar.gz  && tar xvf keadm-v1.13.0-linux-$arch.tar.gz && chmod +x keadm && ./keadm join --kubeedge-version=1.13.0 --cloudcore-ipport=10.101.32.14:30000 --quicport 30001 --certport 30002 --tunnelport 30004 --edgenode-name edgenode-2jag --edgenode-ip 10.11.8.215 --token da22ed5f279f014c04b1f768d9a0c1c46de17270e930618d8301117de90f7ff3.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDU0Nzc1MzR9.4SxkX6qvz3BEDR-SbO8tB8JoqRqrAI_yhliG7rOaLFY --with-edge-taint
+```
+
 
 
 ###  问题汇总
@@ -197,6 +286,10 @@ spec:
 * netstat -anpt |grep 10002 查看 cloudcore 是否能部署在这上面
 
 * 注意 边缘节点的node id 和 cloud 节点名字不能重复
+
+   
+
+
 
 
 
