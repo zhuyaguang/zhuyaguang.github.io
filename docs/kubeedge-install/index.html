@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/"
-        },"genre": "posts","wordcount":  1180 ,
+        },"genre": "posts","wordcount":  1246 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/","datePublished": "2023-11-07T11:03:15+08:00","dateModified": "2023-11-07T11:03:15+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">在 KubeSphere 上部署最新版的 KubeEdge</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1180 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1246 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -96,6 +96,7 @@
           </ul>
         </li>
         <li><a href="#安装-cni-插件">安装 CNI 插件</a></li>
+        <li><a href="#安装-cri-dockerd">安装 cri-dockerd</a></li>
       </ul>
     </li>
   </ul>
@@ -334,6 +335,44 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><a href="https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice" target="_blank" rel="noopener noreffer">CNI 安装参考链接</a></p>
+<h3 id="安装-cri-dockerd">安装 cri-dockerd</h3>
+<ul>
+<li>
+<p>下载 release 包</p>
+<p><a href="https://github.com/Mirantis/cri-dockerd/releases" target="_blank" rel="noopener noreffer">https://github.com/Mirantis/cri-dockerd/releases</a></p>
+</li>
+<li>
+<p>下载 cri-docker.service 和 cri-docker.socket</p>
+<p><a href="https://github.com/Mirantis/cri-dockerd/tree/master/packaging/systemd" target="_blank" rel="noopener noreffer">https://github.com/Mirantis/cri-dockerd/tree/master/packaging/systemd</a></p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cp cri-dockerd/cri-dockerd /usr/local/bin/cri-dockerd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cp cri-docker.service cri-docker.socket /etc/systemd/system/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sed -i -e &#39;s,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,&#39; /etc/systemd/system/cri-docker.service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">systemctl enable cri-docker.service
+</span></span><span class="line"><span class="cl">systemctl enable --now cri-docker.socket
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>重启 docker</li>
+</ul>
 <h1 id="使用keadm进行部署">使用Keadm进行部署</h1>
 <p>Keadm 是一款用于安装 KubeEdge 的工具。 Keadm 不负责 K8s 的安装和运行,在使用它之前，请先准备好一个 K8s 集群。</p>
 <p>KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 <a href="https://github.com/kubeedge/kubeedge#kubernetes-compatibility" target="_blank" rel="noopener noreffer">kubernetes-兼容性</a> 来了解，以此来确定安装哪个版本的 Kubernetes 以及 KubeEdge。</p>
@@ -379,7 +418,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm  join --cloudcore-ipport<span class="o">=</span>10.108.96.24:10000 --token<span class="o">=</span>c96621fc3d5280337aced5dcb63be7382eeedd764fbdd21c892ec8b47053f394.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDU2MzQxNzJ9.ThpOYdoO9MZEouFuKf9dKEuQKTyeuIqrNrrR7OPhVJk --kubeedge-version<span class="o">=</span>1.15.1 --runtimetype<span class="o">=</span>remote  --with-mqtt<span class="o">=</span><span class="nb">false</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm  join --cloudcore-ipport<span class="o">=</span>10.108.96.24:10000 --token<span class="o">=</span>c96621fc3d5280337aced5dcb63be7382eeedd764fbdd21c892ec8b47053f394.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDU2NzczNzJ9.G3aEpFxi_0HMsa6aDcefDeItCkaFri1rFWU3IIqDVmo --kubeedge-version<span class="o">=</span>1.15.1 --runtimetype<span class="o">=</span>remote  --with-mqtt<span class="o">=</span><span class="nb">false</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -534,6 +573,9 @@
 </li>
 <li>
 <p>注意 边缘节点的node id 和 cloud 节点名字不能重复</p>
+</li>
+<li>
+<p>220 上部署 containerd 问题比较多，换成 docker 需要安装  cri-dockerd</p>
 </li>
 </ul>
 <p>更多问题可以访问<a href="https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice" target="_blank" rel="noopener noreffer">kubeedge FAQ </a></p></div><div class="post-footer" id="post-footer">

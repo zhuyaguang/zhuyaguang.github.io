@@ -130,6 +130,32 @@ systemctl restart containerd
 
 
 
+### 安装 cri-dockerd
+
+* 下载 release 包
+
+  https://github.com/Mirantis/cri-dockerd/releases
+
+* 下载 cri-docker.service 和 cri-docker.socket
+
+  https://github.com/Mirantis/cri-dockerd/tree/master/packaging/systemd
+
+```
+cp cri-dockerd/cri-dockerd /usr/local/bin/cri-dockerd
+
+cp cri-docker.service cri-docker.socket /etc/systemd/system/
+
+sed -i -e 's,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,' /etc/systemd/system/cri-docker.service
+
+systemctl daemon-reload
+systemctl enable cri-docker.service
+systemctl enable --now cri-docker.socket
+```
+
+* 重启 docker
+
+  
+
 # 使用Keadm进行部署
 
 Keadm 是一款用于安装 KubeEdge 的工具。 Keadm 不负责 K8s 的安装和运行,在使用它之前，请先准备好一个 K8s 集群。
@@ -182,7 +208,7 @@ keadm reset --kube-config=/root/.kube/config
 1. 纳管 边缘节点
 
    ```shell
-   keadm  join --cloudcore-ipport=10.108.96.24:10000 --token=c96621fc3d5280337aced5dcb63be7382eeedd764fbdd21c892ec8b47053f394.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDU2MzQxNzJ9.ThpOYdoO9MZEouFuKf9dKEuQKTyeuIqrNrrR7OPhVJk --kubeedge-version=1.15.1 --runtimetype=remote  --with-mqtt=false
+   keadm  join --cloudcore-ipport=10.108.96.24:10000 --token=c96621fc3d5280337aced5dcb63be7382eeedd764fbdd21c892ec8b47053f394.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDU2NzczNzJ9.G3aEpFxi_0HMsa6aDcefDeItCkaFri1rFWU3IIqDVmo --kubeedge-version=1.15.1 --runtimetype=remote  --with-mqtt=false
    ```
 
 2. 查看状态
@@ -282,6 +308,8 @@ arch=$(uname -m); if [[ $arch != x86_64 ]]; then arch='arm64'; fi;  curl -LO htt
 * netstat -anpt |grep 10002 查看 cloudcore 是否能部署在这上面
 
 * 注意 边缘节点的node id 和 cloud 节点名字不能重复
+
+* 220 上部署 containerd 问题比较多，换成 docker 需要安装  cri-dockerd
 
    
 
