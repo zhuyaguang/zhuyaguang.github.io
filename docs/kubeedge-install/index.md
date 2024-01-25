@@ -189,8 +189,18 @@ KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 [
 ### 安装 CloudCore
 
 ```shell
+keadm init --advertise-address=192.168.137.90
+
+
+
 keadm init --advertise-address=10.101.32.14,10.101.32.15 --set cloudCore.service.enable=true --set cloudCore.hostNetWork=true --profile version=v1.14.0 --kube-config=/root/.kube/config
 
+```
+
+检查 cloudcore 是否安装成功
+
+```shell
+kubectl get pods -n kubeedge
 ```
 
 
