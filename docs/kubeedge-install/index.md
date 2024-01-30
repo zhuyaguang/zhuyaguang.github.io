@@ -3,7 +3,7 @@
 
 <!--more-->
 
-### 准备
+## 准备
 
 1. 一个 k8s 集群
 
@@ -24,13 +24,11 @@
 
    
 
-2. 一个 边缘节点 可以访问集群，contained 版本 >=1.6 
+2. 一个 边缘节点 可以访问集群，contained 版本 >=1.6  ，**如果是 docker 记得安装 CRI-dockerd**.
 
 
 
 ![image-20240110145607680](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png)
-
-
 
 #### 卸载 docker 安装contained
 
@@ -123,14 +121,25 @@ cat >/etc/cni/net.d/10-containerd-net.conflist <<EOF
 }
 EOF
 
-systemctl restart containerd
 ```
+
+重启 containerd
+
+````shell
+systemctl daemon-reload
+
+systemctl restart containerd
+
+systemctl restart containerd.service
+````
+
+
 
 [CNI 安装参考链接](https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice)
 
 
 
-### 安装 cri-dockerd
+### 可选：安装 cri-dockerd(运行时为 docker )
 
 * 下载 release 包
 
@@ -154,6 +163,10 @@ systemctl enable --now cri-docker.socket
 
 * 重启 docker
 
+  ```
+  systemctl restart docker
+  ```
+  
   
 
 # 使用Keadm进行部署
@@ -161,8 +174,6 @@ systemctl enable --now cri-docker.socket
 Keadm 是一款用于安装 KubeEdge 的工具。 Keadm 不负责 K8s 的安装和运行,在使用它之前，请先准备好一个 K8s 集群。
 
 KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 [kubernetes-兼容性](https://github.com/kubeedge/kubeedge#kubernetes-compatibility) 来了解，以此来确定安装哪个版本的 Kubernetes 以及 KubeEdge。
-
-
 
 ## 使用限制
 
@@ -191,8 +202,6 @@ KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 [
 ```shell
 keadm init --advertise-address=192.168.137.90
 
-
-
 keadm init --advertise-address=10.101.32.14,10.101.32.15 --set cloudCore.service.enable=true --set cloudCore.hostNetWork=true --profile version=v1.14.0 --kube-config=/root/.kube/config
 
 ```
@@ -203,17 +212,17 @@ keadm init --advertise-address=10.101.32.14,10.101.32.15 --set cloudCore.service
 kubectl get pods -n kubeedge
 ```
 
-
-
-卸载
+卸载 CloudCore
 
 ```shell
 keadm reset --kube-config=/root/.kube/config
 ```
 
-
+## 设置太空端
 
 ### 安装 EdgeCore
+
+**根据前面的准备步骤，安装 CNI CRI-dockerd**
 
 1. 纳管 边缘节点
 
@@ -227,22 +236,7 @@ keadm reset --kube-config=/root/.kube/config
 systemctl status edgecore
 ```
 
-
-
-### 重启 containerd
-
-```
-
-systemctl daemon-reload
-
-systemctl restart containerd
-
-systemctl restart containerd.service
-```
-
-
-
-### 部署应用到边缘节点
+## 部署应用到边缘节点
 
 ```yaml
 apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
@@ -275,9 +269,7 @@ spec:
         - containerPort: 6379
 ```
 
-
-
-### 查看太空端服务日志
+## 查看太空端服务日志
 
 1.开启日志
 
@@ -287,17 +279,7 @@ spec:
 
 service edgecore restart
 
-
-
-### 使用 kubesphere 添加边缘节点
-
-```
-arch=$(uname -m); if [[ $arch != x86_64 ]]; then arch='arm64'; fi;  curl -LO https://kubeedge.pek3b.qingstor.com/bin/v1.13.0/$arch/keadm-v1.13.0-linux-$arch.tar.gz  && tar xvf keadm-v1.13.0-linux-$arch.tar.gz && chmod +x keadm && ./keadm join --kubeedge-version=1.13.0 --cloudcore-ipport=10.101.32.14:30000 --quicport 30001 --certport 30002 --tunnelport 30004 --edgenode-name edgenode-2jag --edgenode-ip 10.11.8.215 --token da22ed5f279f014c04b1f768d9a0c1c46de17270e930618d8301117de90f7ff3.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDU0Nzc1MzR9.4SxkX6qvz3BEDR-SbO8tB8JoqRqrAI_yhliG7rOaLFY --with-edge-taint
-```
-
-
-
-###  问题汇总
+## 问题汇总
 
 [常见问题](https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice):
 
@@ -319,11 +301,15 @@ arch=$(uname -m); if [[ $arch != x86_64 ]]; then arch='arm64'; fi;  curl -LO htt
 
 * 注意 边缘节点的node id 和 cloud 节点名字不能重复
 
-* 220 上部署 containerd 问题比较多，换成 docker 需要安装  cri-dockerd
+* can't mount rootfs的问题
 
-   
-
-
+  ![image-20240130092813051](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240130092813051.png)
+  
+   修改 containerd 的配置
+  
+  ![image-20240130092843639](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240130092843639.png)
+  
+* 220 上部署 containerd 问题比较多，换成 docker 需要安装  cri-dockerd。使用 cri-dockerd 的时候，keadm join 的时候 记得加上参数 --remote-runtime-endpoint=unix:///var/run/cri-dockerd.sock
 
 
 
