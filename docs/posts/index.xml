@@ -4,7 +4,14 @@
         <link>https://zhuyaguang.github.io/posts/</link>
         <description>所有文章 | 朱亚光的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Mon, 04 Dec 2023 16:19:35 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Sun, 04 Feb 2024 14:16:46 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>开源创新的理解</title>
+    <link>https://zhuyaguang.github.io/zjlab-post/</link>
+    <pubDate>Sun, 04 Feb 2024 14:16:46 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/zjlab-post/</guid>
+    <description><![CDATA[开源创新（Open sourse innovation）约稿提纲： 1.你是从什么时候开始接触开源相关技术和社区的？是什么机缘巧合下开始从事开源的相关工作？]]></description>
+</item><item>
     <title>为什么说 k8s 是新时代的Linux </title>
     <link>https://zhuyaguang.github.io/kubewharf/</link>
     <pubDate>Mon, 04 Dec 2023 16:19:35 &#43;0800</pubDate>
@@ -67,12 +74,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/ebpf-observability/</guid>
     <description><![CDATA[今年第一次做分享]]></description>
-</item><item>
-    <title>RoCe on K8s 实践</title>
-    <link>https://zhuyaguang.github.io/roce-on-k8s/</link>
-    <pubDate>Wed, 16 Aug 2023 17:07:52 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/roce-on-k8s/</guid>
-    <description><![CDATA[部署 k8s 集群 选择 合适的 容器网络 部署 k8s-device-plugin 选择最新的版本 https://github.com/NVIDIA/k8s-device-plugin 配置 Nvidia docker runtime 1 2 3 4 5 6 7 &#34;default-runtime&#34;: &#34;nvidia&#34;, &#34;runtimes&#34;: { &#34;nvidia&#34;: { &#34;path&#34;: &#34;nvidia-container-runtime&#34;, &#34;runtimeArgs&#34;: [] } }, 部署 RDMA 插件 方案一：使用阿里的镜像 来自文章：]]></description>
 </item></channel>
 </rss>
