@@ -242,6 +242,8 @@ systemctl status edgecore
 
 ## 部署应用到边缘节点
 
+部署 redis
+
 ```yaml
 apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
 kind: Deployment
@@ -272,6 +274,59 @@ spec:
         ports:
         - containerPort: 6379
 ```
+
+部署 nginx
+
+```yaml
+apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis-master
+spec:
+  selector:
+    matchLabels:
+      app: redis
+      role: master
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+        role: master
+        tier: backend
+    spec:
+      nodeName: jetpack513
+      containers:
+      - name: master
+        image: registry.k8s.io/redis:e2e  # or just image: redis
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 6379
+```
+
+## 去掉 daemonset 
+
+* 给 master 节点打标签
+
+kubectl label nodes **tjmaster**  master=true
+
+* 编辑daemonset 
+
+kubectl edit  daemonset calico-node  -n kube-system
+
+kubectl edit  daemonset kube-proxy   -n kube-system
+
+kubectl edit  daemonset nodelocaldns  -n kube-system
+
+* 增加一个标签 master: “true”,没有标签就都加上。
+
+![image-20240205141929456](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240205141929456.png)
+
+![image-20240205142617622](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240205142617622.png)
 
 ## 查看太空端服务日志
 
