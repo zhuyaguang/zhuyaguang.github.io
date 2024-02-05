@@ -304,7 +304,7 @@ spec:
         - containerPort: 6379
 ```
 
-## 去掉 daemonset 
+## 去掉 daemonset 部署在边缘节点上
 
 * 给 master 节点打标签
 
@@ -314,7 +314,7 @@ kubectl label nodes **tjmaster**  master=true
 
 kubectl edit  daemonset calico-node  -n kube-system
 
-kubectl edit  daemonset kube-proxy   -n kube-system
+kubectl edit  daemonset kube-proxy   -n kube-system:：
 
 kubectl edit  daemonset nodelocaldns  -n kube-system
 

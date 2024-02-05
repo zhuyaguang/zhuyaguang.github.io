@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/"
-        },"genre": "posts","wordcount":  1436 ,
+        },"genre": "posts","wordcount":  1456 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/","datePublished": "2023-11-07T11:03:15+08:00","dateModified": "2023-11-07T11:03:15+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">在 KubeSphere 上部署最新版的 KubeEdge</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1436 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1456 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -115,7 +115,7 @@
       </ul>
     </li>
     <li><a href="#部署应用到边缘节点">部署应用到边缘节点</a></li>
-    <li><a href="#去掉-daemonset">去掉 daemonset</a></li>
+    <li><a href="#去掉-daemonset-部署在边缘节点上">去掉 daemonset 部署在边缘节点上</a></li>
     <li><a href="#查看太空端服务日志">查看太空端服务日志</a></li>
     <li><a href="#问题汇总">问题汇总</a></li>
   </ul>
@@ -602,7 +602,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">6379</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="去掉-daemonset">去掉 daemonset</h2>
+</div><h2 id="去掉-daemonset-部署在边缘节点上">去掉 daemonset 部署在边缘节点上</h2>
 <ul>
 <li>给 master 节点打标签</li>
 </ul>
@@ -611,7 +611,7 @@
 <li>编辑daemonset</li>
 </ul>
 <p>kubectl edit  daemonset calico-node  -n kube-system</p>
-<p>kubectl edit  daemonset kube-proxy   -n kube-system</p>
+<p>kubectl edit  daemonset kube-proxy   -n kube-system:：</p>
 <p>kubectl edit  daemonset nodelocaldns  -n kube-system</p>
 <ul>
 <li>增加一个标签 master: “true”,没有标签就都加上。</li>
