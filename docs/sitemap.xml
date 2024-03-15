@@ -3,16 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://zhuyaguang.github.io/posts/</loc>
-    <lastmod>2024-02-07T09:13:04+08:00</lastmod>
+    <lastmod>2024-03-15T15:57:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://zhuyaguang.github.io/zadig-story/</loc>
-    <lastmod>2024-02-07T09:13:04+08:00</lastmod>
+    <loc>https://zhuyaguang.github.io/claude/</loc>
+    <lastmod>2024-03-15T15:57:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://zhuyaguang.github.io/</loc>
+    <lastmod>2024-03-15T15:57:22+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://zhuyaguang.github.io/zadig-story/</loc>
     <lastmod>2024-02-07T09:13:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
