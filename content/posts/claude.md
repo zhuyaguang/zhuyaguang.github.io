@@ -1,5 +1,5 @@
 ---
-title: "无需魔法，快来体验 Claude 3 ，GPT 4 在他面前就是弟弟"
+title: "无需魔法，快来体验 Claude 3 ，GPT 4在他面前就是弟弟"
 date: 2024-03-15T15:57:22+08:00
 draft: true
 ---
