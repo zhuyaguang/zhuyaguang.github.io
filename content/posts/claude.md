@@ -6,7 +6,9 @@ draft: true
 
 ### 第一步访问链接
 
-https://lab.amazoncloud.cn/demo/qrcode?trk=UG  微信扫描二维码创建实验环境
+https://lab.amazoncloud.cn/demo/qrcode?trk=UG  
+
+微信扫描二维码创建实验环境
 
 ![image-20240308091442061](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240308091442061.png)
 

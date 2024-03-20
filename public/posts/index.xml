@@ -8,8 +8,15 @@
     <language>zh-CN</language>
     <managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
     <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster>
-    <lastBuildDate>Wed, 07 Feb 2024 09:13:04 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 15 Mar 2024 15:57:22 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>无需魔法，快来体验 Claude 3 ，GPT 4 在他面前就是弟弟</title>
+      <link>http://localhost:1313/claude/</link>
+      <pubDate>Fri, 15 Mar 2024 15:57:22 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
+      <guid>http://localhost:1313/claude/</guid>
+      <description>第一步访问链接 https://lab.amazoncloud.cn/demo/qrcode?trk=UG 微信扫描二维码创建实验环境 第二步 限时试用 第三步 管理模型访问权限&amp;ndash;全选，反正免费 第四步 申请 Claude3 模型，提交下公司信息，</description>
+    </item>
     <item>
       <title>流水线的故事</title>
       <link>http://localhost:1313/zadig-story/</link>
