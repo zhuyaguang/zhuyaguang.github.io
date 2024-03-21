@@ -8,8 +8,15 @@
     <language>zh-CN</language>
     <managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
     <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster>
-    <lastBuildDate>Fri, 15 Mar 2024 15:57:22 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 21 Mar 2024 09:02:57 +0800</lastBuildDate>
     <atom:link href="https://zhuyaguang.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubeedge Code</title>
+      <link>https://zhuyaguang.github.io/kubeedge-code/</link>
+      <pubDate>Thu, 21 Mar 2024 09:02:57 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
+      <guid>https://zhuyaguang.github.io/kubeedge-code/</guid>
+      <description></description>
+    </item>
     <item>
       <title>无需魔法，快来体验 Claude 3 ，GPT 4在他面前就是弟弟</title>
       <link>https://zhuyaguang.github.io/claude/</link>
