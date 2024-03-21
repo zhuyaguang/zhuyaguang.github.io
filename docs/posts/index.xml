@@ -1,287 +1,78 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts on 朱亚光的博客</title>
-    <link>https://zhuyaguang.github.io/posts/</link>
-    <description>Recent content in Posts on 朱亚光的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-    <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster>
-    <lastBuildDate>Fri, 15 Mar 2024 15:57:22 +0800</lastBuildDate>
-    <atom:link href="https://zhuyaguang.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>无需魔法，快来体验 Claude 3 ，GPT 4在他面前就是弟弟</title>
-      <link>https://zhuyaguang.github.io/claude/</link>
-      <pubDate>Fri, 15 Mar 2024 15:57:22 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/claude/</guid>
-      <description>第一步访问链接 https://lab.amazoncloud.cn/demo/qrcode?trk=UG 微信扫描二维码创建实验环境 第二步 限时试用 第三步 管理模型访问权限&amp;ndash;全选，反正免费 第四步 申请 Claude3 模型，提交下公司信息，</description>
-    </item>
-    <item>
-      <title>流水线的故事</title>
-      <link>https://zhuyaguang.github.io/zadig-story/</link>
-      <pubDate>Wed, 07 Feb 2024 09:13:04 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/zadig-story/</guid>
-      <description>“我其实对你是有些失望的，虽然今年没有年终奖，但你是B里最靠前的。来公司三年了，运维开发样样都不行。版本流水线再挂了，你半夜就来公司修吧”。</description>
-    </item>
-    <item>
-      <title>开源创新的理解</title>
-      <link>https://zhuyaguang.github.io/zjlab-post/</link>
-      <pubDate>Sun, 04 Feb 2024 14:16:46 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/zjlab-post/</guid>
-      <description>开源创新（Open sourse innovation）约稿提纲： 1.你是从什么时候开始接触开源相关技术和社区的？是什么机缘巧合下开始从事开源的相关工作？</description>
-    </item>
-    <item>
-      <title>为什么说 k8s 是新时代的Linux </title>
-      <link>https://zhuyaguang.github.io/kubewharf/</link>
-      <pubDate>Mon, 04 Dec 2023 16:19:35 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/kubewharf/</guid>
-      <description>我们经常说 Kubernetes 已经取代了 Linux 成为下一代的操作系统了。此话怎讲，看下面这张图片，传统Linux不管是用户态还是内核态，在 k8s 里面都有与其对应的服务。</description>
-    </item>
-    <item>
-      <title>狂飙的大模型-2023年度总结</title>
-      <link>https://zhuyaguang.github.io/2023/</link>
-      <pubDate>Fri, 01 Dec 2023 17:24:34 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/2023/</guid>
-      <description>大模型 ​ 多年以后，我一定会记得我第一次使用 ChatGPT 那种震撼的感觉。起初我只是以为使用了一个有意思的工具，却不知迎来了 AI 浪潮的大时代。他打乱了很多顶</description>
-    </item>
-    <item>
-      <title>Leetcode 刷题笔记</title>
-      <link>https://zhuyaguang.github.io/leetcode/</link>
-      <pubDate>Mon, 20 Nov 2023 11:46:42 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/leetcode/</guid>
-      <description>最近在整理笔记，之前刷题的总结打包放上来了。这种算法题还是多刷，感觉并没有其他的好办法。 Write Code Every Day 这是大佬写的一篇文章，讲的是自己每天都在写代</description>
-    </item>
-    <item>
-      <title>在 KubeSphere 上部署最新版的 KubeEdge</title>
-      <link>https://zhuyaguang.github.io/kubeedge-install/</link>
-      <pubDate>Tue, 07 Nov 2023 11:03:15 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/kubeedge-install/</guid>
-      <description>准备 一个 k8s 集群 1 2 3 4 5 6 7 8 9 10 11 12 centos ./kk create config --with-kubernetes v1.26.0 --with-kubesphere ./kk create cluster -f config-sample.yaml 低版本的k8s:./kk create cluster --with-kubernetes v1.22.12 --with-kubesphere v3.4.1 ubuntu 20.04 ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd 一个 边缘节点 可以访问</description>
-    </item>
-    <item>
-      <title>杭电校外导师讲座</title>
-      <link>https://zhuyaguang.github.io/hdu-speak/</link>
-      <pubDate>Mon, 16 Oct 2023 11:24:39 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/hdu-speak/</guid>
-      <description>云原生时代的技术栈 自我介绍 云原生时代 什么是云原生 kubeSphere 为什么要参与开源社区 https://mp.weixin.qq.com/s/fsNYG5YtJbAkjaNrFLlfUw GLCC 开源之夏 个人成长 https://ppt.infoq.cn/slide/show?cid=136&amp;amp;pid=4453 工具分享 回到杭电 感觉自己也年轻了很多</description>
-    </item>
-    <item>
-      <title>ElasticSearch 权威指南笔记</title>
-      <link>https://zhuyaguang.github.io/elasticsearch/</link>
-      <pubDate>Thu, 05 Oct 2023 08:44:30 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/elasticsearch/</guid>
-      <description>入门 简单搜索 检查 ES 集群状态 1 curl &amp;#39;http://localhost:9200/?pretty&amp;#39; 关系型数据库和ES字段的对应关系 1 2 Relational DB -&amp;gt; Databases -&amp;gt; Tables -&amp;gt; Rows -&amp;gt; Columns Elasticsearch -&amp;gt; Indices -&amp;gt; Types -&amp;gt; Documents -&amp;gt; Fields 插入一条数据 1 2 3 4 5 6 7 PUT /megacorp/employee/1 { &amp;#34;first_name&amp;#34;</description>
-    </item>
-    <item>
-      <title>Rust 学习</title>
-      <link>https://zhuyaguang.github.io/rust-note/</link>
-      <pubDate>Wed, 04 Oct 2023 08:49:45 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/rust-note/</guid>
-      <description>网站 rust 官网 练习题 Rust语言实战 练习题 Github awesome rust 库 工具 Rust playground 电子书 Rust语言圣经 Rust 程序设计语言 文章 Yes! And it&amp;rsquo;s freaking fast! 描述 rust 在 web 上面的使用情况综述。 字节跳</description>
-    </item>
-    <item>
-      <title>潮科技·悦科普-科普活动</title>
-      <link>https://zhuyaguang.github.io/book-recommended/</link>
-      <pubDate>Mon, 18 Sep 2023 10:04:09 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/book-recommended/</guid>
-      <description>潮新闻 “潮科技·悦科普”|朱亚光：读《别逗了，费曼先生》永葆科学好奇心 拍摄脚本底稿 标题 朱亚光 ：最有趣的诺贝尔奖得主，《别逗了，费曼先生》 视频</description>
-    </item>
-    <item>
-      <title>DeepFlow 可观测性 Meetup</title>
-      <link>https://zhuyaguang.github.io/ebpf-observability/</link>
-      <pubDate>Fri, 15 Sep 2023 17:25:47 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/ebpf-observability/</guid>
-      <description>活动总结 【活动回顾】探索基于 eBPF 的可观测性：从理论到实践！ DeepFlow 可观测性 Meetup·杭州站 报告脚本 报告PPT kubesphere 杭州用户委员会 广州 deepflow 合办 meetup 欢迎大家</description>
-    </item>
-    <item>
-      <title>RoCe on K8s 实践</title>
-      <link>https://zhuyaguang.github.io/roce-on-k8s/</link>
-      <pubDate>Wed, 16 Aug 2023 17:07:52 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/roce-on-k8s/</guid>
-      <description>部署 k8s 集群 选择 合适的 容器网络 部署 k8s-device-plugin 选择最新的版本 https://github.com/NVIDIA/k8s-device-plugin 配置 Nvidia docker runtime 1 2 3 4 5 6 7 &amp;#34;default-runtime&amp;#34;: &amp;#34;nvidia&amp;#34;, &amp;#34;runtimes&amp;#34;: { &amp;#34;nvidia&amp;#34;: { &amp;#34;path&amp;#34;: &amp;#34;nvidia-container-runtime&amp;#34;, &amp;#34;runtimeArgs&amp;#34;: [] } }, 部署 RDMA 插件 方案一：使用阿里的镜像 来自文章：</description>
-    </item>
-    <item>
-      <title>Byconity on Kubesphere</title>
-      <link>https://zhuyaguang.github.io/byconity-on-kubesphere/</link>
-      <pubDate>Wed, 09 Aug 2023 15:00:54 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/byconity-on-kubesphere/</guid>
-      <description>基于 KubeSphere 搭建生产级云原生数仓 ByConity 什么是 KubeSphere KubeSphere 是在 Kubernetes 之上构建的面向云原生应用的分布式操作系统，完全开源，支持多云与多集群管理，提供全栈的 IT 自动化运维</description>
-    </item>
-    <item>
-      <title>云原生架构师PPT 汇总</title>
-      <link>https://zhuyaguang.github.io/x-notes/</link>
-      <pubDate>Sat, 29 Jul 2023 19:13:15 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/x-notes/</guid>
-      <description>有时候写绩效答辩、方案规划的时候，要画图，要做PPT,这时候有现成的 PPT 最好了。 所以对于一些大会比如 KubeCon 我每年都会搜集他们的PPT。 字节 地址：字</description>
-    </item>
-    <item>
-      <title>对话毕玄-读书笔记</title>
-      <link>https://zhuyaguang.github.io/readingnotes/</link>
-      <pubDate>Wed, 19 Jul 2023 09:53:00 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/readingnotes/</guid>
-      <description>新一代互联网工程师更难 因为以前的软件，一是相对来讲功能比较单一化，不会太复杂，现在大家要做的软件上来复杂度就比较高，软件要链接的东西更多。 所</description>
-    </item>
-    <item>
-      <title>播客-KubeSphere Talk 第八期</title>
-      <link>https://zhuyaguang.github.io/podcast/</link>
-      <pubDate>Wed, 05 Jul 2023 08:10:57 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/podcast/</guid>
-      <description>成稿后的地址 个人简介 大家好，我叫朱亚光，是之江实验室的一名工程师。是 kubesphere 杭州用户委员会的委员。GitLink 技术委员会的委员。 目前从事于基于大</description>
-    </item>
-    <item>
-      <title>吴恩达-基于LangChain的大语言模型应用开发</title>
-      <link>https://zhuyaguang.github.io/wuclass3/</link>
-      <pubDate>Wed, 07 Jun 2023 09:50:15 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/wuclass3/</guid>
-      <description>基于LangChain的大语言模型应用开发 视频教程地址 https://learn.deeplearning.ai/langchain/lesson/1/introduction 熟肉地址 https://www.youtube.com/watch?v=gUcYC0Iuw2g&amp;amp;list=PLiuLMb-dLdWIYYBF3k5JI_6Od593EIuEG&amp;amp;index=1 Langchain 官方文档 https://blog.langchain.dev/ LangChain 中文入门教程 https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide LangChain 保姆级别教程 https://dev.to/mikeyoung44/a-plain-english-guide-to-reverse-engineering-the-twitter-algorithm-with-langchain-activeloop-and-deepinfra-47fh 一、介绍 Langchain 主要有下面五个主要部</description>
-    </item>
-    <item>
-      <title>吴恩达-使用ChatGPT API构建系统-笔记</title>
-      <link>https://zhuyaguang.github.io/wuclass2/</link>
-      <pubDate>Fri, 02 Jun 2023 09:47:18 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/wuclass2/</guid>
-      <description>使用ChatGPT API构建系统 课程地址：https://learn.deeplearning.ai/chatgpt-building-sy</description>
-    </item>
-    <item>
-      <title>Meetup 2023</title>
-      <link>https://zhuyaguang.github.io/2023meetup/</link>
-      <pubDate>Thu, 01 Jun 2023 14:08:20 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/2023meetup/</guid>
-      <description>线下 3.11 寻找 Milvus 的第 N+1 种可能 寻找 Milvus 的第 N+1 种可能 4.8 第二届开源云原生开发者日 5.20 JuiceFS 在大规模 AI 训练、大模型中的应用 JuiceFS 在大规模 AI 训练、大模型中的应用 6.3 云原</description>
-    </item>
-    <item>
-      <title>吴恩达 prompt 课程笔记</title>
-      <link>https://zhuyaguang.github.io/promptclass/</link>
-      <pubDate>Fri, 05 May 2023 09:11:39 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/promptclass/</guid>
-      <description>吴恩达 prompt 课程笔记 1. 课程简介 两种大模型 base LLMs ：根据文本训练数据预测下一个单词 instruction tuned LLMs ：在 Base 基础上，经过 RLHF 细化，形成有用、诚实和无害的AI。 2. 提示原</description>
-    </item>
-    <item>
-      <title>Azure OpenAI</title>
-      <link>https://zhuyaguang.github.io/azure-openai/</link>
-      <pubDate>Mon, 03 Apr 2023 17:19:44 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/azure-openai/</guid>
-      <description>第一步：注册Azure 注册地址：Azure 国际版 我是用 GitHub 注册的,注册完绑定一张 visa 信用卡 申请 openAI service 申请链接 就一五一十填写，地址填中国也没关系，公</description>
-    </item>
-    <item>
-      <title>大模型实践之旅</title>
-      <link>https://zhuyaguang.github.io/bigmodel/</link>
-      <pubDate>Mon, 20 Mar 2023 10:37:28 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/bigmodel/</guid>
-      <description>工具集 chatGPT UI 开源的ChatGPT UI https://github.com/mckaywrigley/chatbot-ui 一键拥有你自己的 ChatGPT 网页服务。 https://github.com/Yidadaa/ChatGPT-Next</description>
-    </item>
-    <item>
-      <title>Bytebase 体验官之狂飙的 ChatGPT</title>
-      <link>https://zhuyaguang.github.io/bytebase03/</link>
-      <pubDate>Sat, 18 Mar 2023 22:38:02 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/bytebase03/</guid>
-      <description>Bytebase 体验官之狂飙的 ChatGPT 个人信息 朱亚光 最近在研究大模型的Prompt Engineer GitHub 地址 Schema 变更 开启今天的体验官之旅之前，先回忆下我们上期在新手村学到的内容： 1</description>
-    </item>
-    <item>
-      <title>Bytebase 体验官之勇闯新手村</title>
-      <link>https://zhuyaguang.github.io/bytabase2/</link>
-      <pubDate>Wed, 15 Feb 2023 14:10:52 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/bytabase2/</guid>
-      <description>Bytebase 体验官之勇闯新手村 作为一个后端开发，看到微信群里一直在传要干掉 DBA 。于是我踏上了 Bytebase 体验官之旅。想看看 DBA 的尽头是什么。 个人信息 朱亚光 之江实验室</description>
-    </item>
-    <item>
-      <title>2022 年终总结</title>
-      <link>https://zhuyaguang.github.io/2022/</link>
-      <pubDate>Sun, 18 Dec 2022 10:00:20 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/2022/</guid>
-      <description>达芬奇综合症指的是，不停地想学新东西，做了很多新项目，但是实际完成的很少。 更糟糕的是，你完全没有达芬奇的才华，却得了达芬奇的这种病。 2022 我好像</description>
-    </item>
-    <item>
-      <title>Bytebase SQL 编辑器文档体验报告</title>
-      <link>https://zhuyaguang.github.io/bytebase/</link>
-      <pubDate>Fri, 09 Dec 2022 11:22:27 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/bytebase/</guid>
-      <description>Bytebase 介绍 Bytebase 官网的 slogan是： 面向开发者 可靠的 数据库 CI/CD。把数据库 和 DevOps 结合起来了。这对于 DBA 来说确实是一个福音。 作为一个开发之前部署了 mysql</description>
-    </item>
-    <item>
-      <title>AI 场景下的分布式存储方案</title>
-      <link>https://zhuyaguang.github.io/storage-on-ai/</link>
-      <pubDate>Wed, 28 Sep 2022 09:26:16 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/storage-on-ai/</guid>
-      <description>AI 训练的时候经常要拷贝数据集来训练，之前在前项目组发现是一人配一台性能比较好的台式机，然后就是共享几台 A100 的服务器。分布式存储的目的就是访问远</description>
-    </item>
-    <item>
-      <title>Meetup 2022</title>
-      <link>https://zhuyaguang.github.io/serverless-meetup/</link>
-      <pubDate>Tue, 20 Sep 2022 16:06:16 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/serverless-meetup/</guid>
-      <description>6.11 kubesphere走进企业-之江站 这应该是之江实验室第一个社区技术分享会。对接社区和实验室。很开心这次活动能顺利举办。 活动详情：Kube</description>
-    </item>
-    <item>
-      <title>多集群实现 PLG 日志收集</title>
-      <link>https://zhuyaguang.github.io/plg-on-multi-cluster/</link>
-      <pubDate>Wed, 07 Sep 2022 11:04:28 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/plg-on-multi-cluster/</guid>
-      <description>多集群实现 PLG 日志收集 PLG介绍 快速部署 PLG 环境 新建目录保存配置文件 1 mkdir -p /data/loki/config &amp;amp;&amp;amp; cd /data/loki/config 部署 Loki 1 2 wget https://raw.githubusercontent.com/grafana/loki/v2.6.1/cmd/loki/loki-local-config.yaml -O loki-config.yaml docker run --name loki -d -v /data/loki/config:/mnt/config -p 3100:3100 grafana/loki:2.6.1 -config.file=/mnt/config/loki-config.yaml 部署 promtail 1 wget https://raw.githubusercontent.com/grafana/loki/v2.6.1/clients/cmd/promtail/promtail-docker-config.yaml -O promtail-config.yaml 1 2 3</description>
-    </item>
-    <item>
-      <title>我用 极狐 Gitlab 议题 来点菜</title>
-      <link>https://zhuyaguang.github.io/gitlab-printer/</link>
-      <pubDate>Mon, 05 Sep 2022 16:19:39 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/gitlab-printer/</guid>
-      <description>我用 极狐 Gitlab 议题 来点菜 虽然我是一个程序员，但是我一直想开一个餐厅。希望开一个极客范儿的餐厅，大家通过 issue 来点菜。受到推特上一位大佬 Andrew Schmelyun 的影响，我</description>
-    </item>
-    <item>
-      <title>基于 kubesphere 搭建一站式云原生机器学习平台 </title>
-      <link>https://zhuyaguang.github.io/cube-on-kubesphere/</link>
-      <pubDate>Mon, 18 Jul 2022 11:31:10 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/cube-on-kubesphere/</guid>
-      <description>搭建 kubesphere 注意：机器最低规格为：8C16G ；kubectl 版本要1.24 ；之前安装过 KS 要提前清理下环境。 下载 KubeKey 1 2 export KKZONE=cn curl -sfL https://get-kk.kubesphere.io | VERSION=v3.0.2 sh - 如果机器上之</description>
-    </item>
-    <item>
-      <title>K8s 上的中间件</title>
-      <link>https://zhuyaguang.github.io/mysql-on-k8s/</link>
-      <pubDate>Sat, 16 Jul 2022 13:53:33 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/mysql-on-k8s/</guid>
-      <description>K8S 上部署 mysql、redis、minio方案 docker 部署 Minio简单版： 1 2 3 4 5 6 7 8 9 10 11 12 docker run \ -p 9000:9000 \ -p 9001:9001 \ --name zj-minio \ -v ~/minio/data:/data \ -e &amp;#34;MINIO_ROOT_USER=admin&amp;#34; \ -e &amp;#34;MINIO_ROOT_PASSWORD=root123456&amp;#34; \ quay.io/minio/minio server</description>
-    </item>
-    <item>
-      <title>2021年总结</title>
-      <link>https://zhuyaguang.github.io/2021/</link>
-      <pubDate>Wed, 18 May 2022 14:53:27 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/2021/</guid>
-      <description>目标 2021年年初做整年规划的时候，我把简历 title 改成了云原生开发工程师。2021年的主要目标就是补齐云原生技术栈。当时定的目标主要有 写一个 k8s Operator</description>
-    </item>
-    <item>
-      <title>Mlops 产品研习录</title>
-      <link>https://zhuyaguang.github.io/mlops/</link>
-      <pubDate>Mon, 09 May 2022 10:13:22 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/mlops/</guid>
-      <description>4.6号，听了公众号“M小姐研习录”的一个直播，下一个infra 百亿美金战场在哪里？。最近刚好也在用 kubeflow 做一些 infra 的工作。所以就对直播中提到的一</description>
-    </item>
-    <item>
-      <title>分布式系统学习</title>
-      <link>https://zhuyaguang.github.io/distributed-systems/</link>
-      <pubDate>Wed, 04 May 2022 11:02:29 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/distributed-systems/</guid>
-      <description>GitHub 《分布式系统模式》 公众号文章 分布式实验室公众号文章 分布式系统的一些基础理论 值得你收藏的100篇分布式干货文章： Raft：寻找一种易于理解的</description>
-    </item>
-    <item>
-      <title>向量检索落地场景探索</title>
-      <link>https://zhuyaguang.github.io/milvus-action/</link>
-      <pubDate>Mon, 18 Apr 2022 17:23:48 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/milvus-action/</guid>
-      <description>向量检索落地场景探索 Zilliz 公司理念：以重新定义数据科学为愿景，致力于打造一家全球领先的开源技术创新公司，并通过开源和云原生解决方案为企业解锁非结</description>
-    </item>
-    <item>
-      <title>Kubeflow实践笔记</title>
-      <link>https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Sun, 10 Apr 2022 08:47:52 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</guid>
-      <description>基于 Kubernetes 的云原生 AI 平台建设 提高算力资源利用 GPU 虚拟化 GPUManager 基于 GPU 驱动封装实现，用户需要对驱动的某些关键接口（如显存分配、cuda thread 创建等）进行封装劫</description>
-    </item>
-    <item>
-      <title>Hugo Command</title>
-      <link>https://zhuyaguang.github.io/hugo-command/</link>
-      <pubDate>Sun, 10 Apr 2022 08:41:30 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
-      <guid>https://zhuyaguang.github.io/hugo-command/</guid>
-      <description>1 2 3 4 5 6 7 8 9 echo &amp;#39;eval &amp;#34;$(/opt/homebrew/bin/brew shellenv)&amp;#34;&amp;#39; &amp;gt;&amp;gt; /Users/zhuyaguang/.zprofile eval &amp;#34;$(/opt/homebrew/bin/brew shellenv)&amp;#34; hugo new posts/hugo-command.md hugo server -D hugo --destination ./docs --buildDrafts --cleanDestinationDir 参考文档 Love It 主题文章设置 头像设置地址</description>
-    </item>
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>所有文章 - 朱亚光的博客</title>
+        <link>https://zhuyaguang.github.io/posts/</link>
+        <description>所有文章 | 朱亚光的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Fri, 15 Mar 2024 15:57:22 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>无需魔法，快来体验 Claude 3 ，GPT 4在他面前就是弟弟</title>
+    <link>https://zhuyaguang.github.io/claude/</link>
+    <pubDate>Fri, 15 Mar 2024 15:57:22 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/claude/</guid>
+    <description><![CDATA[第一步访问链接 https://lab.amazoncloud.cn/demo/qrcode?trk=UG 微信扫描二维码创建实验环境 第二步 限时试用 第三步 管理模型访问权限&ndash;全选，反正免费 第四步 申请 Claude3 模型，提交下公司信息，]]></description>
+</item><item>
+    <title>流水线的故事</title>
+    <link>https://zhuyaguang.github.io/zadig-story/</link>
+    <pubDate>Wed, 07 Feb 2024 09:13:04 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/zadig-story/</guid>
+    <description><![CDATA[“我其实对你是有些失望的，虽然今年没有年终奖，但你是B里最靠前的。来公司三年了，运维开发样样都不行。版本流水线再挂了，你半夜就来公司修吧”。]]></description>
+</item><item>
+    <title>开源创新的理解</title>
+    <link>https://zhuyaguang.github.io/zjlab-post/</link>
+    <pubDate>Sun, 04 Feb 2024 14:16:46 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/zjlab-post/</guid>
+    <description><![CDATA[开源创新（Open sourse innovation）约稿提纲： 1.你是从什么时候开始接触开源相关技术和社区的？是什么机缘巧合下开始从事开源的相关工作？]]></description>
+</item><item>
+    <title>为什么说 k8s 是新时代的Linux </title>
+    <link>https://zhuyaguang.github.io/kubewharf/</link>
+    <pubDate>Mon, 04 Dec 2023 16:19:35 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/kubewharf/</guid>
+    <description><![CDATA[我们经常说 Kubernetes 已经取代了 Linux 成为下一代的操作系统了。此话怎讲，看下面这张图片，传统Linux不管是用户态还是内核态，在 k8s 里面都有与其对应的服务。]]></description>
+</item><item>
+    <title>狂飙的大模型-2023年度总结</title>
+    <link>https://zhuyaguang.github.io/2023/</link>
+    <pubDate>Fri, 01 Dec 2023 17:24:34 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/2023/</guid>
+    <description><![CDATA[2023年度总结]]></description>
+</item><item>
+    <title>Leetcode 刷题笔记</title>
+    <link>https://zhuyaguang.github.io/leetcode/</link>
+    <pubDate>Mon, 20 Nov 2023 11:46:42 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/leetcode/</guid>
+    <description><![CDATA[最近在整理笔记，之前刷题的总结打包放上来了。这种算法题还是多刷，感觉并没有其他的好办法。 Write Code Every Day 这是大佬写的一篇文章，讲的是自己每天都在写代]]></description>
+</item><item>
+    <title>在 KubeSphere 上部署最新版的 KubeEdge</title>
+    <link>https://zhuyaguang.github.io/kubeedge-install/</link>
+    <pubDate>Tue, 07 Nov 2023 11:03:15 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/kubeedge-install/</guid>
+    <description><![CDATA[KubeEdge 安装使用笔记]]></description>
+</item><item>
+    <title>杭电校外导师讲座</title>
+    <link>https://zhuyaguang.github.io/hdu-speak/</link>
+    <pubDate>Mon, 16 Oct 2023 11:24:39 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/hdu-speak/</guid>
+    <description><![CDATA[云原生时代的技术栈 自我介绍 云原生时代 什么是云原生 kubeSphere 为什么要参与开源社区 https://mp.weixin.qq.com/s/fsNYG5YtJbAkjaNrFLlfUw GLCC 开源之夏 个人成长 https://ppt.infoq.cn/slide/show?cid=136&pid=4453 工具分享 回到杭电 感觉自己也年轻了很多]]></description>
+</item><item>
+    <title>ElasticSearch 权威指南笔记</title>
+    <link>https://zhuyaguang.github.io/elasticsearch/</link>
+    <pubDate>Thu, 05 Oct 2023 08:44:30 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/elasticsearch/</guid>
+    <description><![CDATA[ES 权威指南读书笔记]]></description>
+</item><item>
+    <title>Rust 学习</title>
+    <link>https://zhuyaguang.github.io/rust-note/</link>
+    <pubDate>Wed, 04 Oct 2023 08:49:45 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/rust-note/</guid>
+    <description><![CDATA[rust 打怪升级之路]]></description>
+</item></channel>
 </rss>
