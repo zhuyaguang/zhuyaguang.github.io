@@ -1,15 +1,21 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>向量检索 - 分类 - 朱亚光的博客</title>
-        <link>https://zhuyaguang.github.io/categories/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2/</link>
-        <description>向量检索 - 分类 - 朱亚光的博客</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Mon, 18 Apr 2022 17:23:48 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/categories/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2/" rel="self" type="application/rss+xml" /><item>
-    <title>向量检索落地场景探索</title>
-    <link>https://zhuyaguang.github.io/milvus-action/</link>
-    <pubDate>Mon, 18 Apr 2022 17:23:48 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/milvus-action/</guid>
-    <description><![CDATA[向量检索落地场景探索]]></description>
-</item></channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>向量检索 on 朱亚光的博客</title>
+    <link>https://zhuyaguang.github.io/categories/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2/</link>
+    <description>Recent content in 向量检索 on 朱亚光的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
+    <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster>
+    <lastBuildDate>Mon, 18 Apr 2022 17:23:48 +0800</lastBuildDate>
+    <atom:link href="https://zhuyaguang.github.io/categories/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>向量检索落地场景探索</title>
+      <link>https://zhuyaguang.github.io/milvus-action/</link>
+      <pubDate>Mon, 18 Apr 2022 17:23:48 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
+      <guid>https://zhuyaguang.github.io/milvus-action/</guid>
+      <description>向量检索落地场景探索 Zilliz 公司理念：以重新定义数据科学为愿景，致力于打造一家全球领先的开源技术创新公司，并通过开源和云原生解决方案为企业解锁非结</description>
+    </item>
+  </channel>
 </rss>

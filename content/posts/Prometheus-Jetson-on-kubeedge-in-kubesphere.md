@@ -43,9 +43,13 @@ https://www.kubesphere.io/zh/docs/v3.3/pluggable-components/kubeedge/
 
 ### 安装 Jtop
 
+### 升级内核
+
 ###  安装 jetson GPU Exporter
 
 https://blog.devops.dev/monitor-nvidia-jetson-gpu-82e256999840
+
+容器化部署  jetson GPU Exporter 
 
 ### 使用 kubesphere  自定义监控
 
