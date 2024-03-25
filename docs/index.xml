@@ -12,7 +12,7 @@
     <pubDate>Mon, 25 Mar 2024 16:42:03 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/2024meetup/</guid>
-    <description><![CDATA[3.23 云原生 Meetup * 2024 第一场就做了讲师]]></description>
+    <description><![CDATA[3.23 云原生 Meetup 2024 第一场就做了讲师]]></description>
 </item><item>
     <title>使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态</title>
     <link>https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/</link>
