@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态 - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态" />
-<meta property="og:description" content="环境部署 部署 k8s 环境 参考 kubesphere 部署文档 1 ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd 部署 KubeEdge 环境 参考 在 KubeSphere 上部署最新版的 KubeEdge 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.17.0 修改 kubesphere 配置 启动 kubeedge 功能 https://www.kubesphere.io/zh/docs/v3.3/pluggable-components/kubeedge/ 修改 node-exporter 亲" />
+        <title>使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态 - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态" />
+<meta property="og:description" content="环境部署 部署 k8s 环境 参考 kubesphere 部署文档 1 ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd 部署 KubeEdge 环境 参考 在 KubeSphere 上部署最新版的 KubeEdge 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.15.1 修改 kubesphere 配置 由于 kubeedge 在 arm 上的服务发" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-21T14:19:33+08:00" />
@@ -15,8 +15,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
-<meta name="twitter:title" content="使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态"/>
-<meta name="twitter:description" content="环境部署 部署 k8s 环境 参考 kubesphere 部署文档 1 ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd 部署 KubeEdge 环境 参考 在 KubeSphere 上部署最新版的 KubeEdge 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.17.0 修改 kubesphere 配置 启动 kubeedge 功能 https://www.kubesphere.io/zh/docs/v3.3/pluggable-components/kubeedge/ 修改 node-exporter 亲"/>
+<meta name="twitter:title" content="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态"/>
+<meta name="twitter:description" content="环境部署 部署 k8s 环境 参考 kubesphere 部署文档 1 ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd 部署 KubeEdge 环境 参考 在 KubeSphere 上部署最新版的 KubeEdge 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.15.1 修改 kubesphere 配置 由于 kubeedge 在 arm 上的服务发"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -24,12 +24,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态",
+        "headline": "使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/"
-        },"genre": "posts","wordcount":  132 ,
+        },"genre": "posts","wordcount":  161 ,
         "url": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/","datePublished": "2024-03-21T14:19:33+08:00","dateModified": "2024-03-21T14:19:33+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -77,9 +77,9 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 132 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 161 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -137,13 +137,18 @@
 </tr>
 <tr>
 <td>kubeedge</td>
-<td>1.17.0</td>
+<td>1.15.1</td>
 </tr>
 </tbody>
 </table>
 <h3 id="修改-kubesphere-配置">修改 kubesphere 配置</h3>
 <ul>
-<li>启动 kubeedge 功能</li>
+<li>
+<p>由于 kubeedge 在 arm 上的服务发现功能不太好用，我们需要把 kubeproxy 的 ipvs 改成 iptables</p>
+</li>
+<li>
+<p>启动 kubeedge 功能</p>
+</li>
 </ul>
 <p><a href="https://www.kubesphere.io/zh/docs/v3.3/pluggable-components/kubeedge/" target="_blank" rel="noopener noreffer">https://www.kubesphere.io/zh/docs/v3.3/pluggable-components/kubeedge/</a></p>
 <ul>
@@ -179,7 +184,7 @@
                             <a class="link-to-markdown" href="/prometheus-jetson-on-kubeedge-in-kubesphere/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>

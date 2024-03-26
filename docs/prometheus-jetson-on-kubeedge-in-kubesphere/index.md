@@ -1,4 +1,4 @@
-# 使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态
+# 使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态
 
 
 ## 环境部署
@@ -20,9 +20,11 @@
 | kubesphere | 3.4.1  |
 | containerd | 1.7.2  |
 | k8s        | 1.26.0 |
-| kubeedge   | 1.17.0 |
+| kubeedge   | 1.15.1 |
 
 ### 修改 kubesphere 配置
+
+* 由于 kubeedge 在 arm 上的服务发现功能不太好用，我们需要把 kubeproxy 的 ipvs 改成 iptables 
 
 * 启动 kubeedge 功能
 
