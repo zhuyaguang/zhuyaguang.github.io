@@ -18,11 +18,11 @@
       <description>3.23 云原生 Meetup 2024 第一场就做了讲师</description>
     </item>
     <item>
-      <title>使用 Prometheus 监控 kubeedge 边缘节点 GPU 状态</title>
+      <title>使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态</title>
       <link>https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/</link>
       <pubDate>Thu, 21 Mar 2024 14:19:33 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
       <guid>https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/</guid>
-      <description>环境部署 部署 k8s 环境 参考 kubesphere 部署文档 1 ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd 部署 KubeEdge 环境 参考 在 KubeSphere 上部署最新版的 KubeEdge 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.17.0 修改 kubesphere 配置 启动 kubeedge 功能 https://www.kubesphere.io/zh/docs/v3.3/pluggable-components/kubeedge/ 修改 node-exporter 亲</description>
+      <description>环境部署 部署 k8s 环境 参考 kubesphere 部署文档 1 ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd 部署 KubeEdge 环境 参考 在 KubeSphere 上部署最新版的 KubeEdge 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.15.1 修改 kubesphere 配置 由于 kubeedge 在 arm 上的服务发</description>
     </item>
     <item>
       <title>基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）</title>
