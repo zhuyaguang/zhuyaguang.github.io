@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>基于 Jetson 在 kubeedge上 搭建 机器学习环境（docker/containerd） - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="基于 Jetson 在 kubeedge上 搭建 机器学习环境（docker/containerd）" />
-<meta property="og:description" content="应用的部署流程图 环境配置 安装jtop 1 2 3 sudo apt-get install python3-pip python3-dev -y sudo -H pip3 install jetson-stats sudo systemctl restart jtop.service 安装JetPack 什么是 JetPack （https://developer.nv" />
+        <title>基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd） - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）" />
+<meta property="og:description" content="应用的部署流程图 在 Jetson 上 如果部署 GPU 类型的应用，需要有 NVIDIA Container Runtime 支持。 NVIDIA Container Runtime 环境配置 安装jtop 安装 jtop 的目的是为了监控 GPU 的使用情况 1 2 3 sudo apt-get install python3-pip python3-dev -y" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-21T09:07:51+08:00" />
@@ -15,8 +15,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
-<meta name="twitter:title" content="基于 Jetson 在 kubeedge上 搭建 机器学习环境（docker/containerd）"/>
-<meta name="twitter:description" content="应用的部署流程图 环境配置 安装jtop 1 2 3 sudo apt-get install python3-pip python3-dev -y sudo -H pip3 install jetson-stats sudo systemctl restart jtop.service 安装JetPack 什么是 JetPack （https://developer.nv"/>
+<meta name="twitter:title" content="基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）"/>
+<meta name="twitter:description" content="应用的部署流程图 在 Jetson 上 如果部署 GPU 类型的应用，需要有 NVIDIA Container Runtime 支持。 NVIDIA Container Runtime 环境配置 安装jtop 安装 jtop 的目的是为了监控 GPU 的使用情况 1 2 3 sudo apt-get install python3-pip python3-dev -y"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -24,12 +24,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "基于 Jetson 在 kubeedge上 搭建 机器学习环境（docker/containerd）",
+        "headline": "基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/jetson-on-kubeedge-use-gpu\/"
-        },"genre": "posts","wordcount":  1465 ,
+        },"genre": "posts","wordcount":  2313 ,
         "url": "https:\/\/zhuyaguang.github.io\/jetson-on-kubeedge-use-gpu\/","datePublished": "2024-03-21T09:07:51+08:00","dateModified": "2024-03-21T09:07:51+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -77,10 +77,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">基于 Jetson 在 kubeedge上 搭建 机器学习环境（docker/containerd）</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1465 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2313 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -95,19 +95,31 @@
         <li><a href="#安装jetpack">安装JetPack</a></li>
         <li><a href="#安装-nvidia-container-toolkit">安装 NVIDIA Container Toolkit</a></li>
         <li><a href="#地卫二-jetson安装组件版本信息">地卫二 Jetson安装组件版本信息</a></li>
-        <li><a href="#安装-docker">安装 Docker</a></li>
+        <li><a href="#安装-docker-打镜像包">安装 Docker 打镜像包</a></li>
         <li><a href="#nvida-官方的机器学习-docker-镜像">Nvida 官方的机器学习 docker 镜像</a></li>
       </ul>
     </li>
     <li><a href="#应用部署">应用部署</a>
       <ul>
-        <li><a href="#手动部署">手动部署</a>
+        <li><a href="#部署-mnist-算法">部署 mnist 算法</a>
           <ul>
-            <li><a href="#镜像准备">镜像准备</a></li>
-            <li><a href="#kubectl-apply-部署">kubectl apply 部署</a></li>
+            <li><a href="#mnist-镜像准备">mnist 镜像准备</a></li>
+            <li><a href="#pod部署">pod部署</a></li>
+            <li><a href="#deployment-部署">deployment 部署</a></li>
           </ul>
         </li>
-        <li><a href="#界面部署">界面部署</a></li>
+        <li><a href="#部署-高分算法">部署 高分算法</a>
+          <ul>
+            <li><a href="#job-部署用算法基础镜像">job 部署，用算法基础镜像</a></li>
+            <li><a href="#job-部署用高分算法镜像">job 部署，用高分算法镜像</a></li>
+            <li><a href="#制作-chart-包上架应用市场">制作 chart 包，上架应用市场</a></li>
+          </ul>
+        </li>
+        <li><a href="#ui-界面部署">UI 界面部署</a>
+          <ul>
+            <li><a href="#应用发布">应用发布</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -121,8 +133,23 @@
         data-sizes="auto"
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240315111505144.png"
         title="image-20240315111505144" /></p>
+<blockquote>
+<p>在 Jetson 上 如果部署 GPU 类型的应用，需要有  NVIDIA Container Runtime 支持。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/_images/runtime-architecture.png"
+        data-srcset="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/_images/runtime-architecture.png, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/_images/runtime-architecture.png 1.5x, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/_images/runtime-architecture.png 2x"
+        data-sizes="auto"
+        alt="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/_images/runtime-architecture.png"
+        title="img" /></p>
+<p><a href="https://developer.nvidia.com/container-runtime#" target="_blank" rel="noopener noreffer">NVIDIA Container Runtime</a></p>
 <h2 id="环境配置">环境配置</h2>
 <h3 id="安装jtop">安装jtop</h3>
+<blockquote>
+<p>安装 jtop 的目的是为了监控 GPU 的使用情况</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -138,10 +165,10 @@
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240311094852620.png"
-        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240311094852620.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240311094852620.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240311094852620.png 2x"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240311094852620.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240311094852620.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240311094852620.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240311094852620.png 2x"
         data-sizes="auto"
-        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240311094852620.png"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240311094852620.png"
         title="image-20240311094852620" /></p>
 <h3 id="安装jetpack">安装JetPack</h3>
 <ul>
@@ -160,10 +187,10 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313140009928.png"
-        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313140009928.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313140009928.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313140009928.png 2x"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313140009928.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313140009928.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313140009928.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313140009928.png 2x"
         data-sizes="auto"
-        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240313140009928.png"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313140009928.png"
         title="image-20240313140009928" /></p>
 <ul>
 <li>安装命令</li>
@@ -184,7 +211,7 @@
 </div>
 </div><p>参考文档：<a href="https://docs.nvidia.com/jetson/jetpack/index.html" target="_blank" rel="noopener noreffer">NVIDIA JetPack Documentation</a></p>
 <ul>
-<li>无法安装，更换镜像源</li>
+<li>无法安装，请更换镜像源</li>
 </ul>
 <blockquote>
 <div class="highlight"><div class="chroma">
@@ -225,17 +252,20 @@
 </span></span><span class="line"><span class="cl">sudo systemctl restart containerd
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>安装教程：<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-the-nvidia-container-toolkit" target="_blank" rel="noopener noreffer">Installing the NVIDIA Container Toolkit</a></p>
-<p>故障排除：<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/troubleshooting.html" target="_blank" rel="noopener noreffer">Trobleshooting</a></p>
+</div><blockquote>
+<p>参考文档</p>
+</blockquote>
+<p>安装教程：<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-the-nvidia-container-toolkit" target="_blank" rel="noopener noreffer">Installing the NVIDIA Container Toolkit</a></p>
+<p>安装有问题可以参考：<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/troubleshooting.html" target="_blank" rel="noopener noreffer">Trobleshooting</a></p>
 <p><a href="https://github.com/NVIDIA/nvidia-docker/issues/1268" target="_blank" rel="noopener noreffer">nvidia-docker 与 nvidia container runtime 的区别</a></p>
 <h3 id="地卫二-jetson安装组件版本信息">地卫二 Jetson安装组件版本信息</h3>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313104210233.png"
-        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313104210233.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313104210233.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313104210233.png 2x"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313104210233.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313104210233.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313104210233.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313104210233.png 2x"
         data-sizes="auto"
-        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240313104210233.png"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313104210233.png"
         title="image-20240313104210233" /></p>
 <ul>
 <li>
@@ -246,25 +276,16 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313104318867.png"
-        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313104318867.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313104318867.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313104318867.png 2x"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313104318867.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313104318867.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313104318867.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313104318867.png 2x"
         data-sizes="auto"
-        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240313104318867.png"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313104318867.png"
         title="image-20240313104318867" /></p>
 </li>
 </ul>
-<h3 id="安装-docker">安装 Docker</h3>
-<p>nvidia 在 jetson 上对 containerd 运行时支持不太友好</p>
-<p>在普通的 GPU 服务器上是可以支持 containerd 运行</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/_images/runtime-architecture.png"
-        data-srcset="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/_images/runtime-architecture.png, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/_images/runtime-architecture.png 1.5x, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/_images/runtime-architecture.png 2x"
-        data-sizes="auto"
-        alt="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/_images/runtime-architecture.png"
-        title="img" /></p>
-<p><a href="https://developer.nvidia.com/container-runtime#" target="_blank" rel="noopener noreffer">NVIDIA Container Runtime</a></p>
+<h3 id="安装-docker-打镜像包">安装 Docker 打镜像包</h3>
+<p>nvidia 在 jetson 上对 containerd 运行时支持不太友好，有些算法在containerd 运行会出现错误， 在普通的 GPU 服务器上是可以完美支持 containerd 运行 。</p>
+<p>另外 containerd 打镜像也需要 docker build  来支持。Docker  可以不用安装在 Jetson 机器上，可以准备一台专门打镜像的机器。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -331,7 +352,7 @@
         data-sizes="auto"
         alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240313090907773.png"
         title="image-20240313090907773" /></p>
-<p>其中 <strong>l4t-base container</strong> 是基础镜像，可以在此基础上构建。</p>
+<p>其中 <strong>l4t-base container</strong> 是基础镜像，可以在此基础上构建自己所需的镜像。</p>
 <p>例如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -360,8 +381,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="应用部署">应用部署</h2>
-<h3 id="手动部署">手动部署</h3>
-<h4 id="镜像准备">镜像准备</h4>
+<h3 id="部署-mnist-算法">部署 mnist 算法</h3>
+<h4 id="mnist-镜像准备">mnist 镜像准备</h4>
 <ul>
 <li>pytorch 训练代码</li>
 </ul>
@@ -663,7 +684,7 @@
 </div>
 </div><ul>
 <li>
-<p>Dockerfile 打镜像</p>
+<p>Dockerfile 打镜像，基于 nvidia 的 pytorch 基础镜像</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -677,9 +698,10 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
-<li>
-<p>docker 运行命令：</p>
-</li>
+</ul>
+<p><code>docker build -t mnist:1.0 .</code></p>
+<ul>
+<li>docker 运行命令：</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -694,7 +716,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
-<li>镜像转换</li>
+<li>
+<p>镜像转换</p>
+<p><strong>当然如果安装了 Harbor 镜像仓库，直接 docker push 然后 ctr images pull</strong></p>
+</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -735,7 +760,7 @@
 </span></span><span class="line"><span class="cl">ctr tasks <span class="nb">kill</span> gpu-demo --signal SIGKILL
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="kubectl-apply-部署">kubectl apply 部署</h4>
+</div><h4 id="pod部署">pod部署</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -774,7 +799,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Never</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="界面部署">界面部署</h3>
+</div><h4 id="deployment-部署">deployment 部署</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -839,7 +864,426 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">maxSurge</span><span class="p">:</span><span class="w"> </span><span class="m">25</span><span class="l">%</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h3 id="部署-高分算法">部署 高分算法</h3>
+<ul>
+<li>
+<p>Dockerfile-arm</p>
+<p>whl 文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="c"># 使用官方的Python基础镜像</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># FROM python:3.8</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> python:3.8-slim</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># # 安装OpenCV依赖</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get update<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># libjasper-dev libdc1394-22-dev libavresample-dev \</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get install -y --no-install-recommends <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    build-essential <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    cmake <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    git <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    pkg-config <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    libjpeg-dev <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    libtiff5-dev <span class="se">\ </span>   <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    libpng-dev <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    zlib1g-dev libopenexr-dev libgdal-dev <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    gdal-bin <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    libavcodec-dev <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    libavformat-dev <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    libswscale-dev <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    libv4l-dev <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    libxvidcore-dev <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    libx264-dev <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    libgtk-3-dev libcanberra-gtk* <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    libatlas-base-dev  libhdf5-dev liblapacke-dev libblas-dev <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    gfortran <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    ffmpeg <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    python3-dev python3-pip<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 复制PyTorch安装文件到镜像中 这里面的镜像文件</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> torch-1.10.0-cp38-cp38-manylinux2014_aarch64.whl /tmp/torch-1.10.0-cp38-cp38-manylinux2014_aarch64.whl<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> torchvision-0.11.0-cp38-cp38-manylinux2014_aarch64.whl /tmp/torchvision-0.11.0-cp38-cp38-manylinux2014_aarch64.whl<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> torchaudio-0.10.0-cp38-cp38-manylinux2014_aarch64.whl /tmp/torchaudio-0.10.0-cp38-cp38-manylinux2014_aarch64.whl<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> scipy-1.8.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl /tmp/scipy-1.8.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> opencv_python-4.9.0.80-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl /tmp/opencv_python-4.9.0.80-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 安装PyTorch</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install --upgrade pip<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install <span class="nv">Pillow</span><span class="o">==</span>10.2.0<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install <span class="nv">numpy</span><span class="o">==</span>1.24.4<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install /tmp/torch-1.10.0-cp38-cp38-manylinux2014_aarch64.whl<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install /tmp/torchvision-0.11.0-cp38-cp38-manylinux2014_aarch64.whl<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install /tmp/torchaudio-0.10.0-cp38-cp38-manylinux2014_aarch64.whl<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install /tmp/scipy-1.8.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install /tmp/opencv_python-4.9.0.80-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install <span class="nv">gitpython</span><span class="o">==</span>3.1.42<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install <span class="nv">setuptools</span><span class="o">==</span>69.2.0<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install tiffile<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install <span class="nv">GDAL</span><span class="o">==</span>3.6.2<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install ultralytics<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># # 将您的算法代码复制到容器中</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> GaoFen-2_ortho.py /app/GaoFen-2_ortho.py<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> GF2_PMS1_E139.8_N35.5_20230109_L1A0007045334-MSS1.rpb /app/GF2_PMS1_E139.8_N35.5_20230109_L1A0007045334-MSS1.rpb<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> GF2_PMS1_E139.8_N35.5_20230109_L1A0007045334-MSS1.tiff /app/GF2_PMS1_E139.8_N35.5_20230109_L1A0007045334-MSS1.tiff<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> GMTED2010.jp2 /app/GMTED2010.jp2<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 给予执行权限</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> chmod +x GaoFen-2_ortho.py<span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="job-部署用算法基础镜像">job 部署，用算法基础镜像</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">tianji-job3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">jobgroup</span><span class="p">:</span><span class="w"> </span><span class="l">jobexample</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubejob</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">jobgroup</span><span class="p">:</span><span class="w"> </span><span class="l">jobexample</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nodeName</span><span class="p">:</span><span class="w"> </span><span class="l">jetpack513</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">tianji-c3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">armtianji:v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/bin/sh&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;-c&#34;</span><span class="p">]</span><span class="w">      
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;python /app/GaoFen-2_ortho.py&#34;</span><span class="p">]</span><span class="w">   
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">IfNotPresent</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/app       </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/home/jetpack511/zyg/algorithms/Gaofen</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Never</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中 <code>path: /home/jetpack511/zyg/algorithms/Gaofen</code> 为 gitlab 下载的代码存放地址</p>
+<h4 id="job-部署用高分算法镜像">job 部署，用高分算法镜像</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">gaofen-job</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">jobgroup</span><span class="p">:</span><span class="w"> </span><span class="l">jobexample</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubejob</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">jobgroup</span><span class="p">:</span><span class="w"> </span><span class="l">jobexample</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nodeName</span><span class="p">:</span><span class="w"> </span><span class="l">edge1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">tianji-c3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">local-harbor.com/algorithms/gaofen:v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/bin/sh&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;-c&#34;</span><span class="p">]</span><span class="w">      
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;python /app/GaoFen-2_ortho.py&#34;</span><span class="p">]</span><span class="w">   
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">IfNotPresent</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Never</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="制作-chart-包上架应用市场">制作 chart 包，上架应用市场</h4>
+<ul>
+<li>安装 Helm ，具体参考<a href="https://helm.sh/zh/docs/" target="_blank" rel="noopener noreffer">官网</a></li>
+<li>helm create gaofen 新建模板</li>
+<li>rm -rf gaofen/templates/* 替换k8s资源文件，将 job.yaml  放进去</li>
+<li>helm install gaofen2024 ./gaofen 安装应用</li>
+<li>helm uninstall gaofen2024  卸载应用</li>
+</ul>
+<p>修改 Values.yaml 外部传入变量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">gaofen-2024</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">images</span><span class="p">:</span><span class="w"> </span><span class="l">local-harbor.com/algorithms/gaofen:v1</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>job.yaml</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span>{{<span class="w"> </span><span class="l">.Values.name }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">jobgroup</span><span class="p">:</span><span class="w"> </span><span class="l">jobexample</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubejob</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">jobgroup</span><span class="p">:</span><span class="w"> </span><span class="l">jobexample</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nodeName</span><span class="p">:</span><span class="w"> </span><span class="l">edge1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">tianji-c3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span>{{<span class="w"> </span><span class="l">.Values.images }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/bin/sh&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;-c&#34;</span><span class="p">]</span><span class="w">      
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;python /app/GaoFen-2_ortho.py&#34;</span><span class="p">]</span><span class="w">   
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">IfNotPresent</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Never</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>打包 <code>helm package gaofen/</code></li>
+</ul>
+<h3 id="ui-界面部署">UI 界面部署</h3>
+<blockquote>
+<p>需要创建一个企业空间、一个项目以及一个用户 (<code>project-regular</code>)</p>
+</blockquote>
+<ol>
+<li>登录该用户账号，上传应用模板</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326143428655.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326143428655.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326143428655.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326143428655.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326143428655.png"
+        title="image-20240326143428655" /></p>
+<ol start="2">
+<li>每个算法的代码仓库里面，会有一个自动打包好的 chart 包（应用安装包）</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326143922245.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326143922245.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326143922245.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326143922245.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326143922245.png"
+        title="image-20240326143922245" /></p>
+<ol start="3">
+<li>上传应用的图标</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144231886.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144231886.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144231886.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144231886.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144231886.png"
+        title="image-20240326144231886" /></p>
+<ol start="4">
+<li>安装应用，选择项目（命名空间）</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144552140.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144552140.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144552140.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144552140.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144552140.png"
+        title="image-20240326144552140" /></p>
+<ol start="5">
+<li>
+<p>配置应用参数，选择应用部署的卫星节点。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144644944.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144644944.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144644944.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144644944.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144644944.png"
+        title="image-20240326144644944" /></p>
+<ol start="6">
+<li>
+<p>部署后，可以查看应用实例</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145121877.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145121877.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145121877.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145121877.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145121877.png"
+        title="image-20240326145121877" /></p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="应用发布">应用发布</h4>
+<ul>
+<li>应用还可以提交发布给其他人使用</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145341039.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145341039.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145341039.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145341039.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145341039.png"
+        title="image-20240326145341039" /></p>
+<ul>
+<li>管理员审核通过后，可以上架到公共的应用商店</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145424545.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145424545.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145424545.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145424545.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145424545.png"
+        title="image-20240326145424545" /></p>
+<p>具体应用生命周期管理，可以参考<a href="https://kubesphere.io/zh/docs/v3.3/application-store/app-lifecycle-management/" target="_blank" rel="noopener noreffer">链接</a></p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -852,7 +1296,7 @@
                             <a class="link-to-markdown" href="/jetson-on-kubeedge-use-gpu/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 Jetson 在 kubeedge上 搭建 机器学习环境（docker/containerd）" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 Jetson 在 kubeedge上 搭建 机器学习环境（docker/containerd）" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 Jetson 在 kubeedge上 搭建 机器学习环境（docker/containerd）"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 Jetson 在 kubeedge上 搭建 机器学习环境（docker/containerd）"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 Jetson 在 kubeedge上 搭建 机器学习环境（docker/containerd）" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 Jetson 在 kubeedge上 搭建 机器学习环境（docker/containerd）" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 Jetson 在 kubeedge上 搭建 机器学习环境（docker/containerd）"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" data-title="基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
