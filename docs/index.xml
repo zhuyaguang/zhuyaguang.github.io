@@ -85,7 +85,7 @@
       <link>https://zhuyaguang.github.io/kubeedge-install/</link>
       <pubDate>Tue, 07 Nov 2023 11:03:15 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
       <guid>https://zhuyaguang.github.io/kubeedge-install/</guid>
-      <description>准备 一个 k8s 集群 1 2 3 4 5 6 7 8 9 10 11 12 centos ./kk create config --with-kubernetes v1.26.0 --with-kubesphere ./kk create cluster -f config-sample.yaml 低版本的k8s:./kk create cluster --with-kubernetes v1.22.12 --with-kubesphere v3.4.1 ubuntu 20.04 ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd 一个 边缘节点 可以访问</description>
+      <description>准备 一个 k8s 集群，使用 kubesphere 安装 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 centos ./kk create config --with-kubernetes v1.26.0 --with-kubesphere ./kk create cluster -f config-sample.yaml 低版本的k8s: ./kk create cluster --with-kubernetes v1.22.12 --with-kubesphere v3.4.1 ubuntu 20.04 all in one ./kk create cluster --with-kubernetes</description>
     </item>
     <item>
       <title>杭电校外导师讲座</title>
