@@ -5,6 +5,8 @@ draft: true
 ---
 
 
+# 在轨验证方案
+
 ##  应用的部署流程图
 
 ![image-20240315111505144](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240315111505144.png)
@@ -79,22 +81,7 @@ sudo apt show nvidia-jetpack
 > sudo apt install nvidia-jetpack
 > ```
 
-### 安装 NVIDIA Container Toolkit 
 
-```
-sudo apt-get install -y nvidia-container-toolkit
-
-sudo nvidia-ctk runtime configure --runtime=containerd
-sudo systemctl restart containerd
-```
-
-> 参考文档
-
-安装教程：[Installing the NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-the-nvidia-container-toolkit)
-
-安装有问题可以参考：[Trobleshooting](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/troubleshooting.html)
-
-[nvidia-docker 与 nvidia container runtime 的区别](https://github.com/NVIDIA/nvidia-docker/issues/1268)
 
 ### 地卫二 Jetson安装组件版本信息
 
@@ -116,7 +103,7 @@ nvidia 在 jetson 上对 containerd 运行时支持不太友好，有些算法�
 
 
 
-![image-20240312174619755](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312174619755.png)
+![image-20240312174619755](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240312174619755.png)
 
 [Cloud-Native on Jetson](https://developer.nvidia.com/embedded/jetson-cloud-native)
 
@@ -124,7 +111,7 @@ nvidia 在 jetson 上对 containerd 运行时支持不太友好，有些算法�
 
 
 
-![image-20240312180127250](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312180127250.png)
+![image-20240312180127250](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240312180127250.png)
 
 
 
@@ -153,7 +140,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 ### Nvida 官方的机器学习 docker 镜像
 
-![image-20240313090907773](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313090907773.png)
+![image-20240313090907773](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240313090907773.png)
 
 
 
@@ -340,13 +327,22 @@ if __name__ == '__main__':
 
 `docker build -t mnist:1.0 .`
 
-* docker 运行命令：
+docker 运行命令：
+
+不加 --runtime nvidia 参数，会使用 CPU 进行训练
 
 ```shell
-sudo docker run -it --rm --runtime nvidia --network host -v /home/user/project:/location/in/container nvcr.io/nvidia/l4t-pytorch:r35.2.1-pth2.0-py3
-
+docker run -it --runtime nvidia mnist:1.0  /bin/bash
 python3 pytorch-minst.py
 ```
+
+* 不打镜像直接挂载代码
+
+  ```shell
+  sudo docker run -it --rm --runtime nvidia --network host -v /home/user/project:/location/in/container nvcr.io/nvidia/l4t-pytorch:r35.2.1-pth2.0-py3
+  
+  python3 pytorch-minst.py
+  ```
 
 * 镜像转换
 
@@ -383,7 +379,7 @@ spec:
   nodeSelector:
     kubernetes.io/hostname: edge1
   containers:
-  - image: docker.io/library/pytorch-mnist:latest
+  - image: local-harbor.com/algorithms/mnist:1.0
     imagePullPolicy: IfNotPresent
     name: gpu-test
     command:
@@ -416,7 +412,7 @@ spec:
     spec:
       containers:
       - name: gpu-test
-        image: docker.io/library/pytorch-mnist:latest
+        image: local-harbor.com/algorithms/mnist:1.0
         imagePullPolicy: IfNotPresent
         command:
         - "/bin/bash"
@@ -433,7 +429,7 @@ spec:
 
 * Dockerfile-arm
 
-  whl 文件
+  whl 文件比较大，需要从指定目录拷贝过来。
 
   ```dockerfile
   # 使用官方的Python基础镜像
@@ -651,3 +647,10 @@ spec:
 
 具体应用生命周期管理，可以参考[链接](https://kubesphere.io/zh/docs/v3.3/application-store/app-lifecycle-management/)
 
+## 参考文档
+
+nvidia-ctk安装教程：[Installing the NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-the-nvidia-container-toolkit)
+
+安装有问题可以参考：[Trobleshooting](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/troubleshooting.html)
+
+[nvidia-docker 与 nvidia container runtime 的区别](https://github.com/NVIDIA/nvidia-docker/issues/1268)

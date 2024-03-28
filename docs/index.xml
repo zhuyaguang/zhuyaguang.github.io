@@ -22,14 +22,14 @@
       <link>https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/</link>
       <pubDate>Thu, 21 Mar 2024 14:19:33 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
       <guid>https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/</guid>
-      <description>环境部署 部署 k8s 环境 参考 kubesphere 部署文档 1 ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd 部署 KubeEdge 环境 参考 在 KubeSphere 上部署最新版的 KubeEdge 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.15.1 修改 kubesphere 配置 由于 kubeedge 在 arm 上的服务发</description>
+      <description>环境部署 部署 k8s 环境 参考 kubesphere 部署文档 1 ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd 部署 KubeEdge 环境 参考 在 KubeSphere 上部署最新版的 KubeEdge 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.15.1 Jetson型号 NVIDIA Jetson Xavier NX (16GB ram) Jtop</description>
     </item>
     <item>
       <title>基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）</title>
       <link>https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/</link>
       <pubDate>Thu, 21 Mar 2024 09:07:51 +0800</pubDate><author>zhuyaguang1368@163.com (朱亚光)</author>
       <guid>https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/</guid>
-      <description>应用的部署流程图 在 Jetson 上 如果部署 GPU 类型的应用，需要有 NVIDIA Container Runtime 支持。 NVIDIA Container Runtime 环境配置 安装jtop 安装 jtop 的目的是为了监控 GPU 的使用情况 1 2 3 sudo apt-get install python3-pip python3-dev -y</description>
+      <description>在轨验证方案 应用的部署流程图 在 Jetson 上 如果部署 GPU 类型的应用，需要有 NVIDIA Container Runtime 支持。 NVIDIA Container Runtime 环境配置 安装jtop 安装 jtop 的目的是为了监控 GPU 的使用情况 1 2 3</description>
     </item>
     <item>
       <title>Kubeedge 代码解析（更新中）</title>

@@ -18,12 +18,17 @@ draft: true
 
 参考 [在 KubeSphere 上部署最新版的 KubeEdge](https://zhuyaguang.github.io/kubeedge-install/)
 
-| 组件       | 版本   |
-| ---------- | ------ |
-| kubesphere | 3.4.1  |
-| containerd | 1.7.2  |
-| k8s        | 1.26.0 |
-| kubeedge   | 1.15.1 |
+| 组件       | 版本                               |
+| ---------- | ---------------------------------- |
+| kubesphere | 3.4.1                              |
+| containerd | 1.7.2                              |
+| k8s        | 1.26.0                             |
+| kubeedge   | 1.15.1                             |
+| Jetson型号 | NVIDIA Jetson Xavier NX (16GB ram) |
+| Jtop       | 4.2.7                              |
+| JetPack    |                                    |
+
+containerd  / nvidia GPU  / Jetson  像一个永远不可能三角形
 
 ### 修改 kubesphere 配置
 
