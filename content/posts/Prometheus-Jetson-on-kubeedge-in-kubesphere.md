@@ -1,5 +1,5 @@
 ---
-title: "使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态"
+title: "使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态"
 date: 2024-03-21T14:19:33+08:00
 draft: true
 ---
@@ -53,7 +53,7 @@ draft: true
 
 2.  advertiseAddress 设置为 cloudhub 所在的物理机地址
 
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/35101517/1710467882107-c44e734b-245d-446b-8564-f8830e5db478.png#averageHue=%23374154&clientId=ubfbc51a9-8b9e-4&from=paste&height=755&id=u65c0d477&originHeight=755&originWidth=1189&originalType=binary&ratio=1&rotation=0&showTitle=false&size=56006&status=done&style=none&taskId=u689a8677-8a5b-43af-8592-e88e368b176&title=&width=1189)
+![image.png](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467882107-c44e734b-245d-446b-8564-f8830e5db478.png)
 
 
 
@@ -61,7 +61,7 @@ draft: true
 
 > 修改完 发现可以显示边缘节点，但是没有 CPU 和 内存信息，发现边缘节点没有 node-exporter 这个pod。
 
-![image-20240329112326949](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329112326949.png)
+![image-20240329112326949](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329112326949.png)
 
 
 
@@ -69,7 +69,7 @@ draft: true
 
 `kubectl get ds -n kubesphere-monitoring-system` 发现 不会部署到边缘节点上
 
-![image-20240329135414326](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329135414326.png)
+![image-20240329135414326](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329135414326.png)
 
 修改为：
 
@@ -131,7 +131,7 @@ kubecrl edit该失败的pod，发现是其中的kube-rbac-proxy这个container�
    $ systemctl restart edgecore
    ```
 
-   ![image-20240329152628525](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329152628525.png)
+   ![image-20240329152628525](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329152628525.png)
 
    
 
@@ -157,7 +157,7 @@ kubecrl edit该失败的pod，发现是其中的kube-rbac-proxy这个container�
       kubectl apply -f build/agent/resources/
       ```
 
-      ![image-20240329154436074](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329154436074.png)
+      ![image-20240329154436074](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329154436074.png)
 
 #### 4. 修改dnsPolicy
 
@@ -181,7 +181,7 @@ nameserver 127.0.0.53
 
 vim /etc/systemd/system/edgecore.service
 
-![image-20240329155133337](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329155133337.png)
+![image-20240329155133337](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329155133337.png)
 
 ```
 Environment=METASERVER_DUMMY_IP=kubernetes.default.svc.cluster.local
@@ -203,11 +203,11 @@ systemctl restart edgecore
 
 最后我们可以将 kubesphere 的 k8s 服务通过 NodePort 暴露出来。就可以在页面查看 
 
-![image-20240401145941476](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240401145941476.png)
+![image-20240401145941476](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401145941476.png)
 
 然后界面上也出现了 CPU 和 内存的信息
 
-![image-20240401151605113](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240401151605113.png)
+![image-20240401151605113](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401151605113.png)
 
 
 
@@ -571,7 +571,7 @@ spec:
 
 部署完成后，jetson-exporter pod  running
 
-![image-20240401164222036](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240401164222036.png)
+![image-20240401164222036](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401164222036.png)
 
 重启prometheus pod，重新加载配置后，可以在prometheus界面看到新增加的gpu exporter的target
 
@@ -579,7 +579,7 @@ spec:
 kubectl delete pod prometheus-k8s-0 -n kubesphere-monitoring-system
 ```
 
-![image-20240401164550474](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240401164550474.png)
+![image-20240401164550474](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401164550474.png)
 
 #### 在 kubesphere 前端，查看 GPU 监控数据
 
@@ -633,7 +633,7 @@ get http://10.11.140.87:32143/api/v1/query_range?query=gpu_usage_gpu&start=17114
 
 这样就成功在 kubesphere ，监控 kubeedge 边缘节点 Jetson  的 GPU 状态了。
 
-![image-20240401165457482](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240401165457482.png)
+![image-20240401165457482](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401165457482.png)
 
 
 
