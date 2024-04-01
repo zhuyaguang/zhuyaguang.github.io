@@ -24,11 +24,11 @@ description: "KubeEdge 安装使用笔记"
    
    ubuntu 20.04
    
-   all in one 
+   all in one 部署
    
    ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd
    
-   多节点 高可用
+   多节点 高可用部署
    
    ./kk create config --with-kubesphere 3.4.1 --with-kubernetes v1.26.0
    
@@ -61,8 +61,6 @@ yum -y remove containerd.io.x86_64 \
               docker-compose-plugin.x86_64 \
               docker-scan-plugin.x86_64 \
 							docker-buildx-plugin.x86_64
-							
-
 ```
 
 
@@ -96,7 +94,9 @@ KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 [
 ### 安装 CloudCore
 
 ```shell
-keadm init --advertise-address=192.168.137.90
+keadm init --advertise-address=10.108.96.24
+
+// k8s 多节点的时候，配置 cloudcore 所在节点的地址
 
 keadm init --advertise-address=10.101.32.14,10.101.32.15 --set cloudCore.service.enable=true --set cloudCore.hostNetWork=true --profile version=v1.14.0 --kube-config=/root/.kube/config
 
@@ -214,6 +214,8 @@ systemctl restart containerd.service
   https://github.com/Mirantis/cri-dockerd/tree/master/packaging/systemd
 
 ```
+tar  zxvf cri-dockerd-0.3.9.arm64.tgz
+
 cp cri-dockerd/cri-dockerd /usr/local/bin/cri-dockerd
 
 cp cri-docker.service cri-docker.socket /etc/systemd/system/
@@ -237,9 +239,19 @@ systemctl enable --now cri-docker.socket
 
 1. 纳管 边缘节点
 
+   containerd
+
    ```shell
    keadm  join --cloudcore-ipport=10.108.96.24:10000 --token=c96621fc3d5280337aced5dcb63be7382eeedd764fbdd21c892ec8b47053f394.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDU2NzczNzJ9.G3aEpFxi_0HMsa6aDcefDeItCkaFri1rFWU3IIqDVmo --kubeedge-version=1.15.1 --runtimetype=remote  --with-mqtt=false
    ```
+
+   docker
+
+   ```
+   keadm  join --cloudcore-ipport=10.108.96.24:10000 --token=8cc6fc16618f8fc7b98a0221683b26d36a9b571c9257aac544574bb9dc014f74.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTE2OTY4MTR9.EgxPs9Z5MFHSUxCwM9rvyY9XjWXBHKxZmezi7pzyOIo --kubeedge-version=1.15.1   --with-mqtt=false --remote-runtime-endpoint=unix:///var/run/cri-dockerd.sock
+   ```
+
+   
 
 2. 查看状态
 

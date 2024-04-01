@@ -23,6 +23,19 @@ draft: true
 
 ## 环境配置
 
+各个组件的版本信息如下：
+
+| 组件       | 版本                               |
+| ---------- | ---------------------------------- |
+| kubesphere | 3.4.1                              |
+| containerd | 1.7.2                              |
+| k8s        | 1.26.0                             |
+| kubeedge   | 1.15.1                             |
+| Jetson型号 | NVIDIA Jetson Xavier NX (16GB ram) |
+| Jtop       | 4.2.7                              |
+| JetPack    | 5.1.3-b29                          |
+| docker     | 24.0.5                             |
+
 ### 安装jtop
 
 > 安装 jtop 的目的是为了监控 GPU 的使用情况
@@ -366,6 +379,10 @@ ctr task exec --exec-id 2 -t gpu-demo sh
 python3 pytorch-minst.py
 
 ctr tasks kill gpu-demo --signal SIGKILL
+
+或者
+
+ctr run --rm --gpus 0 --tty local-harbor.com/algorithms/mnist:1.0 python3 /home/pytorch-mnist.py
 ```
 
 #### pod部署
@@ -376,8 +393,9 @@ kind: Pod
 metadata:
   name: gpu-test
 spec:
+  hostNetwork: true
   nodeSelector:
-    kubernetes.io/hostname: edge1
+    kubernetes.io/hostname: jetpack513-desktop
   containers:
   - image: local-harbor.com/algorithms/mnist:1.0
     imagePullPolicy: IfNotPresent
@@ -410,6 +428,7 @@ spec:
       labels:
         app: gpu-test
     spec:
+      hostNetwork: true
       containers:
       - name: gpu-test
         image: local-harbor.com/algorithms/mnist:1.0
