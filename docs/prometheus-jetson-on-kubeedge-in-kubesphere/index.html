@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态 - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态" />
-<meta property="og:description" content="环境部署 部署 k8s 环境 参考 kubesphere 部署文档 1 ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd 部署 KubeEdge 环境 参考 在 KubeSphere 上部署最新版的 KubeEdge 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.15.1 修改 kubesphere 配置 由于 kubeedge 在 arm 上的服务发" />
+<meta property="og:description" content="环境部署 k8s containerd / nvidia GPU / Jetson 像一个永远不可能三角形 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.15.1 Jetson型号 NVIDIA Jetson Xavier NX (16GB ram) Jtop 4.2.7 JetPack 5.1.3-b29 Docker 24.0.5 部署 k8s 环境 参考 kubesphere 部署文档 1 2 3 //" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-21T14:19:33+08:00" />
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
 <meta name="twitter:title" content="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态"/>
-<meta name="twitter:description" content="环境部署 部署 k8s 环境 参考 kubesphere 部署文档 1 ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd 部署 KubeEdge 环境 参考 在 KubeSphere 上部署最新版的 KubeEdge 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.15.1 修改 kubesphere 配置 由于 kubeedge 在 arm 上的服务发"/>
+<meta name="twitter:description" content="环境部署 k8s containerd / nvidia GPU / Jetson 像一个永远不可能三角形 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.15.1 Jetson型号 NVIDIA Jetson Xavier NX (16GB ram) Jtop 4.2.7 JetPack 5.1.3-b29 Docker 24.0.5 部署 k8s 环境 参考 kubesphere 部署文档 1 2 3 //"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/"
-        },"genre": "posts","wordcount":  161 ,
+        },"genre": "posts","wordcount":  1317 ,
         "url": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/","datePublished": "2024-03-21T14:19:33+08:00","dateModified": "2024-03-21T14:19:33+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） GPU 状态</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 161 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1317 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -91,10 +91,22 @@
     <li><a href="#环境部署">环境部署</a>
       <ul>
         <li><a href="#部署-k8s-环境">部署 k8s 环境</a></li>
-        <li><a href="#部署--kubeedge-环境">部署  KubeEdge 环境</a></li>
-        <li><a href="#修改-kubesphere-配置">修改 kubesphere 配置</a></li>
-        <li><a href="#安装-jtop">安装 Jtop</a></li>
-        <li><a href="#升级内核">升级内核</a></li>
+        <li><a href="#部署--kubeedge-环境">部署  KubeEdge 环境</a>
+          <ul>
+            <li><a href="#开启-边缘节点日志查询功能">开启 边缘节点日志查询功能</a></li>
+          </ul>
+        </li>
+        <li><a href="#修改-kubesphere-配置">修改 kubesphere 配置</a>
+          <ul>
+            <li><a href="#1开启-kubeedge-边缘节点插件">1.开启 kubeedge 边缘节点插件</a></li>
+            <li><a href="#2-修改-node-exporter-亲和性">2. 修改 node-exporter 亲和性</a></li>
+            <li><a href="#3-edgemesh部署">3. edgemesh部署</a></li>
+            <li><a href="#4-修改dnspolicy">4. 修改dnsPolicy</a></li>
+            <li><a href="#5-添加环境变量">5. 添加环境变量</a></li>
+            <li><a href="#6-ipvs-改成-iptables">6. ipvs 改成 iptables</a></li>
+          </ul>
+        </li>
+        <li><a href="#监控-gpu-状态">监控 GPU 状态</a></li>
         <li><a href="#安装-jetson-gpu-exporter">安装 jetson GPU Exporter</a></li>
         <li><a href="#使用-kubesphere--自定义监控">使用 kubesphere  自定义监控</a></li>
         <li><a href="#使用独立的-grafana--prometheus--监控">使用独立的 Grafana + Prometheus  监控</a></li>
@@ -103,18 +115,9 @@
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="环境部署">环境部署</h2>
-<h3 id="部署-k8s-环境">部署 k8s 环境</h3>
-<p>参考  <a href="https://kubesphere.io/zh/docs/v3.4/quick-start/all-in-one-on-linux/" target="_blank" rel="noopener noreffer">kubesphere 部署文档</a></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="部署--kubeedge-环境">部署  KubeEdge 环境</h3>
-<p>参考 <a href="https://zhuyaguang.github.io/kubeedge-install/" target="_blank" rel="noopener noreffer">在 KubeSphere 上部署最新版的 KubeEdge</a></p>
+<blockquote>
+<p>k8s containerd  / nvidia GPU  / Jetson  像一个永远不可能三角形</p>
+</blockquote>
 <table>
 <thead>
 <tr>
@@ -139,33 +142,319 @@
 <td>kubeedge</td>
 <td>1.15.1</td>
 </tr>
+<tr>
+<td>Jetson型号</td>
+<td>NVIDIA Jetson Xavier NX (16GB ram)</td>
+</tr>
+<tr>
+<td>Jtop</td>
+<td>4.2.7</td>
+</tr>
+<tr>
+<td>JetPack</td>
+<td>5.1.3-b29</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>24.0.5</td>
+</tr>
 </tbody>
 </table>
+<h3 id="部署-k8s-环境">部署 k8s 环境</h3>
+<p>参考  <a href="https://kubesphere.io/zh/docs/v3.4/quick-start/all-in-one-on-linux/" target="_blank" rel="noopener noreffer">kubesphere 部署文档</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//  all in one 方式部署一台 单 master 的 k8s 集群
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="部署--kubeedge-环境">部署  KubeEdge 环境</h3>
+<p>参考 <a href="https://zhuyaguang.github.io/kubeedge-install/" target="_blank" rel="noopener noreffer">在 KubeSphere 上部署最新版的 KubeEdge</a>，部署kubeedge。</p>
+<h4 id="开启-边缘节点日志查询功能">开启 边缘节点日志查询功能</h4>
+<ol>
+<li>
+<p>vim /etc/kubeedge/config/edgecore.yaml</p>
+</li>
+<li>
+<p>enable=true</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231226105650084.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231226105650084.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231226105650084.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231226105650084.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231226105650084.png"
+        title="image-20231226105650084" /></p>
+</li>
+</ol>
 <h3 id="修改-kubesphere-配置">修改 kubesphere 配置</h3>
-<ul>
+<h4 id="1开启-kubeedge-边缘节点插件">1.开启 kubeedge 边缘节点插件</h4>
+<ol>
+<li>修改 configmap&ndash;ClusterConfiguration</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467730006-6c1d70a7-23e5-4e3a-89b3-b0ad8bf39673.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467730006-6c1d70a7-23e5-4e3a-89b3-b0ad8bf39673.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467730006-6c1d70a7-23e5-4e3a-89b3-b0ad8bf39673.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467730006-6c1d70a7-23e5-4e3a-89b3-b0ad8bf39673.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467730006-6c1d70a7-23e5-4e3a-89b3-b0ad8bf39673.png"
+        title="image.png" /></p>
+<ol start="2">
+<li>advertiseAddress 设置为 cloudhub 所在的物理机地址</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.nlark.com/yuque/0/2024/png/35101517/1710467882107-c44e734b-245d-446b-8564-f8830e5db478.png#averageHue=%23374154&amp;clientId=ubfbc51a9-8b9e-4&amp;from=paste&amp;height=755&amp;id=u65c0d477&amp;originHeight=755&amp;originWidth=1189&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=56006&amp;status=done&amp;style=none&amp;taskId=u689a8677-8a5b-43af-8592-e88e368b176&amp;title=&amp;width=1189"
+        data-srcset="https://cdn.nlark.com/yuque/0/2024/png/35101517/1710467882107-c44e734b-245d-446b-8564-f8830e5db478.png#averageHue=%23374154&amp;clientId=ubfbc51a9-8b9e-4&amp;from=paste&amp;height=755&amp;id=u65c0d477&amp;originHeight=755&amp;originWidth=1189&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=56006&amp;status=done&amp;style=none&amp;taskId=u689a8677-8a5b-43af-8592-e88e368b176&amp;title=&amp;width=1189, https://cdn.nlark.com/yuque/0/2024/png/35101517/1710467882107-c44e734b-245d-446b-8564-f8830e5db478.png#averageHue=%23374154&amp;clientId=ubfbc51a9-8b9e-4&amp;from=paste&amp;height=755&amp;id=u65c0d477&amp;originHeight=755&amp;originWidth=1189&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=56006&amp;status=done&amp;style=none&amp;taskId=u689a8677-8a5b-43af-8592-e88e368b176&amp;title=&amp;width=1189 1.5x, https://cdn.nlark.com/yuque/0/2024/png/35101517/1710467882107-c44e734b-245d-446b-8564-f8830e5db478.png#averageHue=%23374154&amp;clientId=ubfbc51a9-8b9e-4&amp;from=paste&amp;height=755&amp;id=u65c0d477&amp;originHeight=755&amp;originWidth=1189&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=56006&amp;status=done&amp;style=none&amp;taskId=u689a8677-8a5b-43af-8592-e88e368b176&amp;title=&amp;width=1189 2x"
+        data-sizes="auto"
+        alt="https://cdn.nlark.com/yuque/0/2024/png/35101517/1710467882107-c44e734b-245d-446b-8564-f8830e5db478.png#averageHue=%23374154&amp;clientId=ubfbc51a9-8b9e-4&amp;from=paste&amp;height=755&amp;id=u65c0d477&amp;originHeight=755&amp;originWidth=1189&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=56006&amp;status=done&amp;style=none&amp;taskId=u689a8677-8a5b-43af-8592-e88e368b176&amp;title=&amp;width=1189"
+        title="image.png" /></p>
+<p><a href="https://www.kubesphere.io/zh/docs/v3.3/pluggable-components/kubeedge/" target="_blank" rel="noopener noreffer">官方参考链接</a></p>
+<blockquote>
+<p>修改完 发现可以显示边缘节点，但是没有 CPU 和 内存信息，发现边缘节点没有 node-exporter 这个pod。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329112326949.png"
+        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329112326949.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329112326949.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329112326949.png 2x"
+        data-sizes="auto"
+        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329112326949.png"
+        title="image-20240329112326949" /></p>
+<h4 id="2-修改-node-exporter-亲和性">2. 修改 node-exporter 亲和性</h4>
+<p><code>kubectl get ds -n kubesphere-monitoring-system</code> 发现 不会部署到边缘节点上</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329135414326.png"
+        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329135414326.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329135414326.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329135414326.png 2x"
+        data-sizes="auto"
+        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329135414326.png"
+        title="image-20240329135414326" /></p>
+<p>修改为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">affinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">nodeAffinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">requiredDuringSchedulingIgnoredDuringExecution</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">nodeSelectorTerms</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">matchExpressions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">node-role.kubernetes.io/edgetest  -- 暂时修改了这里</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">DoesNotExist</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>node-exporter 是部署在边缘节点上了，但是 pods 起不来。</p>
+<p>kubecrl edit该失败的pod，发现是其中的kube-rbac-proxy这个container启动失败，看这个container的logs。</p>
+<p>发现是kube-rbac-proxy想要获取KUBERNETES_SERVICE_HOST和KUBERNETES_SERVICE_PORT这两个环境变量，但是获取失败，所以启动失败。</p>
+<p>在K8S的集群中，当创建pod时，会在pod中增加KUBERNETES_SERVICE_HOST和KUBERNETES_SERVICE_PORT这两个环境变量，用于pod内的进程对kube-apiserver的访问，但是在kubeedge的edge节点上创建的pod中，这两个环境变量存在，但它是空的。</p>
+<p>跟华为kubeedge的开发人员咨询，他们说会在kubeedge 1.17版本上增加这两个环境变量的设置。参考如下：
+<a href="https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md" target="_blank" rel="noopener noreffer">https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md</a></p>
+<p>另一方面，他推荐安装edgemesh，安装之后在edge的pod上就可以访问kubernetes.default.svc.cluster.local:443了。</p>
+<h4 id="3-edgemesh部署">3. edgemesh部署</h4>
+<ol>
 <li>
-<p>由于 kubeedge 在 arm 上的服务发现功能不太好用，我们需要把 kubeproxy 的 ipvs 改成 iptables</p>
+<p>配置 cloudcore configmap</p>
+<p><code>kubectl edit cm cloudcore -n kubeedge</code>   设置 dynamicController=true.</p>
+<p>修改完 重启 cloudcore <code>kubectl delete pod cloudcore-776ffcbbb9-s6ff8 -n kubeedge</code></p>
 </li>
 <li>
-<p>启动 kubeedge 功能</p>
-</li>
-</ul>
-<p><a href="https://www.kubesphere.io/zh/docs/v3.3/pluggable-components/kubeedge/" target="_blank" rel="noopener noreffer">https://www.kubesphere.io/zh/docs/v3.3/pluggable-components/kubeedge/</a></p>
-<ul>
-<li>
-<p>修改 node-exporter 亲和性</p>
-</li>
+<p>配置 edgecore 模块，metaServer=true clusterDNS</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ vim /etc/kubeedge/config/edgecore.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">modules:
+</span></span><span class="line"><span class="cl">  ...
+</span></span><span class="line"><span class="cl">  metaManager:
+</span></span><span class="line"><span class="cl">    metaServer:
+</span></span><span class="line"><span class="cl">      enable: <span class="nb">true</span>   //配置这里
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">modules:
+</span></span><span class="line"><span class="cl">  ...
+</span></span><span class="line"><span class="cl">  edged:
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">    tailoredKubeletConfig:
+</span></span><span class="line"><span class="cl">      ...
+</span></span><span class="line"><span class="cl">      clusterDNS:
+</span></span><span class="line"><span class="cl">      - 169.254.96.16
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//重启edgecore
+</span></span><span class="line"><span class="cl">$ systemctl restart edgecore
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329152628525.png"
+        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329152628525.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329152628525.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329152628525.png 2x"
+        data-sizes="auto"
+        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329152628525.png"
+        title="image-20240329152628525" /></p>
+<p>修改完 验证是否修改成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ curl 127.0.0.1:10550/api/v1/services
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{&#34;apiVersion&#34;:&#34;v1&#34;,&#34;items&#34;:[{&#34;apiVersion&#34;:&#34;v1&#34;,&#34;kind&#34;:&#34;Service&#34;,&#34;metadata&#34;:{&#34;creationTimestamp&#34;:&#34;2021-04-14T06:30:05Z&#34;,&#34;labels&#34;:{&#34;component&#34;:&#34;apiserver&#34;,&#34;provider&#34;:&#34;kubernetes&#34;},&#34;name&#34;:&#34;kubernetes&#34;,&#34;namespace&#34;:&#34;default&#34;,&#34;resourceVersion&#34;:&#34;147&#34;,&#34;selfLink&#34;:&#34;default/services/kubernetes&#34;,&#34;uid&#34;:&#34;55eeebea-08cf-4d1a-8b04-e85f8ae112a9&#34;},&#34;spec&#34;:{&#34;clusterIP&#34;:&#34;10.96.0.1&#34;,&#34;ports&#34;:[{&#34;name&#34;:&#34;https&#34;,&#34;port&#34;:443,&#34;protocol&#34;:&#34;TCP&#34;,&#34;targetPort&#34;:6443}],&#34;sessionAffinity&#34;:&#34;None&#34;,&#34;type&#34;:&#34;ClusterIP&#34;},&#34;status&#34;:{&#34;loadBalancer&#34;:{}}},{&#34;apiVersion&#34;:&#34;v1&#34;,&#34;kind&#34;:&#34;Service&#34;,&#34;metadata&#34;:{&#34;annotations&#34;:{&#34;prometheus.io/port&#34;:&#34;9153&#34;,&#34;prometheus.io/scrape&#34;:&#34;true&#34;},&#34;creationTimestamp&#34;:&#34;2021-04-14T06:30:07Z&#34;,&#34;labels&#34;:{&#34;k8s-app&#34;:&#34;kube-dns&#34;,&#34;kubernetes.io/cluster-service&#34;:&#34;true&#34;,&#34;kubernetes.io/name&#34;:&#34;KubeDNS&#34;},&#34;name&#34;:&#34;kube-dns&#34;,&#34;namespace&#34;:&#34;kube-system&#34;,&#34;resourceVersion&#34;:&#34;203&#34;,&#34;selfLink&#34;:&#34;kube-system/services/kube-dns&#34;,&#34;uid&#34;:&#34;c221ac20-cbfa-406b-812a-c44b9d82d6dc&#34;},&#34;spec&#34;:{&#34;clusterIP&#34;:&#34;10.96.0.10&#34;,&#34;ports&#34;:[{&#34;name&#34;:&#34;dns&#34;,&#34;port&#34;:53,&#34;protocol&#34;:&#34;UDP&#34;,&#34;targetPort&#34;:53},{&#34;name&#34;:&#34;dns-tcp&#34;,&#34;port&#34;:53,&#34;protocol&#34;:&#34;TCP&#34;,&#34;targetPort&#34;:53},{&#34;name&#34;:&#34;metrics&#34;,&#34;port&#34;:9153,&#34;protocol&#34;:&#34;TCP&#34;,&#34;targetPort&#34;:9153}],&#34;selector&#34;:{&#34;k8s-app&#34;:&#34;kube-dns&#34;},&#34;sessionAffinity&#34;:&#34;None&#34;,&#34;type&#34;:&#34;ClusterIP&#34;},&#34;status&#34;:{&#34;loadBalancer&#34;:{}}}],&#34;kind&#34;:&#34;ServiceList&#34;,&#34;metadata&#34;:{&#34;resourceVersion&#34;:&#34;377360&#34;,&#34;selfLink&#34;:&#34;/api/v1/services&#34;}}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
 <li>
 <p>安装 edgemesh</p>
-<p><a href="https://blog.csdn.net/lovemxs/article/details/135240849" target="_blank" rel="noopener noreffer">https://blog.csdn.net/lovemxs/article/details/135240849</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone https://github.com/kubeedge/edgemesh.git
+</span></span><span class="line"><span class="cl">cd edgemesh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f build/crds/istio/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f build/agent/resources/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329154436074.png"
+        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329154436074.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329154436074.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329154436074.png 2x"
+        data-sizes="auto"
+        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329154436074.png"
+        title="image-20240329154436074" /></p>
 </li>
-<li>
-<p>开启IptableManager</p>
-<p><a href="https://blog.csdn.net/menghaocheng/article/details/128492427" target="_blank" rel="noopener noreffer">https://blog.csdn.net/menghaocheng/article/details/128492427</a></p>
+</ol>
 </li>
-</ul>
-<h3 id="安装-jtop">安装 Jtop</h3>
-<h3 id="升级内核">升级内核</h3>
+</ol>
+<h4 id="4-修改dnspolicy">4. 修改dnsPolicy</h4>
+<p>edgemesh部署完成后，edge节点上的node-exporter中的两个境变量还是空的，也无法访问kubernetes.default.svc.cluster.local:443，原因是该pod中的dns服务器配置错误，应该是169.254.96.16的，但是却是跟宿主机一样的dns配置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@master1:/home/wpx/edgemesh-1.12.0/build/crds/istio# kubectl <span class="nb">exec</span> -it node-exporter-hcmfg -n kubesphere-monitoring-system -- sh
+</span></span><span class="line"><span class="cl">Defaulted container <span class="s2">&#34;node-exporter&#34;</span> out of: node-exporter, kube-rbac-proxy
+</span></span><span class="line"><span class="cl">/ $ cat /etc/resolv.conf 
+</span></span><span class="line"><span class="cl">nameserver 127.0.0.53
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将dnsPolicy修改为ClusterFirstWithHostNet，之后重启node-exporter，dns的配置正确</p>
+<pre><code>  dnsPolicy: ClusterFirstWithHostNet
+  hostNetwork: true
+</code></pre>
+<h4 id="5-添加环境变量">5. 添加环境变量</h4>
+<p>vim /etc/systemd/system/edgecore.service</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329155133337.png"
+        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329155133337.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329155133337.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329155133337.png 2x"
+        data-sizes="auto"
+        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329155133337.png"
+        title="image-20240329155133337" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Environment=METASERVER_DUMMY_IP=kubernetes.default.svc.cluster.local
+</span></span><span class="line"><span class="cl">Environment=METASERVER_DUMMY_PORT=443
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改完重启 edgecore</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">systemctl restart edgecore
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>node-exporter 变成 running</strong>!!!!</p>
+<p>在边缘节点 <code>curl http://127.0.0.1:9100/metrics</code>  可以发现 采集到了边缘节点的数据。</p>
+<p>最后我们可以将 kubesphere 的k8s 服务暴露出来，访问下看看是否能收集到 边缘节点采集的数据。</p>
+<h4 id="6-ipvs-改成-iptables">6. ipvs 改成 iptables</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170702278.png"
+        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170702278.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170702278.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170702278.png 2x"
+        data-sizes="auto"
+        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329170702278.png"
+        title="image-20240329170702278" /></p>
+<p>至此 node</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170803288.png"
+        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170803288.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170803288.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170803288.png 2x"
+        data-sizes="auto"
+        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329170803288.png"
+        title="image-20240329170803288" /></p>
+<h3 id="监控-gpu-状态">监控 GPU 状态</h3>
+<p>升级内核</p>
+<p>安装 Jtop</p>
 <h3 id="安装-jetson-gpu-exporter">安装 jetson GPU Exporter</h3>
 <p><a href="https://blog.devops.dev/monitor-nvidia-jetson-gpu-82e256999840" target="_blank" rel="noopener noreffer">https://blog.devops.dev/monitor-nvidia-jetson-gpu-82e256999840</a></p>
 <p>容器化部署  jetson GPU Exporter</p>

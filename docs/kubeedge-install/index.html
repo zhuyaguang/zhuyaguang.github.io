@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/"
-        },"genre": "posts","wordcount":  1456 ,
+        },"genre": "posts","wordcount":  1531 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/","datePublished": "2023-11-07T11:03:15+08:00","dateModified": "2023-11-07T11:03:15+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">在 KubeSphere 上部署最新版的 KubeEdge</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1456 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1531 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -88,15 +88,9 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#准备">准备</a>
+    <li>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#卸载-docker-安装contained">卸载 docker 安装contained</a></li>
-          </ul>
-        </li>
-        <li><a href="#安装-cni-插件">安装 CNI 插件</a></li>
-        <li><a href="#可选安装-cri-dockerd运行时为-docker-">可选：安装 cri-dockerd(运行时为 docker )</a></li>
+        <li><a href="#可选卸载-docker-安装contained">可选：卸载 docker 安装contained</a></li>
       </ul>
     </li>
   </ul>
@@ -111,64 +105,18 @@
     </li>
     <li><a href="#设置太空端">设置太空端</a>
       <ul>
+        <li><a href="#安装最新版-containerd">安装最新版 containerd</a></li>
+        <li><a href="#安装-cni-插件">安装 CNI 插件</a></li>
+        <li><a href="#可选安装-cri-dockerd运行时为-docker-">可选：安装 cri-dockerd(运行时为 docker )</a></li>
         <li><a href="#安装-edgecore">安装 EdgeCore</a></li>
       </ul>
     </li>
-    <li><a href="#部署应用到边缘节点">部署应用到边缘节点</a></li>
-    <li><a href="#去掉-daemonset-部署在边缘节点上">去掉 daemonset 部署在边缘节点上</a></li>
-    <li><a href="#查看太空端服务日志">查看太空端服务日志</a></li>
-    <li><a href="#问题汇总">问题汇总</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="准备">准备</h2>
+            </div><div class="content" id="content"><h1 id="准备">准备</h1>
 <ol>
 <li>
-<p>一个 k8s 集群</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">centos
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">./kk create config --with-kubernetes v1.26.0 --with-kubesphere
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">./kk create cluster -f config-sample.yaml
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> 低版本的k8s:./kk create cluster --with-kubernetes v1.22.12 --with-kubesphere v3.4.1
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ubuntu 20.04
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
-<li>
-<p>一个 边缘节点 可以访问集群，contained 版本 &gt;=1.6  ，<strong>如果是 docker 记得安装 CRI-dockerd</strong>.</p>
-</li>
-</ol>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png"
-        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png 2x"
-        data-sizes="auto"
-        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png"
-        title="image-20240110145607680" /></p>
-<h4 id="卸载-docker-安装contained">卸载 docker 安装contained</h4>
-<p>如果之前安装了 docker ,使用下面命令卸载</p>
+<p>一个 k8s 集群，使用 kubesphere 安装</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -185,6 +133,68 @@
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">centos
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./kk create config --with-kubernetes v1.26.0 --with-kubesphere
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./kk create cluster -f config-sample.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> 低版本的k8s:
+</span></span><span class="line"><span class="cl"> ./kk create cluster --with-kubernetes v1.22.12 --with-kubesphere v3.4.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ubuntu 20.04
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">all in one 部署
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">多节点 高可用部署
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./kk create config --with-kubesphere 3.4.1 --with-kubernetes v1.26.0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./kk create cluster -f config-sample.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>一个 边缘节点 可以访问集群，contained 版本 &gt;=1.6  ，<strong>如果是 docker 记得安装 CRI-dockerd</strong>.</p>
+</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png"
+        title="image-20240110145607680" /></p>
+<h3 id="可选卸载-docker-安装contained">可选：卸载 docker 安装contained</h3>
+<p>如果之前安装了 docker ,使用下面命令卸载</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemctl stop docker
@@ -200,10 +210,63 @@
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>              docker-compose-plugin.x86_64 <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>              docker-scan-plugin.x86_64 <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>							docker-buildx-plugin.x86_64
-</span></span><span class="line"><span class="cl">							
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>安装最新版 containerd</p>
+</div><h1 id="使用keadm进行部署">使用Keadm进行部署</h1>
+<p>Keadm 是一款用于安装 KubeEdge 的工具。 Keadm 不负责 K8s 的安装和运行,在使用它之前，请先准备好一个 K8s 集群。</p>
+<p>KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 <a href="https://github.com/kubeedge/kubeedge#kubernetes-compatibility" target="_blank" rel="noopener noreffer">kubernetes-兼容性</a> 来了解，以此来确定安装哪个版本的 Kubernetes 以及 KubeEdge。</p>
+<h2 id="使用限制">使用限制</h2>
+<ul>
+<li><code>keadm</code> 目前支持 Ubuntu 和 CentOS OS。</li>
+<li>需要超级用户权限（或 root 权限）才能运行。</li>
+</ul>
+<h2 id="设置云端kubeedge-主节点">设置云端（KubeEdge 主节点）</h2>
+<h3 id="keadm-init">keadm init</h3>
+<p>默认情况下边缘节点需要访问 cloudcore 中 <code>10000</code> ，<code>10002</code> 端口。 若要确保边缘节点可以成功地与集群通信，您需要创建防火墙规则以允许流量进入这些端口（10000 至 10004）。</p>
+<p><strong>重要提示：</strong></p>
+<ol>
+<li>必须正确配置 kubeconfig 或 master 中的至少一个，以便可以将其用于验证 k8s 集群的版本和其他信息。</li>
+<li>请确保边缘节点可以使用云节点的本地 IP 连接云节点，或者需要使用 <code>--advertise-address</code> 标记指定云节点的公共 IP 。</li>
+<li><code>--advertise-address</code>（仅从 1.3 版本开始可用）是云端公开的地址（将添加到 CloudCore 证书的 SAN 中），默认值为本地 IP。</li>
+<li><code>keadm init</code> 将会使用二进制方式部署 cloudcore 为一个系统服务，如果您想实现容器化部署，可以参考 <code>keadm beta init</code> 。</li>
+</ol>
+<h3 id="安装-cloudcore">安装 CloudCore</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm init --advertise-address<span class="o">=</span>10.108.96.24
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// k8s 多节点的时候，配置 cloudcore 所在节点的地址
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">keadm init --advertise-address<span class="o">=</span>10.101.32.14,10.101.32.15 --set cloudCore.service.enable<span class="o">=</span><span class="nb">true</span> --set cloudCore.hostNetWork<span class="o">=</span><span class="nb">true</span> --profile <span class="nv">version</span><span class="o">=</span>v1.14.0 --kube-config<span class="o">=</span>/root/.kube/config
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>检查 cloudcore 是否安装成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get pods -n kubeedge
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>卸载 CloudCore</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm reset --kube-config<span class="o">=</span>/root/.kube/config
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="设置太空端">设置太空端</h2>
+<h3 id="安装最新版-containerd">安装最新版 containerd</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -364,18 +427,22 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cp cri-dockerd/cri-dockerd /usr/local/bin/cri-dockerd
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tar  zxvf cri-dockerd-0.3.9.arm64.tgz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cp cri-dockerd/cri-dockerd /usr/local/bin/cri-dockerd
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">cp cri-docker.service cri-docker.socket /etc/systemd/system/
 </span></span><span class="line"><span class="cl">
@@ -399,67 +466,27 @@
 </div>
 </div></li>
 </ul>
-<h1 id="使用keadm进行部署">使用Keadm进行部署</h1>
-<p>Keadm 是一款用于安装 KubeEdge 的工具。 Keadm 不负责 K8s 的安装和运行,在使用它之前，请先准备好一个 K8s 集群。</p>
-<p>KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 <a href="https://github.com/kubeedge/kubeedge#kubernetes-compatibility" target="_blank" rel="noopener noreffer">kubernetes-兼容性</a> 来了解，以此来确定安装哪个版本的 Kubernetes 以及 KubeEdge。</p>
-<h2 id="使用限制">使用限制</h2>
-<ul>
-<li><code>keadm</code> 目前支持 Ubuntu 和 CentOS OS。</li>
-<li>需要超级用户权限（或 root 权限）才能运行。</li>
-</ul>
-<h2 id="设置云端kubeedge-主节点">设置云端（KubeEdge 主节点）</h2>
-<h3 id="keadm-init">keadm init</h3>
-<p>默认情况下边缘节点需要访问 cloudcore 中 <code>10000</code> ，<code>10002</code> 端口。 若要确保边缘节点可以成功地与集群通信，您需要创建防火墙规则以允许流量进入这些端口（10000 至 10004）。</p>
-<p><strong>重要提示：</strong></p>
-<ol>
-<li>必须正确配置 kubeconfig 或 master 中的至少一个，以便可以将其用于验证 k8s 集群的版本和其他信息。</li>
-<li>请确保边缘节点可以使用云节点的本地 IP 连接云节点，或者需要使用 <code>--advertise-address</code> 标记指定云节点的公共 IP 。</li>
-<li><code>--advertise-address</code>（仅从 1.3 版本开始可用）是云端公开的地址（将添加到 CloudCore 证书的 SAN 中），默认值为本地 IP。</li>
-<li><code>keadm init</code> 将会使用二进制方式部署 cloudcore 为一个系统服务，如果您想实现容器化部署，可以参考 <code>keadm beta init</code> 。</li>
-</ol>
-<h3 id="安装-cloudcore">安装 CloudCore</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm init --advertise-address<span class="o">=</span>192.168.137.90
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">keadm init --advertise-address<span class="o">=</span>10.101.32.14,10.101.32.15 --set cloudCore.service.enable<span class="o">=</span><span class="nb">true</span> --set cloudCore.hostNetWork<span class="o">=</span><span class="nb">true</span> --profile <span class="nv">version</span><span class="o">=</span>v1.14.0 --kube-config<span class="o">=</span>/root/.kube/config
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>检查 cloudcore 是否安装成功</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get pods -n kubeedge
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>卸载 CloudCore</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm reset --kube-config<span class="o">=</span>/root/.kube/config
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="设置太空端">设置太空端</h2>
 <h3 id="安装-edgecore">安装 EdgeCore</h3>
 <p><strong>根据前面的准备步骤，安装 CNI CRI-dockerd</strong></p>
 <ol>
 <li>
 <p>纳管 边缘节点</p>
+<p>containerd</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm  join --cloudcore-ipport<span class="o">=</span>10.108.96.24:10000 --token<span class="o">=</span>c96621fc3d5280337aced5dcb63be7382eeedd764fbdd21c892ec8b47053f394.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDU2NzczNzJ9.G3aEpFxi_0HMsa6aDcefDeItCkaFri1rFWU3IIqDVmo --kubeedge-version<span class="o">=</span>1.15.1 --runtimetype<span class="o">=</span>remote  --with-mqtt<span class="o">=</span><span class="nb">false</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>docker</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">keadm  join --cloudcore-ipport=10.108.96.24:10000 --token=8cc6fc16618f8fc7b98a0221683b26d36a9b571c9257aac544574bb9dc014f74.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTE2OTY4MTR9.EgxPs9Z5MFHSUxCwM9rvyY9XjWXBHKxZmezi7pzyOIo --kubeedge-version=1.15.1   --with-mqtt=false --remote-runtime-endpoint=unix:///var/run/cri-dockerd.sock
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -475,7 +502,7 @@
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemctl status edgecore
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="部署应用到边缘节点">部署应用到边缘节点</h2>
+</div><h1 id="部署应用到边缘节点">部署应用到边缘节点</h1>
 <p>部署 redis</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -602,7 +629,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">6379</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="去掉-daemonset-部署在边缘节点上">去掉 daemonset 部署在边缘节点上</h2>
+</div><h1 id="去掉-daemonset-部署在边缘节点上">去掉 daemonset 部署在边缘节点上</h1>
 <ul>
 <li>给 master 节点打标签</li>
 </ul>
@@ -632,7 +659,7 @@
         data-sizes="auto"
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240205142617622.png"
         title="image-20240205142617622" /></p>
-<h2 id="查看太空端服务日志">查看太空端服务日志</h2>
+<h1 id="查看太空端服务日志">查看太空端服务日志</h1>
 <p>1.开启日志</p>
 <p><img
         class="lazyload"
@@ -644,7 +671,7 @@
         title="image-20231226105650084" /></p>
 <p>2.重启 edgecore</p>
 <p>service edgecore restart</p>
-<h2 id="问题汇总">问题汇总</h2>
+<h1 id="问题汇总">问题汇总</h1>
 <p><a href="https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice" target="_blank" rel="noopener noreffer">常见问题</a>:</p>
 <ul>
 <li>

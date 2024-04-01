@@ -3,23 +3,32 @@
 
 <!--more-->
 
-## 准备
+# 准备
 
-1. 一个 k8s 集群
+1. 一个 k8s 集群，使用 kubesphere 安装
 
-   ```
+   ```shell
    centos
    
    ./kk create config --with-kubernetes v1.26.0 --with-kubesphere
    
    ./kk create cluster -f config-sample.yaml
    
-    低版本的k8s:./kk create cluster --with-kubernetes v1.22.12 --with-kubesphere v3.4.1
+    低版本的k8s:
+    ./kk create cluster --with-kubernetes v1.22.12 --with-kubesphere v3.4.1
    
    
    ubuntu 20.04
    
+   all in one 部署
+   
    ./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd
+   
+   多节点 高可用部署
+   
+   ./kk create config --with-kubesphere 3.4.1 --with-kubernetes v1.26.0
+   
+   ./kk create cluster -f config-sample.yaml
    ```
 
    
@@ -30,7 +39,7 @@
 
 ![image-20240110145607680](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png)
 
-#### 卸载 docker 安装contained
+### 可选：卸载 docker 安装contained
 
 如果之前安装了 docker ,使用下面命令卸载
 
@@ -48,11 +57,62 @@ yum -y remove containerd.io.x86_64 \
               docker-compose-plugin.x86_64 \
               docker-scan-plugin.x86_64 \
 							docker-buildx-plugin.x86_64
-							
+```
+
+
+
+# 使用Keadm进行部署
+
+Keadm 是一款用于安装 KubeEdge 的工具。 Keadm 不负责 K8s 的安装和运行,在使用它之前，请先准备好一个 K8s 集群。
+
+KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 [kubernetes-兼容性](https://github.com/kubeedge/kubeedge#kubernetes-compatibility) 来了解，以此来确定安装哪个版本的 Kubernetes 以及 KubeEdge。
+
+## 使用限制
+
+- `keadm` 目前支持 Ubuntu 和 CentOS OS。
+- 需要超级用户权限（或 root 权限）才能运行。
+
+## 设置云端（KubeEdge 主节点）
+
+### keadm init
+
+默认情况下边缘节点需要访问 cloudcore 中 `10000` ，`10002` 端口。 若要确保边缘节点可以成功地与集群通信，您需要创建防火墙规则以允许流量进入这些端口（10000 至 10004）。
+
+**重要提示：**
+
+1. 必须正确配置 kubeconfig 或 master 中的至少一个，以便可以将其用于验证 k8s 集群的版本和其他信息。
+2. 请确保边缘节点可以使用云节点的本地 IP 连接云节点，或者需要使用 `--advertise-address` 标记指定云节点的公共 IP 。
+3. `--advertise-address`（仅从 1.3 版本开始可用）是云端公开的地址（将添加到 CloudCore 证书的 SAN 中），默认值为本地 IP。
+4. `keadm init` 将会使用二进制方式部署 cloudcore 为一个系统服务，如果您想实现容器化部署，可以参考 `keadm beta init` 。
+
+
+
+### 安装 CloudCore
+
+```shell
+keadm init --advertise-address=10.108.96.24
+
+// k8s 多节点的时候，配置 cloudcore 所在节点的地址
+
+keadm init --advertise-address=10.101.32.14,10.101.32.15 --set cloudCore.service.enable=true --set cloudCore.hostNetWork=true --profile version=v1.14.0 --kube-config=/root/.kube/config
 
 ```
 
-安装最新版 containerd
+检查 cloudcore 是否安装成功
+
+```shell
+kubectl get pods -n kubeedge
+```
+
+卸载 CloudCore
+
+```shell
+keadm reset --kube-config=/root/.kube/config
+```
+
+## 设置太空端
+
+### 安装最新版 containerd
 
 ```shell
 centos
@@ -150,6 +210,8 @@ systemctl restart containerd.service
   https://github.com/Mirantis/cri-dockerd/tree/master/packaging/systemd
 
 ```
+tar  zxvf cri-dockerd-0.3.9.arm64.tgz
+
 cp cri-dockerd/cri-dockerd /usr/local/bin/cri-dockerd
 
 cp cri-docker.service cri-docker.socket /etc/systemd/system/
@@ -166,59 +228,6 @@ systemctl enable --now cri-docker.socket
   ```
   systemctl restart docker
   ```
-  
-  
-
-# 使用Keadm进行部署
-
-Keadm 是一款用于安装 KubeEdge 的工具。 Keadm 不负责 K8s 的安装和运行,在使用它之前，请先准备好一个 K8s 集群。
-
-KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 [kubernetes-兼容性](https://github.com/kubeedge/kubeedge#kubernetes-compatibility) 来了解，以此来确定安装哪个版本的 Kubernetes 以及 KubeEdge。
-
-## 使用限制
-
-- `keadm` 目前支持 Ubuntu 和 CentOS OS。
-- 需要超级用户权限（或 root 权限）才能运行。
-
-
-
-## 设置云端（KubeEdge 主节点）
-
-### keadm init
-
-默认情况下边缘节点需要访问 cloudcore 中 `10000` ，`10002` 端口。 若要确保边缘节点可以成功地与集群通信，您需要创建防火墙规则以允许流量进入这些端口（10000 至 10004）。
-
-**重要提示：**
-
-1. 必须正确配置 kubeconfig 或 master 中的至少一个，以便可以将其用于验证 k8s 集群的版本和其他信息。
-2. 请确保边缘节点可以使用云节点的本地 IP 连接云节点，或者需要使用 `--advertise-address` 标记指定云节点的公共 IP 。
-3. `--advertise-address`（仅从 1.3 版本开始可用）是云端公开的地址（将添加到 CloudCore 证书的 SAN 中），默认值为本地 IP。
-4. `keadm init` 将会使用二进制方式部署 cloudcore 为一个系统服务，如果您想实现容器化部署，可以参考 `keadm beta init` 。
-
-
-
-### 安装 CloudCore
-
-```shell
-keadm init --advertise-address=192.168.137.90
-
-keadm init --advertise-address=10.101.32.14,10.101.32.15 --set cloudCore.service.enable=true --set cloudCore.hostNetWork=true --profile version=v1.14.0 --kube-config=/root/.kube/config
-
-```
-
-检查 cloudcore 是否安装成功
-
-```shell
-kubectl get pods -n kubeedge
-```
-
-卸载 CloudCore
-
-```shell
-keadm reset --kube-config=/root/.kube/config
-```
-
-## 设置太空端
 
 ### 安装 EdgeCore
 
@@ -226,9 +235,19 @@ keadm reset --kube-config=/root/.kube/config
 
 1. 纳管 边缘节点
 
+   containerd
+
    ```shell
    keadm  join --cloudcore-ipport=10.108.96.24:10000 --token=c96621fc3d5280337aced5dcb63be7382eeedd764fbdd21c892ec8b47053f394.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDU2NzczNzJ9.G3aEpFxi_0HMsa6aDcefDeItCkaFri1rFWU3IIqDVmo --kubeedge-version=1.15.1 --runtimetype=remote  --with-mqtt=false
    ```
+
+   docker
+
+   ```
+   keadm  join --cloudcore-ipport=10.108.96.24:10000 --token=8cc6fc16618f8fc7b98a0221683b26d36a9b571c9257aac544574bb9dc014f74.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTE2OTY4MTR9.EgxPs9Z5MFHSUxCwM9rvyY9XjWXBHKxZmezi7pzyOIo --kubeedge-version=1.15.1   --with-mqtt=false --remote-runtime-endpoint=unix:///var/run/cri-dockerd.sock
+   ```
+
+   
 
 2. 查看状态
 
@@ -236,7 +255,7 @@ keadm reset --kube-config=/root/.kube/config
 systemctl status edgecore
 ```
 
-## 部署应用到边缘节点
+# 部署应用到边缘节点
 
 部署 redis
 
@@ -304,7 +323,7 @@ spec:
         - containerPort: 6379
 ```
 
-## 去掉 daemonset 部署在边缘节点上
+# 去掉 daemonset 部署在边缘节点上
 
 * 给 master 节点打标签
 
@@ -324,7 +343,7 @@ kubectl edit  daemonset nodelocaldns  -n kube-system
 
 ![image-20240205142617622](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240205142617622.png)
 
-## 查看太空端服务日志
+# 查看太空端服务日志
 
 1.开启日志
 
@@ -334,7 +353,7 @@ kubectl edit  daemonset nodelocaldns  -n kube-system
 
 service edgecore restart
 
-## 问题汇总
+# 问题汇总
 
 [常见问题](https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice):
 

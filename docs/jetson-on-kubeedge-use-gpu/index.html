@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd） - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）" />
-<meta property="og:description" content="应用的部署流程图 在 Jetson 上 如果部署 GPU 类型的应用，需要有 NVIDIA Container Runtime 支持。 NVIDIA Container Runtime 环境配置 安装jtop 安装 jtop 的目的是为了监控 GPU 的使用情况 1 2 3 sudo apt-get install python3-pip python3-dev -y" />
+<meta property="og:description" content="在轨验证方案 应用的部署流程图 在 Jetson 上 如果部署 GPU 类型的应用，需要有 NVIDIA Container Runtime 支持。 NVIDIA Container Runtime 环境配置 各个组件的版本信息如下： 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.15.1 Je" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-21T09:07:51+08:00" />
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
 <meta name="twitter:title" content="基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）"/>
-<meta name="twitter:description" content="应用的部署流程图 在 Jetson 上 如果部署 GPU 类型的应用，需要有 NVIDIA Container Runtime 支持。 NVIDIA Container Runtime 环境配置 安装jtop 安装 jtop 的目的是为了监控 GPU 的使用情况 1 2 3 sudo apt-get install python3-pip python3-dev -y"/>
+<meta name="twitter:description" content="在轨验证方案 应用的部署流程图 在 Jetson 上 如果部署 GPU 类型的应用，需要有 NVIDIA Container Runtime 支持。 NVIDIA Container Runtime 环境配置 各个组件的版本信息如下： 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.15.1 Je"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/jetson-on-kubeedge-use-gpu\/"
-        },"genre": "posts","wordcount":  2313 ,
+        },"genre": "posts","wordcount":  2419 ,
         "url": "https:\/\/zhuyaguang.github.io\/jetson-on-kubeedge-use-gpu\/","datePublished": "2024-03-21T09:07:51+08:00","dateModified": "2024-03-21T09:07:51+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2313 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2419 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -93,7 +93,6 @@
       <ul>
         <li><a href="#安装jtop">安装jtop</a></li>
         <li><a href="#安装jetpack">安装JetPack</a></li>
-        <li><a href="#安装-nvidia-container-toolkit">安装 NVIDIA Container Toolkit</a></li>
         <li><a href="#地卫二-jetson安装组件版本信息">地卫二 Jetson安装组件版本信息</a></li>
         <li><a href="#安装-docker-打镜像包">安装 Docker 打镜像包</a></li>
         <li><a href="#nvida-官方的机器学习-docker-镜像">Nvida 官方的机器学习 docker 镜像</a></li>
@@ -122,9 +121,11 @@
         </li>
       </ul>
     </li>
+    <li><a href="#参考文档">参考文档</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="应用的部署流程图">应用的部署流程图</h2>
+            </div><div class="content" id="content"><h1 id="在轨验证方案">在轨验证方案</h1>
+<h2 id="应用的部署流程图">应用的部署流程图</h2>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -146,6 +147,49 @@
         title="img" /></p>
 <p><a href="https://developer.nvidia.com/container-runtime#" target="_blank" rel="noopener noreffer">NVIDIA Container Runtime</a></p>
 <h2 id="环境配置">环境配置</h2>
+<p>各个组件的版本信息如下：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kubesphere</td>
+<td>3.4.1</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.7.2</td>
+</tr>
+<tr>
+<td>k8s</td>
+<td>1.26.0</td>
+</tr>
+<tr>
+<td>kubeedge</td>
+<td>1.15.1</td>
+</tr>
+<tr>
+<td>Jetson型号</td>
+<td>NVIDIA Jetson Xavier NX (16GB ram)</td>
+</tr>
+<tr>
+<td>Jtop</td>
+<td>4.2.7</td>
+</tr>
+<tr>
+<td>JetPack</td>
+<td>5.1.3-b29</td>
+</tr>
+<tr>
+<td>docker</td>
+<td>24.0.5</td>
+</tr>
+</tbody>
+</table>
 <h3 id="安装jtop">安装jtop</h3>
 <blockquote>
 <p>安装 jtop 的目的是为了监控 GPU 的使用情况</p>
@@ -237,27 +281,6 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div></blockquote>
-<h3 id="安装-nvidia-container-toolkit">安装 NVIDIA Container Toolkit</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt-get install -y nvidia-container-toolkit
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sudo nvidia-ctk runtime configure --runtime=containerd
-</span></span><span class="line"><span class="cl">sudo systemctl restart containerd
-</span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>参考文档</p>
-</blockquote>
-<p>安装教程：<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-the-nvidia-container-toolkit" target="_blank" rel="noopener noreffer">Installing the NVIDIA Container Toolkit</a></p>
-<p>安装有问题可以参考：<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/troubleshooting.html" target="_blank" rel="noopener noreffer">Trobleshooting</a></p>
-<p><a href="https://github.com/NVIDIA/nvidia-docker/issues/1268" target="_blank" rel="noopener noreffer">nvidia-docker 与 nvidia container runtime 的区别</a></p>
 <h3 id="地卫二-jetson安装组件版本信息">地卫二 Jetson安装组件版本信息</h3>
 <p><img
         class="lazyload"
@@ -289,19 +312,19 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312174619755.png"
-        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312174619755.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312174619755.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312174619755.png 2x"
+        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240312174619755.png"
+        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240312174619755.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240312174619755.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240312174619755.png 2x"
         data-sizes="auto"
-        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312174619755.png"
+        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240312174619755.png"
         title="image-20240312174619755" /></p>
 <p><a href="https://developer.nvidia.com/embedded/jetson-cloud-native" target="_blank" rel="noopener noreffer">Cloud-Native on Jetson</a></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312180127250.png"
-        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312180127250.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312180127250.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312180127250.png 2x"
+        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240312180127250.png"
+        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240312180127250.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240312180127250.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240312180127250.png 2x"
         data-sizes="auto"
-        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312180127250.png"
+        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240312180127250.png"
         title="image-20240312180127250" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -347,10 +370,10 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313090907773.png"
-        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313090907773.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313090907773.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313090907773.png 2x"
+        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313090907773.png"
+        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313090907773.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313090907773.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240313090907773.png 2x"
         data-sizes="auto"
-        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313090907773.png"
+        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240313090907773.png"
         title="image-20240313090907773" /></p>
 <p>其中 <strong>l4t-base container</strong> 是基础镜像，可以在此基础上构建自己所需的镜像。</p>
 <p>例如：</p>
@@ -700,9 +723,21 @@
 </div></li>
 </ul>
 <p><code>docker build -t mnist:1.0 .</code></p>
-<ul>
-<li>docker 运行命令：</li>
-</ul>
+<p>docker 运行命令：</p>
+<p>不加 &ndash;runtime nvidia 参数，会使用 CPU 进行训练</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run -it --runtime nvidia mnist:1.0  /bin/bash
+</span></span><span class="line"><span class="cl">python3 pytorch-minst.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>不打镜像直接挂载代码</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -715,7 +750,7 @@
 </span></span><span class="line"><span class="cl">python3 pytorch-minst.py
 </span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div></li>
 <li>
 <p>镜像转换</p>
 <p><strong>当然如果安装了 Harbor 镜像仓库，直接 docker push 然后 ctr images pull</strong></p>
@@ -738,15 +773,19 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ctr c create nvcr.io/nvidia/l4t-pytorch:r35.2.1-pth2.0-py3 gpu-demo
@@ -758,6 +797,10 @@
 </span></span><span class="line"><span class="cl">python3 pytorch-minst.py
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">ctr tasks <span class="nb">kill</span> gpu-demo --signal SIGKILL
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">或者
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ctr run --rm --gpus <span class="m">0</span> --tty local-harbor.com/algorithms/mnist:1.0 python3 /home/pytorch-mnist.py
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="pod部署">pod部署</h4>
@@ -779,6 +822,7 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
+</span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
@@ -786,10 +830,11 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">gpu-test</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hostNetwork</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nodeSelector</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/hostname</span><span class="p">:</span><span class="w"> </span><span class="l">edge1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/hostname</span><span class="p">:</span><span class="w"> </span><span class="l">jetpack513-desktop</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">docker.io/library/pytorch-mnist:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">local-harbor.com/algorithms/mnist:1.0</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">IfNotPresent</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">gpu-test</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w">
@@ -831,6 +876,7 @@
 </span><span class="lnt">27
 </span><span class="lnt">28
 </span><span class="lnt">29
+</span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
@@ -849,9 +895,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">gpu-test</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hostNetwork</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">gpu-test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">docker.io/library/pytorch-mnist:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">local-harbor.com/algorithms/mnist:1.0</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">IfNotPresent</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="s2">&#34;/bin/bash&#34;</span><span class="w">
@@ -868,7 +915,7 @@
 <ul>
 <li>
 <p>Dockerfile-arm</p>
-<p>whl 文件</p>
+<p>whl 文件比较大，需要从指定目录拷贝过来。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1283,6 +1330,10 @@
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145424545.png"
         title="image-20240326145424545" /></p>
 <p>具体应用生命周期管理，可以参考<a href="https://kubesphere.io/zh/docs/v3.3/application-store/app-lifecycle-management/" target="_blank" rel="noopener noreffer">链接</a></p>
+<h2 id="参考文档">参考文档</h2>
+<p>nvidia-ctk安装教程：<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-the-nvidia-container-toolkit" target="_blank" rel="noopener noreffer">Installing the NVIDIA Container Toolkit</a></p>
+<p>安装有问题可以参考：<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/troubleshooting.html" target="_blank" rel="noopener noreffer">Trobleshooting</a></p>
+<p><a href="https://github.com/NVIDIA/nvidia-docker/issues/1268" target="_blank" rel="noopener noreffer">nvidia-docker 与 nvidia container runtime 的区别</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
