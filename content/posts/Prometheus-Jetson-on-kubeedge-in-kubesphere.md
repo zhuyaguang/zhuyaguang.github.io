@@ -5,8 +5,6 @@ draft: true
 description: "k8s containerd \nvidia GPU \Jetson  像一个永远不可能三角形"
 ---
 
-<!--more-->
-
 ## 环境部署
 
 | 组件       | 版本                               |
