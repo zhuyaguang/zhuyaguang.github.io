@@ -1,8 +1,5 @@
----
-title: "使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态"
-date: 2024-03-21T14:19:33+08:00
-draft: true
----
+# 使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态
+
 
 ## 环境部署
 
@@ -680,4 +677,5 @@ get http://10.11.140.87:32143/api/v1/query_range?query=gpu_usage_gpu&start=17114
 
 
 ### 
+
 
