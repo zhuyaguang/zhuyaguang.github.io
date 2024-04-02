@@ -2,11 +2,12 @@
 title: "使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态"
 date: 2024-03-21T14:19:33+08:00
 draft: true
+description: "k8s containerd \nvidia GPU \Jetson  像一个永远不可能三角形"
 ---
 
-## 环境部署
+<!--more-->
 
-> k8s containerd  / nvidia GPU  / Jetson  像一个永远不可能三角形
+## 环境部署
 
 | 组件       | 版本                               |
 | ---------- | ---------------------------------- |
