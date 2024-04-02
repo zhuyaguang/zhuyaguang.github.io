@@ -169,6 +169,8 @@ nameserver 127.0.0.53
 
 将dnsPolicy修改为ClusterFirstWithHostNet，之后重启node-exporter，dns的配置正确
 
+`kubectl edit ds node-exporter -n kubesphere-monitoring-system`
+
       dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true
 

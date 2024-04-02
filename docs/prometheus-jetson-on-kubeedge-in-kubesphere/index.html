@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/"
-        },"genre": "posts","wordcount":  2825 ,
+        },"genre": "posts","wordcount":  2831 ,
         "url": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/","datePublished": "2024-03-21T14:19:33+08:00","dateModified": "2024-03-21T14:19:33+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2825 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2831 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -401,6 +401,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>将dnsPolicy修改为ClusterFirstWithHostNet，之后重启node-exporter，dns的配置正确</p>
+<p><code>kubectl edit ds node-exporter -n kubesphere-monitoring-system</code></p>
 <pre><code>  dnsPolicy: ClusterFirstWithHostNet
   hostNetwork: true
 </code></pre>
