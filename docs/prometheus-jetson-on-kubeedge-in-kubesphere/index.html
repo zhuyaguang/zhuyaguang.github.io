@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/"
-        },"genre": "posts","wordcount":  2795 ,
+        },"genre": "posts","wordcount":  2825 ,
         "url": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/","datePublished": "2024-03-21T14:19:33+08:00","dateModified": "2024-03-21T14:19:33+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2795 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2825 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -113,7 +113,6 @@
             <li><a href="#在-kubesphere-前端查看-gpu-监控数据">在 kubesphere 前端，查看 GPU 监控数据</a></li>
           </ul>
         </li>
-        <li><a href="#其他">其他</a></li>
         <li><a href="#heading"></a></li>
       </ul>
     </li>
@@ -273,7 +272,7 @@
 <p>在K8S的集群中，当创建pod时，会在pod中增加KUBERNETES_SERVICE_HOST和KUBERNETES_SERVICE_PORT这两个环境变量，用于pod内的进程对kube-apiserver的访问，但是在kubeedge的edge节点上创建的pod中，这两个环境变量存在，但它是空的。</p>
 <p>跟华为kubeedge的开发人员咨询，他们说会在kubeedge 1.17版本上增加这两个环境变量的设置。参考如下：
 <a href="https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md" target="_blank" rel="noopener noreffer">https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md</a></p>
-<p>另一方面，他推荐安装edgemesh，安装之后在edge的pod上就可以访问kubernetes.default.svc.cluster.local:443了。</p>
+<p>另一方面，推荐安装edgemesh，安装之后在edge的pod上就可以访问kubernetes.default.svc.cluster.local:443了。</p>
 <h4 id="3-edgemesh部署">3. edgemesh部署</h4>
 <ol>
 <li>
@@ -282,7 +281,7 @@
 <p>修改完 重启 cloudcore <code>kubectl delete pod cloudcore-776ffcbbb9-s6ff8 -n kubeedge</code></p>
 </li>
 <li>
-<p>配置 edgecore 模块，metaServer=true clusterDNS</p>
+<p>配置 edgecore 模块，配置 metaServer=true 和 clusterDNS</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -323,7 +322,7 @@
 </span></span><span class="line"><span class="cl">    ...
 </span></span><span class="line"><span class="cl">    tailoredKubeletConfig:
 </span></span><span class="line"><span class="cl">      ...
-</span></span><span class="line"><span class="cl">      clusterDNS:
+</span></span><span class="line"><span class="cl">      clusterDNS:     //配置这里
 </span></span><span class="line"><span class="cl">      - 169.254.96.16
 </span></span><span class="line"><span class="cl">...
 </span></span><span class="line"><span class="cl">
@@ -395,9 +394,9 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@master1:/home/wpx/edgemesh-1.12.0/build/crds/istio# kubectl <span class="nb">exec</span> -it node-exporter-hcmfg -n kubesphere-monitoring-system -- sh
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> -it node-exporter-hcmfg -n kubesphere-monitoring-system -- sh
 </span></span><span class="line"><span class="cl">Defaulted container <span class="s2">&#34;node-exporter&#34;</span> out of: node-exporter, kube-rbac-proxy
-</span></span><span class="line"><span class="cl">/ $ cat /etc/resolv.conf 
+</span></span><span class="line"><span class="cl">$ cat /etc/resolv.conf 
 </span></span><span class="line"><span class="cl">nameserver 127.0.0.53
 </span></span></code></pre></td></tr></table>
 </div>
@@ -438,7 +437,68 @@
 </div>
 </div><p><strong>node-exporter 变成 running</strong>!!!!</p>
 <p>在边缘节点 <code>curl http://127.0.0.1:9100/metrics</code>  可以发现 采集到了边缘节点的数据。</p>
-<p>最后我们可以将 kubesphere 的 k8s 服务通过 NodePort 暴露出来。就可以在页面查看</p>
+<p>最后我们可以将 kubesphere 的 k8s 服务通过 NodePort 暴露出来。就可以在页面查看 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/instance</span><span class="p">:</span><span class="w"> </span><span class="l">k8s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/version</span><span class="p">:</span><span class="w"> </span><span class="m">2.39.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus-k8s-nodeport</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubesphere-monitoring-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">9090</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">9090</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="m">32143</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/instance</span><span class="p">:</span><span class="w"> </span><span class="l">k8s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sessionAffinity</span><span class="p">:</span><span class="w"> </span><span class="l">ClientIP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sessionAffinityConfig</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">clientIP</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">timeoutSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">10800</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">NodePort</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过访问 master IP + 32143 端口，就可以访问 边缘节点 node-exporter 数据。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -1258,27 +1318,6 @@
         data-sizes="auto"
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401165457482.png"
         title="image-20240401165457482" /></p>
-<h3 id="其他">其他</h3>
-<ul>
-<li>解决 kube-proxy not running</li>
-</ul>
-<p>将 kubeproxy 的 config 的 ipvs 改成 iptables</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170702278.png"
-        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170702278.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170702278.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170702278.png 2x"
-        data-sizes="auto"
-        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329170702278.png"
-        title="image-20240329170702278" /></p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170803288.png"
-        data-srcset="C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170803288.png, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170803288.png 1.5x, C:%5cUsers%5cDELL%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20240329170803288.png 2x"
-        data-sizes="auto"
-        alt="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329170803288.png"
-        title="image-20240329170803288" /></p>
 <h3 id="heading"></h3>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">

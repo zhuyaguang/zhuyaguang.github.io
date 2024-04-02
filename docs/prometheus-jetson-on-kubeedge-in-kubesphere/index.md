@@ -92,7 +92,7 @@ kubecrl edit该失败的pod，发现是其中的kube-rbac-proxy这个container�
 跟华为kubeedge的开发人员咨询，他们说会在kubeedge 1.17版本上增加这两个环境变量的设置。参考如下：
 [https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md](https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md)
 
-另一方面，他推荐安装edgemesh，安装之后在edge的pod上就可以访问kubernetes.default.svc.cluster.local:443了。
+另一方面，推荐安装edgemesh，安装之后在edge的pod上就可以访问kubernetes.default.svc.cluster.local:443了。
 
 #### 3. edgemesh部署
 
@@ -102,7 +102,7 @@ kubecrl edit该失败的pod，发现是其中的kube-rbac-proxy这个container�
 
    修改完 重启 cloudcore `kubectl delete pod cloudcore-776ffcbbb9-s6ff8 -n kubeedge`
 
-2. 配置 edgecore 模块，metaServer=true clusterDNS  
+2. 配置 edgecore 模块，配置 metaServer=true 和 clusterDNS  
 
    ```shell
    $ vim /etc/kubeedge/config/edgecore.yaml
@@ -120,7 +120,7 @@ kubecrl edit该失败的pod，发现是其中的kube-rbac-proxy这个container�
        ...
        tailoredKubeletConfig:
          ...
-         clusterDNS:
+         clusterDNS:     //配置这里
          - 169.254.96.16
    ...
    
@@ -161,9 +161,9 @@ kubecrl edit该失败的pod，发现是其中的kube-rbac-proxy这个container�
 edgemesh部署完成后，edge节点上的node-exporter中的两个境变量还是空的，也无法访问kubernetes.default.svc.cluster.local:443，原因是该pod中的dns服务器配置错误，应该是169.254.96.16的，但是却是跟宿主机一样的dns配置。
 
 ```shell
-root@master1:/home/wpx/edgemesh-1.12.0/build/crds/istio# kubectl exec -it node-exporter-hcmfg -n kubesphere-monitoring-system -- sh
+kubectl exec -it node-exporter-hcmfg -n kubesphere-monitoring-system -- sh
 Defaulted container "node-exporter" out of: node-exporter, kube-rbac-proxy
-/ $ cat /etc/resolv.conf 
+$ cat /etc/resolv.conf 
 nameserver 127.0.0.53
 ```
 
@@ -198,7 +198,39 @@ systemctl restart edgecore
 
 在边缘节点 `curl http://127.0.0.1:9100/metrics`  可以发现 采集到了边缘节点的数据。
 
-最后我们可以将 kubesphere 的 k8s 服务通过 NodePort 暴露出来。就可以在页面查看 
+最后我们可以将 kubesphere 的 k8s 服务通过 NodePort 暴露出来。就可以在页面查看 。
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: prometheus
+    app.kubernetes.io/instance: k8s
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: kube-prometheus
+    app.kubernetes.io/version: 2.39.1
+  name: prometheus-k8s-nodeport
+  namespace: kubesphere-monitoring-system
+spec:
+  ports:
+  - port: 9090
+    targetPort: 9090
+    protocol: TCP
+    nodePort: 32143
+  selector:
+    app.kubernetes.io/component: prometheus
+    app.kubernetes.io/instance: k8s
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: kube-prometheus
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  type: NodePort
+```
+
+通过访问 master IP + 32143 端口，就可以访问 边缘节点 node-exporter 数据。
 
 ![image-20240401145941476](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401145941476.png)
 
@@ -635,18 +667,6 @@ get http://10.11.140.87:32143/api/v1/query_range?query=gpu_usage_gpu&start=17114
 
 
 
-
-### 其他
-
-* 解决 kube-proxy not running
-
-将 kubeproxy 的 config 的 ipvs 改成 iptables 
-
-
-
-![image-20240329170702278](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329170702278.png)
-
-![image-20240329170803288](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240329170803288.png)
 
 
 
