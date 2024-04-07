@@ -1,14 +1,24 @@
 # 使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态
 
 
-## 环境部署
+### KubeSphere 边缘节点的可观测性
+
+KubeSphere 愿景是打造一个以 Kubernetes 为内核的云原生分布式操作系统，它的架构可以非常方便地使第三方应用与云原生生态组件进行即插即用（plug-and-play）的集成。
+
+在边缘计算场景下，KubeSphere 基于 KubeEdge 实现应用与工作负载在云端与边缘节点的统一分发与管理，解决在海量边、端设备上完成应用交付、运维、管控的需求。
+
+根据 KubeSphere 的[支持矩阵](https://kubesphere.io/zh/docs/v3.3/installing-on-linux/introduction/kubekey/#%e6%94%af%e6%8c%81%e7%9f%a9%e9%98%b5)，只有 1.23.x 版本的 k8s 支持边缘计算，而且 KubeSphere 界面也没有资源使用率显示。
+
+![image-20240407141223475](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240407141223475.png)
+
+本文基于 KubeSphere 和 KubeEdge 构建云边一体化计算平台，通过Prometheus 来监控 Nvidia Jetson 边缘设备状态，实现 KubeSphere 在边缘节点的可观测性。
 
 | 组件       | 版本                               |
 | ---------- | ---------------------------------- |
-| kubesphere | 3.4.1                              |
+| KubeSphere | 3.4.1                              |
 | containerd | 1.7.2                              |
 | k8s        | 1.26.0                             |
-| kubeedge   | 1.15.1                             |
+| KubeEdge   | 1.15.1                             |
 | Jetson型号 | NVIDIA Jetson Xavier NX (16GB ram) |
 | Jtop       | 4.2.7                              |
 | JetPack    | 5.1.3-b29                          |
@@ -16,7 +26,7 @@
 
 ### 部署 k8s 环境
 
-参考  [kubesphere 部署文档](https://kubesphere.io/zh/docs/v3.4/quick-start/all-in-one-on-linux/)
+参考  [kubesphere 部署文档](https://kubesphere.io/zh/docs/v3.4/quick-start/all-in-one-on-linux/)。通过 KubeKey 可以快速部署一套 k8s 集群。
 
 ```
 //  all in one 方式部署一台 单 master 的 k8s 集群
@@ -26,9 +36,9 @@
 
 ### 部署  KubeEdge 环境
 
-参考 [在 KubeSphere 上部署最新版的 KubeEdge](https://zhuyaguang.github.io/kubeedge-install/)，部署kubeedge。
+参考 [在 KubeSphere 上部署最新版的 KubeEdge](https://zhuyaguang.github.io/kubeedge-install/)，部署 KubeEdge。
 
-####  开启 边缘节点日志查询功能
+####  开启边缘节点日志查询功能
 
 1. vim /etc/kubeedge/config/edgecore.yaml
 
@@ -36,7 +46,7 @@
 
    ![image-20231226105650084](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231226105650084.png)
 
-
+开启后，可以方便查询 pod 日志，定位问题。
 
 ### 修改 kubesphere 配置
 
@@ -50,9 +60,7 @@
 
 ![image.png](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467882107-c44e734b-245d-446b-8564-f8830e5db478.png)
 
-
-
-[官方参考链接](https://www.kubesphere.io/zh/docs/v3.3/pluggable-components/kubeedge/)
+[ KubeSphere 开启边缘节点文档链接](https://www.kubesphere.io/zh/docs/v3.3/pluggable-components/kubeedge/)
 
 > 修改完 发现可以显示边缘节点，但是没有 CPU 和 内存信息，发现边缘节点没有 node-exporter 这个pod。
 
@@ -75,22 +83,20 @@
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/edgetest  -- 暂时修改了这里
+              - key: node-role.kubernetes.io/edgetest  -- 修改这里，让亲和性失效
                 operator: DoesNotExist
 ```
 
 node-exporter 是部署在边缘节点上了，但是 pods 起不来。
 
-kubecrl edit该失败的pod，发现是其中的kube-rbac-proxy这个container启动失败，看这个container的logs。
+kubecrl edit 该失败的pod，发现是其中的 kube-rbac-proxy 这个 container 启动失败，看这个 container 的logs。发现是 kube-rbac-proxy 想要获取 KUBERNETES_SERVICE_HOST 和 KUBERNETES_SERVICE_PORT 这两个环境变量，但是获取失败，所以启动失败。
 
-发现是kube-rbac-proxy想要获取KUBERNETES_SERVICE_HOST和KUBERNETES_SERVICE_PORT这两个环境变量，但是获取失败，所以启动失败。
+在 K8S 的集群中，当创建 pod 时，会在pod中增加 KUBERNETES_SERVICE_HOST 和 KUBERNETES_SERVICE_PORT 这两个环境变量，用于 pod 内的进程对 kube-apiserver 的访问，但是在 KubeEdge 的 edge 节点上创建的 pod 中，这两个环境变量存在，但它是空的。
 
-在K8S的集群中，当创建pod时，会在pod中增加KUBERNETES_SERVICE_HOST和KUBERNETES_SERVICE_PORT这两个环境变量，用于pod内的进程对kube-apiserver的访问，但是在kubeedge的edge节点上创建的pod中，这两个环境变量存在，但它是空的。
-
-跟华为kubeedge的开发人员咨询，他们说会在kubeedge 1.17版本上增加这两个环境变量的设置。参考如下：
+和华为 KubeEdge 的开发人员咨询，他们说会在KubeEdge 1.17版本上增加这两个环境变量的设置。参考如下：
 [https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md](https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md)
 
-另一方面，推荐安装edgemesh，安装之后在edge的pod上就可以访问kubernetes.default.svc.cluster.local:443了。
+另一方面，推荐安装 edgemesh，安装之后在 edge 的 pod 上就可以访问 kubernetes.default.svc.cluster.local:443 了。
 
 #### 3. edgemesh部署
 
@@ -196,6 +202,8 @@ systemctl restart edgecore
 
 **node-exporter 变成 running**!!!!
 
+
+
 在边缘节点 `curl http://127.0.0.1:9100/metrics`  可以发现 采集到了边缘节点的数据。
 
 最后我们可以将 kubesphere 的 k8s 服务通过 NodePort 暴露出来。就可以在页面查看 。
@@ -234,11 +242,11 @@ spec:
 
 ![image-20240401145941476](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401145941476.png)
 
-然后界面上也出现了 CPU 和 内存的信息
+然后界面上也出现了 CPU 和 内存的信息。
 
 ![image-20240401151605113](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401151605113.png)
 
-
+搞定了 CPU 和 内存，接下来就是 GPU了。
 
 ### 监控 Jetson GPU 状态
 
@@ -664,18 +672,12 @@ get http://10.11.140.87:32143/api/v1/query_range?query=gpu_usage_gpu&start=17114
 
 ![image-20240401165457482](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401165457482.png)
 
+### 总结
 
+基于 KubeEdge ，我们在 KubeSphere 的前端界面上实现了边缘设备的可观测性，包括 GPU 信息的可观测性。
 
+对于边缘节点 CPU、内存状态的监控，首先修改亲和性，让 KubeSphere 自带的 node-exporter 能够采集边缘节点监控数据，接下来利用 KubeEdge 的 edgemesh 将采集的数据提供给 KubeSphere 的 prometheus 。这样就实现了CPU、内存信息的监控。
 
-
-
-
-
-
-
-
-
-
-### 
+对于边缘节点 GPU 状态的监控，安装 jtop 获取 GPU 使用率，温度等数据，然后开发  jetson GPU Exporter 将获取 jtop 获取的信息发送给 KubeSphere 的 prometheus，通过修改 KubeSphere 前端 ks-console 的代码，在界面上通过 http 接口获取 prometheus 数据，这样就实现了 GPU 使用率等监控信息。
 
 
