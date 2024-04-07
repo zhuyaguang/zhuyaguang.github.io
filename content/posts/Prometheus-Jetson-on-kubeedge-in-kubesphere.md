@@ -10,7 +10,7 @@ KubeSphere 愿景是打造一个以 Kubernetes 为内核的云原生分布式操
 
 在边缘计算场景下，KubeSphere 基于 KubeEdge 实现应用与工作负载在云端与边缘节点的统一分发与管理，解决在海量边、端设备上完成应用交付、运维、管控的需求。
 
-根据 KubeSphere 的[支持矩阵](https://kubesphere.io/zh/docs/v3.3/installing-on-linux/introduction/kubekey/#%e6%94%af%e6%8c%81%e7%9f%a9%e9%98%b5)，只有 1.23.x 版本的 k8s 支持边缘计算，而且 KubeSphere 界面也没有资源使用率显示。
+根据 KubeSphere 的[支持矩阵](https://kubesphere.io/zh/docs/v3.3/installing-on-linux/introduction/kubekey/#%e6%94%af%e6%8c%81%e7%9f%a9%e9%98%b5)，只有 1.23.x 版本的 k8s 支持边缘计算，而且 KubeSphere 界面也没有边缘节点资源使用率等监控信息的显示。
 
 ![image-20240407141223475](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240407141223475.png)
 

@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/"
-        },"genre": "posts","wordcount":  3139 ,
+        },"genre": "posts","wordcount":  3149 ,
         "url": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/","datePublished": "2024-03-21T14:19:33+08:00","dateModified": "2024-03-21T14:19:33+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3139 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3149 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -122,7 +122,7 @@
             </div><div class="content" id="content"><h3 id="kubesphere-边缘节点的可观测性">KubeSphere 边缘节点的可观测性</h3>
 <p>KubeSphere 愿景是打造一个以 Kubernetes 为内核的云原生分布式操作系统，它的架构可以非常方便地使第三方应用与云原生生态组件进行即插即用（plug-and-play）的集成。</p>
 <p>在边缘计算场景下，KubeSphere 基于 KubeEdge 实现应用与工作负载在云端与边缘节点的统一分发与管理，解决在海量边、端设备上完成应用交付、运维、管控的需求。</p>
-<p>根据 KubeSphere 的<a href="https://kubesphere.io/zh/docs/v3.3/installing-on-linux/introduction/kubekey/#%e6%94%af%e6%8c%81%e7%9f%a9%e9%98%b5" target="_blank" rel="noopener noreffer">支持矩阵</a>，只有 1.23.x 版本的 k8s 支持边缘计算，而且 KubeSphere 界面也没有资源使用率显示。</p>
+<p>根据 KubeSphere 的<a href="https://kubesphere.io/zh/docs/v3.3/installing-on-linux/introduction/kubekey/#%e6%94%af%e6%8c%81%e7%9f%a9%e9%98%b5" target="_blank" rel="noopener noreffer">支持矩阵</a>，只有 1.23.x 版本的 k8s 支持边缘计算，而且 KubeSphere 界面也没有边缘节点资源使用率等监控信息的显示。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
