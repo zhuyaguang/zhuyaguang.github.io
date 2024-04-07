@@ -116,7 +116,7 @@ nvidia 在 jetson 上对 containerd 运行时支持不太友好，有些算法�
 
 
 
-![image-20240312174619755](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240312174619755.png)
+![image-20240312174619755](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312174619755.png)
 
 [Cloud-Native on Jetson](https://developer.nvidia.com/embedded/jetson-cloud-native)
 
@@ -124,7 +124,7 @@ nvidia 在 jetson 上对 containerd 运行时支持不太友好，有些算法�
 
 
 
-![image-20240312180127250](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240312180127250.png)
+![image-20240312180127250](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312180127250.png)
 
 
 
@@ -153,7 +153,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 ### Nvida 官方的机器学习 docker 镜像
 
-![image-20240313090907773](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240313090907773.png)
+![image-20240313090907773](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313090907773.png)
 
 
 
