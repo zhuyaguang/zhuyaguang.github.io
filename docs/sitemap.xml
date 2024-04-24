@@ -2,13 +2,13 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://zhuyaguang.github.io/2024meetup/</loc><lastmod>2024-03-25T16:42:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>https://zhuyaguang.github.io/posts/</loc><lastmod>2024-03-25T16:42:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>https://zhuyaguang.github.io/</loc><lastmod>2024-03-25T16:42:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/</loc><lastmod>2024-03-21T14:19:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/</loc><lastmod>2024-03-21T09:07:51&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://zhuyaguang.github.io/kubeedge-code/</loc><lastmod>2024-03-21T09:02:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://zhuyaguang.github.io/claude/</loc><lastmod>2024-03-15T15:57:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+            <loc>https://zhuyaguang.github.io/2024meetup/</loc><lastmod>2024-03-25T16:42:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://zhuyaguang.github.io/posts/</loc><lastmod>2024-03-25T16:42:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://zhuyaguang.github.io/</loc><lastmod>2024-03-25T16:42:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/</loc><lastmod>2024-03-21T14:19:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/</loc><lastmod>2024-03-21T09:07:51&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://zhuyaguang.github.io/kubeedge-code/</loc><lastmod>2024-03-21T09:02:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://zhuyaguang.github.io/claude/</loc><lastmod>2024-03-15T15:57:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/zadig-story/</loc><lastmod>2024-02-07T09:13:04&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/zjlab-post/</loc><lastmod>2024-02-04T14:16:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/kubewharf/</loc><lastmod>2023-12-04T16:19:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
