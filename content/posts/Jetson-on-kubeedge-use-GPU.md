@@ -106,50 +106,7 @@ sudo apt show nvidia-jetpack
 
   ![image-20240313104318867](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240313104318867.png)
 
-
-
-### 安装 Docker 打镜像包
-
-nvidia 在 jetson 上对 containerd 运行时支持不太友好，有些算法在containerd 运行会出现错误， 在普通的 GPU 服务器上是可以完美支持 containerd 运行 。
-
-另外 containerd 打镜像也需要 docker build  来支持。Docker  可以不用安装在 Jetson 机器上，可以准备一台专门打镜像的机器。
-
-
-
-![image-20240312174619755](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312174619755.png)
-
 [Cloud-Native on Jetson](https://developer.nvidia.com/embedded/jetson-cloud-native)
-
-
-
-
-
-![image-20240312180127250](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240312180127250.png)
-
-
-
-
-
-```
-sudo apt-get update
-sudo apt-get install \
-apt-transport-https \
-ca-certificates \
-curl \
-gnupg \
-lsb-release
-
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
-echo \
-"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
-
-```
 
 ### Nvida 官方的机器学习 docker 镜像
 
@@ -340,9 +297,7 @@ if __name__ == '__main__':
 
 `docker build -t mnist:1.0 .`
 
-docker 运行命令：
-
-不加 --runtime nvidia 参数，会使用 CPU 进行训练
+* docker 运行命令（不加 --runtime nvidia 参数，会使用 CPU 进行训练）
 
 ```shell
 docker run -it --runtime nvidia mnist:1.0  /bin/bash
@@ -357,15 +312,7 @@ python3 pytorch-minst.py
   python3 pytorch-minst.py
   ```
 
-* 镜像转换
-
-  **当然如果安装了 Harbor 镜像仓库，直接 docker push 然后 ctr images pull** 
-
-```shell
-docker save nvcr.io/nvidia/l4t-pytorch:r35.2.1-pth2.0-py3 -o pytorch.tar
- 
-ctr -n k8s.io images import pytorch.tar
-```
+* 安装 Harbor 镜像仓库，直接 docker push 然后 ctr images pull 拉取镜像
 
 * containerd 运行命令：
 
@@ -444,116 +391,46 @@ spec:
         maxSurge: 25%
 ```
 
-### 部署 高分算法
+### 部署星载算法
 
-* Dockerfile-arm
+### 配置 GPU　容器运行时
 
-  whl 文件比较大，需要从指定目录拷贝过来。
+* docker:vim /etc/docker/daemon.json
 
-  ```dockerfile
-  # 使用官方的Python基础镜像
-  # FROM python:3.8
-  FROM python:3.8-slim
-  
-  # # 安装OpenCV依赖
-  RUN apt-get update
-  # libjasper-dev libdc1394-22-dev libavresample-dev \
-  RUN apt-get install -y --no-install-recommends \
-      build-essential \
-      cmake \
-      git \
-      pkg-config \
-      libjpeg-dev \
-      libtiff5-dev \    
-      libpng-dev \
-      zlib1g-dev libopenexr-dev libgdal-dev \
-      gdal-bin \
-      libavcodec-dev \
-      libavformat-dev \
-      libswscale-dev \
-      libv4l-dev \
-      libxvidcore-dev \
-      libx264-dev \
-      libgtk-3-dev libcanberra-gtk* \
-      libatlas-base-dev  libhdf5-dev liblapacke-dev libblas-dev \
-      gfortran \
-      ffmpeg \
-      python3-dev python3-pip
-  
-  
-  # 复制PyTorch安装文件到镜像中 这里面的镜像文件
-  COPY torch-1.10.0-cp38-cp38-manylinux2014_aarch64.whl /tmp/torch-1.10.0-cp38-cp38-manylinux2014_aarch64.whl
-  COPY torchvision-0.11.0-cp38-cp38-manylinux2014_aarch64.whl /tmp/torchvision-0.11.0-cp38-cp38-manylinux2014_aarch64.whl
-  COPY torchaudio-0.10.0-cp38-cp38-manylinux2014_aarch64.whl /tmp/torchaudio-0.10.0-cp38-cp38-manylinux2014_aarch64.whl
-  COPY scipy-1.8.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl /tmp/scipy-1.8.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
-  COPY opencv_python-4.9.0.80-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl /tmp/opencv_python-4.9.0.80-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
-  # 安装PyTorch
-  RUN pip install --upgrade pip
-  RUN pip install Pillow==10.2.0
-  RUN pip install numpy==1.24.4
-  RUN pip install /tmp/torch-1.10.0-cp38-cp38-manylinux2014_aarch64.whl
-  RUN pip install /tmp/torchvision-0.11.0-cp38-cp38-manylinux2014_aarch64.whl
-  RUN pip install /tmp/torchaudio-0.10.0-cp38-cp38-manylinux2014_aarch64.whl
-  RUN pip install /tmp/scipy-1.8.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
-  RUN pip install /tmp/opencv_python-4.9.0.80-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
-  
-  
-  RUN pip install gitpython==3.1.42
-  RUN pip install setuptools==69.2.0
-  RUN pip install tiffile
-  RUN pip install GDAL==3.6.2
-  RUN pip install ultralytics
-  
-  
-  
-  # # 将您的算法代码复制到容器中
-  COPY GaoFen-2_ortho.py /app/GaoFen-2_ortho.py
-  COPY GF2_PMS1_E139.8_N35.5_20230109_L1A0007045334-MSS1.rpb /app/GF2_PMS1_E139.8_N35.5_20230109_L1A0007045334-MSS1.rpb
-  COPY GF2_PMS1_E139.8_N35.5_20230109_L1A0007045334-MSS1.tiff /app/GF2_PMS1_E139.8_N35.5_20230109_L1A0007045334-MSS1.tiff
-  COPY GMTED2010.jp2 /app/GMTED2010.jp2
-  # 给予执行权限
-  RUN chmod +x GaoFen-2_ortho.py
-  
+  ```json
+  {
+      "runtimes": {
+          "nvidia": {
+              "path": "nvidia-container-runtime",
+              "runtimeArgs": []
+          }
+      },
+      
+      "default-runtime": "nvidia"
+  }
   ```
 
+* containerd:vim /etc/containerd/config.toml
 
+  修改runtime插件的配置，首先切换到runtime v2
 
-#### job 部署，用算法基础镜像
+  ```
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+            runtime_type = "io.containerd.runc.v2"
+  ```
 
-```yaml
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: tianji-job3
-  labels:
-    jobgroup: jobexample
-spec:
-  template:
-    metadata:
-      name: kubejob
-      labels:
-        jobgroup: jobexample
-    spec:
-      nodeName: jetpack513
-      containers:
-      - name: tianji-c3
-        image: armtianji:v1
-        command: ["/bin/sh", "-c"]      
-        args: ["python /app/GaoFen-2_ortho.py"]   
-        imagePullPolicy: IfNotPresent
-        volumeMounts:
-        - name: app
-          mountPath: /app       
-      volumes:
-      - name: app
-        hostPath:
-          path: /home/jetpack511/zyg/algorithms/Gaofen
-      restartPolicy: Never
-```
+  将CRI配置中的runc binary改为 `nvidia-container-runtime` 
 
-其中 `path: /home/jetpack511/zyg/algorithms/Gaofen` 为 gitlab 下载的代码存放地址
+  ```
+    [plugins."io.containerd.runtime.v1.linux"]
+      shim = "containerd-shim"
+      runtime = "nvidia-container-runtime" # 将此处 runtime 的值改成 nvidia-container-runtime
+  ```
 
-#### job 部署，用高分算法镜像
+  
+
+#### job 部署高分算法
 
 ```yaml
 apiVersion: batch/v1
