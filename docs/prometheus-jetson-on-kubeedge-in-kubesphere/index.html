@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/"
-        },"genre": "posts","wordcount":  3149 ,
+        },"genre": "posts","wordcount":  3439 ,
         "url": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/","datePublished": "2024-03-21T14:19:33+08:00","dateModified": "2024-03-21T14:19:33+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3149 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3439 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -97,13 +97,18 @@
             <li><a href="#开启边缘节点日志查询功能">开启边缘节点日志查询功能</a></li>
           </ul>
         </li>
-        <li><a href="#修改-kubesphere-配置">修改 kubesphere 配置</a>
+        <li><a href="#修改-kubesphere-配置kubeedge--1170">修改 kubesphere 配置(KubeEdge &lt; 1.17.0)</a>
           <ul>
             <li><a href="#1开启-kubeedge-边缘节点插件">1.开启 kubeedge 边缘节点插件</a></li>
             <li><a href="#2-修改-node-exporter-亲和性">2. 修改 node-exporter 亲和性</a></li>
             <li><a href="#3-edgemesh部署">3. edgemesh部署</a></li>
             <li><a href="#4-修改dnspolicy">4. 修改dnsPolicy</a></li>
             <li><a href="#5-添加环境变量">5. 添加环境变量</a></li>
+          </ul>
+        </li>
+        <li><a href="#kubeedge--1170">KubeEdge = 1.17.0</a>
+          <ul>
+            <li><a href="#创建-clusterrolebinding">创建 clusterrolebinding</a></li>
           </ul>
         </li>
         <li><a href="#监控-jetson-gpu-状态">监控 Jetson GPU 状态</a>
@@ -208,7 +213,7 @@
 </li>
 </ol>
 <p>开启后，可以方便查询 pod 日志，定位问题。</p>
-<h3 id="修改-kubesphere-配置">修改 kubesphere 配置</h3>
+<h3 id="修改-kubesphere-配置kubeedge--1170">修改 kubesphere 配置(KubeEdge &lt; 1.17.0)</h3>
 <h4 id="1开启-kubeedge-边缘节点插件">1.开启 kubeedge 边缘节点插件</h4>
 <ol>
 <li>修改 configmap&ndash;ClusterConfiguration</li>
@@ -280,8 +285,7 @@
 </div><p>node-exporter 是部署在边缘节点上了，但是 pods 起不来。</p>
 <p>kubecrl edit 该失败的pod，发现是其中的 kube-rbac-proxy 这个 container 启动失败，看这个 container 的logs。发现是 kube-rbac-proxy 想要获取 KUBERNETES_SERVICE_HOST 和 KUBERNETES_SERVICE_PORT 这两个环境变量，但是获取失败，所以启动失败。</p>
 <p>在 K8S 的集群中，当创建 pod 时，会在pod中增加 KUBERNETES_SERVICE_HOST 和 KUBERNETES_SERVICE_PORT 这两个环境变量，用于 pod 内的进程对 kube-apiserver 的访问，但是在 KubeEdge 的 edge 节点上创建的 pod 中，这两个环境变量存在，但它是空的。</p>
-<p>和华为 KubeEdge 的开发人员咨询，他们说会在KubeEdge 1.17版本上增加这两个环境变量的设置。参考如下：
-<a href="https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md" target="_blank" rel="noopener noreffer">https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md</a></p>
+<p>和华为 KubeEdge 的社区同学咨询，KubeEdge 1.17版本将会增加这两个环境变量的设置。<a href="https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md" target="_blank" rel="noopener noreffer">KubeEdge 社区  proposals 链接</a>。</p>
 <p>另一方面，推荐安装 edgemesh，安装之后在 edge 的 pod 上就可以访问 kubernetes.default.svc.cluster.local:443 了。</p>
 <h4 id="3-edgemesh部署">3. edgemesh部署</h4>
 <ol>
@@ -527,6 +531,84 @@
         data-sizes="auto"
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401151605113.png"
         title="image-20240401151605113" /></p>
+<h3 id="kubeedge--1170">KubeEdge = 1.17.0</h3>
+<blockquote>
+<p>开启 kubeedge 边缘节点插件 和 修改 node-exporter 亲和性 和 KubeEdge &lt; 1.17.0 一样</p>
+</blockquote>
+<p>部署 1.17.0版本注意，需要支持边缘 Pods 使用 InClusterConfig 访问 Kube-APIServer ，所以要配置指定 cloudCore.featureGates.requireAuthorization=true 以及 cloudCore.modules.dynamicController.enable=true。 详情可以查看 <a href="https://mp.weixin.qq.com/s/Dw2IKRDvOWH52xTOStI7dg" target="_blank" rel="noopener noreffer">KubeEdge 公众号文章</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm init --advertise-address<span class="o">=</span>10.108.96.24  --set cloudCore.featureGates.requireAuthorization<span class="o">=</span>true,cloudCore.modules.dynamicController.enable<span class="o">=</span><span class="nb">true</span> --kubeedge-version<span class="o">=</span>v1.17.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>启动 EdgeCore 后，按如下修改 edgecore.yaml 后重启 EdgeCore。</p>
+<p>修改  <strong>metaServer.enable = true</strong> 同时增加  <strong>featureGates: requireAuthorization: true</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">edgecore.config.kubeedge.io/v1alpha2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">EdgeCore</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">featureGates</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">requireAuthorization</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">modules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">metaManager</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metaServer</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改完重启 edgecore</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">systemctl restart edgecore
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="创建-clusterrolebinding">创建 clusterrolebinding</h4>
+<p>发现 node-exporter 里面的容器报错：<code>Unable to authenticate the request due to an error: tokenreviews.authentication.k8s.io is forbidden: User &quot;system:serviceaccount:kubeedge:cloudcore&quot; cannot create resource &quot;tokenreviews&quot; in API group &quot;authentication.k8s.io&quot; at the cluster scope</code></p>
+<p>因为  cloudcore 没有权限，所以创建一个 clusterrolebinding</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/9b5b3561b967051b6cab073f7eda10d.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/9b5b3561b967051b6cab073f7eda10d.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/9b5b3561b967051b6cab073f7eda10d.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/9b5b3561b967051b6cab073f7eda10d.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/9b5b3561b967051b6cab073f7eda10d.png"
+        title="9b5b3561b967051b6cab073f7eda10d" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl create clusterrolebinding cloudcore-promethus-binding --clusterrole=cluster-admin --serviceaccount=kubeedge:cloudcore
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建完 clusterrolebinding 就可以查询到边缘节点的监控信息了。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240604094828377.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240604094828377.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240604094828377.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240604094828377.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240604094828377.png"
+        title="image-20240604094828377" /></p>
 <p>搞定了 CPU 和 内存，接下来就是 GPU了。</p>
 <h3 id="监控-jetson-gpu-状态">监控 Jetson GPU 状态</h3>
 <h4 id="安装-jtop">安装 Jtop</h4>

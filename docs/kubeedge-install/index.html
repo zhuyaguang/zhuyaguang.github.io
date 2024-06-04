@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/"
-        },"genre": "posts","wordcount":  1531 ,
+        },"genre": "posts","wordcount":  1578 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/","datePublished": "2023-11-07T11:03:15+08:00","dateModified": "2023-11-07T11:03:15+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">在 KubeSphere 上部署最新版的 KubeEdge</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1531 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1578 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -245,6 +245,15 @@
 </span></span><span class="line"><span class="cl">// k8s 多节点的时候，配置 cloudcore 所在节点的地址
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">keadm init --advertise-address<span class="o">=</span>10.101.32.14,10.101.32.15 --set cloudCore.service.enable<span class="o">=</span><span class="nb">true</span> --set cloudCore.hostNetWork<span class="o">=</span><span class="nb">true</span> --profile <span class="nv">version</span><span class="o">=</span>v1.14.0 --kube-config<span class="o">=</span>/root/.kube/config
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用1.17.0版本 支持边缘Pods使用InClusterConfig访问Kube-APIServer</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm init --advertise-address<span class="o">=</span>10.11.140.131,10.11.140.86 --set cloudCore.featureGates.requireAuthorization<span class="o">=</span>true,cloudCore.modules.dynamicController.enable<span class="o">=</span><span class="nb">true</span> mosquitto.enable<span class="o">=</span><span class="nb">false</span> --kubeedge-version<span class="o">=</span>v1.17.0
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>检查 cloudcore 是否安装成功</p>
@@ -477,7 +486,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm  join --cloudcore-ipport<span class="o">=</span>10.108.96.24:10000 --token<span class="o">=</span>c96621fc3d5280337aced5dcb63be7382eeedd764fbdd21c892ec8b47053f394.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDU2NzczNzJ9.G3aEpFxi_0HMsa6aDcefDeItCkaFri1rFWU3IIqDVmo --kubeedge-version<span class="o">=</span>1.15.1 --runtimetype<span class="o">=</span>remote  --with-mqtt<span class="o">=</span><span class="nb">false</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm  join --cloudcore-ipport<span class="o">=</span>10.108.96.24:10000 --token<span class="o">=</span>45055f5cd0eb033764cfb24ce4a5f64636862f7945efb174ff69eb437aafdfa9.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTcxMjU1NDd9.YIgECHxVGU6Yq23zhMjAjPQ0TUOFWnMgqAQyQvdsaNM --kubeedge-version<span class="o">=</span>1.15.1 --runtimetype<span class="o">=</span>remote  --with-mqtt<span class="o">=</span><span class="nb">false</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>docker</p>
@@ -638,7 +647,7 @@
 <li>编辑daemonset</li>
 </ul>
 <p>kubectl edit  daemonset calico-node  -n kube-system</p>
-<p>kubectl edit  daemonset kube-proxy   -n kube-system:：</p>
+<p>kubectl edit  daemonset kube-proxy   -n kube-system</p>
 <p>kubectl edit  daemonset nodelocaldns  -n kube-system</p>
 <ul>
 <li>增加一个标签 master: “true”,没有标签就都加上。</li>
