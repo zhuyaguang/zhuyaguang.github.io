@@ -51,7 +51,7 @@ KubeSphere 愿景是打造一个以 Kubernetes 为内核的云原生分布式操
 
 开启后，可以方便查询 pod 日志，定位问题。
 
-### 修改 kubesphere 配置
+### 修改 kubesphere 配置(KubeEdge < 1.17.0)
 
 #### 1.开启 kubeedge 边缘节点插件
 
@@ -96,8 +96,7 @@ kubecrl edit 该失败的pod，发现是其中的 kube-rbac-proxy 这个 contain
 
 在 K8S 的集群中，当创建 pod 时，会在pod中增加 KUBERNETES_SERVICE_HOST 和 KUBERNETES_SERVICE_PORT 这两个环境变量，用于 pod 内的进程对 kube-apiserver 的访问，但是在 KubeEdge 的 edge 节点上创建的 pod 中，这两个环境变量存在，但它是空的。
 
-和华为 KubeEdge 的开发人员咨询，他们说会在KubeEdge 1.17版本上增加这两个环境变量的设置。参考如下：
-[https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md](https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md)
+和华为 KubeEdge 的社区同学咨询，KubeEdge 1.17版本将会增加这两个环境变量的设置。[KubeEdge 社区  proposals 链接](https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md)。
 
 另一方面，推荐安装 edgemesh，安装之后在 edge 的 pod 上就可以访问 kubernetes.default.svc.cluster.local:443 了。
 
@@ -248,6 +247,59 @@ spec:
 然后界面上也出现了 CPU 和 内存的信息。
 
 ![image-20240401151605113](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401151605113.png)
+
+
+
+### KubeEdge = 1.17.0
+
+>  开启 kubeedge 边缘节点插件 和 修改 node-exporter 亲和性 和 KubeEdge < 1.17.0 一样
+
+部署 1.17.0版本注意，需要支持边缘 Pods 使用 InClusterConfig 访问 Kube-APIServer ，所以要配置指定 cloudCore.featureGates.requireAuthorization=true 以及 cloudCore.modules.dynamicController.enable=true。 详情可以查看 [KubeEdge 公众号文章](https://mp.weixin.qq.com/s/Dw2IKRDvOWH52xTOStI7dg)
+
+```shell
+keadm init --advertise-address=10.108.96.24  --set cloudCore.featureGates.requireAuthorization=true,cloudCore.modules.dynamicController.enable=true --kubeedge-version=v1.17.0
+```
+
+启动 EdgeCore 后，按如下修改 edgecore.yaml 后重启 EdgeCore。
+
+修改  **metaServer.enable = true** 同时增加  **featureGates: requireAuthorization: true**
+
+```yaml
+apiVersion: edgecore.config.kubeedge.io/v1alpha2
+kind: EdgeCore
+featureGates:
+  requireAuthorization: true
+modules:
+  ...
+  metaManager:
+    metaServer:
+      enable: true
+```
+
+修改完重启 edgecore
+
+```
+systemctl daemon-reload
+systemctl restart edgecore
+```
+
+#### 创建 clusterrolebinding
+
+发现 node-exporter 里面的容器报错：`Unable to authenticate the request due to an error: tokenreviews.authentication.k8s.io is forbidden: User "system:serviceaccount:kubeedge:cloudcore" cannot create resource "tokenreviews" in API group "authentication.k8s.io" at the cluster scope`
+
+因为  cloudcore 没有权限，所以创建一个 clusterrolebinding
+
+![9b5b3561b967051b6cab073f7eda10d](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/9b5b3561b967051b6cab073f7eda10d.png)
+
+```
+kubectl create clusterrolebinding cloudcore-promethus-binding --clusterrole=cluster-admin --serviceaccount=kubeedge:cloudcore
+```
+
+创建完 clusterrolebinding 就可以查询到边缘节点的监控信息了。
+
+![image-20240604094828377](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240604094828377.png)
+
+
 
 搞定了 CPU 和 内存，接下来就是 GPU了。
 

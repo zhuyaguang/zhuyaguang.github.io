@@ -102,6 +102,14 @@ keadm init --advertise-address=10.101.32.14,10.101.32.15 --set cloudCore.service
 
 ```
 
+使用1.17.0版本 支持边缘Pods使用InClusterConfig访问Kube-APIServer 
+
+```shell
+keadm init --advertise-address=10.11.140.131,10.11.140.86 --set cloudCore.featureGates.requireAuthorization=true,cloudCore.modules.dynamicController.enable=true mosquitto.enable=false --kubeedge-version=v1.17.0
+```
+
+
+
 检查 cloudcore 是否安装成功
 
 ```shell
@@ -242,7 +250,7 @@ systemctl enable --now cri-docker.socket
    containerd
 
    ```shell
-   keadm  join --cloudcore-ipport=10.108.96.24:10000 --token=c96621fc3d5280337aced5dcb63be7382eeedd764fbdd21c892ec8b47053f394.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDU2NzczNzJ9.G3aEpFxi_0HMsa6aDcefDeItCkaFri1rFWU3IIqDVmo --kubeedge-version=1.15.1 --runtimetype=remote  --with-mqtt=false
+   keadm  join --cloudcore-ipport=10.108.96.24:10000 --token=45055f5cd0eb033764cfb24ce4a5f64636862f7945efb174ff69eb437aafdfa9.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTcxMjU1NDd9.YIgECHxVGU6Yq23zhMjAjPQ0TUOFWnMgqAQyQvdsaNM --kubeedge-version=1.15.1 --runtimetype=remote  --with-mqtt=false
    ```
 
    docker
@@ -337,7 +345,7 @@ kubectl label nodes **tjmaster**  master=true
 
 kubectl edit  daemonset calico-node  -n kube-system
 
-kubectl edit  daemonset kube-proxy   -n kube-system:：
+kubectl edit  daemonset kube-proxy   -n kube-system
 
 kubectl edit  daemonset nodelocaldns  -n kube-system
 
