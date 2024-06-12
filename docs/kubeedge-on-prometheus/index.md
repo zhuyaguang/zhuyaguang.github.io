@@ -31,7 +31,7 @@ kubectl apply -f manifests/
 
 可以看到上面针对 grafana、alertmanager 和 prometheus 都创建了一个类型为 ClusterIP 的 Service，当然如果我们想要在外网访问这两个服务的话可以通过创建对应的 Ingress 对象或者使用 NodePort 类型的 Service，我们这里为了简单，直接使用 NodePort 类型的服务即可，编辑 `grafana`、`alertmanager-main` 和 `prometheus-k8s` 这 3 个 Service，将服务类型更改为 NodePort:
 
-![image-20240524161614721](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240524161614721.png)
+![image-20240524161614721](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240524161614721.png)
 
 ```shell
 kubectl edit svc grafana -n monitoring
@@ -41,7 +41,7 @@ kubectl edit svc prometheus-k8s -n monitoring
 
 由于最新版本的 kube-prometheus 设置了网络策略，即使配置了 NodePort 也无法访问。需要修改 NetworkPolicy，允许 10网段的 IP访问。
 
-![image-20240530111340823](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240530111340823.png)
+![image-20240530111340823](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240530111340823.png)
 
 ```
 kubectl edit  NetworkPolicy prometheus-k8s -n monitoring
@@ -51,7 +51,7 @@ kubectl edit  NetworkPolicy alertmanager-main -n monitoring
 
 这样就可以通过 NodePort 访问 prometheus 和 grafana 服务了
 
-![image-20240530111642034](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240530111642034.png)
+![image-20240530111642034](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240530111642034.png)
 
 
 

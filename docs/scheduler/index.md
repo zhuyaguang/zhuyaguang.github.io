@@ -7,7 +7,7 @@
 
 github 下载完代码，新建一个你自己的调度插件文件目录，spacecloud.go 里面写上你的调度节点逻辑
 
-![image-20240612135414918](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240612135414918.png)
+![image-20240612135414918](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240612135414918.png)
 
 
 
@@ -112,7 +112,7 @@ func (pl *SpaceCloud) RemovePod(ctx context.Context, cycleState *framework.Cycle
 
 ### 注册你的插件
 
-![image-20240612135629518](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20240612135629518.png)
+![image-20240612135629518](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240612135629518.png)
 
 
 
