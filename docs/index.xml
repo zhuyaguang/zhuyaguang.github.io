@@ -7,19 +7,19 @@
             <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Wed, 12 Jun 2024 13:45:35 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>Kubeedge on Prometheus</title>
+    <title>使用 Prometheus 监控 KubeEdge 边缘节点</title>
     <link>https://zhuyaguang.github.io/kubeedge-on-prometheus/</link>
     <pubDate>Wed, 12 Jun 2024 13:45:35 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/kubeedge-on-prometheus/</guid>
-    <description><![CDATA[]]></description>
+    <description><![CDATA[使用 Prometheus 监控 KubeEdge 边缘节点 环境信息 组件 版本 containerd 1.7.2 k8s 1.26.0 KubeEdge 1.15.1或者1.17.0 Jetson型号 NVIDIA Jetson Xavier NX (16GB ram) 部署 prometheus 我们可以直接使用 kube-prometheus 的 Helm Charts 来进行快]]></description>
 </item><item>
-    <title>Scheduler</title>
+    <title>开发一个自定义调度插件</title>
     <link>https://zhuyaguang.github.io/scheduler/</link>
     <pubDate>Wed, 12 Jun 2024 13:44:46 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/scheduler/</guid>
-    <description><![CDATA[]]></description>
+    <description><![CDATA[fork Scheduler Plugins 开发调度逻辑 github 下载完代码，新建一个你自己的调度插件文件目录，spacecloud.go 里面写上你的调度节点逻辑 1 2 3 4 5 6 7 8 9 10 11 12]]></description>
 </item><item>
     <title>2024 meetup</title>
     <link>https://zhuyaguang.github.io/2024meetup/</link>
