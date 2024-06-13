@@ -59,11 +59,15 @@ kubectl edit  NetworkPolicy alertmanager-main -n monitoring
 
 ## 部署 KubeEdge 
 
+
+
 ### KubeEdge < 1.17.0 
 
 部署完 KubeEdge 发现，node-exporter 在边缘节点的 pod 起不来。
 
-kubecrl edit 该失败的pod，发现是其中的 kube-rbac-proxy 这个 container 启动失败，看这个 container 的logs。发现是 kube-rbac-proxy 想要获取 KUBERNETES_SERVICE_HOST 和 KUBERNETES_SERVICE_PORT 这两个环境变量，但是获取失败，所以启动失败。
+去节点上查看 node-exporter 容器日志，发现是其中的 kube-rbac-proxy 这个 container 启动失败，看这个 container 的logs。发现是 kube-rbac-proxy 想要获取 KUBERNETES_SERVICE_HOST 和 KUBERNETES_SERVICE_PORT 这两个环境变量，但是获取失败，所以启动失败。
+
+![image-20240612153658785](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240612153658785.png)
 
 和华为 KubeEdge 的社区同学咨询，KubeEdge 1.17版本将会增加这两个环境变量的设置。[KubeEdge 社区  proposals 链接](https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md)。
 
@@ -126,9 +130,19 @@ kubecrl edit 该失败的pod，发现是其中的 kube-rbac-proxy 这个 contain
       
       kubectl apply -f build/crds/istio/
       
+      PSK 和 Relay Node 设置
+      vim 04-configmap.yaml
+      
+        relayNodes:
+        - nodeName: masternode ## your relay node name
+          advertiseAddress:
+          - x.x.x.x ## your relay node ip
+          
+          
+      
       kubectl apply -f build/agent/resources/
       ```
-
+      
       ![image-20240329154436074](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329154436074.png)
 
 #### 2. 修改dnsPolicy
@@ -136,7 +150,7 @@ kubecrl edit 该失败的pod，发现是其中的 kube-rbac-proxy 这个 contain
 edgemesh部署完成后，edge节点上的node-exporter中的两个境变量还是空的，也无法访问kubernetes.default.svc.cluster.local:443，原因是该pod中的dns服务器配置错误，应该是169.254.96.16的，但是却是跟宿主机一样的dns配置。
 
 ```shell
-kubectl exec -it node-exporter-hcmfg -n kubesphere-monitoring-system -- sh
+kubectl exec -it node-exporter-hcmfg -n monitoring -- sh
 Defaulted container "node-exporter" out of: node-exporter, kube-rbac-proxy
 $ cat /etc/resolv.conf 
 nameserver 127.0.0.53
@@ -144,7 +158,7 @@ nameserver 127.0.0.53
 
 将dnsPolicy修改为ClusterFirstWithHostNet，之后重启node-exporter，dns的配置正确
 
-`kubectl edit ds node-exporter -n kubesphere-monitoring-system`
+`kubectl edit ds node-exporter -n monitoring`
 
       dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true

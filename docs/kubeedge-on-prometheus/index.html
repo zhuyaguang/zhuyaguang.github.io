@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubeedge-on-prometheus\/"
-        },"genre": "posts","wordcount":  1327 ,
+        },"genre": "posts","wordcount":  1364 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubeedge-on-prometheus\/","datePublished": "2024-06-12T13:45:35+08:00","dateModified": "2024-06-12T13:45:35+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">使用 Prometheus 监控 KubeEdge 边缘节点</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-06-12">2024-06-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1327 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-06-12">2024-06-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1364 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -215,7 +215,15 @@
 <h2 id="部署-kubeedge">部署 KubeEdge</h2>
 <h3 id="kubeedge--1170">KubeEdge &lt; 1.17.0</h3>
 <p>部署完 KubeEdge 发现，node-exporter 在边缘节点的 pod 起不来。</p>
-<p>kubecrl edit 该失败的pod，发现是其中的 kube-rbac-proxy 这个 container 启动失败，看这个 container 的logs。发现是 kube-rbac-proxy 想要获取 KUBERNETES_SERVICE_HOST 和 KUBERNETES_SERVICE_PORT 这两个环境变量，但是获取失败，所以启动失败。</p>
+<p>去节点上查看 node-exporter 容器日志，发现是其中的 kube-rbac-proxy 这个 container 启动失败，看这个 container 的logs。发现是 kube-rbac-proxy 想要获取 KUBERNETES_SERVICE_HOST 和 KUBERNETES_SERVICE_PORT 这两个环境变量，但是获取失败，所以启动失败。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240612153658785.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240612153658785.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240612153658785.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240612153658785.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240612153658785.png"
+        title="image-20240612153658785" /></p>
 <p>和华为 KubeEdge 的社区同学咨询，KubeEdge 1.17版本将会增加这两个环境变量的设置。<a href="https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md" target="_blank" rel="noopener noreffer">KubeEdge 社区  proposals 链接</a>。</p>
 <p>另一方面，推荐安装 edgemesh，安装之后在 edge 的 pod 上就可以访问 kubernetes.default.svc.cluster.local:443 了。</p>
 <h4 id="1-edgemesh部署">1. edgemesh部署</h4>
@@ -301,18 +309,38 @@
 <p>安装 edgemesh</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone https://github.com/kubeedge/edgemesh.git
 </span></span><span class="line"><span class="cl">cd edgemesh
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl apply -f build/crds/istio/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PSK 和 Relay Node 设置
+</span></span><span class="line"><span class="cl">vim 04-configmap.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  relayNodes:
+</span></span><span class="line"><span class="cl">  - nodeName: masternode ## your relay node name
+</span></span><span class="line"><span class="cl">    advertiseAddress:
+</span></span><span class="line"><span class="cl">    - x.x.x.x ## your relay node ip
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl apply -f build/agent/resources/
 </span></span></code></pre></td></tr></table>
@@ -339,14 +367,14 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> -it node-exporter-hcmfg -n kubesphere-monitoring-system -- sh
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> -it node-exporter-hcmfg -n monitoring -- sh
 </span></span><span class="line"><span class="cl">Defaulted container <span class="s2">&#34;node-exporter&#34;</span> out of: node-exporter, kube-rbac-proxy
 </span></span><span class="line"><span class="cl">$ cat /etc/resolv.conf 
 </span></span><span class="line"><span class="cl">nameserver 127.0.0.53
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>将dnsPolicy修改为ClusterFirstWithHostNet，之后重启node-exporter，dns的配置正确</p>
-<p><code>kubectl edit ds node-exporter -n kubesphere-monitoring-system</code></p>
+<p><code>kubectl edit ds node-exporter -n monitoring</code></p>
 <pre><code>  dnsPolicy: ClusterFirstWithHostNet
   hostNetwork: true
 </code></pre>
@@ -487,7 +515,7 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/scheduler/" class="prev" rel="prev" title="开发一个自定义调度插件"><i class="fas fa-angle-left fa-fw"></i>开发一个自定义调度插件</a></div>
+    <div class="post-nav"><a href="/scheduler/" class="prev" rel="prev" title="开发一个自定义 k8s 调度插件"><i class="fas fa-angle-left fa-fw"></i>开发一个自定义 k8s 调度插件</a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">

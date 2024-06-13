@@ -1,4 +1,4 @@
-# 开发一个自定义调度插件
+# 开发一个自定义 k8s 调度插件
 
 
 ## fork Scheduler Plugins
