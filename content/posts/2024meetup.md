@@ -12,3 +12,6 @@ draft: true
 
 2024 第一场就做了讲师 
 
+## 6.15 非结构化数据 Meetup
+
+![image-20240615150924043](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240615150924043.png)
