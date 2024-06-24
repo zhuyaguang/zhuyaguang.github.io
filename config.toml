@@ -142,7 +142,7 @@ theme = "Loveit"
       # Gravatar 邮箱，用于优先在主页显示的头像
       gravatarEmail = "zhuyaguang1368@163.com"
       # 主页显示头像的 URL
-      avatarURL = "https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231130134826423.png"
+      avatarURL = "https://en.gravatar.com/userimage/220462221/a34be956617f399a4630c30605fdbe14.jpg"
       #  主页显示的网站标题 (支持 HTML 格式)
       title = ""
       # 主页显示的网站副标题
