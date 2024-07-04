@@ -7,7 +7,7 @@ description: "KubeEdge 安装使用笔记"
 
 <!--more-->
 
-# 准备
+## 准备
 
 1. 一个 k8s 集群，使用 kubesphere 安装
 
@@ -90,7 +90,7 @@ containerd config default > /etc/containerd/config.toml
 systemctl restart containerd
 ```
 
-## open Euler contained系统安装步骤
+## openEuler 系统安装 contained 步骤
 
 ### 下载安装包
 
@@ -174,7 +174,7 @@ systemctl status containerd
 
 https://cloud.tencent.com/developer/article/2383890
 
-# 使用Keadm进行部署
+## 使用Keadm进行部署
 
 Keadm 是一款用于安装 KubeEdge 的工具。 Keadm 不负责 K8s 的安装和运行,在使用它之前，请先准备好一个 K8s 集群。
 
@@ -347,9 +347,7 @@ systemctl enable --now cri-docker.socket
 systemctl status edgecore
 ```
 
-##     
-
-# 部署应用到边缘节点
+## 部署应用到边缘节点
 
 部署 redis
 
@@ -417,7 +415,7 @@ spec:
         - containerPort: 6379
 ```
 
-# 去掉 daemonset 部署在边缘节点上
+## 去掉 daemonset 部署在边缘节点上
 
 * 给 master 节点打标签
 
@@ -437,7 +435,7 @@ kubectl edit  daemonset nodelocaldns  -n kube-system
 
 ![image-20240205142617622](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240205142617622.png)
 
-# 查看太空端服务日志
+## 查看太空端服务日志
 
 1.开启日志
 
@@ -447,7 +445,7 @@ kubectl edit  daemonset nodelocaldns  -n kube-system
 
 service edgecore restart
 
-# 问题汇总
+## 问题汇总
 
 [常见问题](https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice):
 
