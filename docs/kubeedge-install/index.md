@@ -339,9 +339,7 @@ systemctl enable --now cri-docker.socket
 
 2. 查看状态
 
-```shell
-systemctl status edgecore
-```
+​	systemctl status edgecore
 
 ## 部署应用到边缘节点
 
