@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/"
-        },"genre": "posts","wordcount":  1578 ,
+        },"genre": "posts","wordcount":  1856 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/","datePublished": "2023-11-07T11:03:15+08:00","dateModified": "2023-11-07T11:03:15+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">在 KubeSphere 上部署最新版的 KubeEdge</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1578 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1856 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -88,29 +88,32 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#安装contained">安装contained</a></li>
+    <li><a href="#open-euler-contained系统安装步骤">open Euler contained系统安装步骤</a>
       <ul>
-        <li><a href="#可选卸载-docker-安装contained">可选：卸载 docker 安装contained</a></li>
+        <li><a href="#下载安装包">下载安装包</a></li>
+        <li><a href="#安装">安装</a></li>
+        <li><a href="#配置containerd">配置containerd</a></li>
+        <li><a href="#配置service">配置service</a></li>
+        <li><a href="#启动">启动</a></li>
       </ul>
     </li>
   </ul>
 
   <ul>
-    <li><a href="#使用限制">使用限制</a></li>
     <li><a href="#设置云端kubeedge-主节点">设置云端（KubeEdge 主节点）</a>
       <ul>
-        <li><a href="#keadm-init">keadm init</a></li>
         <li><a href="#安装-cloudcore">安装 CloudCore</a></li>
       </ul>
     </li>
     <li><a href="#设置太空端">设置太空端</a>
       <ul>
-        <li><a href="#安装最新版-containerd">安装最新版 containerd</a></li>
         <li><a href="#安装-cni-插件">安装 CNI 插件</a></li>
         <li><a href="#可选安装-cri-dockerd运行时为-docker-">可选：安装 cri-dockerd(运行时为 docker )</a></li>
         <li><a href="#安装-edgecore">安装 EdgeCore</a></li>
       </ul>
     </li>
+    <li><a href="#heading"></a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="准备">准备</h1>
@@ -178,7 +181,7 @@
         data-sizes="auto"
         alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png"
         title="image-20240110145607680" /></p>
-<h3 id="可选卸载-docker-安装contained">可选：卸载 docker 安装contained</h3>
+<h2 id="安装contained">安装contained</h2>
 <p>如果之前安装了 docker ,使用下面命令卸载</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -212,16 +215,205 @@
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>							docker-buildx-plugin.x86_64
 </span></span></code></pre></td></tr></table>
 </div>
+</div><p>安装最新版本containerd</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">centos
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo yum install -y yum-utils
+</span></span><span class="line"><span class="cl">sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo yum install  containerd.io
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Configure containerd</span>
+</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd
+</span></span><span class="line"><span class="cl">containerd config default &gt; /etc/containerd/config.toml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ubuntu
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Install containerd</span>
+</span></span><span class="line"><span class="cl">apt-get update <span class="o">&amp;&amp;</span> apt-get install -y containerd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Configure containerd</span>
+</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd
+</span></span><span class="line"><span class="cl">containerd config default &gt; /etc/containerd/config.toml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Restart containerd</span>
+</span></span><span class="line"><span class="cl">systemctl restart containerd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="open-euler-contained系统安装步骤">open Euler contained系统安装步骤</h2>
+<h3 id="下载安装包">下载安装包</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://github.com/containerd/containerd/releases/download/v1.7.2/containerd-1.7.2-linux-arm64.tar.gz
+</span></span><span class="line"><span class="cl">wget https://github.com/opencontainers/runc/releases/download/v1.1.12/runc.arm64
+</span></span><span class="line"><span class="cl">wget https://github.com/containernetworking/plugins/releases/download/v1.4.0/cni-plugins-linux-arm64-v1.4.0.tgz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装">安装</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tar -zxvf containerd-1.7.2-linux-arm64.tar.gz -C /usr/local
+</span></span><span class="line"><span class="cl">install -m 755 runc.arm64 /usr/local/sbin/runc
+</span></span><span class="line"><span class="cl">mkdir -p /opt/cni/bin
+</span></span><span class="line"><span class="cl">tar -zxvf cni-plugins-linux-arm64-v1.4.0.tgz -C /opt/cni/bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="配置containerd">配置containerd</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">containerd config default &gt; /etc/containerd/config.toml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="配置service">配置service</h3>
+<p>vim /usr/lib/systemd/system/containerd.service</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># Copyright The containerd Authors.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># you may not use this file except in compliance with the License.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># You may obtain a copy of the License at</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#     http://www.apache.org/licenses/LICENSE-2.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Unless required by applicable law or agreed to in writing, software</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># distributed under the License is distributed on an &#34;AS IS&#34; BASIS,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># See the License for the specific language governing permissions and</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># limitations under the License.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="l">Unit]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">Description=containerd container runtime</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">Documentation=https://containerd.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">After=network.target local-fs.target</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="l">Service]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">ExecStartPre=-/sbin/modprobe overlay</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">ExecStart=/usr/local/bin/containerd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">Type=notify</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">Delegate=yes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">KillMode=process</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">Restart=always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">RestartSec=5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Having non-zero Limit*s causes performance problems due to accounting overhead</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># in the kernel. We recommend using cgroups to do container-local accounting.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">LimitNPROC=infinity</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">LimitCORE=infinity</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Comment TasksMax if your systemd version does not supports it.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Only systemd 226 and above support this version.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">TasksMax=infinity</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">OOMScoreAdjust=-999</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="l">Install]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">WantedBy=multi-user.target</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="启动">启动</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemctl start containerd
+</span></span><span class="line"><span class="cl">systemctl status containerd
+</span></span></code></pre></td></tr></table>
+</div>
 </div><h1 id="使用keadm进行部署">使用Keadm进行部署</h1>
 <p>Keadm 是一款用于安装 KubeEdge 的工具。 Keadm 不负责 K8s 的安装和运行,在使用它之前，请先准备好一个 K8s 集群。</p>
 <p>KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 <a href="https://github.com/kubeedge/kubeedge#kubernetes-compatibility" target="_blank" rel="noopener noreffer">kubernetes-兼容性</a> 来了解，以此来确定安装哪个版本的 Kubernetes 以及 KubeEdge。</p>
-<h2 id="使用限制">使用限制</h2>
+<p>使用限制</p>
 <ul>
 <li><code>keadm</code> 目前支持 Ubuntu 和 CentOS OS。</li>
 <li>需要超级用户权限（或 root 权限）才能运行。</li>
 </ul>
 <h2 id="设置云端kubeedge-主节点">设置云端（KubeEdge 主节点）</h2>
-<h3 id="keadm-init">keadm init</h3>
 <p>默认情况下边缘节点需要访问 cloudcore 中 <code>10000</code> ，<code>10002</code> 端口。 若要确保边缘节点可以成功地与集群通信，您需要创建防火墙规则以允许流量进入这些端口（10000 至 10004）。</p>
 <p><strong>重要提示：</strong></p>
 <ol>
@@ -275,50 +467,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="设置太空端">设置太空端</h2>
-<h3 id="安装最新版-containerd">安装最新版 containerd</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">centos
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sudo yum install -y yum-utils
-</span></span><span class="line"><span class="cl">sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sudo yum install  containerd.io
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ubuntu
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Install containerd</span>
-</span></span><span class="line"><span class="cl">apt-get update <span class="o">&amp;&amp;</span> apt-get install -y containerd
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Configure containerd</span>
-</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd
-</span></span><span class="line"><span class="cl">containerd config default &gt; /etc/containerd/config.toml
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Restart containerd</span>
-</span></span><span class="line"><span class="cl">systemctl restart containerd
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="安装-cni-插件">安装 CNI 插件</h3>
+<h3 id="安装-cni-插件">安装 CNI 插件</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -511,7 +660,8 @@
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemctl status edgecore
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="部署应用到边缘节点">部署应用到边缘节点</h1>
+</div><h2 id="heading"></h2>
+<h1 id="部署应用到边缘节点">部署应用到边缘节点</h1>
 <p>部署 redis</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

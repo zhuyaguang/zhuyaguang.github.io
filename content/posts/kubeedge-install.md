@@ -43,7 +43,7 @@ description: "KubeEdge 安装使用笔记"
 
 ![image-20240110145607680](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240110145607680.png)
 
-### 可选：卸载 docker 安装contained
+## 安装contained
 
 如果之前安装了 docker ,使用下面命令卸载
 
@@ -63,6 +63,113 @@ yum -y remove containerd.io.x86_64 \
 							docker-buildx-plugin.x86_64
 ```
 
+安装最新版本containerd
+
+```shell
+centos
+
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+sudo yum install  containerd.io
+
+# Configure containerd
+mkdir -p /etc/containerd
+containerd config default > /etc/containerd/config.toml
+
+ubuntu
+
+# Install containerd
+apt-get update && apt-get install -y containerd
+
+# Configure containerd
+mkdir -p /etc/containerd
+containerd config default > /etc/containerd/config.toml
+
+# Restart containerd
+systemctl restart containerd
+```
+
+## open Euler contained系统安装步骤
+
+### 下载安装包
+
+```shell
+wget https://github.com/containerd/containerd/releases/download/v1.7.2/containerd-1.7.2-linux-arm64.tar.gz
+wget https://github.com/opencontainers/runc/releases/download/v1.1.12/runc.arm64
+wget https://github.com/containernetworking/plugins/releases/download/v1.4.0/cni-plugins-linux-arm64-v1.4.0.tgz
+```
+
+###    安装
+
+ ```
+ tar -zxvf containerd-1.7.2-linux-arm64.tar.gz -C /usr/local
+ install -m 755 runc.arm64 /usr/local/sbin/runc
+ mkdir -p /opt/cni/bin
+ tar -zxvf cni-plugins-linux-arm64-v1.4.0.tgz -C /opt/cni/bin
+ ```
+
+###   配置containerd
+
+```
+containerd config default > /etc/containerd/config.toml
+```
+
+### 配置service
+
+vim /usr/lib/systemd/system/containerd.service 
+
+```yaml
+# Copyright The containerd Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+[Unit]
+Description=containerd container runtime
+Documentation=https://containerd.io
+After=network.target local-fs.target
+
+[Service]
+ExecStartPre=-/sbin/modprobe overlay
+ExecStart=/usr/local/bin/containerd
+
+Type=notify
+Delegate=yes
+KillMode=process
+Restart=always
+RestartSec=5
+
+# Having non-zero Limit*s causes performance problems due to accounting overhead
+# in the kernel. We recommend using cgroups to do container-local accounting.
+LimitNPROC=infinity
+LimitCORE=infinity
+
+# Comment TasksMax if your systemd version does not supports it.
+# Only systemd 226 and above support this version.
+TasksMax=infinity
+OOMScoreAdjust=-999
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### 启动
+
+```shell
+systemctl start containerd
+systemctl status containerd
+```
+
 
 
 # 使用Keadm进行部署
@@ -71,14 +178,12 @@ Keadm 是一款用于安装 KubeEdge 的工具。 Keadm 不负责 K8s 的安装�
 
 KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 [kubernetes-兼容性](https://github.com/kubeedge/kubeedge#kubernetes-compatibility) 来了解，以此来确定安装哪个版本的 Kubernetes 以及 KubeEdge。
 
-## 使用限制
+使用限制
 
 - `keadm` 目前支持 Ubuntu 和 CentOS OS。
 - 需要超级用户权限（或 root 权限）才能运行。
 
 ## 设置云端（KubeEdge 主节点）
-
-### keadm init
 
 默认情况下边缘节点需要访问 cloudcore 中 `10000` ，`10002` 端口。 若要确保边缘节点可以成功地与集群通信，您需要创建防火墙规则以允许流量进入这些端口（10000 至 10004）。
 
@@ -88,8 +193,6 @@ KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 [
 2. 请确保边缘节点可以使用云节点的本地 IP 连接云节点，或者需要使用 `--advertise-address` 标记指定云节点的公共 IP 。
 3. `--advertise-address`（仅从 1.3 版本开始可用）是云端公开的地址（将添加到 CloudCore 证书的 SAN 中），默认值为本地 IP。
 4. `keadm init` 将会使用二进制方式部署 cloudcore 为一个系统服务，如果您想实现容器化部署，可以参考 `keadm beta init` 。
-
-
 
 ### 安装 CloudCore
 
@@ -123,31 +226,6 @@ keadm reset --kube-config=/root/.kube/config
 ```
 
 ## 设置太空端
-
-### 安装最新版 containerd
-
-```shell
-centos
-
-sudo yum install -y yum-utils
-sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-
-sudo yum install  containerd.io
-
-ubuntu
-
-# Install containerd
-apt-get update && apt-get install -y containerd
-
-# Configure containerd
-mkdir -p /etc/containerd
-containerd config default > /etc/containerd/config.toml
-
-# Restart containerd
-systemctl restart containerd
-```
-
-
 
 ### 安装 CNI 插件
 
@@ -266,6 +344,8 @@ systemctl enable --now cri-docker.socket
 ```shell
 systemctl status edgecore
 ```
+
+##     
 
 # 部署应用到边缘节点
 
