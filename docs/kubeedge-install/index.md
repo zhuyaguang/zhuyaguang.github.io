@@ -166,7 +166,9 @@ systemctl start containerd
 systemctl status containerd
 ```
 
+ [参考链接](https://blog.csdn.net/luck099/article/details/131233362)
 
+https://cloud.tencent.com/developer/article/2383890
 
 # 使用Keadm进行部署
 
