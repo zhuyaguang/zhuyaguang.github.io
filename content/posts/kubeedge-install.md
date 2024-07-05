@@ -102,16 +102,54 @@ wget https://github.com/containernetworking/plugins/releases/download/v1.4.0/cni
 
 ###    安装
 
- ```
+ ```shell
  tar -zxvf containerd-1.7.2-linux-arm64.tar.gz -C /usr/local
  install -m 755 runc.arm64 /usr/local/sbin/runc
  mkdir -p /opt/cni/bin
  tar -zxvf cni-plugins-linux-arm64-v1.4.0.tgz -C /opt/cni/bin
+ 
+ mkdir -p /etc/cni/net.d/
+ 
+ cat >/etc/cni/net.d/10-containerd-net.conflist <<EOF
+ {
+   "cniVersion": "1.0.0",
+   "name": "containerd-net",
+   "plugins": [
+     {
+       "type": "bridge",
+       "bridge": "cni0",
+       "isGateway": true,
+       "ipMasq": true,
+       "promiscMode": true,
+       "ipam": {
+         "type": "host-local",
+         "ranges": [
+           [{
+             "subnet": "10.88.0.0/16"
+           }],
+           [{
+             "subnet": "2001:db8:4860::/64"
+           }]
+         ],
+         "routes": [
+           { "dst": "0.0.0.0/0" },
+           { "dst": "::/0" }
+         ]
+       }
+     },
+     {
+       "type": "portmap",
+       "capabilities": {"portMappings": true}
+     }
+   ]
+ }
+ EOF
  ```
 
 ###   配置containerd
 
 ```
+mkdir -p /etc/containerd
 containerd config default > /etc/containerd/config.toml
 ```
 

@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/"
-        },"genre": "posts","wordcount":  1852 ,
+        },"genre": "posts","wordcount":  1955 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/","datePublished": "2023-11-07T11:03:15+08:00","dateModified": "2023-11-07T11:03:15+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">在 KubeSphere 上部署最新版的 KubeEdge</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1852 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1955 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -285,25 +285,101 @@
 </div><h3 id="安装">安装</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tar -zxvf containerd-1.7.2-linux-arm64.tar.gz -C /usr/local
-</span></span><span class="line"><span class="cl">install -m 755 runc.arm64 /usr/local/sbin/runc
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">tar -zxvf containerd-1.7.2-linux-arm64.tar.gz -C /usr/local
+</span></span><span class="line"><span class="cl">install -m <span class="m">755</span> runc.arm64 /usr/local/sbin/runc
 </span></span><span class="line"><span class="cl">mkdir -p /opt/cni/bin
 </span></span><span class="line"><span class="cl">tar -zxvf cni-plugins-linux-arm64-v1.4.0.tgz -C /opt/cni/bin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mkdir -p /etc/cni/net.d/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat &gt;/etc/cni/net.d/10-containerd-net.conflist <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">{
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;cniVersion&#34;: &#34;1.0.0&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;name&#34;: &#34;containerd-net&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;plugins&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">    {
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;type&#34;: &#34;bridge&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;bridge&#34;: &#34;cni0&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;isGateway&#34;: true,
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;ipMasq&#34;: true,
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;promiscMode&#34;: true,
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;ipam&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;type&#34;: &#34;host-local&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;ranges&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">          [{
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;subnet&#34;: &#34;10.88.0.0/16&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          }],
+</span></span></span><span class="line"><span class="cl"><span class="s">          [{
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;subnet&#34;: &#34;2001:db8:4860::/64&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          }]
+</span></span></span><span class="line"><span class="cl"><span class="s">        ],
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;routes&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">          { &#34;dst&#34;: &#34;0.0.0.0/0&#34; },
+</span></span></span><span class="line"><span class="cl"><span class="s">          { &#34;dst&#34;: &#34;::/0&#34; }
+</span></span></span><span class="line"><span class="cl"><span class="s">        ]
+</span></span></span><span class="line"><span class="cl"><span class="s">      }
+</span></span></span><span class="line"><span class="cl"><span class="s">    },
+</span></span></span><span class="line"><span class="cl"><span class="s">    {
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;type&#34;: &#34;portmap&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;capabilities&#34;: {&#34;portMappings&#34;: true}
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">  ]
+</span></span></span><span class="line"><span class="cl"><span class="s">}
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="配置containerd">配置containerd</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">containerd config default &gt; /etc/containerd/config.toml
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mkdir -p /etc/containerd
+</span></span><span class="line"><span class="cl">containerd config default &gt; /etc/containerd/config.toml
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="配置service">配置service</h3>
