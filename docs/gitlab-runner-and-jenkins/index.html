@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Gitlab Runner and Jenkins - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="Gitlab Runner and Jenkins" />
-<meta property="og:description" content="" />
+        <title>gitlab runner 与 Jenkins 的使用 - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="gitlab runner 与 Jenkins 的使用" />
+<meta property="og:description" content="gitlab runner 与 Jenkins 的使用 部署runner 1 2 3 4 5 6 7 8 sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64 sudo chmod &#43;x /usr/local/bin/gitlab-runner sudo useradd --comment &#39;GitLab Runner&#39; --create-home gitlab-runner --shell /bin/bash sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner sudo gitlab-runner start 参考链接 使用 runner 注册 在项目中注册 在群组中注" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-07-17T16:52:57+08:00" />
@@ -15,8 +15,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
-<meta name="twitter:title" content="Gitlab Runner and Jenkins"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="gitlab runner 与 Jenkins 的使用"/>
+<meta name="twitter:description" content="gitlab runner 与 Jenkins 的使用 部署runner 1 2 3 4 5 6 7 8 sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64 sudo chmod &#43;x /usr/local/bin/gitlab-runner sudo useradd --comment &#39;GitLab Runner&#39; --create-home gitlab-runner --shell /bin/bash sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner sudo gitlab-runner start 参考链接 使用 runner 注册 在项目中注册 在群组中注"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -24,12 +24,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Gitlab Runner and Jenkins",
+        "headline": "gitlab runner 与 Jenkins 的使用",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/gitlab-runner-and-jenkins\/"
-        },"genre": "posts","wordcount":  0 ,
+        },"genre": "posts","wordcount":  603 ,
         "url": "https:\/\/zhuyaguang.github.io\/gitlab-runner-and-jenkins\/","datePublished": "2024-07-17T16:52:57+08:00","dateModified": "2024-07-17T16:52:57+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -77,17 +77,336 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">Gitlab Runner and Jenkins</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">gitlab runner 与 Jenkins 的使用</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-07-17">2024-07-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 0 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 0 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-07-17">2024-07-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 603 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#部署runner">部署runner</a></li>
+    <li><a href="#使用-runner">使用 runner</a>
+      <ul>
+        <li><a href="#注册">注册</a></li>
+        <li><a href="#shell-类型生成证书">shell 类型生成证书</a></li>
+        <li><a href="#shell-类型编镜像">shell 类型编镜像</a></li>
+        <li><a href="#docker-编译二进制">docker 编译二进制</a></li>
+        <li><a href="#使用gitlab-私有仓库-go-mod">使用gitlab 私有仓库 go mod</a></li>
+        <li><a href="#使用docker-交叉编译">使用docker 交叉编译</a></li>
+      </ul>
+    </li>
+    <li><a href="#jenkins-编镜像和二进制">Jenkins 编镜像和二进制</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="gitlab-runner-与-jenkins-的使用">gitlab runner 与 Jenkins 的使用</h1>
+<h2 id="部署runner">部署runner</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo chmod +x /usr/local/bin/gitlab-runner
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo useradd --comment &#39;GitLab Runner&#39; --create-home gitlab-runner --shell /bin/bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
+</span></span><span class="line"><span class="cl">sudo gitlab-runner start
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a href="https://docs.gitlab.cn/runner/install/linux-manually.html" target="_blank" rel="noopener noreffer">参考链接</a></p>
+<h2 id="使用-runner">使用 runner</h2>
+<h3 id="注册">注册</h3>
+<ul>
+<li>
+<p>在项目中注册</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_6.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_6.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_6.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_6.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_6.png"
+        title="img_6.png" /></p>
+</li>
+<li>
+<p>在群组中注册</p>
+</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_7.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_7.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_7.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_7.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_7.png"
+        title="img_7.png" /></p>
+<h3 id="shell-类型生成证书">shell 类型生成证书</h3>
+<ul>
+<li>variables 是环境变量参数</li>
+<li>tags 是指定runner</li>
+<li>script 是执行的脚本</li>
+<li>only 是执行的条件</li>
+<li>artifacts 是生成的证书</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">stages</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">HOST</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">  </span><span class="c"># 定义一个变量，用于存储主机地址</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;0.0.0.0&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">build-cert</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tags</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cert</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;Gen certs...&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sh deploy/https/generate_certs.sh $host </span><span class="w"> </span><span class="c"># 使用变量替换之前的硬编码地址</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo $HOST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo $host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">only</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">$HOST == &#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">tj.registry.com/</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="shell-类型编镜像">shell 类型编镜像</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">stages</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">before_script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">docker info</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">build-job</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">docker:cli</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tags</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">shell</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">pwd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;Compiling the code...&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;Compile complete.&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">docker build -t gpu-expotter:v1 .</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">docker tag gpu-expotter:v1 tj.inner1.harbor.com/gitlab-ci/gpu-expotter:v1</span><span class="w"> </span><span class="c"># 替换 CI_REGISTRY_IMAGE 为你的镜像仓库地址</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">docker login -u admin -p zjlab12345 tj.inner1.harbor.com</span><span class="w"> </span><span class="c"># 使用 CI/CD 变量进行认证</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">docker push tj.inner1.harbor.com/gitlab-ci/gpu-expotter:v1</span><span class="w"> </span><span class="c"># 推送镜像到 GitLab 的容器注册表或其他镜像仓库</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="docker-编译二进制">docker 编译二进制</h3>
+<ul>
+<li>artifacts 是编译好的二进制</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">stages</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">build-bin</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tags</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">bin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;Compiling the code...&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">pwd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">go build -o ./bin/image-operator cmd/image-operator/main.go </span><span class="w"> </span><span class="c"># 使用变量替换之前的硬编码地址</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">bin/</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="使用gitlab-私有仓库-go-mod">使用gitlab 私有仓库 go mod</h3>
+<ul>
+<li>修改配置文件  vim /etc/gitlab/gitlab.rb</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_8.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_8.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_8.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_8.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_8.png"
+        title="img_8.png" /></p>
+<p>gitlab-ctl reconfigure
+gitlab-ctl restart</p>
+<ul>
+<li>配置 gitlab 机器和本地机器的hosts</li>
+</ul>
+<p>10.11.140.85 gitlab.private.com</p>
+<h3 id="使用docker-交叉编译">使用docker 交叉编译</h3>
+<ul>
+<li>安装 buildx</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt install docker-buildx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>安装</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">docker run --privileged --rm tonistiigi/binfmt --install all
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>编镜像</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">docker buildx build    --platform linux/arm64 -t helloword:v3  .
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>构建样例</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">stages</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">before_script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">docker info</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">build-job</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">docker:cli</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tags</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">shell</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">pwd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">docker buildx build   --platform linux/arm64 -t helloword:v3  .</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">docker tag helloword:v3 tj.inner1.harbor.com/gitlab-ci/helloword:v3 </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">docker login -u admin -p **** tj.inner1.harbor.com </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">docker push tj.inner1.harbor.com/gitlab-ci/helloword:v3 </span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="jenkins-编镜像和二进制">Jenkins 编镜像和二进制</h2>
+<ul>
+<li>启动服务</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run -d -u <span class="m">0</span> -p 8080:8080 -p 50000:50000 -v /home/jenkins/:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker  -v  /root/go:/root/go --privileged  jenkins/jenkins
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过挂载二进制方式，让docker 的Jenkins 可以使用 docker 和 golang</p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -100,7 +419,7 @@
                             <a class="link-to-markdown" href="/gitlab-runner-and-jenkins/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="Gitlab Runner and Jenkins" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="Gitlab Runner and Jenkins" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="Gitlab Runner and Jenkins"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="Gitlab Runner and Jenkins"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="Gitlab Runner and Jenkins" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="Gitlab Runner and Jenkins" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="Gitlab Runner and Jenkins"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="gitlab runner 与 Jenkins 的使用" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="gitlab runner 与 Jenkins 的使用" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="gitlab runner 与 Jenkins 的使用"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="gitlab runner 与 Jenkins 的使用"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="gitlab runner 与 Jenkins 的使用" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="gitlab runner 与 Jenkins 的使用" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/gitlab-runner-and-jenkins/" data-title="gitlab runner 与 Jenkins 的使用"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
