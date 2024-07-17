@@ -611,55 +611,7 @@ for _ in range(100):
 
 ### pod 部署
 
-```yaml
-apiVersion: apps/v1 #指定api版本，此值必须在kubectl apiversion中
-kind: Deployment  #指定创建资源的角色/类型
-metadata: #资源的元数据/属性
-  name: jetson-test-pytorch-deployment #资源的名字，在同一个namespace中必须唯一
-spec: #specification of the resource content 指定该资源的内容
-  replicas: 1
-  selector:
-    matchLabels:
-      app: jetson-test-pytorch
-  template:
-    metadata:
-      labels:
-        app: jetson-test-pytorch
-      name: jetson-test
-    spec:
-      nodeName: orin03-desktop
-      hostNetwork: true
-      containers:
-      - name: jetson-pytorch #容器的名字
-        image: docker.io/dustynv/pytorch:1.11-r35.4.1   #容器使用的镜像地址
-        resources:
-          limits:
-            nvidia.com/gpu: 1 # requesting 1 GPU
-        imagePullPolicy: Never #三个选择Always、Never、IfNotPresent，每次启动时检查和更新（从registery）images的策略，
-                               # Always，每次都检查
-                               # Never，每次都不检查（不管本地是否有）
-                               # IfNotPresent，如果本地有就不检查，如果没有就拉取
-        command: ["python3"]
-        args: ["/home/test/code/test.py"]
-        ports:
-        - name: "metrics"
-          containerPort: 32021
-        securityContext:
-          privileged: true
-          capabilities:
-            add:
-              - ALL
-        volumeMounts:  
-        - name: code
-          mountPath: /home/test/code
-          readOnly: True
-      volumes: #定义一组挂载设备
-      - name: code
-        hostPath:
-          path: /home/orin03/temp/code
-```
-
-
+* 单 GPU 
 
 ```yaml
 apiVersion: v1
@@ -671,7 +623,10 @@ spec:
   nodeSelector:
     kubernetes.io/hostname: orin03-desktop
   containers:
-    - image: tj.registry1.com:5000/algorithms/base:716
+    - image: tj.registry1.com:5000/algorithms/base:v2
+      resources:
+          limits:
+            nvidia.com/gpu: 1 # requesting 1 GPU
       imagePullPolicy: IfNotPresent
       name: gpu-test
       command:
