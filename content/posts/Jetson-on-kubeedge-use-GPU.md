@@ -131,11 +131,180 @@ RUN apt update && apt install -y --fix-missing make g++ python3-pip libhdf5-seri
 CMD [ "bash" ]
 ```
 
-## 应用部署
+## 配置 GPU 容器运行时 和 nvdia k8s device plugin
 
-### 部署 mnist 算法
+### dokcer run 或者 ctr run 部署的配置
 
-#### mnist 镜像准备
+* docker:vim /etc/docker/daemon.json
+
+  ```json
+  {
+      "runtimes": {
+          "nvidia": {
+              "path": "nvidia-container-runtime",
+              "runtimeArgs": []
+          }
+      },
+      
+      "default-runtime": "nvidia"
+  }
+  ```
+
+* containerd:vim /etc/containerd/config.toml
+
+  修改runtime插件的配置，首先切换到runtime v2
+
+  ```
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+            runtime_type = "io.containerd.runc.v2"
+  ```
+
+  将CRI配置中的runc binary改为 `nvidia-container-runtime` 
+
+  ```
+    [plugins."io.containerd.runtime.v1.linux"]
+      shim = "containerd-shim"
+      runtime = "nvidia-container-runtime" # 将此处 runtime 的值改成 nvidia-container-runtime
+  ```
+
+
+### k8s 部署配置
+
+* docker:vim /etc/docker/daemon.json
+
+  ```
+  {
+      "runtimes": {
+          "nvidia": {
+              "path": "nvidia-container-runtime",
+              "runtimeArgs": []
+          }
+      },
+      
+      "default-runtime": "nvidia"
+  }
+  ```
+
+* containerd:vim /etc/containerd/config.toml
+
+```
+ sandbox_image = "registry.aliyuncs.com/google_containers/pause:3.8"
+ 
+default_runtime_name = "nvidia"
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia]
+          privileged_without_host_devices = false
+          runtime_engine = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia.options]
+            BinaryName = "/usr/bin/nvidia-container-runtime"
+```
+
+
+
+![image-20240717100217182](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240717100217182.png)
+
+### nvdia k8s device plugin 部署
+
+#### 配置虚拟化GPU个数
+
+touch  virtualization_configmap.yaml
+
+```yaml
+apiVersion: v1
+data:
+  config: |
+    {
+       "version": "v1",
+       "sharing": {
+         "timeSlicing": {
+           "resources": [
+             {
+               "name": "nvidia.com/gpu",
+               "replicas": 3,
+             }
+           ]
+         }
+       }
+    }
+kind: ConfigMap
+metadata:
+  name: nvidia-config
+  namespace: kube-system
+```
+
+#### 部署 device plugin daemonSet
+
+touch device-plugin.yaml
+
+```yaml
+# Copyright (c) 2019, NVIDIA CORPORATION.  All rights reserved.
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nvidia-device-plugin-daemonset
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: nvidia-device-plugin-ds
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: nvidia-device-plugin-ds
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/edge
+                operator: Exists
+      tolerations:
+      - key: nvidia.com/gpu
+        operator: Exists
+        effect: NoSchedule
+      # Mark this pod as a critical add-on; when enabled, the critical add-on
+      # scheduler reserves resources for critical add-on pods so that they can
+      # be rescheduled after a failure.
+      # See https://kubernetes.io/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/
+      priorityClassName: "system-node-critical"
+      containers:
+      - args:
+        - --config-file=/etc/nvidia/config
+        image: nvcr.io/nvidia/k8s-device-plugin:v0.15.0
+        name: nvidia-device-plugin-ctr
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: FAIL_ON_INIT_ERROR
+            value: "false"
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+        volumeMounts:
+        - name: device-plugin
+          mountPath: /var/lib/kubelet/device-plugins
+        - name: config
+          mountPath: /etc/nvidia
+      volumes:
+      - name: device-plugin
+        hostPath:
+          path: /var/lib/kubelet/device-plugins
+      - name: config
+        configMap:
+          name: nvidia-config
+```
+
+
+
+##  部署 mnist 算法
+
+### mnist 镜像准备
 
 * pytorch 训练代码
 
@@ -297,7 +466,9 @@ if __name__ == '__main__':
 
 `docker build -t mnist:1.0 .`
 
-* docker 运行命令（不加 --runtime nvidia 参数，会使用 CPU 进行训练）
+### 容器部署
+
+* **docker 运行命令（不加 --runtime nvidia 参数，会使用 CPU 进行训练）**
 
 ```shell
 docker run -it --runtime nvidia mnist:1.0  /bin/bash
@@ -314,7 +485,7 @@ python3 pytorch-minst.py
 
 * 安装 Harbor 镜像仓库，直接 docker push 然后 ctr images pull 拉取镜像
 
-* containerd 运行命令：
+* **containerd 运行命令：**
 
 ```shell
 ctr c create nvcr.io/nvidia/l4t-pytorch:r35.2.1-pth2.0-py3 gpu-demo
@@ -332,7 +503,7 @@ ctr tasks kill gpu-demo --signal SIGKILL
 ctr run --rm --gpus 0 --tty local-harbor.com/algorithms/mnist:1.0 python3 /home/pytorch-mnist.py
 ```
 
-#### pod部署
+### pod部署
 
 ```yaml
 apiVersion: v1
@@ -354,9 +525,7 @@ spec:
   restartPolicy: Never
 ```
 
-
-
-#### deployment 部署
+### deployment 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -391,157 +560,128 @@ spec:
         maxSurge: 25%
 ```
 
-### 部署星载算法
+## 部署GPU 虚拟化 应用
 
-### 配置 GPU　容器运行时
+测试代码 test.py
 
-* docker:vim /etc/docker/daemon.json
+```python
+import torch
+import torch.nn as nn
+torch.cuda.synchronize()
+import time
+import os
+import sys
+import random
+n = 0
 
-  ```json
-  {
-      "runtimes": {
-          "nvidia": {
-              "path": "nvidia-container-runtime",
-              "runtimeArgs": []
-          }
-      },
-      
-      "default-runtime": "nvidia"
-  }
-  ```
+d = 5000
+linear = nn.Sequential(
+    nn.Linear(d, d),
+    nn.Linear(d, d),
+    nn.Linear(d, d),
+    nn.Linear(d, d),
+    nn.Linear(d, d),
+    nn.Linear(d, d),
+    nn.Linear(d, d),
+    nn.Linear(d, d),
+    nn.Linear(d, d),
+    nn.Linear(d, d),
+    nn.Linear(d, d),
+    nn.Linear(d, d),
+    nn.Linear(d, d),
+    nn.Linear(d, d),
+).cuda()
 
-* containerd:vim /etc/containerd/config.toml
+path = "/tmp/time_cost_{}.txt".format(n)
+if os.path.isfile(path):
+    os.remove(path)
+for _ in range(100):
+    f = open(path, 'a')
+    t_s = time.time()
+    a = torch.randn(size=(64, 100, d)).cuda()
+    b = linear(a)
+    sum_v = torch.sum(b)
+    print(sum_v)
+    torch.cuda.synchronize()
+    t_e = time.time()
+    print(str(t_e - t_s))
+    f.write(str(t_e - t_s) + "\n")
+    f.close()
+```
 
-  修改runtime插件的配置，首先切换到runtime v2
-
-  ```
-        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
-          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
-            runtime_type = "io.containerd.runc.v2"
-  ```
-
-  将CRI配置中的runc binary改为 `nvidia-container-runtime` 
-
-  ```
-    [plugins."io.containerd.runtime.v1.linux"]
-      shim = "containerd-shim"
-      runtime = "nvidia-container-runtime" # 将此处 runtime 的值改成 nvidia-container-runtime
-  ```
-
-  
-
-#### job 部署高分算法
+### pod 部署
 
 ```yaml
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: gaofen-job
-  labels:
-    jobgroup: jobexample
-spec:
+apiVersion: apps/v1 #指定api版本，此值必须在kubectl apiversion中
+kind: Deployment  #指定创建资源的角色/类型
+metadata: #资源的元数据/属性
+  name: jetson-test-pytorch-deployment #资源的名字，在同一个namespace中必须唯一
+spec: #specification of the resource content 指定该资源的内容
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jetson-test-pytorch
   template:
     metadata:
-      name: kubejob
       labels:
-        jobgroup: jobexample
+        app: jetson-test-pytorch
+      name: jetson-test
     spec:
-      nodeName: edge1
+      nodeName: orin03-desktop
+      hostNetwork: true
       containers:
-      - name: tianji-c3
-        image: local-harbor.com/algorithms/gaofen:v1
-        command: ["/bin/sh", "-c"]      
-        args: ["python /app/GaoFen-2_ortho.py"]   
-        imagePullPolicy: IfNotPresent
-      restartPolicy: Never
+      - name: jetson-pytorch #容器的名字
+        image: docker.io/dustynv/pytorch:1.11-r35.4.1   #容器使用的镜像地址
+        resources:
+          limits:
+            nvidia.com/gpu: 1 # requesting 1 GPU
+        imagePullPolicy: Never #三个选择Always、Never、IfNotPresent，每次启动时检查和更新（从registery）images的策略，
+                               # Always，每次都检查
+                               # Never，每次都不检查（不管本地是否有）
+                               # IfNotPresent，如果本地有就不检查，如果没有就拉取
+        command: ["python3"]
+        args: ["/home/test/code/test.py"]
+        ports:
+        - name: "metrics"
+          containerPort: 32021
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+              - ALL
+        volumeMounts:  
+        - name: code
+          mountPath: /home/test/code
+          readOnly: True
+      volumes: #定义一组挂载设备
+      - name: code
+        hostPath:
+          path: /home/orin03/temp/code
 ```
 
-#### 制作 chart 包，上架应用市场
 
-* 安装 Helm ，具体参考[官网](https://helm.sh/zh/docs/)
-* helm create gaofen 新建模板
-* rm -rf gaofen/templates/* 替换k8s资源文件，将 job.yaml  放进去
-*  helm install gaofen2024 ./gaofen 安装应用
-* helm uninstall gaofen2024  卸载应用
-
-修改 Values.yaml 外部传入变量
 
 ```yaml
-name: gaofen-2024
-images: local-harbor.com/algorithms/gaofen:v1
-```
-
-job.yaml
-
-```yaml
-apiVersion: batch/v1
-kind: Job
+apiVersion: v1
+kind: Pod
 metadata:
-  name: {{ .Values.name }}
-  labels:
-    jobgroup: jobexample
+  name: gpu-test
 spec:
-  template:
-    metadata:
-      name: kubejob
-      labels:
-        jobgroup: jobexample
-    spec:
-      nodeName: edge1
-      containers:
-      - name: tianji-c3
-        image: {{ .Values.images }}
-        command: ["/bin/sh", "-c"]      
-        args: ["python /app/GaoFen-2_ortho.py"]   
-        imagePullPolicy: IfNotPresent
-      restartPolicy: Never
+  hostNetwork: true
+  nodeSelector:
+    kubernetes.io/hostname: orin03-desktop
+  containers:
+    - image: tj.registry1.com:5000/algorithms/base:716
+      imagePullPolicy: IfNotPresent
+      name: gpu-test
+      command:
+        - "/bin/bash"
+        - "-c"
+        - "python3 /home/test.py"
+  restartPolicy: Never
 ```
 
-* 打包 `helm package gaofen/`
 
-### UI 界面部署
-
-> 需要创建一个企业空间、一个项目以及一个用户 (`project-regular`)
-
-1. 登录该用户账号，上传应用模板
-
-![image-20240326143428655](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326143428655.png)
-
-2. 每个算法的代码仓库里面，会有一个自动打包好的 chart 包（应用安装包）
-
-![image-20240326143922245](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326143922245.png)
-
-3. 上传应用的图标
-
-![image-20240326144231886](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144231886.png)
-
-4. 安装应用，选择项目（命名空间）
-
-![image-20240326144552140](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144552140.png)
-
-5. 配置应用参数，选择应用部署的卫星节点。
-
-   ![image-20240326144644944](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326144644944.png)
-
-   6. 部署后，可以查看应用实例
-
-      ![image-20240326145121877](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145121877.png)
-
-
-
-#### 应用发布
-
-* 应用还可以提交发布给其他人使用
-
-![image-20240326145341039](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145341039.png)
-
-* 管理员审核通过后，可以上架到公共的应用商店
-
-![image-20240326145424545](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240326145424545.png)
-
-
-
-具体应用生命周期管理，可以参考[链接](https://kubesphere.io/zh/docs/v3.3/application-store/app-lifecycle-management/)
 
 ## 参考文档
 
