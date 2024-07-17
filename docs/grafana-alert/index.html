@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>Grafana Alert - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="Grafana Alert" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="部署 grafana 1 docker run -d -p 3000:3000 --name=grafana grafana/grafana-enterprise 告警规则 测试环境地址：http://10.11.140.85:3000/d/rYdddlPWk/node-export" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhuyaguang.github.io/grafana-alert/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-07-04T16:25:33+08:00" />
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
 
 <meta name="twitter:title" content="Grafana Alert"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="部署 grafana 1 docker run -d -p 3000:3000 --name=grafana grafana/grafana-enterprise 告警规则 测试环境地址：http://10.11.140.85:3000/d/rYdddlPWk/node-export"/>
 <meta name="application-name" content="朱亚光的博客">
 <meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/grafana-alert\/"
-        },"genre": "posts","wordcount":  0 ,
+        },"genre": "posts","wordcount":  251 ,
         "url": "https:\/\/zhuyaguang.github.io\/grafana-alert\/","datePublished": "2024-07-04T16:25:33+08:00","dateModified": "2024-07-04T16:25:33+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,15 +79,169 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Grafana Alert</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-07-04">2024-07-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 0 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 0 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-07-04">2024-07-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 251 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#部署-grafana">部署 grafana</a></li>
+    <li><a href="#告警规则">告警规则</a>
+      <ul>
+        <li><a href="#配置钉钉告警">配置钉钉告警</a></li>
+        <li><a href="#配置告警规则">配置告警规则</a></li>
+        <li><a href="#磁盘">磁盘</a></li>
+        <li><a href="#内存">内存</a></li>
+        <li><a href="#cpu">CPU</a></li>
+        <li><a href="#gpu">GPU</a></li>
+        <li><a href="#配置采集的频率和采集的项目">配置采集的频率和采集的项目</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="部署-grafana">部署 grafana</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">docker run -d -p 3000:3000 --name=grafana grafana/grafana-enterprise
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="告警规则">告警规则</h2>
+<p>测试环境地址：http://10.11.140.85:3000/d/rYdddlPWk/node-exporter-full?orgId=1&amp;refresh=1m</p>
+<h3 id="配置钉钉告警">配置钉钉告警</h3>
+<p>添加联络点
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_4.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_4.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_4.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_4.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_4.png"
+        title="img_4.png" /></p>
+<p>配置联络点名称，类型，消息格式</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_5.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_5.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_5.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_5.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_5.png"
+        title="img_5.png" /></p>
+<h3 id="配置告警规则">配置告警规则</h3>
+<p>增加告警
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img.png"
+        title="img.png" /></p>
+<p>填写告警内容</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_1.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_1.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_1.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_1.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_1.png"
+        title="img_1.png" /></p>
+<p>配置告警目录和持续时间</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_2.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_2.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_2.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_2.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_2.png"
+        title="img_2.png" /></p>
+<p>配置告警发送源</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_3.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_3.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_3.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_3.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/img_3.png"
+        title="img_3.png" /></p>
+<h3 id="磁盘">磁盘</h3>
+<p>磁盘使用率 &gt; 80 %</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">100 * (1 - (node_filesystem_free_bytes{fstype=~&#34;ext4|xfs&#34;} / node_filesystem_size_bytes{fstype=~&#34;ext4|xfs&#34;})) &gt; 80
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="内存">内存</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">((1 - (node_memory_MemFree_bytes / node_memory_MemTotal_bytes)) * 100) &gt; 50
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="cpu">CPU</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sum(rate(node_cpu_seconds_total{mode!=&#34;idle&#34;}[5m])) by (instance) &gt; 80
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="gpu">GPU</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gpu_usage_gpu
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="配置采集的频率和采集的项目">配置采集的频率和采集的项目</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl -n kubesphere-monitoring-system edit prometheus k8s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">evaluationInterval:5s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl edit  ds node-exporter  -n kubesphere-monitoring-system
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        - --collector.disable-defaults
+</span></span><span class="line"><span class="cl">        - --collector.cpu
+</span></span><span class="line"><span class="cl">        - --collector.cpufreq
+</span></span><span class="line"><span class="cl">        - --collector.diskstats
+</span></span><span class="line"><span class="cl">        - --collector.meminfo
+</span></span><span class="line"><span class="cl">        - --collector.filesystem
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

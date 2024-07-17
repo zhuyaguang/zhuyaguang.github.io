@@ -12,7 +12,7 @@
     <pubDate>Thu, 04 Jul 2024 16:25:33 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/grafana-alert/</guid>
-    <description><![CDATA[]]></description>
+    <description><![CDATA[部署 grafana 1 docker run -d -p 3000:3000 --name=grafana grafana/grafana-enterprise 告警规则 测试环境地址：http://10.11.140.85:3000/d/rYdddlPWk/node-export]]></description>
 </item><item>
     <title>使用 Prometheus 监控 KubeEdge 边缘节点</title>
     <link>https://zhuyaguang.github.io/kubeedge-on-prometheus/</link>
