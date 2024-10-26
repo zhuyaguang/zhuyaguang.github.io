@@ -2,17 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2024-03-15T15:57:22+08:00</lastmod>
+    <loc>http://localhost:1313/gitlab-runner-and-jenkins/</loc>
+    <lastmod>2024-07-17T16:52:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/claude/</loc>
-    <lastmod>2024-03-15T15:57:22+08:00</lastmod>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2024-07-17T16:52:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>http://localhost:1313/</loc>
+    <lastmod>2024-07-17T16:52:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://localhost:1313/grafana-alert/</loc>
+    <lastmod>2024-07-04T16:25:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://localhost:1313/kubeedge-on-prometheus/</loc>
+    <lastmod>2024-06-12T13:45:35+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://localhost:1313/scheduler/</loc>
+    <lastmod>2024-06-12T13:44:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://localhost:1313/2024meetup/</loc>
+    <lastmod>2024-03-25T16:42:03+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://localhost:1313/prometheus-jetson-on-kubeedge-in-kubesphere/</loc>
+    <lastmod>2024-03-21T14:19:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://localhost:1313/jetson-on-kubeedge-use-gpu/</loc>
+    <lastmod>2024-03-21T09:07:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://localhost:1313/kubeedge-code/</loc>
+    <lastmod>2024-03-21T09:02:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://localhost:1313/claude/</loc>
     <lastmod>2024-03-15T15:57:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
