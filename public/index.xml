@@ -38,10 +38,10 @@
     </item>
     <item>
       <title>2024 meetup</title>
-      <link>http://localhost:1313/img/2024meetup/</link>
+      <link>http://localhost:1313/2024meetup/</link>
       <pubDate>Mon, 25 Mar 2024 16:42:03 +0800</pubDate>
-      <guid>http://localhost:1313/img/2024meetup/</guid>
-      <description>&lt;h2 id=&#34;323-云原生-meetup&#34;&gt;3.23 云原生 Meetup&lt;/h2&gt;&#xA;&lt;p&gt;2024 第一场就做了讲师&lt;/p&gt;&#xA;&lt;h2 id=&#34;615-非结构化数据-meetup&#34;&gt;6.15 非结构化数据 Meetup&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240615150924043.png&#34; alt=&#34;image-20240615150924043&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;622-kubeblocks-x-alluxio-meetup&#34;&gt;6.22 KubeBlocks X Alluxio meetup&lt;/h2&gt;&#xA;&lt;h2 id=&#34;1019-csdn-1024程序员节&#34;&gt;10.19 CSDN 1024程序员节&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240622.jpg&#34; alt=&#34;image-20240622&#34;&gt;&lt;/p&gt;</description>
+      <guid>http://localhost:1313/2024meetup/</guid>
+      <description>&lt;h2 id=&#34;323-云原生-meetup&#34;&gt;3.23 云原生 Meetup&lt;/h2&gt;&#xA;&lt;p&gt;2024 第一场就做了讲师&lt;/p&gt;&#xA;&lt;h2 id=&#34;615-非结构化数据-meetup&#34;&gt;6.15 非结构化数据 Meetup&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240615150924043.png&#34; alt=&#34;image-20240615150924043&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;622-kubeblocks-x-alluxio-meetup&#34;&gt;6.22 KubeBlocks X Alluxio meetup&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;../img/2cb88b8f9f43301d5b88ec98e796592.jpg&#34; alt=&#34;alt-text&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;1019-csdn-1024程序员节&#34;&gt;10.19 CSDN 1024程序员节&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;../img/af3a333198d24bd1db448a9b03aec15.jpg&#34; alt=&#34;alt2text&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态</title>
