@@ -2,6 +2,7 @@
 title: "2024 meetup"
 date: 2024-03-25T16:42:03+08:00
 draft: true
+description: "2024搞天基的一年"
 ---
 
 

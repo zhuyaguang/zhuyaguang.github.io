@@ -2,6 +2,7 @@
 title: "Byconity on Kubesphere"
 date: 2023-08-09T15:00:54+08:00
 draft: true
+description: "ByConity on KubeSphere"
 ---
 
 # 基于 KubeSphere 搭建生产级云原生数仓 ByConity 
