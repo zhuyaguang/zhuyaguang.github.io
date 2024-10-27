@@ -1,103 +1,90 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>朱亚光的博客</title>
-    <link>https://zhuyaguang.github.io/</link>
-    <description>Recent content on 朱亚光的博客</description>
-    <generator>Hugo</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Wed, 15 Feb 2023 14:10:52 +0800</lastBuildDate>
-    <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Bytebase 体验官之勇闯新手村</title>
-      <link>https://zhuyaguang.github.io/bytabase2/</link>
-      <pubDate>Wed, 15 Feb 2023 14:10:52 +0800</pubDate>
-      <guid>https://zhuyaguang.github.io/bytabase2/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>2022 年终总结</title>
-      <link>https://zhuyaguang.github.io/2022/</link>
-      <pubDate>Sun, 18 Dec 2022 10:00:20 +0800</pubDate>
-      <guid>https://zhuyaguang.github.io/2022/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Bytebase SQL 编辑器文档体验报告</title>
-      <link>https://zhuyaguang.github.io/bytebase/</link>
-      <pubDate>Fri, 09 Dec 2022 11:22:27 +0800</pubDate>
-      <guid>https://zhuyaguang.github.io/bytebase/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>AI 场景下的分布式存储方案</title>
-      <link>https://zhuyaguang.github.io/storage-on-ai/</link>
-      <pubDate>Wed, 28 Sep 2022 09:26:16 +0800</pubDate>
-      <guid>https://zhuyaguang.github.io/storage-on-ai/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>多集群实现 PLG 日志收集</title>
-      <link>https://zhuyaguang.github.io/plg-on-multi-cluster/</link>
-      <pubDate>Wed, 07 Sep 2022 11:04:28 +0800</pubDate>
-      <guid>https://zhuyaguang.github.io/plg-on-multi-cluster/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>我用 极狐 Gitlab 议题 来点菜</title>
-      <link>https://zhuyaguang.github.io/gitlab-printer/</link>
-      <pubDate>Mon, 05 Sep 2022 16:19:39 +0800</pubDate>
-      <guid>https://zhuyaguang.github.io/gitlab-printer/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>基于 kubesphere 搭建一站式云原生机器学习平台 </title>
-      <link>https://zhuyaguang.github.io/cube-on-kubesphere/</link>
-      <pubDate>Mon, 18 Jul 2022 11:31:10 +0800</pubDate>
-      <guid>https://zhuyaguang.github.io/cube-on-kubesphere/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>K8s 上的中间件</title>
-      <link>https://zhuyaguang.github.io/mysql-on-k8s/</link>
-      <pubDate>Sat, 16 Jul 2022 13:53:33 +0800</pubDate>
-      <guid>https://zhuyaguang.github.io/mysql-on-k8s/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>2021年总结</title>
-      <link>https://zhuyaguang.github.io/2021/</link>
-      <pubDate>Wed, 18 May 2022 14:53:27 +0800</pubDate>
-      <guid>https://zhuyaguang.github.io/2021/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>向量检索落地场景探索</title>
-      <link>https://zhuyaguang.github.io/milvus-action/</link>
-      <pubDate>Mon, 18 Apr 2022 17:23:48 +0800</pubDate>
-      <guid>https://zhuyaguang.github.io/milvus-action/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>About</title>
-      <link>https://zhuyaguang.github.io/about/</link>
-      <pubDate>Sun, 10 Apr 2022 12:03:33 +0800</pubDate>
-      <guid>https://zhuyaguang.github.io/about/</guid>
-      <description>&lt;h3 id=&#34;about-zhuyaguang&#34;&gt;About zhuyaguang&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Software developer&lt;/li&gt;&#xA;&lt;li&gt;Part time translator&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;career-experience&#34;&gt;Career Experience&lt;/h3&gt;&#xA;&lt;p&gt;1.Huawei(2017-2020),Software developer&lt;/p&gt;&#xA;&lt;p&gt;2.ZheJiang Lab(2020-),AI application Platform Software Enginner&lt;/p&gt;&#xA;&lt;h3 id=&#34;focus--interests&#34;&gt;Focus &amp;amp; Interests&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;CloudNative,Docker,Kubernetes,Helm&lt;/li&gt;&#xA;&lt;li&gt;Kubernetes Operators&lt;/li&gt;&#xA;&lt;li&gt;Bash,Git,Terraform&lt;/li&gt;&#xA;&lt;li&gt;MLops&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;voluntary-activities&#34;&gt;Voluntary Activities&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/gocn/translator&#34;&gt;GoCN  translator&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;i-contributed-project&#34;&gt;I contributed project&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/milvus-io/milvus-sdk-go&#34;&gt;milvus-sdk-go&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/kubeedge/kubeedge&#34;&gt;kubeedge&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/WasmEdge/WasmEdge&#34;&gt;WasmEdge&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;status&#34;&gt;Status&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;🌱 I’m currently learning AI native and LLM&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
-    </item>
-    <item>
-      <title>Kubeflow实践笔记</title>
-      <link>https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Sun, 10 Apr 2022 08:47:52 +0800</pubDate>
-      <guid>https://zhuyaguang.github.io/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Hugo Command</title>
-      <link>https://zhuyaguang.github.io/hugo-command/</link>
-      <pubDate>Sun, 10 Apr 2022 08:41:30 +0800</pubDate>
-      <guid>https://zhuyaguang.github.io/hugo-command/</guid>
-      <description></description>
-    </item>
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>朱亚光的博客</title>
+        <link>https://zhuyaguang.github.io/</link>
+        <description>zhuyaguang blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Wed, 17 Jul 2024 16:52:57 &#43;0800</lastBuildDate>
+            <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>gitlab runner 与 Jenkins 的使用</title>
+    <link>https://zhuyaguang.github.io/gitlab-runner-and-jenkins/</link>
+    <pubDate>Wed, 17 Jul 2024 16:52:57 &#43;0800</pubDate>
+    <author>朱亚光</author>
+    <guid>https://zhuyaguang.github.io/gitlab-runner-and-jenkins/</guid>
+    <description><![CDATA[gitlab runner 与 Jenkins 的使用 部署runner 1 2 3 4 5 6 7 8 sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64 sudo chmod +x /usr/local/bin/gitlab-runner sudo useradd --comment &#39;GitLab Runner&#39; --create-home gitlab-runner --shell /bin/bash sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner sudo gitlab-runner start 参考链接 使用 runner 注册 在项目中注册 在群组中注]]></description>
+</item>
+<item>
+    <title>Grafana Alert</title>
+    <link>https://zhuyaguang.github.io/grafana-alert/</link>
+    <pubDate>Thu, 04 Jul 2024 16:25:33 &#43;0800</pubDate>
+    <author>朱亚光</author>
+    <guid>https://zhuyaguang.github.io/grafana-alert/</guid>
+    <description><![CDATA[部署 grafana 1 docker run -d -p 3000:3000 --name=grafana grafana/grafana-enterprise 告警规则 测试环境地址：http://10.11.140.85:3000/d/rYdddlPWk/node-export]]></description>
+</item>
+<item>
+    <title>使用 Prometheus 监控 KubeEdge 边缘节点</title>
+    <link>https://zhuyaguang.github.io/kubeedge-on-prometheus/</link>
+    <pubDate>Wed, 12 Jun 2024 13:45:35 &#43;0800</pubDate>
+    <author>朱亚光</author>
+    <guid>https://zhuyaguang.github.io/kubeedge-on-prometheus/</guid>
+    <description><![CDATA[使用 Prometheus 监控 KubeEdge 边缘节点 环境信息 组件 版本 containerd 1.7.2 k8s 1.26.0 KubeEdge 1.15.1或者1.17.0 Jetson型号 NVIDIA Jetson Xavier NX (16GB ram) 部署 prometheus 我们可以直接使用 kube-prometheus 的 Helm Charts 来进行快]]></description>
+</item>
+<item>
+    <title>开发一个自定义 k8s 调度插件</title>
+    <link>https://zhuyaguang.github.io/scheduler/</link>
+    <pubDate>Wed, 12 Jun 2024 13:44:46 &#43;0800</pubDate>
+    <author>朱亚光</author>
+    <guid>https://zhuyaguang.github.io/scheduler/</guid>
+    <description><![CDATA[fork Scheduler Plugins 开发调度逻辑 github 下载完代码，新建一个你自己的调度插件文件目录，spacecloud.go 里面写上你的调度节点逻辑 1 2 3 4 5 6 7 8 9 10 11 12]]></description>
+</item>
+<item>
+    <title>2024 meetup</title>
+    <link>https://zhuyaguang.github.io/2024meetup/</link>
+    <pubDate>Mon, 25 Mar 2024 16:42:03 &#43;0800</pubDate>
+    <author>朱亚光</author>
+    <guid>https://zhuyaguang.github.io/2024meetup/</guid>
+    <description><![CDATA[3.23 云原生 Meetup 2024 第一场就做了讲师 6.15 非结构化数据 Meetup 6.22 KubeBlocks X Alluxio meetup 10.19 CSDN 1024程序员节]]></description>
+</item>
+<item>
+    <title>使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态</title>
+    <link>https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/</link>
+    <pubDate>Thu, 21 Mar 2024 14:19:33 &#43;0800</pubDate>
+    <author>朱亚光</author>
+    <guid>https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/</guid>
+    <description><![CDATA[KubeSphere 边缘节点的可观测性 KubeSphere 愿景是打造一个以 Kubernetes 为内核的云原生分布式操作系统，它的架构可以非常方便地使第三方应用与云原生生态组件进行即插即用（plu]]></description>
+</item>
+<item>
+    <title>基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）</title>
+    <link>https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/</link>
+    <pubDate>Thu, 21 Mar 2024 09:07:51 &#43;0800</pubDate>
+    <author>朱亚光</author>
+    <guid>https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/</guid>
+    <description><![CDATA[在轨验证方案 应用的部署流程图 在 Jetson 上 如果部署 GPU 类型的应用，需要有 NVIDIA Container Runtime 支持。 NVIDIA Container Runtime 环境配置 各个组件的版本信息如下： 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.15.1 Je]]></description>
+</item>
+<item>
+    <title>Kubeedge 代码解析（更新中）</title>
+    <link>https://zhuyaguang.github.io/kubeedge-code/</link>
+    <pubDate>Thu, 21 Mar 2024 09:02:57 &#43;0800</pubDate>
+    <author>朱亚光</author>
+    <guid>https://zhuyaguang.github.io/kubeedge-code/</guid>
+    <description><![CDATA[kubeEdge 代码解析 目录 CHANGELOG 版本新特性 其他组件依赖比较大的三个组件，beehive，viaduct, mapper-framework beehive beehive是一个基于go channel的消息]]></description>
+</item>
+<item>
+    <title>无需魔法，快来体验 Claude 3 ，GPT 4在他面前就是弟弟</title>
+    <link>https://zhuyaguang.github.io/claude/</link>
+    <pubDate>Fri, 15 Mar 2024 15:57:22 &#43;0800</pubDate>
+    <author>朱亚光</author>
+    <guid>https://zhuyaguang.github.io/claude/</guid>
+    <description><![CDATA[第一步访问链接 https://lab.amazoncloud.cn/demo/qrcode?trk=UG 微信扫描二维码创建实验环境 第二步 限时试用 第三步 管理模型访问权限&ndash;全选，反正免费 第四步 申请 Claude3 模型，提交下公司信息，]]></description>
+</item>
+<item>
+    <title>流水线的故事</title>
+    <link>https://zhuyaguang.github.io/zadig-story/</link>
+    <pubDate>Wed, 07 Feb 2024 09:13:04 &#43;0800</pubDate>
+    <author>朱亚光</author>
+    <guid>https://zhuyaguang.github.io/zadig-story/</guid>
+    <description><![CDATA[“我其实对你是有些失望的，虽然今年没有年终奖，但你是B里最靠前的。来公司三年了，运维开发样样都不行。版本流水线再挂了，你半夜就来公司修吧”。]]></description>
+</item>
+</channel>
 </rss>

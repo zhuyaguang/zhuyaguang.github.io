@@ -4,23 +4,23 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>在 KubeSphere 上部署最新版的 KubeEdge - 朱亚光的博客</title><meta name="Description" content="KubeEdge 安装使用笔记"><meta property="og:title" content="在 KubeSphere 上部署最新版的 KubeEdge" />
 <meta property="og:description" content="KubeEdge 安装使用笔记" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhuyaguang.github.io/kubeedge-install/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://zhuyaguang.github.io/kubeedge-install/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-07T11:03:15+08:00" />
-<meta property="article:modified_time" content="2023-11-07T11:03:15+08:00" />
+<meta property="article:modified_time" content="2023-11-07T11:03:15+08:00" /><meta property="og:site_name" content="My cool site" />
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
-
-<meta name="twitter:title" content="在 KubeSphere 上部署最新版的 KubeEdge"/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png" /><meta name="twitter:title" content="在 KubeSphere 上部署最新版的 KubeEdge"/>
 <meta name="twitter:description" content="KubeEdge 安装使用笔记"/>
-<meta name="application-name" content="朱亚光的博客">
-<meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<meta name="twitter:site" content="@SurfingSnail"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/kubeedge-install/" /><link rel="prev" href="https://zhuyaguang.github.io/hdu-speak/" /><link rel="next" href="https://zhuyaguang.github.io/leetcode/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/kubeedge-install/" /><link rel="prev" href="https://zhuyaguang.github.io/hdu-speak/" /><link rel="next" href="https://zhuyaguang.github.io/leetcode/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/"
-        },"genre": "posts","wordcount":  1955 ,
+        },"genre": "posts","wordcount":  2077 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubeedge-install\/","datePublished": "2023-11-07T11:03:15+08:00","dateModified": "2023-11-07T11:03:15+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -38,7 +38,7 @@
             },"description": "KubeEdge 安装使用笔记"
     }
     </script></head>
-    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
@@ -47,9 +47,8 @@
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="/reading/"> 书单 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                    <i class="fas fa-adjust fa-fw"></i>
-                </a>
-            </div>
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
         </div>
     </div>
 </header><header class="mobile" id="header-mobile">
@@ -63,28 +62,21 @@
             </div>
         </div>
         <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="/reading/" title="">书单</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                <i class="fas fa-adjust fa-fw"></i>
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
-</header>
-<div class="search-dropdown desktop">
-    <div id="search-dropdown-desktop"></div>
-</div>
-<div class="search-dropdown mobile">
-    <div id="search-dropdown-mobile"></div>
-</div>
-<main class="main">
+</header><main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">在 KubeSphere 上部署最新版的 KubeEdge</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1955 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  kept="">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">在 KubeSphere 上部署最新版的 KubeEdge</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 2077 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
@@ -483,11 +475,11 @@
 </span></span><span class="line"><span class="cl">systemctl status containerd
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><a href="https://blog.csdn.net/luck099/article/details/131233362" target="_blank" rel="noopener noreffer">参考链接</a></p>
-<p><a href="https://cloud.tencent.com/developer/article/2383890" target="_blank" rel="noopener noreffer">https://cloud.tencent.com/developer/article/2383890</a></p>
+</div><p><a href="https://blog.csdn.net/luck099/article/details/131233362" target="_blank" rel="noopener noreffer ">参考链接</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/2383890" target="_blank" rel="noopener noreffer ">https://cloud.tencent.com/developer/article/2383890</a></p>
 <h2 id="使用keadm进行部署">使用Keadm进行部署</h2>
 <p>Keadm 是一款用于安装 KubeEdge 的工具。 Keadm 不负责 K8s 的安装和运行,在使用它之前，请先准备好一个 K8s 集群。</p>
-<p>KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 <a href="https://github.com/kubeedge/kubeedge#kubernetes-compatibility" target="_blank" rel="noopener noreffer">kubernetes-兼容性</a> 来了解，以此来确定安装哪个版本的 Kubernetes 以及 KubeEdge。</p>
+<p>KubeEdge 对 Kubernetes 的版本兼容性，更多详细信息您可以参考 <a href="https://github.com/kubeedge/kubeedge#kubernetes-compatibility" target="_blank" rel="noopener noreffer ">kubernetes-兼容性</a> 来了解，以此来确定安装哪个版本的 Kubernetes 以及 KubeEdge。</p>
 <p>使用限制</p>
 <ul>
 <li><code>keadm</code> 目前支持 Ubuntu 和 CentOS OS。</li>
@@ -651,16 +643,16 @@
 </span></span><span class="line"><span class="cl">systemctl restart containerd.service
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><a href="https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice" target="_blank" rel="noopener noreffer">CNI 安装参考链接</a></p>
+</div><p><a href="https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice" target="_blank" rel="noopener noreffer ">CNI 安装参考链接</a></p>
 <h3 id="可选安装-cri-dockerd运行时为-docker-">可选：安装 cri-dockerd(运行时为 docker )</h3>
 <ul>
 <li>
 <p>下载 release 包</p>
-<p><a href="https://github.com/Mirantis/cri-dockerd/releases" target="_blank" rel="noopener noreffer">https://github.com/Mirantis/cri-dockerd/releases</a></p>
+<p><a href="https://github.com/Mirantis/cri-dockerd/releases" target="_blank" rel="noopener noreffer ">https://github.com/Mirantis/cri-dockerd/releases</a></p>
 </li>
 <li>
 <p>下载 cri-docker.service 和 cri-docker.socket</p>
-<p><a href="https://github.com/Mirantis/cri-dockerd/tree/master/packaging/systemd" target="_blank" rel="noopener noreffer">https://github.com/Mirantis/cri-dockerd/tree/master/packaging/systemd</a></p>
+<p><a href="https://github.com/Mirantis/cri-dockerd/tree/master/packaging/systemd" target="_blank" rel="noopener noreffer ">https://github.com/Mirantis/cri-dockerd/tree/master/packaging/systemd</a></p>
 </li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -678,17 +670,17 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tar  zxvf cri-dockerd-0.3.9.arm64.tgz
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">tar</span>  <span class="n">zxvf</span> <span class="n">cri</span><span class="o">-</span><span class="n">dockerd</span><span class="o">-</span><span class="mf">0.3</span><span class="o">.</span><span class="mf">9.</span><span class="n">arm64</span><span class="o">.</span><span class="n">tgz</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">cp cri-dockerd/cri-dockerd /usr/local/bin/cri-dockerd
+</span></span><span class="line"><span class="cl"><span class="n">cp</span> <span class="n">cri</span><span class="o">-</span><span class="n">dockerd</span><span class="o">/</span><span class="n">cri</span><span class="o">-</span><span class="n">dockerd</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">cri</span><span class="o">-</span><span class="n">dockerd</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">cp cri-docker.service cri-docker.socket /etc/systemd/system/
+</span></span><span class="line"><span class="cl"><span class="n">cp</span> <span class="n">cri</span><span class="o">-</span><span class="n">docker</span><span class="o">.</span><span class="n">service</span> <span class="n">cri</span><span class="o">-</span><span class="n">docker</span><span class="o">.</span><span class="n">socket</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sed -i -e &#39;s,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,&#39; /etc/systemd/system/cri-docker.service
+</span></span><span class="line"><span class="cl"><span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;s,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,&#39;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">cri</span><span class="o">-</span><span class="n">docker</span><span class="o">.</span><span class="n">service</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">systemctl daemon-reload
-</span></span><span class="line"><span class="cl">systemctl enable cri-docker.service
-</span></span><span class="line"><span class="cl">systemctl enable --now cri-docker.socket
+</span></span><span class="line"><span class="cl"><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
+</span></span><span class="line"><span class="cl"><span class="n">systemctl</span> <span class="n">enable</span> <span class="n">cri</span><span class="o">-</span><span class="n">docker</span><span class="o">.</span><span class="n">service</span>
+</span></span><span class="line"><span class="cl"><span class="n">systemctl</span> <span class="n">enable</span> <span class="o">--</span><span class="n">now</span> <span class="n">cri</span><span class="o">-</span><span class="n">docker</span><span class="o">.</span><span class="n">socket</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -724,7 +716,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">keadm  join --cloudcore-ipport=10.108.96.24:10000 --token=8cc6fc16618f8fc7b98a0221683b26d36a9b571c9257aac544574bb9dc014f74.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTE2OTY4MTR9.EgxPs9Z5MFHSUxCwM9rvyY9XjWXBHKxZmezi7pzyOIo --kubeedge-version=1.15.1   --with-mqtt=false --remote-runtime-endpoint=unix:///var/run/cri-dockerd.sock
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">keadm</span>  <span class="n">join</span> <span class="o">--</span><span class="n">cloudcore</span><span class="o">-</span><span class="n">ipport</span><span class="o">=</span><span class="mf">10.108</span><span class="o">.</span><span class="mf">96.24</span><span class="p">:</span><span class="mi">10000</span> <span class="o">--</span><span class="n">token</span><span class="o">=</span><span class="mi">8</span><span class="n">cc6fc16618f8fc7b98a0221683b26d36a9b571c9257aac544574bb9dc014f74</span><span class="o">.</span><span class="n">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span><span class="o">.</span><span class="n">eyJleHAiOjE3MTE2OTY4MTR9</span><span class="o">.</span><span class="n">EgxPs9Z5MFHSUxCwM9rvyY9XjWXBHKxZmezi7pzyOIo</span> <span class="o">--</span><span class="n">kubeedge</span><span class="o">-</span><span class="n">version</span><span class="o">=</span><span class="mf">1.15</span><span class="o">.</span><span class="mi">1</span>   <span class="o">--</span><span class="n">with</span><span class="o">-</span><span class="n">mqtt</span><span class="o">=</span><span class="bp">false</span> <span class="o">--</span><span class="n">remote</span><span class="o">-</span><span class="n">runtime</span><span class="o">-</span><span class="n">endpoint</span><span class="o">=</span><span class="n">unix</span><span class="p">:</span><span class="o">///</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">cri</span><span class="o">-</span><span class="n">dockerd</span><span class="o">.</span><span class="n">sock</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -903,11 +895,11 @@
 <p>2.重启 edgecore</p>
 <p>service edgecore restart</p>
 <h2 id="问题汇总">问题汇总</h2>
-<p><a href="https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice" target="_blank" rel="noopener noreffer">常见问题</a>:</p>
+<p><a href="https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice" target="_blank" rel="noopener noreffer ">常见问题</a>:</p>
 <ul>
 <li>
 <p>CNI 网络问题，安装CNI插件，后重启。</p>
-<p><a href="https://github.com/containerd/containerd/blob/main/script/setup/install-cni" target="_blank" rel="noopener noreffer">安装脚本地址</a></p>
+<p><a href="https://github.com/containerd/containerd/blob/main/script/setup/install-cni" target="_blank" rel="noopener noreffer ">安装脚本地址</a></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -963,20 +955,18 @@
 <p>220 上部署 containerd 问题比较多，换成 docker 需要安装  cri-dockerd。使用 cri-dockerd 的时候，keadm join 的时候 记得加上参数 &ndash;remote-runtime-endpoint=unix:///var/run/cri-dockerd.sock</p>
 </li>
 </ul>
-<p>更多问题可以访问<a href="https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice" target="_blank" rel="noopener noreffer">kubeedge FAQ </a></p></div><div class="post-footer" id="post-footer">
+<p>更多问题可以访问<a href="https://github.com/kubeedge/website/blob/e394dd0e0927fbe58b5d9cc80d94ba392241c859/i18n/zh/docusaurus-plugin-content-docs/current/faq/setup.md#unknown-service-runtimev1alpha2imageservice" target="_blank" rel="noopener noreffer ">kubeedge FAQ </a></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
                 <span>更新于 2023-11-07</span>
-            </div>
-            <div class="post-info-license"></div>
-        </div>
+            </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
                             <a class="link-to-markdown" href="/kubeedge-install/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/kubeedge-install/" data-title="在 KubeSphere 上部署最新版的 KubeEdge" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/kubeedge-install/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/kubeedge-install/" data-title="在 KubeSphere 上部署最新版的 KubeEdge" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/kubeedge-install/" data-title="在 KubeSphere 上部署最新版的 KubeEdge"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/kubeedge-install/" data-title="在 KubeSphere 上部署最新版的 KubeEdge"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/kubeedge-install/" data-title="在 KubeSphere 上部署最新版的 KubeEdge" data-description="KubeEdge 安装使用笔记"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/kubeedge-install/" data-title="在 KubeSphere 上部署最新版的 KubeEdge" data-description="KubeEdge 安装使用笔记"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/kubeedge-install/" data-title="在 KubeSphere 上部署最新版的 KubeEdge"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/kubeedge-install/" data-title="在 KubeSphere 上部署最新版的 KubeEdge" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/kubeedge-install/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/kubeedge-install/" data-title="在 KubeSphere 上部署最新版的 KubeEdge" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/kubeedge-install/" data-title="在 KubeSphere 上部署最新版的 KubeEdge"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/kubeedge-install/" data-title="在 KubeSphere 上部署最新版的 KubeEdge"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/kubeedge-install/" data-title="在 KubeSphere 上部署最新版的 KubeEdge" data-description="KubeEdge 安装使用笔记"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/kubeedge-install/" data-title="在 KubeSphere 上部署最新版的 KubeEdge"><i class="fab fa-evernote fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -988,29 +978,19 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/hdu-speak/" class="prev" rel="prev" title="杭电校外导师讲座"><i class="fas fa-angle-left fa-fw"></i>杭电校外导师讲座</a>
-            <a href="/leetcode/" class="next" rel="next" title="Leetcode 刷题笔记">Leetcode 刷题笔记<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/hdu-speak/" class="prev" rel="prev" title="杭电校外导师讲座"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>杭电校外导师讲座</a>
+            <a href="/leetcode/" class="next" rel="next" title="Leetcode 刷题笔记">Leetcode 刷题笔记<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-            
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZMX6LNNGD"></script>
-            <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-9ZMX6LNNGD');
-            </script>
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
-        
     </footer></div>
 
         <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
-                <i class="fas fa-arrow-up fa-fw"></i>
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-                <i class="fas fa-comment fa-fw"></i>
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

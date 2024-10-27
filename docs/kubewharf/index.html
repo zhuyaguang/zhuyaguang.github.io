@@ -4,23 +4,23 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>为什么说 k8s 是新时代的Linux  - 朱亚光的博客</title><meta name="Description" content="zhuyaguang blog"><meta property="og:title" content="为什么说 k8s 是新时代的Linux " />
 <meta property="og:description" content="我们经常说 Kubernetes 已经取代了 Linux 成为下一代的操作系统了。此话怎讲，看下面这张图片，传统Linux不管是用户态还是内核态，在 k8s 里面都有与其对应的服务。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhuyaguang.github.io/kubewharf/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://zhuyaguang.github.io/kubewharf/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-04T16:19:35+08:00" />
-<meta property="article:modified_time" content="2023-12-04T16:19:35+08:00" />
+<meta property="article:modified_time" content="2023-12-04T16:19:35+08:00" /><meta property="og:site_name" content="My cool site" />
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
-
-<meta name="twitter:title" content="为什么说 k8s 是新时代的Linux "/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png" /><meta name="twitter:title" content="为什么说 k8s 是新时代的Linux "/>
 <meta name="twitter:description" content="我们经常说 Kubernetes 已经取代了 Linux 成为下一代的操作系统了。此话怎讲，看下面这张图片，传统Linux不管是用户态还是内核态，在 k8s 里面都有与其对应的服务。"/>
-<meta name="application-name" content="朱亚光的博客">
-<meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<meta name="twitter:site" content="@SurfingSnail"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/kubewharf/" /><link rel="prev" href="https://zhuyaguang.github.io/2023/" /><link rel="next" href="https://zhuyaguang.github.io/zjlab-post/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/kubewharf/" /><link rel="prev" href="https://zhuyaguang.github.io/2023/" /><link rel="next" href="https://zhuyaguang.github.io/zjlab-post/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/kubewharf\/"
-        },"genre": "posts","wordcount":  4093 ,
+        },"genre": "posts","wordcount":  4105 ,
         "url": "https:\/\/zhuyaguang.github.io\/kubewharf\/","datePublished": "2023-12-04T16:19:35+08:00","dateModified": "2023-12-04T16:19:35+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -38,7 +38,7 @@
             },"description": ""
     }
     </script></head>
-    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
@@ -47,9 +47,8 @@
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="/reading/"> 书单 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                    <i class="fas fa-adjust fa-fw"></i>
-                </a>
-            </div>
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
         </div>
     </div>
 </header><header class="mobile" id="header-mobile">
@@ -63,28 +62,21 @@
             </div>
         </div>
         <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="/reading/" title="">书单</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                <i class="fas fa-adjust fa-fw"></i>
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
-</header>
-<div class="search-dropdown desktop">
-    <div id="search-dropdown-desktop"></div>
-</div>
-<div class="search-dropdown mobile">
-    <div id="search-dropdown-mobile"></div>
-</div>
-<main class="main">
+</header><main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">为什么说 k8s 是新时代的Linux </h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-04">2023-12-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4093 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  kept="">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">为什么说 k8s 是新时代的Linux </h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-04">2023-12-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 4105 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
@@ -137,7 +129,7 @@
         title="img" /></p>
 <p>为了应对云原生浪潮下的大规模集群状态信息存储的可扩展性和性能问题，字节实现并开源了 KubeBrain 这个项目。</p>
 <blockquote>
-<p>KubeBrain 是字节跳动针对 Kubernetes 元信息存储的使用需求，基于分布式 KV 存储引擎设计并实现的取代 etcd 的元信息存储系统，支撑线上超过 20,000 节点的超大规模 Kubernetes 集群的稳定运行。&mdash;From 字节跳动云原生工程师薛英才<a href="https://mp.weixin.qq.com/s/lxukeguHP1l0BGKbAa89_Q" target="_blank" rel="noopener noreffer">《 基于分布式 KV 存储引擎的高性能 K8s 元数据存储项目 KubeBrain》</a></p>
+<p>KubeBrain 是字节跳动针对 Kubernetes 元信息存储的使用需求，基于分布式 KV 存储引擎设计并实现的取代 etcd 的元信息存储系统，支撑线上超过 20,000 节点的超大规模 Kubernetes 集群的稳定运行。&mdash;From 字节跳动云原生工程师薛英才<a href="https://mp.weixin.qq.com/s/lxukeguHP1l0BGKbAa89_Q" target="_blank" rel="noopener noreffer ">《 基于分布式 KV 存储引擎的高性能 K8s 元数据存储项目 KubeBrain》</a></p>
 </blockquote>
 <p>KubeBrain 相比于 etcd 有以下优势：</p>
 <ul>
@@ -161,7 +153,7 @@
 <p>项目地址：https://github.com/kubewharf/kubegateway</p>
 <p>大家都知道 Kube-apiserver 是整个集群的入口，随着集群规模扩大到 上万节点的时候，Kube-apiserver 压力非常大，所有资源的增删改查操作都需要经过 kube-apiserver。所以 Kube-apiserver 的高可用决定了以 Kubernetes  为内核的分布式操作系统的高可用。</p>
 <blockquote>
-<p>KubeGateway 是字节跳动针对 kube-apiserver 流量特征专门定制的七层网关，它彻底解决了 kube-apiserver 负载不均衡的问题，同时在社区范围内首次实现了对 kube-apiserver 请求的完整治理，包括请求路由、分流、限流、降级等，显著提高了 Kubernetes 集群的可用性。&mdash;From  字节跳动云原生工程师章骏<a href="https://mp.weixin.qq.com/s/sDxkXPmgtCknwtnwvg2EMw" target="_blank" rel="noopener noreffer">《Kubernetes 集群 kube-apiserver 请求的负载均衡和治理方案 KubeGateway》</a></p>
+<p>KubeGateway 是字节跳动针对 kube-apiserver 流量特征专门定制的七层网关，它彻底解决了 kube-apiserver 负载不均衡的问题，同时在社区范围内首次实现了对 kube-apiserver 请求的完整治理，包括请求路由、分流、限流、降级等，显著提高了 Kubernetes 集群的可用性。&mdash;From  字节跳动云原生工程师章骏<a href="https://mp.weixin.qq.com/s/sDxkXPmgtCknwtnwvg2EMw" target="_blank" rel="noopener noreffer ">《Kubernetes 集群 kube-apiserver 请求的负载均衡和治理方案 KubeGateway》</a></p>
 </blockquote>
 <p>KubeGateway 作为七层网关接入和转发 kube-apiserver 的请求,具有以下优势：</p>
 <ul>
@@ -182,7 +174,7 @@
 <p><strong>路由匹配</strong>：通过解析出来的多维度路由字段，我们可以利用这些字段做更精细化的流量治理，比如分流，限流，熔断等。</p>
 </li>
 <li>
-<p><strong>用户认证</strong>：KubeGateway 支持证书认证和token认证两种方式。下面是 KubeGateway 中的<a href="https://github.com/kubewharf/kubegateway/blob/main/pkg/gateway/proxy/authenticator/config.go#L108" target="_blank" rel="noopener noreffer">源码</a>。</p>
+<p><strong>用户认证</strong>：KubeGateway 支持证书认证和token认证两种方式。下面是 KubeGateway 中的<a href="https://github.com/kubewharf/kubegateway/blob/main/pkg/gateway/proxy/authenticator/config.go#L108" target="_blank" rel="noopener noreffer ">源码</a>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -255,7 +247,7 @@
 <p>项目地址：https://github.com/kubewharf/kubezoo</p>
 <p>Linux 操作系统有很多用户，root 用户，普通用户等等，作为以 Kubernetes 为基础构建的分布式操作系统，我们默认可以通过 <strong>Namespace</strong>来对资源进行隔离。但是 Namespace 也有很多不足，租户只能访问  namespace 级别的资源，比如deployment、pod 和 pvc 。集群级别的资源，比如 PV、clusterrole 则无法访问。API访问权限低。</p>
 <blockquote>
-<p>KubeZoo 是由字节跳动自研的 Kubernetes 轻量级多租户项目，它基于协议转换的核心理念，在一个物理的 Kubernetes Master 上虚拟多个租户，具备轻量级、兼容原生 API 、无侵入等特点，是一种打造 Serverless Kubernetes 底座的优良方案。&mdash;From <a href="https://mp.weixin.qq.com/s/SUNuvFz4HBmFk-XDN0mINg" target="_blank" rel="noopener noreffer">《KubeZoo：字节跳动轻量级多租户开源解决方案》</a></p>
+<p>KubeZoo 是由字节跳动自研的 Kubernetes 轻量级多租户项目，它基于协议转换的核心理念，在一个物理的 Kubernetes Master 上虚拟多个租户，具备轻量级、兼容原生 API 、无侵入等特点，是一种打造 Serverless Kubernetes 底座的优良方案。&mdash;From <a href="https://mp.weixin.qq.com/s/SUNuvFz4HBmFk-XDN0mINg" target="_blank" rel="noopener noreffer ">《KubeZoo：字节跳动轻量级多租户开源解决方案》</a></p>
 </blockquote>
 <p>那么 KubeZoo 是怎么解决这个问题的呢，思路还挺简单的，就是通过在资源的 name/namespace 等字段上增加租户的唯一标识。</p>
 <p>以下图为例，租户 tenant2 有 default 和 prod 两个 namespace，其在上游的真实 namespace 则是加上了租户的前缀，故为 tenant2-default 和 tenant2-prod。所以 tenant1和 tenant2 都有 default 的 namespace ，但其实是两个不同的namespace。</p>
@@ -301,7 +293,7 @@
 <p>2023年应该是可观测性元年，OpenTelemetry 的出现，让大家对可观测性有了更多的选择。它结合了 OpenTracing 与 OpenCensus 两个项目，成为了一个厂商无关、平台无关的支撑可观测性三大支柱的标准协议和开源实现。加上 eBPF 这个黑魔法，解决了可观测性<strong>零侵扰解决落地难的问题</strong>。其中沙箱机制是 eBPF 有别于 APM 插桩机制的核心所在，<strong>「沙箱」在 eBPF 代码和应用程序的代码之间划上了一道清晰的界限，使得我们能在不对应用程序做任何修改的前提下，通过获取外部数据就能确定其内部状态</strong>。</p>
 <p>针对 Kubernetes 控制面的可观测性，Kelemetry 通过收集并连接来自不同组件的信号，并以追踪的形式展示相关数据。来解决 Kubernetes 可观察性数据孤岛的问题。</p>
 <blockquote>
-<p>Kelemetry 是字节跳动开发的用于 Kubernetes 控制平面的追踪系统，它从全局视角串联起多个 Kubernetes 组件的行为，追踪单个 Kubernetes 对象的完整生命周期以及不同对象之间的相互影响。&mdash; From <a href="https://mp.weixin.qq.com/s/U-P9tZhX4rT5wTaSnqfoZg" target="_blank" rel="noopener noreffer">《面向 Kubernetes 控制面的全局追踪系统》</a></p>
+<p>Kelemetry 是字节跳动开发的用于 Kubernetes 控制平面的追踪系统，它从全局视角串联起多个 Kubernetes 组件的行为，追踪单个 Kubernetes 对象的完整生命周期以及不同对象之间的相互影响。&mdash; From <a href="https://mp.weixin.qq.com/s/U-P9tZhX4rT5wTaSnqfoZg" target="_blank" rel="noopener noreffer ">《面向 Kubernetes 控制面的全局追踪系统》</a></p>
 </blockquote>
 <p>Kelemetry 主要有以下特性：</p>
 <ul>
@@ -332,7 +324,7 @@
 <p>项目地址：https://github.com/kubewharf/kubeadmiral</p>
 <p>随着业务的增长，很多公司都使用了公有云和私有云。其中公有云又使用了多家的产品。因为没有一家的云是 100% 可靠的，最近阿里云事故频发，采用多云、混合云架构已经是业界共识了。</p>
 <blockquote>
-<p>随着多云、混合云愈发成为业内主流形态，Kubernetes 成为了云原生的操作系统，实现了对基础设施的进一步抽象和规范，为应用提供更加统一的标准接口。在此基础上，我们<strong>引入 Kubernetes 集群联邦</strong>作为分布式云场景下的云原生系统底座，面向应用提供统一的平台入口，提升应用跨集群分发的能力，做好应用跨集群的分发调度，管理好多个云云原生场景下的基础设施。&mdash;From <a href="https://mp.weixin.qq.com/s/aS18urPF8UB4K2I_9ECbHg" target="_blank" rel="noopener noreffer">《基于 Kubernetes 的新一代多集群编排调度引擎》</a></p>
+<p>随着多云、混合云愈发成为业内主流形态，Kubernetes 成为了云原生的操作系统，实现了对基础设施的进一步抽象和规范，为应用提供更加统一的标准接口。在此基础上，我们<strong>引入 Kubernetes 集群联邦</strong>作为分布式云场景下的云原生系统底座，面向应用提供统一的平台入口，提升应用跨集群分发的能力，做好应用跨集群的分发调度，管理好多个云云原生场景下的基础设施。&mdash;From <a href="https://mp.weixin.qq.com/s/aS18urPF8UB4K2I_9ECbHg" target="_blank" rel="noopener noreffer ">《基于 Kubernetes 的新一代多集群编排调度引擎》</a></p>
 </blockquote>
 <p><strong>KubeAdmiral</strong> 是基于 KubeFed v2 基础上研发，并支持  Kubernetes 原生 API 的多集群联邦解决方案。</p>
 <p>KubeAdmiral  具有以下优势：</p>
@@ -357,7 +349,7 @@
 <p>项目地址：https://github.com/kubewharf/katalyst-core</p>
 <p>降本增笑这个词最近很火，但是怎么提高 Kubernetes 集群的资源利用率，一直是大家最关心的问题。</p>
 <blockquote>
-<p>通过对离线作业进行云原生化改造，我们使它们可以在同一个基础设施上进行调度和资源管理。该体系中，最上面是统一的资源联邦实现多集群资源管理，单集群中有中心的统一调度器和单机的统一资源管理器，它们协同工作，实现在离线一体化资源管理能力。&ndash;From <a href="https://mp.weixin.qq.com/s/d4R2mIzkd-7FIcNKK5S6LQ" target="_blank" rel="noopener noreffer">《Katalyst：字节跳动云原生成本优化实践》</a></p>
+<p>通过对离线作业进行云原生化改造，我们使它们可以在同一个基础设施上进行调度和资源管理。该体系中，最上面是统一的资源联邦实现多集群资源管理，单集群中有中心的统一调度器和单机的统一资源管理器，它们协同工作，实现在离线一体化资源管理能力。&ndash;From <a href="https://mp.weixin.qq.com/s/d4R2mIzkd-7FIcNKK5S6LQ" target="_blank" rel="noopener noreffer ">《Katalyst：字节跳动云原生成本优化实践》</a></p>
 </blockquote>
 <p>Katalyst  解决了云原生场景下的资源不合理利用的问题，有以下优势：</p>
 <ul>
@@ -394,15 +386,13 @@
         <div class="post-info-line">
             <div class="post-info-mod">
                 <span>更新于 2023-12-04</span>
-            </div>
-            <div class="post-info-license"></div>
-        </div>
+            </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
                             <a class="link-to-markdown" href="/kubewharf/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/kubewharf/" data-title="为什么说 k8s 是新时代的Linux " data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/kubewharf/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/kubewharf/" data-title="为什么说 k8s 是新时代的Linux " data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/kubewharf/" data-title="为什么说 k8s 是新时代的Linux "><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/kubewharf/" data-title="为什么说 k8s 是新时代的Linux "><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/kubewharf/" data-title="为什么说 k8s 是新时代的Linux " data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/kubewharf/" data-title="为什么说 k8s 是新时代的Linux " data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/kubewharf/" data-title="为什么说 k8s 是新时代的Linux "><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/kubewharf/" data-title="为什么说 k8s 是新时代的Linux " data-via="SurfingSnail"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/kubewharf/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/kubewharf/" data-title="为什么说 k8s 是新时代的Linux " data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/kubewharf/" data-title="为什么说 k8s 是新时代的Linux "><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/kubewharf/" data-title="为什么说 k8s 是新时代的Linux "><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/kubewharf/" data-title="为什么说 k8s 是新时代的Linux " data-description=""><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/kubewharf/" data-title="为什么说 k8s 是新时代的Linux "><i class="fab fa-evernote fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -414,29 +404,19 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/2023/" class="prev" rel="prev" title="狂飙的大模型-2023年度总结"><i class="fas fa-angle-left fa-fw"></i>狂飙的大模型-2023年度总结</a>
-            <a href="/zjlab-post/" class="next" rel="next" title="开源创新的理解">开源创新的理解<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/2023/" class="prev" rel="prev" title="狂飙的大模型-2023年度总结"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>狂飙的大模型-2023年度总结</a>
+            <a href="/zjlab-post/" class="next" rel="next" title="开源创新的理解">开源创新的理解<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-            
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZMX6LNNGD"></script>
-            <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-9ZMX6LNNGD');
-            </script>
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
-        
     </footer></div>
 
         <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
-                <i class="fas fa-arrow-up fa-fw"></i>
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-                <i class="fas fa-comment fa-fw"></i>
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
