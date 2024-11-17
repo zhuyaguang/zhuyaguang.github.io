@@ -1,7 +1,6 @@
 # Cursor 使用技巧
 
 
-# 
 
 ## 新建 READNE.md 稳定文件
 
