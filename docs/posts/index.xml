@@ -4,7 +4,15 @@
         <link>https://zhuyaguang.github.io/posts/</link>
         <description>所有文章 | 朱亚光的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Wed, 17 Jul 2024 16:52:57 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Sun, 17 Nov 2024 07:41:32 &#43;0800</lastBuildDate><atom:link href="https://zhuyaguang.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Cursor 使用技巧</title>
+    <link>https://zhuyaguang.github.io/cursor/</link>
+    <pubDate>Sun, 17 Nov 2024 07:41:32 &#43;0800</pubDate>
+    <author>朱亚光</author>
+    <guid>https://zhuyaguang.github.io/cursor/</guid>
+    <description><![CDATA[新建 READNE.md 稳定文件 包含项目每一个细节 核心功能 目标和宗旨 技术栈和使用的包 项目文件夹结构 数据库设计 登陆页面组件 配色方案 文案 新建一个 .cursorrules 文件 参考 GitHub 项目 Awesome]]></description>
+</item>
+<item>
     <title>gitlab runner 与 Jenkins 的使用</title>
     <link>https://zhuyaguang.github.io/gitlab-runner-and-jenkins/</link>
     <pubDate>Wed, 17 Jul 2024 16:52:57 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>朱亚光</author>
     <guid>https://zhuyaguang.github.io/claude/</guid>
     <description><![CDATA[第一步访问链接 https://lab.amazoncloud.cn/demo/qrcode?trk=UG 微信扫描二维码创建实验环境 第二步 限时试用 第三步 管理模型访问权限&ndash;全选，反正免费 第四步 申请 Claude3 模型，提交下公司信息，]]></description>
-</item>
-<item>
-    <title>流水线的故事</title>
-    <link>https://zhuyaguang.github.io/zadig-story/</link>
-    <pubDate>Wed, 07 Feb 2024 09:13:04 &#43;0800</pubDate>
-    <author>朱亚光</author>
-    <guid>https://zhuyaguang.github.io/zadig-story/</guid>
-    <description><![CDATA[“我其实对你是有些失望的，虽然今年没有年终奖，但你是B里最靠前的。来公司三年了，运维开发样样都不行。版本流水线再挂了，你半夜就来公司修吧”。]]></description>
 </item>
 </channel>
 </rss>
