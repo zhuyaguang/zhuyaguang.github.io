@@ -67,6 +67,10 @@
         alt="https://www.gravatar.com/avatar/570ce9818146664c9efc9e88f219229b?s=240&amp;d=mp"
         title="https://www.gravatar.com/avatar/570ce9818146664c9efc9e88f219229b?s=240&amp;d=mp" /></a></div><div class="home-subtitle">世界上没有比自由地享受着广阔地平线的人更加幸福的了</div><div class="links"><a href="https://github.com/zhuyaguang" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://twitter.com/SurfingSnail" title="Twitter" target="_blank" rel="noopener noreffer me"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="mailto:zhuyaguang1368@163.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/bytebase/">Bytebase SQL 编辑器文档体验报告</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>朱亚光</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2022-12-09">2022-12-09</time></span></div><div class="content">Bytebase 介绍 Bytebase 官网的 slogan是： 面向开发者 可靠的 数据库 CI/CD。把数据库 和 DevOps 结合起来了。这对于 DBA 来说确实是一个福音。 作为一个开发之前部署了 mysql</div><div class="post-footer">
+        <a href="/bytebase/">阅读全文</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/storage-on-ai/">AI 场景下的分布式存储方案</a>
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>朱亚光</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2022-09-28">2022-09-28</time></span></div><div class="content">AI 训练的时候经常要拷贝数据集来训练，之前在前项目组发现是一人配一台性能比较好的台式机，然后就是共享几台 A100 的服务器。分布式存储的目的就是访问远</div><div class="post-footer">
         <a href="/storage-on-ai/">阅读全文</a></div>
@@ -95,19 +99,6 @@
         <a href="/cube-on-kubesphere/">基于 kubesphere 搭建一站式云原生机器学习平台 </a>
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>朱亚光</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2022-07-18">2022-07-18</time></span></div><div class="content">搭建 kubesphere 注意：机器最低规格为：8C16G ；kubectl 版本要1.24 ；之前安装过 KS 要提前清理下环境。 下载 KubeKey 1 2 export KKZONE=cn curl -sfL https://get-kk.kubesphere.io | VERSION=v3.0.2 sh - 如果机器上之</div><div class="post-footer">
         <a href="/cube-on-kubesphere/">阅读全文</a></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/mysql-on-k8s/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://bartlomiejmika.com/img/2022/07/ian-taylor-jOqJbvo1P9g-unsplash.jpg"
-        data-srcset="https://bartlomiejmika.com/img/2022/07/ian-taylor-jOqJbvo1P9g-unsplash.jpg, https://bartlomiejmika.com/img/2022/07/ian-taylor-jOqJbvo1P9g-unsplash.jpg 1.5x, https://bartlomiejmika.com/img/2022/07/ian-taylor-jOqJbvo1P9g-unsplash.jpg 2x"
-        data-sizes="auto"
-        alt="https://bartlomiejmika.com/img/2022/07/ian-taylor-jOqJbvo1P9g-unsplash.jpg"
-        title="mysql上k8s方案汇总" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/mysql-on-k8s/">K8s 上的中间件</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>朱亚光</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2022-07-16">2022-07-16</time></span></div><div class="content">K8S 上部署 mysql、redis、minio方案 docker 部署 Minio简单版： 1 2 3 4 5 6 7 8 9 10 11 12 docker run \ -p 9000:9000 \ -p 9001:9001 \ --name zj-minio \ -v ~/minio/data:/data \ -e &#34;MINIO_ROOT_USER=admin&#34; \ -e &#34;MINIO_ROOT_PASSWORD=root123456&#34; \ quay.io/minio/minio server</div><div class="post-footer">
-        <a href="/mysql-on-k8s/">阅读全文</a></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -129,6 +120,10 @@
                 </li><li class="page-item ">
                     <span class="page-link">
                         <a href="/page/8/">8</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/9/">9</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

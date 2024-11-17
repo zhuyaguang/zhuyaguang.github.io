@@ -4,9 +4,17 @@
         <link>https://zhuyaguang.github.io/</link>
         <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Sun, 17 Nov 2024 07:41:32 &#43;0800</lastBuildDate>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Sun, 17 Nov 2024 21:19:56 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>How to Live Healthy</title>
+    <link>https://zhuyaguang.github.io/how-to-live-healthy/</link>
+    <pubDate>Sun, 17 Nov 2024 21:19:56 &#43;0800</pubDate>
+    <author>朱亚光</author>
+    <guid>https://zhuyaguang.github.io/how-to-live-healthy/</guid>
+    <description><![CDATA[人到中年，注意养生 最近越来越觉得很累，感觉很有必要从生理和心理上做一些调整 1. 消除超加工食品，吃真正的食物。 原则上吃你100年前可以找到的食物]]></description>
+</item>
+<item>
     <title>Cursor 使用技巧</title>
     <link>https://zhuyaguang.github.io/cursor/</link>
     <pubDate>Sun, 17 Nov 2024 07:41:32 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>朱亚光</author>
     <guid>https://zhuyaguang.github.io/kubeedge-code/</guid>
     <description><![CDATA[kubeEdge 代码解析 目录 CHANGELOG 版本新特性 其他组件依赖比较大的三个组件，beehive，viaduct, mapper-framework beehive beehive是一个基于go channel的消息]]></description>
-</item>
-<item>
-    <title>无需魔法，快来体验 Claude 3 ，GPT 4在他面前就是弟弟</title>
-    <link>https://zhuyaguang.github.io/claude/</link>
-    <pubDate>Fri, 15 Mar 2024 15:57:22 &#43;0800</pubDate>
-    <author>朱亚光</author>
-    <guid>https://zhuyaguang.github.io/claude/</guid>
-    <description><![CDATA[第一步访问链接 https://lab.amazoncloud.cn/demo/qrcode?trk=UG 微信扫描二维码创建实验环境 第二步 限时试用 第三步 管理模型访问权限&ndash;全选，反正免费 第四步 申请 Claude3 模型，提交下公司信息，]]></description>
 </item>
 </channel>
 </rss>

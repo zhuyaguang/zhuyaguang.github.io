@@ -66,7 +66,20 @@
         data-sizes="auto"
         alt="https://www.gravatar.com/avatar/570ce9818146664c9efc9e88f219229b?s=240&amp;d=mp"
         title="https://www.gravatar.com/avatar/570ce9818146664c9efc9e88f219229b?s=240&amp;d=mp" /></a></div><div class="home-subtitle">世界上没有比自由地享受着广阔地平线的人更加幸福的了</div><div class="links"><a href="https://github.com/zhuyaguang" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://twitter.com/SurfingSnail" title="Twitter" target="_blank" rel="noopener noreffer me"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="mailto:zhuyaguang1368@163.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a></div></div>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/mysql-on-k8s/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://bartlomiejmika.com/img/2022/07/ian-taylor-jOqJbvo1P9g-unsplash.jpg"
+        data-srcset="https://bartlomiejmika.com/img/2022/07/ian-taylor-jOqJbvo1P9g-unsplash.jpg, https://bartlomiejmika.com/img/2022/07/ian-taylor-jOqJbvo1P9g-unsplash.jpg 1.5x, https://bartlomiejmika.com/img/2022/07/ian-taylor-jOqJbvo1P9g-unsplash.jpg 2x"
+        data-sizes="auto"
+        alt="https://bartlomiejmika.com/img/2022/07/ian-taylor-jOqJbvo1P9g-unsplash.jpg"
+        title="mysql上k8s方案汇总" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/mysql-on-k8s/">K8s 上的中间件</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>朱亚光</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2022-07-16">2022-07-16</time></span></div><div class="content">K8S 上部署 mysql、redis、minio方案 docker 部署 Minio简单版： 1 2 3 4 5 6 7 8 9 10 11 12 docker run \ -p 9000:9000 \ -p 9001:9001 \ --name zj-minio \ -v ~/minio/data:/data \ -e &#34;MINIO_ROOT_USER=admin&#34; \ -e &#34;MINIO_ROOT_PASSWORD=root123456&#34; \ quay.io/minio/minio server</div><div class="post-footer">
+        <a href="/mysql-on-k8s/">阅读全文</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/2021/">2021年总结</a>
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>朱亚光</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2022-05-18">2022-05-18</time></span></div><div class="content">目标 2021年年初做整年规划的时候，我把简历 title 改成了云原生开发工程师。2021年的主要目标就是补齐云原生技术栈。当时定的目标主要有 写一个 k8s Operator</div><div class="post-footer">
         <a href="/2021/">阅读全文</a></div>
@@ -86,10 +99,6 @@
         <a href="/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/">Kubeflow实践笔记</a>
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>朱亚光</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2022-04-10">2022-04-10</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kubeflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kubeflow</a></span></div><div class="content">基于 Kubernetes 的云原生 AI 平台建设 提高算力资源利用 GPU 虚拟化 GPUManager 基于 GPU 驱动封装实现，用户需要对驱动的某些关键接口（如显存分配、cuda thread 创建等）进行封装劫</div><div class="post-footer">
         <a href="/kubeflow%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/">阅读全文</a></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/hugo-command/">Hugo Command</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>朱亚光</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2022-04-10">2022-04-10</time></span></div><div class="content">1 2 3 4 5 6 7 8 9 echo &#39;eval &#34;$(/opt/homebrew/bin/brew shellenv)&#34;&#39; &gt;&gt; /Users/zhuyaguang/.zprofile eval &#34;$(/opt/homebrew/bin/brew shellenv)&#34; hugo new posts/hugo-command.md hugo server -D hugo --destination ./docs --buildDrafts --cleanDestinationDir 参考文档 Love It 主题文章设置 头像设置地址</div><div class="post-footer">
-        <a href="/hugo-command/">阅读全文</a></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -107,6 +116,10 @@
                 </li><li class="page-item active">
                     <span class="page-link">
                         <a href="/page/8/">8</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/9/">9</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">
