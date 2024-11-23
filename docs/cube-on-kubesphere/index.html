@@ -4,23 +4,23 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>基于 kubesphere 搭建一站式云原生机器学习平台  - 朱亚光的博客</title><meta name="Description" content="在 kubesphere 上搭建 cube-studio "><meta property="og:title" content="基于 kubesphere 搭建一站式云原生机器学习平台 " />
 <meta property="og:description" content="在 kubesphere 上搭建 cube-studio " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhuyaguang.github.io/cube-on-kubesphere/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://zhuyaguang.github.io/cube-on-kubesphere/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-07-18T11:31:10+08:00" />
-<meta property="article:modified_time" content="2022-07-18T11:31:10+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2022-07-18T11:31:10+08:00" />
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png" /><meta name="twitter:title" content="基于 kubesphere 搭建一站式云原生机器学习平台 "/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
+
+<meta name="twitter:title" content="基于 kubesphere 搭建一站式云原生机器学习平台 "/>
 <meta name="twitter:description" content="在 kubesphere 上搭建 cube-studio "/>
-<meta name="twitter:site" content="@SurfingSnail"/>
-<meta name="application-name" content="My cool site">
-<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<meta name="application-name" content="朱亚光的博客">
+<meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/cube-on-kubesphere/" /><link rel="prev" href="https://zhuyaguang.github.io/mysql-on-k8s/" /><link rel="next" href="https://zhuyaguang.github.io/gitlab-printer/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/cube-on-kubesphere/" /><link rel="prev" href="https://zhuyaguang.github.io/mysql-on-k8s/" /><link rel="next" href="https://zhuyaguang.github.io/gitlab-printer/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/cube-on-kubesphere\/"
-        },"genre": "posts","wordcount":  1355 ,
+        },"genre": "posts","wordcount":  1345 ,
         "url": "https:\/\/zhuyaguang.github.io\/cube-on-kubesphere\/","datePublished": "2022-07-18T11:31:10+08:00","dateModified": "2022-07-18T11:31:10+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -38,7 +38,7 @@
             },"description": "在 kubesphere 上搭建 cube-studio "
     }
     </script></head>
-    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
@@ -47,8 +47,9 @@
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="/reading/"> 书单 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a></div>
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
         </div>
     </div>
 </header><header class="mobile" id="header-mobile">
@@ -62,21 +63,28 @@
             </div>
         </div>
         <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="/reading/" title="">书单</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                <i class="fas fa-adjust fa-fw"></i>
             </a></div>
     </div>
-</header><main class="main">
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">基于 kubesphere 搭建一站式云原生机器学习平台 </h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1355 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  data-kept="">
+        </div><article class="page single"><h1 class="single-title animated flipInX">基于 kubesphere 搭建一站式云原生机器学习平台 </h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1345 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
@@ -128,7 +136,7 @@
 </div>
 </div></li>
 <li>
-<p>如果机器上之前安装过 KubeSphere 或者 KubeSphere 版本太高 ， 先卸载 KubeSphere，k8s 版本太高有问题，<a href="https://github.com/tencentmusic/cube-studio/issues/47" target="_blank" rel="noopener noreffer ">会导致部分 CRD 不能安装</a></p>
+<p>如果机器上之前安装过 KubeSphere 或者 KubeSphere 版本太高 ， 先卸载 KubeSphere，k8s 版本太高有问题，<a href="https://github.com/tencentmusic/cube-studio/issues/47" target="_blank" rel="noopener noreffer">会导致部分 CRD 不能安装</a></p>
 </li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -163,7 +171,7 @@
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">./kk create cluster --with-kubernetes v1.22.12 --with-kubesphere v3.3.1
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>详细安装步骤可以参考 KubeSphere <a href="https://kubesphere.io/zh/docs/v3.3/quick-start/all-in-one-on-linux/" target="_blank" rel="noopener noreffer ">官方文档</a></p>
+</div><p>详细安装步骤可以参考 KubeSphere <a href="https://kubesphere.io/zh/docs/v3.3/quick-start/all-in-one-on-linux/" target="_blank" rel="noopener noreffer">官方文档</a></p>
 <h2 id="部署-cube-studio">部署 cube-studio</h2>
 <ol>
 <li>
@@ -467,9 +475,9 @@
 </ul>
 <h3 id="使用-gpu">使用 GPU</h3>
 <ul>
-<li><a href="https://wangjunjian.com/gpu/2020/11/03/install-nvidia-gpu-driver-on-ubuntu.html" target="_blank" rel="noopener noreffer ">安装 nvidia 驱动</a></li>
-<li><a href="https://wangjunjian.com/docker/2020/10/18/install-nvidia-docker2-on-ubuntu.html" target="_blank" rel="noopener noreffer ">安装 nvidia-docker2</a></li>
-<li><a href="https://www.cnblogs.com/l-hh/p/13451639.html" target="_blank" rel="noopener noreffer ">Ubuntu18.04安装nvidia-docker2</a></li>
+<li><a href="https://wangjunjian.com/gpu/2020/11/03/install-nvidia-gpu-driver-on-ubuntu.html" target="_blank" rel="noopener noreffer">安装 nvidia 驱动</a></li>
+<li><a href="https://wangjunjian.com/docker/2020/10/18/install-nvidia-docker2-on-ubuntu.html" target="_blank" rel="noopener noreffer">安装 nvidia-docker2</a></li>
+<li><a href="https://www.cnblogs.com/l-hh/p/13451639.html" target="_blank" rel="noopener noreffer">Ubuntu18.04安装nvidia-docker2</a></li>
 </ul>
 <p>打标签</p>
 <div class="highlight"><div class="chroma">
@@ -481,19 +489,19 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="安装-harbor-并配置证书">安装 Harbor 并配置证书</h3>
-<p><a href="https://mp.weixin.qq.com/s/oj-C8ioIRfj9uYMDsDsA1w" target="_blank" rel="noopener noreffer ">Harbor在线安装：3分钟体验Harbor!</a></p>
-<p><a href="https://blog.inkubate.io/how-to-use-harbor-private-registry-with-kubernetes/" target="_blank" rel="noopener noreffer ">How to install and use VMware Harbor private registry with Kubernetes</a></p>
-<p><a href="https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/" target="_blank" rel="noopener noreffer ">Pull an Image from a Private Registry</a></p>
+<p><a href="https://mp.weixin.qq.com/s/oj-C8ioIRfj9uYMDsDsA1w" target="_blank" rel="noopener noreffer">Harbor在线安装：3分钟体验Harbor!</a></p>
+<p><a href="https://blog.inkubate.io/how-to-use-harbor-private-registry-with-kubernetes/" target="_blank" rel="noopener noreffer">How to install and use VMware Harbor private registry with Kubernetes</a></p>
+<p><a href="https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/" target="_blank" rel="noopener noreffer">Pull an Image from a Private Registry</a></p>
 <p>在 部署好的 Harbor 中添加 HTTPS 证书配置</p>
-<p><a href="https://zhuanlan.zhihu.com/p/234918875" target="_blank" rel="noopener noreffer ">harbor镜像仓库-https访问的证书配置</a></p>
-<p><a href="https://blog.csdn.net/min19900718/article/details/87920254" target="_blank" rel="noopener noreffer ">x509: cannot validate certificate for 10.30.0.163 because it doesn&rsquo;t contain any IP SANs</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/234918875" target="_blank" rel="noopener noreffer">harbor镜像仓库-https访问的证书配置</a></p>
+<p><a href="https://blog.csdn.net/min19900718/article/details/87920254" target="_blank" rel="noopener noreffer">x509: cannot validate certificate for 10.30.0.163 because it doesn&rsquo;t contain any IP SANs</a></p>
 <p>最后 Docker login $harborIP，就可以 docker pull 拉取服务。</p>
 <h3 id="使用-bentoml-快速发布一个-web-镜像">使用 BentoMl 快速发布一个 web 镜像</h3>
 <h3 id="构建分布式存储">构建分布式存储</h3>
 <ul>
 <li>
 <p>JuiceFS</p>
-<p><a href="https://mp.weixin.qq.com/s/Ks_qaEVp0W28532wjzqe5Q" target="_blank" rel="noopener noreffer ">AI 企业多云存储架构实践 | 深势科技分享</a></p>
+<p><a href="https://mp.weixin.qq.com/s/Ks_qaEVp0W28532wjzqe5Q" target="_blank" rel="noopener noreffer">AI 企业多云存储架构实践 | 深势科技分享</a></p>
 </li>
 <li>
 <p>网易 curve</p>
@@ -529,19 +537,21 @@
 </ol>
 <h2 id="参考文档">参考文档</h2>
 <ul>
-<li><a href="https://mp.weixin.qq.com/s/6uaUFS01W2lxnM-SU4PsfQ" target="_blank" rel="noopener noreffer ">腾讯音乐栾鹏：cube-studio开源一站式云原生机器学习平台</a></li>
+<li><a href="https://mp.weixin.qq.com/s/6uaUFS01W2lxnM-SU4PsfQ" target="_blank" rel="noopener noreffer">腾讯音乐栾鹏：cube-studio开源一站式云原生机器学习平台</a></li>
 </ul></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
                 <span>更新于 2022-07-18</span>
-            </div></div>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
                             <a class="link-to-markdown" href="/cube-on-kubesphere/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 " data-via="SurfingSnail"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 " data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 "><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 "><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 " data-description="在 kubesphere 上搭建 cube-studio "><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 "><i class="fab fa-evernote fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 " data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 " data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 "><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 "><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 " data-description="在 kubesphere 上搭建 cube-studio "><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 " data-description="在 kubesphere 上搭建 cube-studio "><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 "><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
@@ -553,19 +563,29 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/mysql-on-k8s/" class="prev" rel="prev" title="K8s 上的中间件"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>K8s 上的中间件</a>
-            <a href="/gitlab-printer/" class="next" rel="next" title="我用 极狐 Gitlab 议题 来点菜">我用 极狐 Gitlab 议题 来点菜<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/mysql-on-k8s/" class="prev" rel="prev" title="K8s 上的中间件"><i class="fas fa-angle-left fa-fw"></i>K8s 上的中间件</a>
+            <a href="/gitlab-printer/" class="next" rel="next" title="我用 极狐 Gitlab 议题 来点菜">我用 极狐 Gitlab 议题 来点菜<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZMX6LNNGD"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-9ZMX6LNNGD');
+            </script>
         </div>
+        
     </footer></div>
 
         <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+                <i class="fas fa-arrow-up fa-fw"></i>
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+                <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

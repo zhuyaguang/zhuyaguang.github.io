@@ -237,7 +237,7 @@ keadm init --advertise-address=10.108.96.24
 
 // k8s 多节点的时候，配置 cloudcore 所在节点的地址
 
-keadm init --advertise-address=10.101.32.14,10.101.32.15 --set cloudCore.service.enable=true --set cloudCore.hostNetWork=true --profile version=v1.14.0 --kube-config=/root/.kube/config
+keadm init --advertise-address=10.101.32.14,10.101.32.15 --set cloudCore.service.enable=true --set cloudCore.hostNetWork=true --profile version=v1.15.1 --kube-config=/root/.kube/config
 
 ```
 

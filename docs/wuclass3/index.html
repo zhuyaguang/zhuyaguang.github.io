@@ -4,23 +4,23 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>吴恩达-基于LangChain的大语言模型应用开发 - 朱亚光的博客</title><meta name="Description" content="吴恩达老师的langchain课"><meta property="og:title" content="吴恩达-基于LangChain的大语言模型应用开发" />
 <meta property="og:description" content="吴恩达老师的langchain课" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhuyaguang.github.io/wuclass3/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://zhuyaguang.github.io/wuclass3/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-06-07T09:50:15+08:00" />
-<meta property="article:modified_time" content="2023-06-07T09:50:15+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-06-07T09:50:15+08:00" />
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png" /><meta name="twitter:title" content="吴恩达-基于LangChain的大语言模型应用开发"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
+
+<meta name="twitter:title" content="吴恩达-基于LangChain的大语言模型应用开发"/>
 <meta name="twitter:description" content="吴恩达老师的langchain课"/>
-<meta name="twitter:site" content="@SurfingSnail"/>
-<meta name="application-name" content="My cool site">
-<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<meta name="application-name" content="朱亚光的博客">
+<meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/wuclass3/" /><link rel="prev" href="https://zhuyaguang.github.io/wuclass2/" /><link rel="next" href="https://zhuyaguang.github.io/podcast/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/wuclass3/" /><link rel="prev" href="https://zhuyaguang.github.io/wuclass2/" /><link rel="next" href="https://zhuyaguang.github.io/podcast/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/zhuyaguang.github.io\/wuclass3\/"
-        },"genre": "posts","wordcount":  3116 ,
+        },"genre": "posts","wordcount":  3112 ,
         "url": "https:\/\/zhuyaguang.github.io\/wuclass3\/","datePublished": "2023-06-07T09:50:15+08:00","dateModified": "2023-06-07T09:50:15+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -38,7 +38,7 @@
             },"description": "吴恩达老师的langchain课"
     }
     </script></head>
-    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
@@ -47,8 +47,9 @@
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="/reading/"> 书单 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a></div>
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
         </div>
     </div>
 </header><header class="mobile" id="header-mobile">
@@ -62,21 +63,28 @@
             </div>
         </div>
         <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="/reading/" title="">书单</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                <i class="fas fa-adjust fa-fw"></i>
             </a></div>
     </div>
-</header><main class="main">
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">吴恩达-基于LangChain的大语言模型应用开发</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-07">2023-06-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 3116 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  data-kept="">
+        </div><article class="page single"><h1 class="single-title animated flipInX">吴恩达-基于LangChain的大语言模型应用开发</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-06-07">2023-06-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3112 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
@@ -114,23 +122,23 @@
 <ul>
 <li>
 <p>视频教程地址</p>
-<p><a href="https://learn.deeplearning.ai/langchain/lesson/1/introduction" target="_blank" rel="noopener noreffer ">https://learn.deeplearning.ai/langchain/lesson/1/introduction</a></p>
+<p><a href="https://learn.deeplearning.ai/langchain/lesson/1/introduction" target="_blank" rel="noopener noreffer">https://learn.deeplearning.ai/langchain/lesson/1/introduction</a></p>
 </li>
 <li>
 <p>熟肉地址</p>
-<p><a href="https://www.youtube.com/watch?v=gUcYC0Iuw2g&amp;list=PLiuLMb-dLdWIYYBF3k5JI_6Od593EIuEG&amp;index=1" target="_blank" rel="noopener noreffer ">https://www.youtube.com/watch?v=gUcYC0Iuw2g&list=PLiuLMb-dLdWIYYBF3k5JI_6Od593EIuEG&index=1</a></p>
+<p><a href="https://www.youtube.com/watch?v=gUcYC0Iuw2g&amp;list=PLiuLMb-dLdWIYYBF3k5JI_6Od593EIuEG&amp;index=1" target="_blank" rel="noopener noreffer">https://www.youtube.com/watch?v=gUcYC0Iuw2g&list=PLiuLMb-dLdWIYYBF3k5JI_6Od593EIuEG&index=1</a></p>
 </li>
 <li>
 <p>Langchain 官方文档</p>
-<p><a href="https://blog.langchain.dev/" target="_blank" rel="noopener noreffer ">https://blog.langchain.dev/</a></p>
+<p><a href="https://blog.langchain.dev/" target="_blank" rel="noopener noreffer">https://blog.langchain.dev/</a></p>
 </li>
 <li>
 <p>LangChain 中文入门教程</p>
-<p><a href="https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide" target="_blank" rel="noopener noreffer ">https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide</a></p>
+<p><a href="https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide" target="_blank" rel="noopener noreffer">https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide</a></p>
 </li>
 <li>
 <p>LangChain 保姆级别教程</p>
-<p><a href="https://dev.to/mikeyoung44/a-plain-english-guide-to-reverse-engineering-the-twitter-algorithm-with-langchain-activeloop-and-deepinfra-47fh" target="_blank" rel="noopener noreffer ">https://dev.to/mikeyoung44/a-plain-english-guide-to-reverse-engineering-the-twitter-algorithm-with-langchain-activeloop-and-deepinfra-47fh</a></p>
+<p><a href="https://dev.to/mikeyoung44/a-plain-english-guide-to-reverse-engineering-the-twitter-algorithm-with-langchain-activeloop-and-deepinfra-47fh" target="_blank" rel="noopener noreffer">https://dev.to/mikeyoung44/a-plain-english-guide-to-reverse-engineering-the-twitter-algorithm-with-langchain-activeloop-and-deepinfra-47fh</a></p>
 </li>
 </ul>
 <h2 id="一介绍">一、介绍</h2>
@@ -1234,46 +1242,46 @@
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="err">我们这是一个合作演讲，我负责讲解应用的开发过程，我的搭档负责讲解应用的部署。</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">我们这是一个合作演讲，我负责讲解应用的开发过程，我的搭档负责讲解应用的部署。
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="err">我们都知道云原生，随着大模型的横空出世，基于</span> <span class="n">LLM</span> <span class="err">的应用也催生出来了。我们正处在</span> <span class="n">AI</span> <span class="n">native</span> <span class="err">应用开发的前夜。因此在本次演讲中我介绍一种</span> <span class="n">AI</span> <span class="n">native</span> <span class="err">应用的框架</span> <span class="n">LangChain</span> <span class="err">。</span>
+</span></span><span class="line"><span class="cl">我们都知道云原生，随着大模型的横空出世，基于 LLM 的应用也催生出来了。我们正处在 AI native 应用开发的前夜。因此在本次演讲中我介绍一种 AI native 应用的框架 LangChain 。
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="err">首先我会介绍</span> <span class="err">什么是</span> <span class="n">LangChain</span><span class="err">。然后怎么利用</span> <span class="n">LangChain</span> <span class="err">写出一个</span> <span class="n">hello</span> <span class="n">world</span> <span class="err">级别的应用。</span>
+</span></span><span class="line"><span class="cl">首先我会介绍 什么是 LangChain。然后怎么利用 LangChain 写出一个 hello world 级别的应用。
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="err">接下来分别介绍</span> <span class="n">LangChain</span> <span class="err">中五种最重要的模块</span> <span class="n">Models</span> <span class="n">Prompts</span> <span class="n">Indexes</span> <span class="n">Chains</span> <span class="n">Agents</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl">接下来分别介绍 LangChain 中五种最重要的模块 Models Prompts Indexes Chains Agents。
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="err">每个模块我都会有一个简单的</span><span class="n">demo</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl">每个模块我都会有一个简单的demo。
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">Models模块我会介绍</span> <span class="n">LangChain</span> <span class="err">如何与市面上主流的大模型接入的方法。</span>
+</span></span><span class="line"><span class="cl">Models模块我会介绍 LangChain 如何与市面上主流的大模型接入的方法。
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">Prompts</span>  <span class="err">模块我会讲解</span> <span class="n">prompts</span> <span class="err">的书写技巧和原则，</span><span class="n">prompts</span> <span class="err">工程师的必备技能。</span>
+</span></span><span class="line"><span class="cl">Prompts  模块我会讲解 prompts 的书写技巧和原则，prompts 工程师的必备技能。
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">Indexes</span> <span class="err">模块</span> <span class="err">我会介绍</span> <span class="n">LangChain</span> <span class="err">与向量数据库的关系，如何利用向量数据库来构建私人知识库。</span>
+</span></span><span class="line"><span class="cl">Indexes 模块 我会介绍 LangChain 与向量数据库的关系，如何利用向量数据库来构建私人知识库。
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">Chains</span> <span class="err">模块</span> <span class="err">我会介绍</span> <span class="err">思维链</span> <span class="err">的概念，已经</span> <span class="err">如何将业务逻辑分解成</span> <span class="err">大模型理解的思维链。</span>
+</span></span><span class="line"><span class="cl">Chains 模块 我会介绍 思维链 的概念，已经 如何将业务逻辑分解成 大模型理解的思维链。
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">Agents</span> <span class="err">模块</span> <span class="err">我会介绍</span> <span class="err">怎么讲多个复杂的功能封装成一个</span> <span class="n">agent</span><span class="err">，大模型如何和外部工具结合使用。</span>
+</span></span><span class="line"><span class="cl">Agents 模块 我会介绍 怎么讲多个复杂的功能封装成一个 agent，大模型如何和外部工具结合使用。
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="err">我的搭档负责讲我写好的应用，编写成</span> <span class="n">Docker</span> <span class="err">镜像，并发布在</span> <span class="n">k8s</span> <span class="err">环境上使用体验。</span>
-</span></span><span class="line"><span class="cl"><span class="n">This</span> <span class="n">is</span> <span class="n">a</span> <span class="n">collaborative</span> <span class="n">speech</span> <span class="n">where</span> <span class="n">I</span> <span class="n">am</span> <span class="n">responsible</span> <span class="k">for</span> <span class="n">explaining</span> <span class="n">the</span> <span class="n">application</span> <span class="n">development</span> <span class="n">process</span><span class="p">,</span> <span class="ow">and</span> <span class="n">my</span> <span class="n">partner</span> <span class="n">is</span> <span class="n">responsible</span> <span class="k">for</span> <span class="n">explaining</span> <span class="n">the</span> <span class="n">deployment</span> <span class="n">process</span> <span class="n">of</span> <span class="n">the</span> <span class="n">application</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">我的搭档负责讲我写好的应用，编写成 Docker 镜像，并发布在 k8s 环境上使用体验。
+</span></span><span class="line"><span class="cl">This is a collaborative speech where I am responsible for explaining the application development process, and my partner is responsible for explaining the deployment process of the application.
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">We</span> <span class="n">all</span> <span class="n">know</span> <span class="n">about</span> <span class="n">cloud</span><span class="o">-</span><span class="n">native</span> <span class="n">computing</span><span class="o">.</span> <span class="n">With</span> <span class="n">the</span> <span class="n">emergence</span> <span class="n">of</span> <span class="n">large</span> <span class="n">models</span><span class="p">,</span> <span class="n">LLM</span><span class="o">-</span><span class="n">based</span> <span class="n">applications</span> <span class="n">have</span> <span class="n">also</span> <span class="n">emerged</span><span class="o">.</span> <span class="n">We</span> <span class="n">are</span> <span class="n">on</span> <span class="n">the</span> <span class="n">eve</span> <span class="n">of</span> <span class="n">AI</span> <span class="n">native</span> <span class="n">application</span> <span class="n">development</span><span class="o">.</span> <span class="n">Therefore</span><span class="p">,</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">speech</span><span class="p">,</span> <span class="n">I</span> <span class="n">will</span> <span class="n">introduce</span> <span class="n">a</span> <span class="n">LangChain</span> <span class="n">framework</span> <span class="k">for</span> <span class="n">AI</span> <span class="n">native</span> <span class="n">applications</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">We all know about cloud-native computing. With the emergence of large models, LLM-based applications have also emerged. We are on the eve of AI native application development. Therefore, in this speech, I will introduce a LangChain framework for AI native applications.
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">Firstly</span><span class="p">,</span> <span class="n">I</span> <span class="n">will</span> <span class="n">introduce</span> <span class="n">what</span> <span class="n">LangChain</span> <span class="n">is</span> <span class="ow">and</span> <span class="n">then</span> <span class="n">how</span> <span class="n">to</span> <span class="n">use</span> <span class="n">LangChain</span> <span class="n">to</span> <span class="n">write</span> <span class="n">a</span> <span class="s2">&#34;hello world&#34;</span> <span class="n">level</span> <span class="n">application</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">Firstly, I will introduce what LangChain is and then how to use LangChain to write a &#34;hello world&#34; level application.
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">Next</span><span class="p">,</span> <span class="n">I</span> <span class="n">will</span> <span class="n">introduce</span> <span class="n">the</span> <span class="n">five</span> <span class="n">most</span> <span class="n">important</span> <span class="n">modules</span> <span class="ow">in</span> <span class="n">LangChain</span><span class="p">:</span> <span class="n">Models</span><span class="p">,</span> <span class="n">Prompts</span><span class="p">,</span> <span class="n">Indexes</span><span class="p">,</span> <span class="n">Chains</span><span class="p">,</span> <span class="ow">and</span> <span class="n">Agents</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">Next, I will introduce the five most important modules in LangChain: Models, Prompts, Indexes, Chains, and Agents.
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">For</span> <span class="n">the</span> <span class="n">Models</span> <span class="n">module</span><span class="p">,</span> <span class="n">I</span> <span class="n">will</span> <span class="n">explain</span> <span class="n">how</span> <span class="n">LangChain</span> <span class="n">integrates</span> <span class="n">with</span> <span class="n">mainstream</span> <span class="n">large</span> <span class="n">models</span> <span class="n">on</span> <span class="n">the</span> <span class="n">market</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">For the Models module, I will explain how LangChain integrates with mainstream large models on the market.
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">For</span> <span class="n">the</span> <span class="n">Prompts</span> <span class="n">module</span><span class="p">,</span> <span class="n">I</span> <span class="n">will</span> <span class="n">explain</span> <span class="n">the</span> <span class="n">writing</span> <span class="n">skills</span> <span class="ow">and</span> <span class="n">principles</span> <span class="n">of</span> <span class="n">prompts</span><span class="p">,</span> <span class="n">which</span> <span class="n">are</span> <span class="n">essential</span> <span class="n">skills</span> <span class="k">for</span> <span class="n">prompt</span> <span class="n">engineers</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">For the Prompts module, I will explain the writing skills and principles of prompts, which are essential skills for prompt engineers.
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">For</span> <span class="n">the</span> <span class="n">Indexes</span> <span class="n">module</span><span class="p">,</span> <span class="n">I</span> <span class="n">will</span> <span class="n">introduce</span> <span class="n">the</span> <span class="n">relationship</span> <span class="n">between</span> <span class="n">LangChain</span> <span class="ow">and</span> <span class="n">vector</span> <span class="n">databases</span> <span class="ow">and</span> <span class="n">how</span> <span class="n">to</span> <span class="n">use</span> <span class="n">vector</span> <span class="n">databases</span> <span class="n">to</span> <span class="n">build</span> <span class="n">private</span> <span class="n">knowledge</span> <span class="n">bases</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">For the Indexes module, I will introduce the relationship between LangChain and vector databases and how to use vector databases to build private knowledge bases.
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">For</span> <span class="n">the</span> <span class="n">Chains</span> <span class="n">module</span><span class="p">,</span> <span class="n">I</span> <span class="n">will</span> <span class="n">explain</span> <span class="n">the</span> <span class="n">concept</span> <span class="n">of</span> <span class="n">thinking</span> <span class="n">chains</span> <span class="ow">and</span> <span class="n">how</span> <span class="n">to</span> <span class="k">break</span> <span class="n">down</span> <span class="n">business</span> <span class="n">logic</span> <span class="n">into</span> <span class="n">thinking</span> <span class="n">chains</span> <span class="n">that</span> <span class="n">large</span> <span class="n">models</span> <span class="n">can</span> <span class="n">understand</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">For the Chains module, I will explain the concept of thinking chains and how to break down business logic into thinking chains that large models can understand.
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">For</span> <span class="n">the</span> <span class="n">Agents</span> <span class="n">module</span><span class="p">,</span> <span class="n">I</span> <span class="n">will</span> <span class="n">explain</span> <span class="n">how</span> <span class="n">to</span> <span class="n">encapsulate</span> <span class="n">multiple</span> <span class="n">complex</span> <span class="n">functions</span> <span class="n">into</span> <span class="n">one</span> <span class="n">agent</span> <span class="ow">and</span> <span class="n">how</span> <span class="n">large</span> <span class="n">models</span> <span class="n">can</span> <span class="n">be</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">conjunction</span> <span class="n">with</span> <span class="n">external</span> <span class="n">tools</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">For the Agents module, I will explain how to encapsulate multiple complex functions into one agent and how large models can be used in conjunction with external tools.
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">My</span> <span class="n">partner</span> <span class="n">will</span> <span class="n">be</span> <span class="n">responsible</span> <span class="k">for</span> <span class="n">discussing</span> <span class="n">the</span> <span class="n">Docker</span> <span class="n">image</span> <span class="n">creation</span> <span class="n">process</span> <span class="k">for</span> <span class="n">the</span> <span class="n">application</span> <span class="n">I</span> <span class="n">have</span> <span class="n">written</span> <span class="ow">and</span> <span class="n">publishing</span> <span class="n">it</span> <span class="k">for</span> <span class="n">use</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">k8s</span> <span class="n">environment</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">My partner will be responsible for discussing the Docker image creation process for the application I have written and publishing it for use in a k8s environment.
 </span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
@@ -1281,13 +1289,15 @@
         <div class="post-info-line">
             <div class="post-info-mod">
                 <span>更新于 2023-06-07</span>
-            </div></div>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
                             <a class="link-to-markdown" href="/wuclass3/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/wuclass3/" data-title="吴恩达-基于LangChain的大语言模型应用开发" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/wuclass3/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/wuclass3/" data-title="吴恩达-基于LangChain的大语言模型应用开发" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/wuclass3/" data-title="吴恩达-基于LangChain的大语言模型应用开发"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/wuclass3/" data-title="吴恩达-基于LangChain的大语言模型应用开发"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/wuclass3/" data-title="吴恩达-基于LangChain的大语言模型应用开发" data-description="吴恩达老师的langchain课"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/wuclass3/" data-title="吴恩达-基于LangChain的大语言模型应用开发"><i class="fab fa-evernote fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/wuclass3/" data-title="吴恩达-基于LangChain的大语言模型应用开发" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/wuclass3/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/wuclass3/" data-title="吴恩达-基于LangChain的大语言模型应用开发" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/wuclass3/" data-title="吴恩达-基于LangChain的大语言模型应用开发"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/wuclass3/" data-title="吴恩达-基于LangChain的大语言模型应用开发"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/wuclass3/" data-title="吴恩达-基于LangChain的大语言模型应用开发" data-description="吴恩达老师的langchain课"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/wuclass3/" data-title="吴恩达-基于LangChain的大语言模型应用开发" data-description="吴恩达老师的langchain课"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/wuclass3/" data-title="吴恩达-基于LangChain的大语言模型应用开发"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
@@ -1299,19 +1309,29 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/wuclass2/" class="prev" rel="prev" title="吴恩达-使用ChatGPT API构建系统-笔记"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>吴恩达-使用ChatGPT API构建系统-笔记</a>
-            <a href="/podcast/" class="next" rel="next" title="播客-KubeSphere Talk 第八期">播客-KubeSphere Talk 第八期<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/wuclass2/" class="prev" rel="prev" title="吴恩达-使用ChatGPT API构建系统-笔记"><i class="fas fa-angle-left fa-fw"></i>吴恩达-使用ChatGPT API构建系统-笔记</a>
+            <a href="/podcast/" class="next" rel="next" title="播客-KubeSphere Talk 第八期">播客-KubeSphere Talk 第八期<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZMX6LNNGD"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-9ZMX6LNNGD');
+            </script>
         </div>
+        
     </footer></div>
 
         <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+                <i class="fas fa-arrow-up fa-fw"></i>
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+                <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

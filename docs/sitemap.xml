@@ -2,9 +2,9 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://zhuyaguang.github.io/how-to-live-healthy/</loc><lastmod>2024-11-17T21:19:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://zhuyaguang.github.io/posts/</loc><lastmod>2024-11-17T21:19:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://zhuyaguang.github.io/</loc><lastmod>2024-11-17T21:19:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://zhuyaguang.github.io/how-to-live-healthy/</loc><lastmod>2024-11-17T21:19:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://zhuyaguang.github.io/cursor/</loc><lastmod>2024-11-17T07:41:32&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://zhuyaguang.github.io/gitlab-runner-and-jenkins/</loc><lastmod>2024-07-17T16:52:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/grafana-alert/</loc><lastmod>2024-07-04T16:25:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

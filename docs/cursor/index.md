@@ -1,6 +1,9 @@
+# Cursor 和 Windsurf 使用技巧
+
+
+本来这篇文章是总结 Cursor 的使用技巧的，结果  Windsurf 送了两个月的会员，做程序员真幸福。左手  Cursor 右手 Windsurf 。
+
 # Cursor 使用技巧
-
-
 
 ## 新建 READNE.md 稳定文件
 
@@ -39,136 +42,13 @@
 
 
 
-
-
-# Cursor 101
+# Cursor 101 
 
 https://cursor101.com/zh?t=2r8SPbM9PoJIauvZQLujxA&s=09
 
 欢迎来到 Cursor 101。这里提供免费的 Cursor 入门教程和实用技巧，助您快速掌握这款强大的开发工具。
 
-[开始学习](https://cursor101.com/tutorial)[视频教程](https://cursor101.com/video)
 
-## Cursor 101
-
-每个人都能创造自己的作品
-
-### Cursor 教程
-
-全面的 Cursor 掌握指南
-
-[了解更多](https://cursor101.com/tutorial)
-
-### Cursor 启动模板
-
-各种框架的快速启动模板
-
-[了解更多](https://cursor101.com/starter)
-
-### Cursor 核心功能
-
-探索 Cursor 的强大功能
-
-[了解更多](https://cursor101.com/cursor)
-
-### Cursor 规则
-
-学习如何为您的工作流程自定义 Cursor
-
-[了解更多](https://cursor101.com/cursor/rules)
-
-### 视频教程
-
-精心策划的视频内容，增强您的学习体验
-
-[了解更多](https://cursor101.com/video)
-
-### AI 编程资源
-
-发现 AI 辅助编码的工具和替代方案
-
-[了解更多](https://cursor101.com/category)
-
-## 教程
-
-### [Cursor入门教程0 - 为什么放弃Github Copilot?](https://cursor101.com/tutorial/learn-cursor-0-why-use-cursor)
-
-[Cursor 和 Github Copilot的能力对比,有多来越多的人开始从Github Copilot转向Cursor，那么为什么Cursor会这么受欢迎呢？其实很多推荐Cursor的作者都没有说明白，Cursor到底比Github Copilot强在哪里。从本质上讲Cursor主要优势体现在两个方面。](https://cursor101.com/tutorial/learn-cursor-0-why-use-cursor)
-
-[阅读更多](https://cursor101.com/tutorial/learn-cursor-0-why-use-cursor)
-
-[**Cursor入门教程1 - Tab功能的使用**
-什么才是AI辅助编程最简单直接的形式？为什么不同的AI编辑器之前都实现了Tab功能，但是体验却差别这么大？Cursor的Tab功能实现了哪些能力呢？阅读更多](https://cursor101.com/tutorial/learn-cursor-tab)
-
-[**Cursor 入门教程2 - 你真的会用提示栏(Cmd K)功能了吗？**
-提示栏(Cmd K)功能是用户引导AI辅助编程怎么做的最快速方式，这弥补了 AI 不能完全理解用户意图的缺陷。本文会介绍 Cursor 提示栏(Cmd K)的基本功能，以及一些使用技巧。阅读更多](https://cursor101.com/tutorial/learn-cursor-cmdk)
-
-[**Cursor 入门教程3 - 使用 Chat(Cmd L)功能解决通用问题**
-Chat(Cmd+L) 功能适合什么样的使用场景？你知道怎么在 Chat 中合理的使用上下文吗？阅读更多](https://cursor101.com/tutorial/learn-cursor-chat)
-
-## 精选视频
-
-### Use This Prompt to Learn to Code with AI
-
-Learn how to effectively use AI to improve your coding skills.
-
-### Introduction to Cursor - AI Code Editor ✨
-
-Explore the capabilities of Cursor AI and how it's revolutionizing coding.
-
-### How To Build An AI Customer Service Bot
-
-Step-by-step guide to creating an AI-powered customer service bot.
-
-### Build a Perplexity Clone in 8min with AI
-
-Quick tutorial on building a Perplexity-like application using AI.
-
-### Build a basic Airbnb app with Cursor AI tricks
-
-Learn how to use Cursor AI to build a simple Airbnb-like application.
-
-### How to Build an AI Web App with Claude 3.5 and Cursor | Full Tutorial
-
-Discover advanced features and techniques in Cursor for power users.
-
-## 文章
-
-[更多文章 →](https://cursor101.com/article)
-
-### [掌握 bolt.new: 快速定制你的 Next.js 项目模板](https://cursor101.com/article/how-to-make-nextjs-starter)
-
-[→](https://cursor101.com/article/how-to-make-nextjs-starter)
-
-学习如何利用 bolt.new 快速创建定制化的 Next.js 项目模板，简化开发流程，提高效率。适合全栈开发者和 Next.js 初学者。
-
-### [Bolt.new 快速上手：无需安装的 AI 驱动全栈开发平台](https://cursor101.com/article/cursor-and-bolt-new)
-
-[→](https://cursor101.com/article/cursor-and-bolt-new)
-
-探索 Bolt.new：一个新兴的 AI 驱动开发沙盒，简化全栈 Web 应用的构建、编辑和部署流程。新手友好，无需安装。可以搭配 Cursor 本地开发。
-
-### [Cursor AI 快捷键：提升您的生产力](https://cursor101.com/article/cursor-ai-shortcuts)
-
-[→](https://cursor101.com/article/cursor-ai-shortcuts)
-
-学习必备的 Cursor AI 快捷键，提高您的编码效率并简化工作流程。
-
-### [Cursor Composer 教程](https://cursor101.com/article/cursor-composer)
-
-[→](https://cursor101.com/article/cursor-composer)
-
-Cursor composer是什么? Cursor Composer 一个 Cursor 的 Beta 功能。它超越了单行和单文件编辑的限制，让你能够同时编辑多个文件，根据高级指令生成整个应用程序。Composer 字面意思是作曲家，在 Cursor 中，它可以帮助你快速生成代码。它如同自动驾驶, 你只需要告诉它你要做什么，它就可以帮你完成。
-
-### [Cursor技能：简化多语言翻译](https://cursor101.com/article/cursor-skills-translate)
-
-[→](https://cursor101.com/article/cursor-skills-translate)
-
-探索如何使用Cursor的Composer功能来简化多语言翻译过程，包括提取翻译键和高效管理多个语言文件。
-
-### [Cursor vs GitHub Copilot：2024年AI编码助手对决](https://cursor101.com/article/cursor-vs-github-copilot-comparison)
-
-[→](https://cursor101.com/article/cursor-vs-github-copilot-comparison)
 
 详细比较Cursor和GitHub Copilot，两种领先的AI编码助手。探索它们的特性、功能和用户体验，以确定哪一个更适合您的编码需求
 

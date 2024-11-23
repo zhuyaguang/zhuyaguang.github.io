@@ -4,23 +4,23 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>Mlops 产品研习录 - 朱亚光的博客</title><meta name="Description" content="MLops 产品大汇总"><meta property="og:title" content="Mlops 产品研习录" />
 <meta property="og:description" content="MLops 产品大汇总" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhuyaguang.github.io/mlops/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://zhuyaguang.github.io/mlops/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-09T10:13:22+08:00" />
-<meta property="article:modified_time" content="2022-05-09T10:13:22+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2022-05-09T10:13:22+08:00" />
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png" /><meta name="twitter:title" content="Mlops 产品研习录"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Mlops 产品研习录"/>
 <meta name="twitter:description" content="MLops 产品大汇总"/>
-<meta name="twitter:site" content="@SurfingSnail"/>
-<meta name="application-name" content="My cool site">
-<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<meta name="application-name" content="朱亚光的博客">
+<meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/mlops/" /><link rel="prev" href="https://zhuyaguang.github.io/distributed-systems/" /><link rel="next" href="https://zhuyaguang.github.io/2021/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/mlops/" /><link rel="prev" href="https://zhuyaguang.github.io/distributed-systems/" /><link rel="next" href="https://zhuyaguang.github.io/2021/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -38,7 +38,7 @@
             },"description": "MLops 产品大汇总"
     }
     </script></head>
-    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
@@ -47,8 +47,9 @@
         </div>
         <div class="menu">
             <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="/reading/"> 书单 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a></div>
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
         </div>
     </div>
 </header><header class="mobile" id="header-mobile">
@@ -62,21 +63,28 @@
             </div>
         </div>
         <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="/reading/" title="">书单</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                <i class="fas fa-adjust fa-fw"></i>
             </a></div>
     </div>
-</header><main class="main">
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Mlops 产品研习录</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>朱亚光</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-05-09">2022-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1782 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  data-kept="">
+        </div><article class="page single"><h1 class="single-title animated flipInX">Mlops 产品研习录</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-09">2022-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1782 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
@@ -123,7 +131,7 @@
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>4.6号，听了公众号“M小姐研习录”的一个直播，<code>下一个infra 百亿美金战场在哪里？</code>。最近刚好也在用 kubeflow 做一些 infra 的工作。所以就对直播中提到的一些产品进行梳理和体验。</p>
-<p>关注M小姐的公众号是因为她的一篇关于Hashicorp（terraform的母公司，开发了一系列 Infra-as-code 的工具）总结性文章，写的非常好。<a href="https://mp.weixin.qq.com/s/Y2A7-Ui2nzUgodkEbgR6lQ" target="_blank" rel="noopener noreffer ">【年度公司】Hashicorp：160亿美金的开源标杆，15000字的研究笔记，2021年不遗憾</a></p>
+<p>关注M小姐的公众号是因为她的一篇关于Hashicorp（terraform的母公司，开发了一系列 Infra-as-code 的工具）总结性文章，写的非常好。<a href="https://mp.weixin.qq.com/s/Y2A7-Ui2nzUgodkEbgR6lQ" target="_blank" rel="noopener noreffer">【年度公司】Hashicorp：160亿美金的开源标杆，15000字的研究笔记，2021年不遗憾</a></p>
 <h2 id="一名词解释">一、名词解释</h2>
 <p>MLOps：Machine learning + DevOps + Data Engineering = MLOps</p>
 <p><img
@@ -136,7 +144,7 @@
         title="image-20220811091106723" /></p>
 <p>CD4ML：机器学习的持续交付</p>
 <p>CT：Continuous Training</p>
-<h2 id="二databrickshttpsdatabrickscom">二、<a href="https://databricks.com/" target="_blank" rel="noopener noreffer ">databricks</a></h2>
+<h2 id="二databrickshttpsdatabrickscom">二、<a href="https://databricks.com/" target="_blank" rel="noopener noreffer">databricks</a></h2>
 <blockquote>
 <p>All your data, analytics and AI on one platform</p>
 </blockquote>
@@ -147,31 +155,31 @@
 <blockquote>
 <p>An open source platform for the machine learning lifecycle</p>
 </blockquote>
-<p>和 kubeflow 类似的产品，可以看看两者的差别 <a href="https://medium.com/weareservian/the-cheesy-analogy-of-mlflow-and-kubeflow-715a45580fbe" target="_blank" rel="noopener noreffer ">THe Cheesy Analogy of MLflow and Kubeflow</a></p>
-<p>具体使用实践，可以参考这个系列文章 <a href="https://medium.com/tag/mlflow-101" target="_blank" rel="noopener noreffer ">mlflow 101</a></p>
-<p><a href="https://mlflow.org/docs/latest/quickstart.html" target="_blank" rel="noopener noreffer ">Mlfow 官方文档</a></p>
+<p>和 kubeflow 类似的产品，可以看看两者的差别 <a href="https://medium.com/weareservian/the-cheesy-analogy-of-mlflow-and-kubeflow-715a45580fbe" target="_blank" rel="noopener noreffer">THe Cheesy Analogy of MLflow and Kubeflow</a></p>
+<p>具体使用实践，可以参考这个系列文章 <a href="https://medium.com/tag/mlflow-101" target="_blank" rel="noopener noreffer">mlflow 101</a></p>
+<p><a href="https://mlflow.org/docs/latest/quickstart.html" target="_blank" rel="noopener noreffer">Mlfow 官方文档</a></p>
 <h2 id="三argovolcanoseldonbentoml搭建云原生机器学习平台">三、argo+volcano+(seldon/BentoML)搭建云原生机器学习平台</h2>
 <h3 id="argo-cd">Argo CD</h3>
 <p>从代码到环境的部署</p>
-<p><a href="https://argo-cd.readthedocs.io/en/stable/" target="_blank" rel="noopener noreffer ">argo cd官方文档</a></p>
-<p><a href="https://mp.weixin.qq.com/s/Hgp7N_HPkpFjfP_qcl4Fzg" target="_blank" rel="noopener noreffer ">GitOps 持续部署工具 Argo CD 初体验</a></p>
+<p><a href="https://argo-cd.readthedocs.io/en/stable/" target="_blank" rel="noopener noreffer">argo cd官方文档</a></p>
+<p><a href="https://mp.weixin.qq.com/s/Hgp7N_HPkpFjfP_qcl4Fzg" target="_blank" rel="noopener noreffer">GitOps 持续部署工具 Argo CD 初体验</a></p>
 <h3 id="argo-workflow">Argo workflow</h3>
-<p><a href="https://argoproj.github.io/argo-workflows/" target="_blank" rel="noopener noreffer ">argo workflow官方文档</a></p>
-<p><a href="https://cloud.tencent.com/developer/article/1810139" target="_blank" rel="noopener noreffer ">Argo Workflows-Kubernetes的工作流引擎</a></p>
+<p><a href="https://argoproj.github.io/argo-workflows/" target="_blank" rel="noopener noreffer">argo workflow官方文档</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1810139" target="_blank" rel="noopener noreffer">Argo Workflows-Kubernetes的工作流引擎</a></p>
 <blockquote>
 <p>1.最新版本的argo-server有问题，回退到V3.2.11</p>
 <p>2.修改 workflow-controller-configmap 和 artifact-repositories 的 minio endpoint地址 为cluster IP。</p>
 <p>kubectl -n argo port-forward &ndash;address 0.0.0.0 svc/argo-server 2746:2746</p>
 </blockquote>
 <h3 id="volcano">volcano</h3>
-<p><a href="https://volcano.sh/zh/" target="_blank" rel="noopener noreffer ">volcano文档</a></p>
+<p><a href="https://volcano.sh/zh/" target="_blank" rel="noopener noreffer">volcano文档</a></p>
 <h3 id="seldon">Seldon</h3>
 <p>An open source platform to deploy your machine learning models on Kubernetes at massive scale.</p>
-<p><a href="https://docs.seldon.io/projects/seldon-core/en/latest/" target="_blank" rel="noopener noreffer ">seldon 官方文档</a></p>
+<p><a href="https://docs.seldon.io/projects/seldon-core/en/latest/" target="_blank" rel="noopener noreffer">seldon 官方文档</a></p>
 <p>安装 seldom</p>
 <ul>
 <li>安装 helm</li>
-<li><a href="https://istio.io/latest/docs/setup/install/helm/" target="_blank" rel="noopener noreffer ">安装istio</a></li>
+<li><a href="https://istio.io/latest/docs/setup/install/helm/" target="_blank" rel="noopener noreffer">安装istio</a></li>
 </ul>
 <blockquote>
 <p>seldon 对 pytorch 支持不太友好呢</p>
@@ -180,13 +188,13 @@
 <blockquote>
 <p>Simplify Model Deployment</p>
 </blockquote>
-<p><a href="https://docs.bentoml.org/en/latest/quickstart.html" target="_blank" rel="noopener noreffer ">BentoML 官网</a></p>
+<p><a href="https://docs.bentoml.org/en/latest/quickstart.html" target="_blank" rel="noopener noreffer">BentoML 官网</a></p>
 <h2 id="四其它产品">四、其它产品</h2>
 <h3 id="metaflow"><strong>Metaflow</strong></h3>
 <blockquote>
 <p>A framework for real-life data science</p>
 </blockquote>
-<p><a href="https://docs.metaflow.org/" target="_blank" rel="noopener noreffer ">Metaflow官网</a></p>
+<p><a href="https://docs.metaflow.org/" target="_blank" rel="noopener noreffer">Metaflow官网</a></p>
 <h3 id="prefect">Prefect</h3>
 <h3 id="snorkel">snorkel</h3>
 <blockquote>
@@ -199,58 +207,60 @@
 <h3 id="valohai">valohai</h3>
 <h2 id="五付费产品">五、付费产品</h2>
 <h3 id="aiflow">AIFLOW</h3>
-<p><a href="https://www.aiflow.ltd/" target="_blank" rel="noopener noreffer ">https://www.aiflow.ltd/</a></p>
+<p><a href="https://www.aiflow.ltd/" target="_blank" rel="noopener noreffer">https://www.aiflow.ltd/</a></p>
 <h3 id="neptune">Neptune</h3>
-<p><a href="https://neptune.ai/" target="_blank" rel="noopener noreffer ">https://neptune.ai/</a></p>
+<p><a href="https://neptune.ai/" target="_blank" rel="noopener noreffer">https://neptune.ai/</a></p>
 <h2 id="六平台">六、平台</h2>
-<p>1.<a href="https://github.com/tencentmusic/cube-studio" target="_blank" rel="noopener noreffer ">Cube Studio</a></p>
+<p>1.<a href="https://github.com/tencentmusic/cube-studio" target="_blank" rel="noopener noreffer">Cube Studio</a></p>
 <p>cube是tme开源的一站式云原生机器学习平台</p>
-<p>2.<a href="https://mp.weixin.qq.com/s/--pWXB1FL8Qf_9mIrVMvYA" target="_blank" rel="noopener noreffer ">火山引擎大规模机器学习平台架构设计与应用实践</a></p>
-<p>3.<a href="https://octopus.openi.org.cn/docs/introduction/intro/" target="_blank" rel="noopener noreffer ">鹏城实验室启智章鱼平台</a></p>
+<p>2.<a href="https://mp.weixin.qq.com/s/--pWXB1FL8Qf_9mIrVMvYA" target="_blank" rel="noopener noreffer">火山引擎大规模机器学习平台架构设计与应用实践</a></p>
+<p>3.<a href="https://octopus.openi.org.cn/docs/introduction/intro/" target="_blank" rel="noopener noreffer">鹏城实验室启智章鱼平台</a></p>
 <p>Octopus是一款面向多计算场景的一站式融合计算平台。平台主要针对AI、HPC等场景的计算与资源管理的需求来设计，向算力使用用户提供了对数据、算法、镜像、模型与算力等资源的管理与使用功能，方便用户一站式构建计算环境，实现计算。同时，向集群管理人员提供了集群资源管理与监控，计算任务管理与监控等功能，方便集群管理人员对整体系统进行操作与分析。</p>
 <p>Octopus平台底层基于容器编排平台Kubernetes ，充分利用容器敏捷、轻量、隔离等特点来实现计算场景多样性的需求。</p>
-<p>4.<a href="https://mp.weixin.qq.com/s/UckkV8kFfPE6JZjui_bbtA" target="_blank" rel="noopener noreffer ">百度AI原生云实践: 基于容器云打造 AI 开发基础设施</a></p>
-<p>5.<a href="https://mp.weixin.qq.com/s/y38qjIBn4w0_HPH_3pqhcw" target="_blank" rel="noopener noreffer ">趋动科技GPU池化技术</a></p>
+<p>4.<a href="https://mp.weixin.qq.com/s/UckkV8kFfPE6JZjui_bbtA" target="_blank" rel="noopener noreffer">百度AI原生云实践: 基于容器云打造 AI 开发基础设施</a></p>
+<p>5.<a href="https://mp.weixin.qq.com/s/y38qjIBn4w0_HPH_3pqhcw" target="_blank" rel="noopener noreffer">趋动科技GPU池化技术</a></p>
 <p>GPU与CPU的解耦是智算中心建设的目标之一。GPU虚拟化以及GPU资源池建设的意义在于解耦AI应用与GPU服务的深度绑定，把 GPU 的静态分配变成动态分配，GPU 使用率获得4倍以上提升。借助OrionX的池化能力，AI应用无需关注部署的节点有没有GPU资源，只要在智算中心网络可达，均可以通过OrionX远程调用的功能，在整个智算中心范围内调用符合要求的GPU资源进行AI计算。</p>
-<p>6.<a href="https://datacanvas.io/" target="_blank" rel="noopener noreffer ">九章云极 DataCanvas</a></p>
+<p>6.<a href="https://datacanvas.io/" target="_blank" rel="noopener noreffer">九章云极 DataCanvas</a></p>
 <p>数据智能基础软件供应商。目前九章云极 DataCanvas 主要在算法平台和实时数据上发力。</p>
-<p><a href="https://mp.weixin.qq.com/s/3MsW03DEz-Wh-Fv3wJWMpA" target="_blank" rel="noopener noreffer ">AI落地的新范式，就“藏”在下一场软件基础设施的重大升级里</a></p>
+<p><a href="https://mp.weixin.qq.com/s/3MsW03DEz-Wh-Fv3wJWMpA" target="_blank" rel="noopener noreffer">AI落地的新范式，就“藏”在下一场软件基础设施的重大升级里</a></p>
 <p>7.灵雀云</p>
 <p>灵雀云企业级 MLOPS 解决方案中，依托于灵雀云 ACP 以及多项企业级容器平台产品之上，集成 Kubefow, SQLFlow 等组件将提供开箱即用，工业生产级别的 MLOPS 平台。我们希望能逐步开放以上能力，包括 4-Flow （Kubeflow, SQLFlow, MLFlow, ParaFlow），推动MLOPS 技术落地进程。</p>
-<p><a href="https://mp.weixin.qq.com/s/rFmrtfZ9nOhHm1mFUL6bcw" target="_blank" rel="noopener noreffer ">https://mp.weixin.qq.com/s/rFmrtfZ9nOhHm1mFUL6bcw</a></p>
+<p><a href="https://mp.weixin.qq.com/s/rFmrtfZ9nOhHm1mFUL6bcw" target="_blank" rel="noopener noreffer">https://mp.weixin.qq.com/s/rFmrtfZ9nOhHm1mFUL6bcw</a></p>
 <h2 id="七资料">七、资料</h2>
 <h3 id="文章">文章</h3>
-<p><a href="https://www.zhihu.com/column/c_1488835248573706240" target="_blank" rel="noopener noreffer ">AI工程与实践</a></p>
+<p><a href="https://www.zhihu.com/column/c_1488835248573706240" target="_blank" rel="noopener noreffer">AI工程与实践</a></p>
 <p>MindSpore架构师 王磊的文章</p>
 <h3 id="演讲分享">演讲分享</h3>
-<p><a href="https://www.youtube.com/channel/UCSBfllj_pRPB36TAZJfjXWg" target="_blank" rel="noopener noreffer ">MLOps London</a></p>
-<p><a href="https://qcon.infoq.cn/2022/guangzhou/presentation/4811" target="_blank" rel="noopener noreffer ">数算工程一体化机器学习平台助力 AI 算法敏捷开发</a></p>
-<p><a href="https://qcon.infoq.cn/2022/guangzhou/presentation/4835" target="_blank" rel="noopener noreffer ">华为 AI 工程化探索与实践之一站式 MLOps 平台</a></p>
-<p><a href="https://mp.weixin.qq.com/s/2QEjAx3adB_PItJcn35qag" target="_blank" rel="noopener noreffer ">机器学习工程化，企业 AI 的下一个起点</a></p>
-<p><a href="https://mp.weixin.qq.com/s/VkVd0AOQwfAUiMYFmO63og" target="_blank" rel="noopener noreffer ">Flink在AI流程中的应用</a></p>
-<p><a href="https://mp.weixin.qq.com/s/U4zaB-JpOa9455aPQOlN3A" target="_blank" rel="noopener noreffer ">理解云原生MLOps技术</a></p>
+<p><a href="https://www.youtube.com/channel/UCSBfllj_pRPB36TAZJfjXWg" target="_blank" rel="noopener noreffer">MLOps London</a></p>
+<p><a href="https://qcon.infoq.cn/2022/guangzhou/presentation/4811" target="_blank" rel="noopener noreffer">数算工程一体化机器学习平台助力 AI 算法敏捷开发</a></p>
+<p><a href="https://qcon.infoq.cn/2022/guangzhou/presentation/4835" target="_blank" rel="noopener noreffer">华为 AI 工程化探索与实践之一站式 MLOps 平台</a></p>
+<p><a href="https://mp.weixin.qq.com/s/2QEjAx3adB_PItJcn35qag" target="_blank" rel="noopener noreffer">机器学习工程化，企业 AI 的下一个起点</a></p>
+<p><a href="https://mp.weixin.qq.com/s/VkVd0AOQwfAUiMYFmO63og" target="_blank" rel="noopener noreffer">Flink在AI流程中的应用</a></p>
+<p><a href="https://mp.weixin.qq.com/s/U4zaB-JpOa9455aPQOlN3A" target="_blank" rel="noopener noreffer">理解云原生MLOps技术</a></p>
 <h3 id="公众号">公众号</h3>
 <ul>
-<li><strong><a href="https://mp.weixin.qq.com/s/Bh-_9N4JY3MvbJ5Iw6bWwQ" target="_blank" rel="noopener noreffer ">MLOps工程实践</a></strong></li>
+<li><strong><a href="https://mp.weixin.qq.com/s/Bh-_9N4JY3MvbJ5Iw6bWwQ" target="_blank" rel="noopener noreffer">MLOps工程实践</a></strong></li>
 </ul>
 <h3 id="课程">课程</h3>
-<p><a href="https://fullstackdeeplearning.com/course/2022/" target="_blank" rel="noopener noreffer ">https://fullstackdeeplearning.com/course/2022/</a></p>
+<p><a href="https://fullstackdeeplearning.com/course/2022/" target="_blank" rel="noopener noreffer">https://fullstackdeeplearning.com/course/2022/</a></p>
 <h3 id="社区">社区</h3>
-<p><a href="https://neptune.ai/blog" target="_blank" rel="noopener noreffer ">https://neptune.ai/blog</a></p>
-<p><a href="https://valohai.com/mlops/" target="_blank" rel="noopener noreffer ">https://valohai.com/mlops/</a></p>
-<p><a href="https://about.mlreef.com/blog/" target="_blank" rel="noopener noreffer ">https://about.mlreef.com/blog/</a></p>
-<p><a href="https://ml-ops.org/" target="_blank" rel="noopener noreffer ">https://ml-ops.org/</a></p></div><div class="post-footer" id="post-footer">
+<p><a href="https://neptune.ai/blog" target="_blank" rel="noopener noreffer">https://neptune.ai/blog</a></p>
+<p><a href="https://valohai.com/mlops/" target="_blank" rel="noopener noreffer">https://valohai.com/mlops/</a></p>
+<p><a href="https://about.mlreef.com/blog/" target="_blank" rel="noopener noreffer">https://about.mlreef.com/blog/</a></p>
+<p><a href="https://ml-ops.org/" target="_blank" rel="noopener noreffer">https://ml-ops.org/</a></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
                 <span>更新于 2022-05-09</span>
-            </div></div>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
                             <a class="link-to-markdown" href="/mlops/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/mlops/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-description="MLops 产品大汇总"><i class="fab fa-blogger fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录"><i class="fab fa-evernote fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/mlops/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-description="MLops 产品大汇总"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录" data-description="MLops 产品大汇总"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/mlops/" data-title="Mlops 产品研习录"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
@@ -262,19 +272,29 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/distributed-systems/" class="prev" rel="prev" title="分布式系统学习"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>分布式系统学习</a>
-            <a href="/2021/" class="next" rel="next" title="2021年总结">2021年总结<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/distributed-systems/" class="prev" rel="prev" title="分布式系统学习"><i class="fas fa-angle-left fa-fw"></i>分布式系统学习</a>
+            <a href="/2021/" class="next" rel="next" title="2021年总结">2021年总结<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZMX6LNNGD"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-9ZMX6LNNGD');
+            </script>
         </div>
+        
     </footer></div>
 
         <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+                <i class="fas fa-arrow-up fa-fw"></i>
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+                <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
