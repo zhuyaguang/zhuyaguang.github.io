@@ -3,6 +3,7 @@ title: "Grafana Alert"
 date: 2024-07-04T16:25:33+08:00
 draft: true
 description: "Grafana 告警的使用"
+featuredImage: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Grafana_logo.svg/1200px-Grafana_logo.svg.png
 ---
 
 ## 部署 grafana

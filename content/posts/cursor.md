@@ -3,6 +3,7 @@ title: "Cursor 和 Windsurf 使用技巧"
 date: 2024-11-17T07:41:32+08:00
 draft: true
 description: " 真的很强"
+featuredImage: https://i.ytimg.com/vi/AD4BLcJf5Bg/maxresdefault.jpg
 ---
 
 本来这篇文章是总结 Cursor 的使用技巧的，结果  Windsurf 送了两个月的会员，做程序员真幸福。左手  Cursor 右手 Windsurf 。

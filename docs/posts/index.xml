@@ -19,21 +19,27 @@
     <pubDate>Sun, 17 Nov 2024 07:41:32 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/cursor/</guid>
-    <description><![CDATA[本来这篇文章是总结 Cursor 的使用技巧的，结果 Windsurf 送了两个月的会员，做程序员真幸福。左手 Cursor 右手 Windsurf 。 Cursor 使用技巧 新建 READNE.md 稳定文件 包含项目每一个细节 核心功能 目]]></description>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://i.ytimg.com/vi/AD4BLcJf5Bg/maxresdefault.jpg" referrerpolicy="no-referrer">
+            </div>本来这篇文章是总结 Cursor 的使用技巧的，结果 Windsurf 送了两个月的会员，做程序员真幸福。左手 Cursor 右手 Windsurf 。 Cursor 使用技巧 新建 READNE.md 稳定文件 包含项目每一个细节 核心功能 目]]></description>
 </item><item>
     <title>gitlab runner 与 Jenkins 的使用</title>
     <link>https://zhuyaguang.github.io/gitlab-runner-and-jenkins/</link>
     <pubDate>Wed, 17 Jul 2024 16:52:57 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/gitlab-runner-and-jenkins/</guid>
-    <description><![CDATA[gitlab runner 与 Jenkins 的使用 部署runner 1 2 3 4 5 6 7 8 sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64 sudo chmod +x /usr/local/bin/gitlab-runner sudo useradd --comment &#39;GitLab Runner&#39; --create-home gitlab-runner --shell /bin/bash sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner sudo gitlab-runner start 参考链接 使用 runner 注册 在项目中注册 在群组中注]]></description>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPKPPRN0kcIx8lMzyILYdk7u1Y9oTDimGN_Q&amp;s" referrerpolicy="no-referrer">
+            </div>gitlab runner 与 Jenkins 的使用 部署runner 1 2 3 4 5 6 7 8 sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64 sudo chmod +x /usr/local/bin/gitlab-runner sudo useradd --comment &#39;GitLab Runner&#39; --create-home gitlab-runner --shell /bin/bash sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner sudo gitlab-runner start 参考链接 使用 runner 注册 在项目中注册 在群组中注]]></description>
 </item><item>
     <title>Grafana Alert</title>
     <link>https://zhuyaguang.github.io/grafana-alert/</link>
     <pubDate>Thu, 04 Jul 2024 16:25:33 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/grafana-alert/</guid>
-    <description><![CDATA[部署 grafana 1 docker run -d -p 3000:3000 --name=grafana grafana/grafana-enterprise 告警规则 测试环境地址：http://10.11.140.85:3000/d/rYdddlPWk/node-export]]></description>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Grafana_logo.svg/1200px-Grafana_logo.svg.png" referrerpolicy="no-referrer">
+            </div>部署 grafana 1 docker run -d -p 3000:3000 --name=grafana grafana/grafana-enterprise 告警规则 测试环境地址：http://10.11.140.85:3000/d/rYdddlPWk/node-export]]></description>
 </item><item>
     <title>使用 Prometheus 监控 KubeEdge 边缘节点</title>
     <link>https://zhuyaguang.github.io/kubeedge-on-prometheus/</link>

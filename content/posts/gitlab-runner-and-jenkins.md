@@ -3,6 +3,7 @@ title: "gitlab runner 与 Jenkins 的使用"
 date: 2024-07-17T16:52:57+08:00
 draft: true
 description: "gitlab runner 与 Jenkins 的使用"
+featuredImage: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPKPPRN0kcIx8lMzyILYdk7u1Y9oTDimGN_Q&s
 ---
 
 # gitlab runner 与 Jenkins 的使用
