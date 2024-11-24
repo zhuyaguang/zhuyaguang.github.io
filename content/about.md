@@ -45,5 +45,5 @@ draft: false
 
 ### Status
 
-- 🌱 I’m currently learning AI native and LLM 
+- 🌱 I’m currently working on spacecomputing 
 
