@@ -5,6 +5,8 @@ draft: true
 description: " AI IDE开始卷起来了"
 featuredImage: https://i.ytimg.com/vi/AD4BLcJf5Bg/maxresdefault.jpg
 ---
+<!--more-->
+
 
 本来这篇文章是总结 Cursor 的使用技巧的，结果  Windsurf 送了两个月的会员，做程序员真幸福。左手  Cursor 右手 Windsurf 。
 

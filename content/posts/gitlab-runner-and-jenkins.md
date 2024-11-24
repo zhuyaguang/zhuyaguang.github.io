@@ -6,6 +6,8 @@ description: "gitlab runner 与 Jenkins 的使用"
 featuredImage: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPKPPRN0kcIx8lMzyILYdk7u1Y9oTDimGN_Q&s
 ---
 
+<!--more-->
+
 # gitlab runner 与 Jenkins 的使用
 
 ## 部署runner

@@ -1,6 +1,8 @@
 # 无需魔法，快来体验 Claude 3 ，GPT 4在他面前就是弟弟
 
 
+<!--more-->
+
 ### 第一步访问链接
 
 https://lab.amazoncloud.cn/demo/qrcode?trk=UG  

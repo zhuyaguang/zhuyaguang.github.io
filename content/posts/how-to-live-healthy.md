@@ -5,6 +5,7 @@ draft: true
 description: "自律让我自由"
 featuredImage: https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/11732403575_.pic.jpg
 ---
+<!--more-->
 
 # 人到中年，注意养生
 

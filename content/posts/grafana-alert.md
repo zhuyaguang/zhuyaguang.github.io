@@ -6,6 +6,8 @@ description: "Grafana 告警的使用"
 featuredImage: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Grafana_logo.svg/1200px-Grafana_logo.svg.png
 ---
 
+<!--more-->
+
 ## 部署 grafana
 
 ```

@@ -1,5 +1,7 @@
 # Cursor 和 Windsurf 使用技巧
 
+<!--more-->
+
 
 本来这篇文章是总结 Cursor 的使用技巧的，结果  Windsurf 送了两个月的会员，做程序员真幸福。左手  Cursor 右手 Windsurf 。
 

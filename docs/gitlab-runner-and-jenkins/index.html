@@ -412,8 +412,7 @@ gitlab-ctl restart</p>
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run -d -u <span class="m">0</span> -p 8080:8080 -p 50000:50000 -v /home/jenkins/:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker  -v  /root/go:/root/go --privileged  jenkins/jenkins
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>通过挂载二进制方式，让docker 的Jenkins 可以使用 docker 和 golang</p>
-</div><div class="post-footer" id="post-footer">
+</div><p>通过挂载二进制方式，让docker 的Jenkins 可以使用 docker 和 golang</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

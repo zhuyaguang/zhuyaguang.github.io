@@ -1,6 +1,8 @@
 # gitlab runner 与 Jenkins 的使用
 
 
+<!--more-->
+
 # gitlab runner 与 Jenkins 的使用
 
 ## 部署runner

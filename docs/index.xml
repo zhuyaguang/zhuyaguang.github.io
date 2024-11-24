@@ -14,7 +14,7 @@
     <guid>https://zhuyaguang.github.io/how-to-live-healthy/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/11732403575_.pic.jpg" referrerpolicy="no-referrer">
-            </div>人到中年，注意养生 最近越来越觉得很累，感觉很有必要从生理和心理上做一些调整. 心态是最重要的，有时候心态好的时候感觉身体充满了能量，正是当打之]]></description>
+            </div>自律让我自由]]></description>
 </item><item>
     <title>Cursor 和 Windsurf 使用技巧</title>
     <link>https://zhuyaguang.github.io/cursor/</link>
@@ -23,7 +23,7 @@
     <guid>https://zhuyaguang.github.io/cursor/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://i.ytimg.com/vi/AD4BLcJf5Bg/maxresdefault.jpg" referrerpolicy="no-referrer">
-            </div>本来这篇文章是总结 Cursor 的使用技巧的，结果 Windsurf 送了两个月的会员，做程序员真幸福。左手 Cursor 右手 Windsurf 。 Cursor 使用技巧 新建 READNE.md 稳定文件 包含项目每一个细节 核心功能 目]]></description>
+            </div> AI IDE开始卷起来了]]></description>
 </item><item>
     <title>gitlab runner 与 Jenkins 的使用</title>
     <link>https://zhuyaguang.github.io/gitlab-runner-and-jenkins/</link>
@@ -32,7 +32,7 @@
     <guid>https://zhuyaguang.github.io/gitlab-runner-and-jenkins/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPKPPRN0kcIx8lMzyILYdk7u1Y9oTDimGN_Q&amp;s" referrerpolicy="no-referrer">
-            </div>gitlab runner 与 Jenkins 的使用 部署runner 1 2 3 4 5 6 7 8 sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64 sudo chmod +x /usr/local/bin/gitlab-runner sudo useradd --comment &#39;GitLab Runner&#39; --create-home gitlab-runner --shell /bin/bash sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner sudo gitlab-runner start 参考链接 使用 runner 注册 在项目中注册 在群组中注]]></description>
+            </div>gitlab runner 与 Jenkins 的使用]]></description>
 </item><item>
     <title>Grafana Alert</title>
     <link>https://zhuyaguang.github.io/grafana-alert/</link>
@@ -41,7 +41,7 @@
     <guid>https://zhuyaguang.github.io/grafana-alert/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Grafana_logo.svg/1200px-Grafana_logo.svg.png" referrerpolicy="no-referrer">
-            </div>部署 grafana 1 docker run -d -p 3000:3000 --name=grafana grafana/grafana-enterprise 告警规则 测试环境地址：http://10.11.140.85:3000/d/rYdddlPWk/node-export]]></description>
+            </div>Grafana 告警的使用]]></description>
 </item><item>
     <title>使用 Prometheus 监控 KubeEdge 边缘节点</title>
     <link>https://zhuyaguang.github.io/kubeedge-on-prometheus/</link>
@@ -62,7 +62,7 @@
     <pubDate>Mon, 25 Mar 2024 16:42:03 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/2024meetup/</guid>
-    <description><![CDATA[3.23 云原生 Meetup 2024 第一场就做了讲师 6.15 非结构化数据 Meetup 6.22 KubeBlocks X Alluxio meetup 10.19 CSDN 1024程序员节]]></description>
+    <description><![CDATA[2024搞天基的一年]]></description>
 </item><item>
     <title>使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态</title>
     <link>https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/</link>
@@ -76,7 +76,7 @@
     <pubDate>Thu, 21 Mar 2024 09:07:51 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/</guid>
-    <description><![CDATA[在轨验证方案 应用的部署流程图 在 Jetson 上 如果部署 GPU 类型的应用，需要有 NVIDIA Container Runtime 支持。 NVIDIA Container Runtime 环境配置 各个组件的版本信息如下： 组件 版本 kubesphere 3.4.1 containerd 1.7.2 k8s 1.26.0 kubeedge 1.15.1 Je]]></description>
+    <description><![CDATA[]]></description>
 </item><item>
     <title>Kubeedge 代码解析（更新中）</title>
     <link>https://zhuyaguang.github.io/kubeedge-code/</link>

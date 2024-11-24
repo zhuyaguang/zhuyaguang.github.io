@@ -6,7 +6,7 @@ description: "Azure OpenAI的使用方法"
 ---
 
 
-
+<!--more-->
 
 
 ## 第一步：注册Azure
