@@ -42,6 +42,6 @@
 
 ### Status
 
-- 🌱 I’m currently working on spacecomputing 
+- 🌱 I’m currently working on spacecomputing and edge computing 
 
 
