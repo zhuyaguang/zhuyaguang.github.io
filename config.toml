@@ -350,29 +350,7 @@ theme = "Loveit"
       [params.page.seo.publisher]
         name = ""
         logoUrl = ""
-    # 添加特色图片的显示配置
-    [params.page.featuredImage]
-      enable = true
-      # 是否只在文章页面显示特色图片
-      onlyPost = false
-      # 是否显示特色图片的标题
-      title = false
-      # 特色图片的位置 ("left", "right", "center")
-      position = "center"
-      # 在手机端是否显示特色图片
-      shown = true
-      # 是否使用相对于主页的永久链接
-      linked = true
-      # 特色图片的宽度，建议设置一个固定值
-      width = "100%"
-      # 特色图片的高度，建议设置一个固定值
-      height = "360px"
-      # 特色图片的最大宽度，如果未设置则使用原始图片宽度
-      maxWidth = "960px"
-      # 特色图片的最大高度，如果未设置则使用原始图片高度
-      maxHeight = "360px"
-
-  # TypeIt 配置
+    #  TypeIt 配置
   [params.typeit]
     # 每一步的打字速度 (单位是毫秒)
     speed = 100

@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态 - 朱亚光的博客</title><meta name="Description" content="true"><meta property="og:title" content="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态" />
+<meta property="og:description" content="KubeSphere 边缘节点的可观测性 KubeSphere 愿景是打造一个以 Kubernetes 为内核的云原生分布式操作系统，它的架构可以非常方便地使第三方应用与云原生生态组件进行即插即用（plu" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-21T14:19:33+08:00" />
+<meta property="article:modified_time" content="2024-03-21T14:19:33+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
+
+<meta name="twitter:title" content="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态"/>
+<meta name="twitter:description" content="KubeSphere 边缘节点的可观测性 KubeSphere 愿景是打造一个以 Kubernetes 为内核的云原生分布式操作系统，它的架构可以非常方便地使第三方应用与云原生生态组件进行即插即用（plu"/>
+<meta name="application-name" content="朱亚光的博客">
+<meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" /><link rel="prev" href="https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/" /><link rel="next" href="https://zhuyaguang.github.io/2024meetup/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/"
+        },"genre": "posts","wordcount":  3439 ,
+        "url": "https:\/\/zhuyaguang.github.io\/prometheus-jetson-on-kubeedge-in-kubesphere\/","datePublished": "2024-03-21T14:19:33+08:00","dateModified": "2024-03-21T14:19:33+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "朱亚光"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="/reading/"> 书单 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="/reading/" title="">书单</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3439 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#kubesphere-边缘节点的可观测性">KubeSphere 边缘节点的可观测性</a></li>
+        <li><a href="#部署-k8s-环境">部署 k8s 环境</a></li>
+        <li><a href="#部署--kubeedge-环境">部署  KubeEdge 环境</a>
+          <ul>
+            <li><a href="#开启边缘节点日志查询功能">开启边缘节点日志查询功能</a></li>
+          </ul>
+        </li>
+        <li><a href="#修改-kubesphere-配置kubeedge--1170">修改 kubesphere 配置(KubeEdge &lt; 1.17.0)</a>
+          <ul>
+            <li><a href="#1开启-kubeedge-边缘节点插件">1.开启 kubeedge 边缘节点插件</a></li>
+            <li><a href="#2-修改-node-exporter-亲和性">2. 修改 node-exporter 亲和性</a></li>
+            <li><a href="#3-edgemesh部署">3. edgemesh部署</a></li>
+            <li><a href="#4-修改dnspolicy">4. 修改dnsPolicy</a></li>
+            <li><a href="#5-添加环境变量">5. 添加环境变量</a></li>
+          </ul>
+        </li>
+        <li><a href="#kubeedge--1170">KubeEdge = 1.17.0</a>
+          <ul>
+            <li><a href="#创建-clusterrolebinding">创建 clusterrolebinding</a></li>
+          </ul>
+        </li>
+        <li><a href="#监控-jetson-gpu-状态">监控 Jetson GPU 状态</a>
+          <ul>
+            <li><a href="#安装-jtop">安装 Jtop</a></li>
+            <li><a href="#安装-jetson-gpu-exporter">安装 jetson GPU Exporter</a></li>
+            <li><a href="#新建-kubesphere-资源">新建 kubesphere 资源</a></li>
+            <li><a href="#在-kubesphere-前端查看-gpu-监控数据">在 kubesphere 前端，查看 GPU 监控数据</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="kubesphere-边缘节点的可观测性">KubeSphere 边缘节点的可观测性</h3>
+<p>KubeSphere 愿景是打造一个以 Kubernetes 为内核的云原生分布式操作系统，它的架构可以非常方便地使第三方应用与云原生生态组件进行即插即用（plug-and-play）的集成。</p>
+<p>在边缘计算场景下，KubeSphere 基于 KubeEdge 实现应用与工作负载在云端与边缘节点的统一分发与管理，解决在海量边、端设备上完成应用交付、运维、管控的需求。</p>
+<p>根据 KubeSphere 的<a href="https://kubesphere.io/zh/docs/v3.3/installing-on-linux/introduction/kubekey/#%e6%94%af%e6%8c%81%e7%9f%a9%e9%98%b5" target="_blank" rel="noopener noreffer">支持矩阵</a>，只有 1.23.x 版本的 k8s 支持边缘计算，而且 KubeSphere 界面也没有边缘节点资源使用率等监控信息的显示。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240407141223475.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240407141223475.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240407141223475.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240407141223475.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240407141223475.png"
+        title="image-20240407141223475" /></p>
+<p>本文基于 KubeSphere 和 KubeEdge 构建云边一体化计算平台，通过Prometheus 来监控 Nvidia Jetson 边缘设备状态，实现 KubeSphere 在边缘节点的可观测性。</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KubeSphere</td>
+<td>3.4.1</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.7.2</td>
+</tr>
+<tr>
+<td>k8s</td>
+<td>1.26.0</td>
+</tr>
+<tr>
+<td>KubeEdge</td>
+<td>1.15.1</td>
+</tr>
+<tr>
+<td>Jetson型号</td>
+<td>NVIDIA Jetson Xavier NX (16GB ram)</td>
+</tr>
+<tr>
+<td>Jtop</td>
+<td>4.2.7</td>
+</tr>
+<tr>
+<td>JetPack</td>
+<td>5.1.3-b29</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>24.0.5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="部署-k8s-环境">部署 k8s 环境</h3>
+<p>参考  <a href="https://kubesphere.io/zh/docs/v3.4/quick-start/all-in-one-on-linux/" target="_blank" rel="noopener noreffer">kubesphere 部署文档</a>。通过 KubeKey 可以快速部署一套 k8s 集群。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//  all in one 方式部署一台 单 master 的 k8s 集群
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./kk create cluster --with-kubernetes v1.26.0 --with-kubesphere v3.4.1 --container-manager containerd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="部署--kubeedge-环境">部署  KubeEdge 环境</h3>
+<p>参考 <a href="https://zhuyaguang.github.io/kubeedge-install/" target="_blank" rel="noopener noreffer">在 KubeSphere 上部署最新版的 KubeEdge</a>，部署 KubeEdge。</p>
+<h4 id="开启边缘节点日志查询功能">开启边缘节点日志查询功能</h4>
+<ol>
+<li>
+<p>vim /etc/kubeedge/config/edgecore.yaml</p>
+</li>
+<li>
+<p>enable=true</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231226105650084.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231226105650084.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231226105650084.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231226105650084.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20231226105650084.png"
+        title="image-20231226105650084" /></p>
+</li>
+</ol>
+<p>开启后，可以方便查询 pod 日志，定位问题。</p>
+<h3 id="修改-kubesphere-配置kubeedge--1170">修改 kubesphere 配置(KubeEdge &lt; 1.17.0)</h3>
+<h4 id="1开启-kubeedge-边缘节点插件">1.开启 kubeedge 边缘节点插件</h4>
+<ol>
+<li>修改 configmap&ndash;ClusterConfiguration</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467730006-6c1d70a7-23e5-4e3a-89b3-b0ad8bf39673.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467730006-6c1d70a7-23e5-4e3a-89b3-b0ad8bf39673.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467730006-6c1d70a7-23e5-4e3a-89b3-b0ad8bf39673.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467730006-6c1d70a7-23e5-4e3a-89b3-b0ad8bf39673.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467730006-6c1d70a7-23e5-4e3a-89b3-b0ad8bf39673.png"
+        title="image.png" /></p>
+<ol start="2">
+<li>advertiseAddress 设置为 cloudhub 所在的物理机地址</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467882107-c44e734b-245d-446b-8564-f8830e5db478.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467882107-c44e734b-245d-446b-8564-f8830e5db478.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467882107-c44e734b-245d-446b-8564-f8830e5db478.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467882107-c44e734b-245d-446b-8564-f8830e5db478.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/1710467882107-c44e734b-245d-446b-8564-f8830e5db478.png"
+        title="image.png" /></p>
+<p><a href="https://www.kubesphere.io/zh/docs/v3.3/pluggable-components/kubeedge/" target="_blank" rel="noopener noreffer"> KubeSphere 开启边缘节点文档链接</a></p>
+<blockquote>
+<p>修改完 发现可以显示边缘节点，但是没有 CPU 和 内存信息，发现边缘节点没有 node-exporter 这个pod。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329112326949.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329112326949.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329112326949.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329112326949.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329112326949.png"
+        title="image-20240329112326949" /></p>
+<h4 id="2-修改-node-exporter-亲和性">2. 修改 node-exporter 亲和性</h4>
+<p><code>kubectl get ds -n kubesphere-monitoring-system</code> 发现 不会部署到边缘节点上</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329135414326.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329135414326.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329135414326.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329135414326.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329135414326.png"
+        title="image-20240329135414326" /></p>
+<p>修改为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">affinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">nodeAffinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">requiredDuringSchedulingIgnoredDuringExecution</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">nodeSelectorTerms</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">matchExpressions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">node-role.kubernetes.io/edgetest  -- 修改这里，让亲和性失效</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">DoesNotExist</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>node-exporter 是部署在边缘节点上了，但是 pods 起不来。</p>
+<p>kubecrl edit 该失败的pod，发现是其中的 kube-rbac-proxy 这个 container 启动失败，看这个 container 的logs。发现是 kube-rbac-proxy 想要获取 KUBERNETES_SERVICE_HOST 和 KUBERNETES_SERVICE_PORT 这两个环境变量，但是获取失败，所以启动失败。</p>
+<p>在 K8S 的集群中，当创建 pod 时，会在pod中增加 KUBERNETES_SERVICE_HOST 和 KUBERNETES_SERVICE_PORT 这两个环境变量，用于 pod 内的进程对 kube-apiserver 的访问，但是在 KubeEdge 的 edge 节点上创建的 pod 中，这两个环境变量存在，但它是空的。</p>
+<p>和华为 KubeEdge 的社区同学咨询，KubeEdge 1.17版本将会增加这两个环境变量的设置。<a href="https://github.com/wackxu/kubeedge/blob/4a7c00783de9b11e56e56968b2cc950a7d32a403/docs/proposals/edge-pod-list-watch-natively.md" target="_blank" rel="noopener noreffer">KubeEdge 社区  proposals 链接</a>。</p>
+<p>另一方面，推荐安装 edgemesh，安装之后在 edge 的 pod 上就可以访问 kubernetes.default.svc.cluster.local:443 了。</p>
+<h4 id="3-edgemesh部署">3. edgemesh部署</h4>
+<ol>
+<li>
+<p>配置 cloudcore configmap</p>
+<p><code>kubectl edit cm cloudcore -n kubeedge</code>   设置 dynamicController=true.</p>
+<p>修改完 重启 cloudcore <code>kubectl delete pod cloudcore-776ffcbbb9-s6ff8 -n kubeedge</code></p>
+</li>
+<li>
+<p>配置 edgecore 模块，配置 metaServer=true 和 clusterDNS</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ vim /etc/kubeedge/config/edgecore.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">modules:
+</span></span><span class="line"><span class="cl">  ...
+</span></span><span class="line"><span class="cl">  metaManager:
+</span></span><span class="line"><span class="cl">    metaServer:
+</span></span><span class="line"><span class="cl">      enable: <span class="nb">true</span>   //配置这里
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">modules:
+</span></span><span class="line"><span class="cl">  ...
+</span></span><span class="line"><span class="cl">  edged:
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">    tailoredKubeletConfig:
+</span></span><span class="line"><span class="cl">      ...
+</span></span><span class="line"><span class="cl">      clusterDNS:     //配置这里
+</span></span><span class="line"><span class="cl">      - 169.254.96.16
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//重启edgecore
+</span></span><span class="line"><span class="cl">$ systemctl restart edgecore
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329152628525.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329152628525.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329152628525.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329152628525.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329152628525.png"
+        title="image-20240329152628525" /></p>
+<p>修改完 验证是否修改成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ curl 127.0.0.1:10550/api/v1/services
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{&#34;apiVersion&#34;:&#34;v1&#34;,&#34;items&#34;:[{&#34;apiVersion&#34;:&#34;v1&#34;,&#34;kind&#34;:&#34;Service&#34;,&#34;metadata&#34;:{&#34;creationTimestamp&#34;:&#34;2021-04-14T06:30:05Z&#34;,&#34;labels&#34;:{&#34;component&#34;:&#34;apiserver&#34;,&#34;provider&#34;:&#34;kubernetes&#34;},&#34;name&#34;:&#34;kubernetes&#34;,&#34;namespace&#34;:&#34;default&#34;,&#34;resourceVersion&#34;:&#34;147&#34;,&#34;selfLink&#34;:&#34;default/services/kubernetes&#34;,&#34;uid&#34;:&#34;55eeebea-08cf-4d1a-8b04-e85f8ae112a9&#34;},&#34;spec&#34;:{&#34;clusterIP&#34;:&#34;10.96.0.1&#34;,&#34;ports&#34;:[{&#34;name&#34;:&#34;https&#34;,&#34;port&#34;:443,&#34;protocol&#34;:&#34;TCP&#34;,&#34;targetPort&#34;:6443}],&#34;sessionAffinity&#34;:&#34;None&#34;,&#34;type&#34;:&#34;ClusterIP&#34;},&#34;status&#34;:{&#34;loadBalancer&#34;:{}}},{&#34;apiVersion&#34;:&#34;v1&#34;,&#34;kind&#34;:&#34;Service&#34;,&#34;metadata&#34;:{&#34;annotations&#34;:{&#34;prometheus.io/port&#34;:&#34;9153&#34;,&#34;prometheus.io/scrape&#34;:&#34;true&#34;},&#34;creationTimestamp&#34;:&#34;2021-04-14T06:30:07Z&#34;,&#34;labels&#34;:{&#34;k8s-app&#34;:&#34;kube-dns&#34;,&#34;kubernetes.io/cluster-service&#34;:&#34;true&#34;,&#34;kubernetes.io/name&#34;:&#34;KubeDNS&#34;},&#34;name&#34;:&#34;kube-dns&#34;,&#34;namespace&#34;:&#34;kube-system&#34;,&#34;resourceVersion&#34;:&#34;203&#34;,&#34;selfLink&#34;:&#34;kube-system/services/kube-dns&#34;,&#34;uid&#34;:&#34;c221ac20-cbfa-406b-812a-c44b9d82d6dc&#34;},&#34;spec&#34;:{&#34;clusterIP&#34;:&#34;10.96.0.10&#34;,&#34;ports&#34;:[{&#34;name&#34;:&#34;dns&#34;,&#34;port&#34;:53,&#34;protocol&#34;:&#34;UDP&#34;,&#34;targetPort&#34;:53},{&#34;name&#34;:&#34;dns-tcp&#34;,&#34;port&#34;:53,&#34;protocol&#34;:&#34;TCP&#34;,&#34;targetPort&#34;:53},{&#34;name&#34;:&#34;metrics&#34;,&#34;port&#34;:9153,&#34;protocol&#34;:&#34;TCP&#34;,&#34;targetPort&#34;:9153}],&#34;selector&#34;:{&#34;k8s-app&#34;:&#34;kube-dns&#34;},&#34;sessionAffinity&#34;:&#34;None&#34;,&#34;type&#34;:&#34;ClusterIP&#34;},&#34;status&#34;:{&#34;loadBalancer&#34;:{}}}],&#34;kind&#34;:&#34;ServiceList&#34;,&#34;metadata&#34;:{&#34;resourceVersion&#34;:&#34;377360&#34;,&#34;selfLink&#34;:&#34;/api/v1/services&#34;}}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>
+<p>安装 edgemesh</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone https://github.com/kubeedge/edgemesh.git
+</span></span><span class="line"><span class="cl">cd edgemesh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f build/crds/istio/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f build/agent/resources/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329154436074.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329154436074.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329154436074.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329154436074.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329154436074.png"
+        title="image-20240329154436074" /></p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="4-修改dnspolicy">4. 修改dnsPolicy</h4>
+<p>edgemesh部署完成后，edge节点上的node-exporter中的两个境变量还是空的，也无法访问kubernetes.default.svc.cluster.local:443，原因是该pod中的dns服务器配置错误，应该是169.254.96.16的，但是却是跟宿主机一样的dns配置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> -it node-exporter-hcmfg -n kubesphere-monitoring-system -- sh
+</span></span><span class="line"><span class="cl">Defaulted container <span class="s2">&#34;node-exporter&#34;</span> out of: node-exporter, kube-rbac-proxy
+</span></span><span class="line"><span class="cl">$ cat /etc/resolv.conf 
+</span></span><span class="line"><span class="cl">nameserver 127.0.0.53
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将dnsPolicy修改为ClusterFirstWithHostNet，之后重启node-exporter，dns的配置正确</p>
+<p><code>kubectl edit ds node-exporter -n kubesphere-monitoring-system</code></p>
+<pre><code>  dnsPolicy: ClusterFirstWithHostNet
+  hostNetwork: true
+</code></pre>
+<h4 id="5-添加环境变量">5. 添加环境变量</h4>
+<p>vim /etc/systemd/system/edgecore.service</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329155133337.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329155133337.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329155133337.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329155133337.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240329155133337.png"
+        title="image-20240329155133337" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Environment=METASERVER_DUMMY_IP=kubernetes.default.svc.cluster.local
+</span></span><span class="line"><span class="cl">Environment=METASERVER_DUMMY_PORT=443
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改完重启 edgecore</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">systemctl restart edgecore
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>node-exporter 变成 running</strong>!!!!</p>
+<p>在边缘节点 <code>curl http://127.0.0.1:9100/metrics</code>  可以发现 采集到了边缘节点的数据。</p>
+<p>最后我们可以将 kubesphere 的 k8s 服务通过 NodePort 暴露出来。就可以在页面查看 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/instance</span><span class="p">:</span><span class="w"> </span><span class="l">k8s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/version</span><span class="p">:</span><span class="w"> </span><span class="m">2.39.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus-k8s-nodeport</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubesphere-monitoring-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">9090</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">9090</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="m">32143</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/instance</span><span class="p">:</span><span class="w"> </span><span class="l">k8s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sessionAffinity</span><span class="p">:</span><span class="w"> </span><span class="l">ClientIP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sessionAffinityConfig</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">clientIP</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">timeoutSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">10800</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">NodePort</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过访问 master IP + 32143 端口，就可以访问 边缘节点 node-exporter 数据。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401145941476.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401145941476.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401145941476.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401145941476.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401145941476.png"
+        title="image-20240401145941476" /></p>
+<p>然后界面上也出现了 CPU 和 内存的信息。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401151605113.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401151605113.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401151605113.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401151605113.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401151605113.png"
+        title="image-20240401151605113" /></p>
+<h3 id="kubeedge--1170">KubeEdge = 1.17.0</h3>
+<blockquote>
+<p>开启 kubeedge 边缘节点插件 和 修改 node-exporter 亲和性 和 KubeEdge &lt; 1.17.0 一样</p>
+</blockquote>
+<p>部署 1.17.0版本注意，需要支持边缘 Pods 使用 InClusterConfig 访问 Kube-APIServer ，所以要配置指定 cloudCore.featureGates.requireAuthorization=true 以及 cloudCore.modules.dynamicController.enable=true。 详情可以查看 <a href="https://mp.weixin.qq.com/s/Dw2IKRDvOWH52xTOStI7dg" target="_blank" rel="noopener noreffer">KubeEdge 公众号文章</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">keadm init --advertise-address<span class="o">=</span>10.108.96.24  --set cloudCore.featureGates.requireAuthorization<span class="o">=</span>true,cloudCore.modules.dynamicController.enable<span class="o">=</span><span class="nb">true</span> --kubeedge-version<span class="o">=</span>v1.17.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>启动 EdgeCore 后，按如下修改 edgecore.yaml 后重启 EdgeCore。</p>
+<p>修改  <strong>metaServer.enable = true</strong> 同时增加  <strong>featureGates: requireAuthorization: true</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">edgecore.config.kubeedge.io/v1alpha2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">EdgeCore</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">featureGates</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">requireAuthorization</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">modules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">metaManager</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metaServer</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改完重启 edgecore</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">systemctl restart edgecore
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="创建-clusterrolebinding">创建 clusterrolebinding</h4>
+<p>发现 node-exporter 里面的容器报错：<code>Unable to authenticate the request due to an error: tokenreviews.authentication.k8s.io is forbidden: User &quot;system:serviceaccount:kubeedge:cloudcore&quot; cannot create resource &quot;tokenreviews&quot; in API group &quot;authentication.k8s.io&quot; at the cluster scope</code></p>
+<p>因为  cloudcore 没有权限，所以创建一个 clusterrolebinding</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/9b5b3561b967051b6cab073f7eda10d.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/9b5b3561b967051b6cab073f7eda10d.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/9b5b3561b967051b6cab073f7eda10d.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/9b5b3561b967051b6cab073f7eda10d.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/9b5b3561b967051b6cab073f7eda10d.png"
+        title="9b5b3561b967051b6cab073f7eda10d" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl create clusterrolebinding cloudcore-promethus-binding --clusterrole=cluster-admin --serviceaccount=kubeedge:cloudcore
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建完 clusterrolebinding 就可以查询到边缘节点的监控信息了。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240604094828377.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240604094828377.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240604094828377.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240604094828377.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240604094828377.png"
+        title="image-20240604094828377" /></p>
+<p>搞定了 CPU 和 内存，接下来就是 GPU了。</p>
+<h3 id="监控-jetson-gpu-状态">监控 Jetson GPU 状态</h3>
+<h4 id="安装-jtop">安装 Jtop</h4>
+<p>首先 Jetson 是一个 arm 设备，所以无法运行 <code>nvidia-smi</code> ，需要安装 Jtop。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt-get install python3-pip python3-dev -y
+</span></span><span class="line"><span class="cl">sudo -H pip3 install jetson-stats
+</span></span><span class="line"><span class="cl">sudo systemctl restart jtop.service
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="安装-jetson-gpu-exporter">安装 jetson GPU Exporter</h4>
+<p>参考<a href="https://blog.devops.dev/monitor-nvidia-jetson-gpu-82e256999840" target="_blank" rel="noopener noreffer">博客</a>，制作 jetson GPU Exporter 镜像，并且对应的 grafana 仪表盘都有。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://miro.medium.com/v2/resize:fit:700/1*6KtoTzERNuM2tEvykpPcng.png"
+        data-srcset="https://miro.medium.com/v2/resize:fit:700/1*6KtoTzERNuM2tEvykpPcng.png, https://miro.medium.com/v2/resize:fit:700/1*6KtoTzERNuM2tEvykpPcng.png 1.5x, https://miro.medium.com/v2/resize:fit:700/1*6KtoTzERNuM2tEvykpPcng.png 2x"
+        data-sizes="auto"
+        alt="https://miro.medium.com/v2/resize:fit:700/1*6KtoTzERNuM2tEvykpPcng.png"
+        title="img" /></p>
+<blockquote>
+<p>Dockerfile</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">FROM python:3-buster
+</span></span><span class="line"><span class="cl">RUN pip install --upgrade pip &amp;&amp; pip install -U jetson-stats prometheus-client
+</span></span><span class="line"><span class="cl">RUN mkdir -p /root
+</span></span><span class="line"><span class="cl">COPY jetson_stats_prometheus_collector.py /root/jetson_stats_prometheus_collector.py
+</span></span><span class="line"><span class="cl">WORKDIR /root
+</span></span><span class="line"><span class="cl">USER root
+</span></span><span class="line"><span class="cl">RUN chmod +x /root/jetson_stats_prometheus_collector.py
+</span></span><span class="line"><span class="cl">ENTRYPOINT [&#34;python3&#34;, &#34;/root/jetson_stats_prometheus_collector.py&#34;]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>jetson_stats_prometheus_collector.py 代码</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/python3</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -*- coding: utf-8 -*-</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">atexit</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">jtop</span> <span class="kn">import</span> <span class="n">jtop</span><span class="p">,</span> <span class="n">JtopException</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">prometheus_client.core</span> <span class="kn">import</span> <span class="n">InfoMetricFamily</span><span class="p">,</span> <span class="n">GaugeMetricFamily</span><span class="p">,</span> <span class="n">REGISTRY</span><span class="p">,</span> <span class="n">CounterMetricFamily</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">prometheus_client</span> <span class="kn">import</span> <span class="n">make_wsgi_app</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">wsgiref.simple_server</span> <span class="kn">import</span> <span class="n">make_server</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">CustomCollector</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">atexit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cleanup</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span> <span class="o">=</span> <span class="n">jtop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Closing jetson-stats connection...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># spin传入true，表示不会等待下一次数据读取完成</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">ok</span><span class="p">(</span><span class="n">spin</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># Board info</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span> <span class="o">=</span> <span class="n">InfoMetricFamily</span><span class="p">(</span><span class="s1">&#39;gpu_info_board&#39;</span><span class="p">,</span> <span class="s1">&#39;Board sys info&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;board_info&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;info&#39;</span><span class="p">],</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;machine&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;info&#39;</span><span class="p">][</span><span class="s1">&#39;machine&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;machine&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="p">{})</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">][</span><span class="s1">&#39;Module&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;jetpack&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;info&#39;</span><span class="p">][</span><span class="s1">&#39;jetpack&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;jetpack&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="p">{})</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">][</span><span class="s1">&#39;Jetpack&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;l4t&#39;</span><span class="p">:</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;info&#39;</span><span class="p">][</span><span class="s1">&#39;L4T&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;L4T&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="p">{})</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">][</span><span class="s1">&#39;L4T&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="p">})</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">i</span> <span class="o">=</span> <span class="n">InfoMetricFamily</span><span class="p">(</span><span class="s1">&#39;gpu_info_hardware&#39;</span><span class="p">,</span> <span class="s1">&#39;Board hardware info&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;board_hw&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;hardware&#39;</span><span class="p">],</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;codename&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Codename&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CODENAME&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;soc&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;SoC&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;SOC&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;module&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;P-Number&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MODULE&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;board&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;699-level Part Number&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;BOARD&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;cuda_arch_bin&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CUDA Arch BIN&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CUDA_ARCH_BIN&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;serial_number&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Serial Number&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="s1">&#39;hardware&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;SERIAL_NUMBER&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">                <span class="p">})</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># NV power mode</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span> <span class="o">=</span> <span class="n">InfoMetricFamily</span><span class="p">(</span><span class="s1">&#39;gpu_nvpmode&#39;</span><span class="p">,</span> <span class="s1">&#39;NV power mode&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nvpmode&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;mode&#39;</span><span class="p">],</span> <span class="p">{</span><span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">nvpmodel</span><span class="o">.</span><span class="n">name</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># System uptime</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span> <span class="o">=</span> <span class="n">GaugeMetricFamily</span><span class="p">(</span><span class="s1">&#39;gpu_uptime&#39;</span><span class="p">,</span> <span class="s1">&#39;System uptime&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;uptime&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">days</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">uptime</span><span class="o">.</span><span class="n">days</span>
+</span></span><span class="line"><span class="cl">            <span class="n">seconds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">uptime</span><span class="o">.</span><span class="n">seconds</span>
+</span></span><span class="line"><span class="cl">            <span class="n">hours</span> <span class="o">=</span> <span class="n">seconds</span><span class="o">//</span><span class="mi">3600</span>
+</span></span><span class="line"><span class="cl">            <span class="n">minutes</span> <span class="o">=</span> <span class="p">(</span><span class="n">seconds</span><span class="o">//</span><span class="mi">60</span><span class="p">)</span> <span class="o">%</span> <span class="mi">60</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;days&#39;</span><span class="p">],</span> <span class="n">days</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;hours&#39;</span><span class="p">],</span> <span class="n">hours</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;minutes&#39;</span><span class="p">],</span> <span class="n">minutes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield</span> <span class="n">g</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># CPU usage</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span> <span class="o">=</span> <span class="n">GaugeMetricFamily</span><span class="p">(</span><span class="s1">&#39;gpu_usage_cpu&#39;</span><span class="p">,</span> <span class="s1">&#39;CPU </span><span class="si">% s</span><span class="s1">chedutil&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cpu&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;cpu_1&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU1&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;CPU1&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU1&#39;</span><span class="p">],</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;cpu_2&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU2&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;CPU2&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU2&#39;</span><span class="p">],</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;cpu_3&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU3&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;CPU3&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU3&#39;</span><span class="p">],</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;cpu_4&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU4&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;CPU4&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU4&#39;</span><span class="p">],</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;cpu_5&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU5&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;CPU5&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU5&#39;</span><span class="p">],</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;cpu_6&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU6&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;CPU6&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU6&#39;</span><span class="p">],</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;cpu_7&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU7&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;CPU7&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU7&#39;</span><span class="p">],</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;cpu_8&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU8&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;CPU8&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;CPU8&#39;</span><span class="p">],</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield</span> <span class="n">g</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># GPU usage</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span> <span class="o">=</span> <span class="n">GaugeMetricFamily</span><span class="p">(</span><span class="s1">&#39;gpu_usage_gpu&#39;</span><span class="p">,</span> <span class="s1">&#39;GPU </span><span class="si">% s</span><span class="s1">chedutil&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gpu&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;val&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;GPU&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield</span> <span class="n">g</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># Fan usage</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span> <span class="o">=</span> <span class="n">GaugeMetricFamily</span><span class="p">(</span><span class="s1">&#39;gpu_usage_fan&#39;</span><span class="p">,</span> <span class="s1">&#39;Fan usage&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fan&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;speed&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">fan</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;speed&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">fan</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pwmfan&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;speed&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">})[</span><span class="s1">&#39;speed&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield</span> <span class="n">g</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># Sensor temperatures</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span> <span class="o">=</span> <span class="n">GaugeMetricFamily</span><span class="p">(</span><span class="s1">&#39;gpu_temperatures&#39;</span><span class="p">,</span> <span class="s1">&#39;Sensor temperatures&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AO&#39;</span><span class="p">,</span> <span class="s1">&#39;GPU&#39;</span><span class="p">,</span> <span class="s1">&#39;Tdiode&#39;</span><span class="p">,</span> <span class="s1">&#39;AUX&#39;</span><span class="p">,</span> <span class="s1">&#39;CPU&#39;</span><span class="p">,</span> <span class="s1">&#39;thermal&#39;</span><span class="p">,</span> <span class="s1">&#39;Tboard&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">temperature</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">temperature</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;temp&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">temperature</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield</span> <span class="n">g</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># Power</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span> <span class="o">=</span> <span class="n">GaugeMetricFamily</span><span class="p">(</span><span class="s1">&#39;gpu_usage_power&#39;</span><span class="p">,</span> <span class="s1">&#39;Power usage&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;power&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;cv&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="s1">&#39;rail&#39;</span><span class="p">][</span><span class="s1">&#39;VDD_CPU_CV&#39;</span><span class="p">][</span><span class="s1">&#39;avg&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;VDD_CPU_CV&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="s1">&#39;rail&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="s1">&#39;rail&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CV&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;avg&#39;</span><span class="p">:</span> <span class="mi">0</span> <span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;avg&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;gpu&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="s1">&#39;rail&#39;</span><span class="p">][</span><span class="s1">&#39;VDD_GPU_SOC&#39;</span><span class="p">][</span><span class="s1">&#39;avg&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;VDD_GPU_SOC&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="s1">&#39;rail&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="s1">&#39;rail&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;avg&#39;</span><span class="p">:</span> <span class="mi">0</span> <span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;avg&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;sys5v&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="s1">&#39;rail&#39;</span><span class="p">][</span><span class="s1">&#39;VIN_SYS_5V0&#39;</span><span class="p">][</span><span class="s1">&#39;avg&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;VIN_SYS_5V0&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="s1">&#39;rail&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="s1">&#39;rail&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;SYS5V&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;avg&#39;</span><span class="p">:</span> <span class="mi">0</span> <span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;avg&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;cv&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;CV&#39;</span><span class="p">][</span><span class="s1">&#39;cur&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;CV&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;gpu&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;GPU&#39;</span><span class="p">][</span><span class="s1">&#39;cur&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;GPU&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">g</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;sys5v&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;SYS5V&#39;</span><span class="p">][</span><span class="s1">&#39;cur&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;SYS5V&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">power</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield</span> <span class="n">g</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># Processes</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">processes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jetson</span><span class="o">.</span><span class="n">processes</span>
+</span></span><span class="line"><span class="cl">                <span class="c1"># key exists in dict</span>
+</span></span><span class="line"><span class="cl">                <span class="n">i</span> <span class="o">=</span> <span class="n">InfoMetricFamily</span><span class="p">(</span><span class="s1">&#39;gpu_processes&#39;</span><span class="p">,</span> <span class="s1">&#39;Process usage&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;process&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">processes</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">i</span><span class="o">.</span><span class="n">add_metric</span><span class="p">([</span><span class="s1">&#39;info&#39;</span><span class="p">],</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;pid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">processes</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="n">processes</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;gpu&#39;</span><span class="p">:</span> <span class="n">processes</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">processes</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;priority&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">processes</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">4</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">processes</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">5</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;cpu&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">processes</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">6</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;memory&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">processes</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">7</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;gpu_memory&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">processes</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">8</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">processes</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">9</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">                <span class="k">yield</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="c1"># key doesn&#39;t exist in dict</span>
+</span></span><span class="line"><span class="cl">                <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">port</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;PORT&#39;</span><span class="p">,</span> <span class="mi">9998</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">REGISTRY</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">CustomCollector</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="n">app</span> <span class="o">=</span> <span class="n">make_wsgi_app</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">httpd</span> <span class="o">=</span> <span class="n">make_server</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">port</span><span class="p">),</span> <span class="n">app</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Serving on port: &#39;</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Goodbye!&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>记得给jetson的板子打标签，确保gpu的exporter在jetson上执行。否则在其他node上执行会因为采集不到数据而报错.</p>
+<p>kubectl label node edge-wpx machine.type=jetson</p>
+</blockquote>
+<h4 id="新建-kubesphere-资源">新建 kubesphere 资源</h4>
+<p>新建ServiceAccount、DaemonSet、Service、servicemonitor,目的是将 jetson-exporter 采集到的数据提供给 kubesphere  的 prometheus。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ServiceAccount</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/version</span><span class="p">:</span><span class="w"> </span><span class="m">1.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubesphere-monitoring-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">DaemonSet</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/version</span><span class="p">:</span><span class="w"> </span><span class="m">1.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubesphere-monitoring-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">revisionHistoryLimit</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app.kubernetes.io/version</span><span class="p">:</span><span class="w"> </span><span class="m">1.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">affinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">nodeAffinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">requiredDuringSchedulingIgnoredDuringExecution</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">nodeSelectorTerms</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">matchExpressions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">node-role.kubernetes.io/edge</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">Exists</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-status-exporter:v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">IfNotPresent</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">500Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">102m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">180Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">9998</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">hostPort</span><span class="p">:</span><span class="w"> </span><span class="m">9998</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">http</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">terminationMessagePath</span><span class="p">:</span><span class="w"> </span><span class="l">/dev/termination-log</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">terminationMessagePolicy</span><span class="p">:</span><span class="w"> </span><span class="l">File</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/run/jtop.sock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">jtop-sock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">readOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">dnsPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterFirstWithHostNet</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hostNetwork</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hostPID</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nodeSelector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">kubernetes.io/os</span><span class="p">:</span><span class="w"> </span><span class="l">linux</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">machine.type</span><span class="p">:</span><span class="w"> </span><span class="l">jetson</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">schedulerName</span><span class="p">:</span><span class="w"> </span><span class="l">default-scheduler</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">serviceAccount</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">terminationGracePeriodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">tolerations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">Exists</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">hostPath</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/run/jtop.sock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Socket</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">jtop-sock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">updateStrategy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">rollingUpdate</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">maxSurge</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">maxUnavailable</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">RollingUpdate</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/version</span><span class="p">:</span><span class="w"> </span><span class="m">1.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubesphere-monitoring-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">clusterIP</span><span class="p">:</span><span class="w"> </span><span class="l">None</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">clusterIPs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">None</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">internalTrafficPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Cluster</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ipFamilies</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">IPv4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ipFamilyPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">SingleStack</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">http</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">9998</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l">http</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sessionAffinity</span><span class="p">:</span><span class="w"> </span><span class="l">None</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterIP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">monitoring.coreos.com/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ServiceMonitor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/vendor</span><span class="p">:</span><span class="w"> </span><span class="l">kubesphere</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/version</span><span class="p">:</span><span class="w"> </span><span class="m">1.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubesphere-monitoring-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">bearerTokenFile</span><span class="p">:</span><span class="w"> </span><span class="l">/var/run/secrets/kubernetes.io/serviceaccount/token</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l">1m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l">http</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">relabelings</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l">replace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="l">(.*)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="l">$1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">sourceLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">__meta_kubernetes_pod_node_name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">targetLabel</span><span class="p">:</span><span class="w"> </span><span class="l">instance</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l">labeldrop</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="l">(service|endpoint|container)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">scheme</span><span class="p">:</span><span class="w"> </span><span class="l">http</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tlsConfig</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">insecureSkipVerify</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">jobLabel</span><span class="p">:</span><span class="w"> </span><span class="l">app.kubernetes.io/name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">jetson-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>部署完成后，jetson-exporter pod  running</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401164222036.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401164222036.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401164222036.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401164222036.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401164222036.png"
+        title="image-20240401164222036" /></p>
+<p>重启prometheus pod，重新加载配置后，可以在prometheus界面看到新增加的gpu exporter的target</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">kubectl delete pod prometheus-k8s-0 -n kubesphere-monitoring-system</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401164550474.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401164550474.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401164550474.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401164550474.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401164550474.png"
+        title="image-20240401164550474" /></p>
+<h4 id="在-kubesphere-前端查看-gpu-监控数据">在 kubesphere 前端，查看 GPU 监控数据</h4>
+<p>前端需要修改 kubesphere 的 console 的代码，这里属于前端内容，这里就不详细说明了。</p>
+<p>其次将prometheus的svc端口暴露出来，通过nodeport的方式将prometheus的端口暴露出来，前端通过 http 接口来查询 GPU　的状态。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/instance</span><span class="p">:</span><span class="w"> </span><span class="l">k8s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/version</span><span class="p">:</span><span class="w"> </span><span class="m">2.39.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus-k8s-nodeport</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubesphere-monitoring-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">9090</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">9090</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="m">32143</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/component</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/instance</span><span class="p">:</span><span class="w"> </span><span class="l">k8s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">kube-prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sessionAffinity</span><span class="p">:</span><span class="w"> </span><span class="l">ClientIP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sessionAffinityConfig</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">clientIP</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">timeoutSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">10800</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">NodePort</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>http 接口</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">查询瞬时值：
+</span></span><span class="line"><span class="cl">get http://masterip:32143/api/v1/query?query=gpu_info_board_info&amp;time=1711431293.686
+</span></span><span class="line"><span class="cl">get http://masterip:32143/api/v1/query?query=gpu_info_hardware_info&amp;time=1711431590.574
+</span></span><span class="line"><span class="cl">get http://masterip:32143/api/v1/query?query=gpu_usage_gpu&amp;time=1711431590.574
+</span></span><span class="line"><span class="cl">其中query为查询字段名，time是查询的时间
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">查询某个时间段的采集值：
+</span></span><span class="line"><span class="cl">get http://10.11.140.87:32143/api/v1/query_range?query=gpu_usage_gpu&amp;start=1711428221.998&amp;end=1711431821.998&amp;step=14
+</span></span><span class="line"><span class="cl">其中query为查询字段名，start和end是起始结束时间，step是间隔时间
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样就成功在 kubesphere ，监控 kubeedge 边缘节点 Jetson  的 GPU 状态了。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401165457482.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401165457482.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401165457482.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401165457482.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20240401165457482.png"
+        title="image-20240401165457482" /></p>
+<h3 id="总结">总结</h3>
+<p>基于 KubeEdge ，我们在 KubeSphere 的前端界面上实现了边缘设备的可观测性，包括 GPU 信息的可观测性。</p>
+<p>对于边缘节点 CPU、内存状态的监控，首先修改亲和性，让 KubeSphere 自带的 node-exporter 能够采集边缘节点监控数据，接下来利用 KubeEdge 的 edgemesh 将采集的数据提供给 KubeSphere 的 prometheus 。这样就实现了CPU、内存信息的监控。</p>
+<p>对于边缘节点 GPU 状态的监控，安装 jtop 获取 GPU 使用率，温度等数据，然后开发  jetson GPU Exporter 将获取 jtop 获取的信息发送给 KubeSphere 的 prometheus，通过修改 KubeSphere 前端 ks-console 的代码，在界面上通过 http 接口获取 prometheus 数据，这样就实现了 GPU 使用率等监控信息。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2024-03-21</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/prometheus-jetson-on-kubeedge-in-kubesphere/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/" data-title="使用 Prometheus 在 kubesphere 上监控 kubeedge 边缘节点（Jetson） CPU、GPU 状态"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/jetson-on-kubeedge-use-gpu/" class="prev" rel="prev" title="基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）"><i class="fas fa-angle-left fa-fw"></i>基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）</a>
+            <a href="/2024meetup/" class="next" rel="next" title="2024 meetup">2024 meetup<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZMX6LNNGD"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-9ZMX6LNNGD');
+            </script>
+        </div>
+        
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

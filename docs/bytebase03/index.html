@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Bytebase 体验官之狂飙的 ChatGPT - 朱亚光的博客</title><meta name="Description" content="Bytebase 体验官系列"><meta property="og:title" content="Bytebase 体验官之狂飙的 ChatGPT" />
+<meta property="og:description" content="Bytebase 体验官系列" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhuyaguang.github.io/bytebase03/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-03-18T22:38:02+08:00" />
+<meta property="article:modified_time" content="2023-03-18T22:38:02+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Bytebase 体验官之狂飙的 ChatGPT"/>
+<meta name="twitter:description" content="Bytebase 体验官系列"/>
+<meta name="application-name" content="朱亚光的博客">
+<meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/bytebase03/" /><link rel="prev" href="https://zhuyaguang.github.io/bytabase2/" /><link rel="next" href="https://zhuyaguang.github.io/bigmodel/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Bytebase 体验官之狂飙的 ChatGPT",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/zhuyaguang.github.io\/bytebase03\/"
+        },"genre": "posts","wordcount":  390 ,
+        "url": "https:\/\/zhuyaguang.github.io\/bytebase03\/","datePublished": "2023-03-18T22:38:02+08:00","dateModified": "2023-03-18T22:38:02+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "朱亚光"
+            },"description": "Bytebase 体验官系列"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="/reading/"> 书单 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="/reading/" title="">书单</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Bytebase 体验官之狂飙的 ChatGPT</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-03-18">2023-03-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 390 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#bytebase-体验官之狂飙的-chatgpt">Bytebase 体验官之狂飙的 ChatGPT</a>
+      <ul>
+        <li><a href="#个人信息">个人信息</a></li>
+        <li><a href="#schema-变更"><strong>Schema 变更</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="bytebase-体验官之狂飙的-chatgpt">Bytebase 体验官之狂飙的 ChatGPT</h2>
+<h3 id="个人信息">个人信息</h3>
+<ul>
+<li>朱亚光</li>
+<li>最近在研究大模型的Prompt Engineer</li>
+<li><a href="https://github.com/zhuyaguang" target="_blank" rel="noopener noreffer">GitHub 地址</a></li>
+</ul>
+<h3 id="schema-变更"><strong>Schema 变更</strong></h3>
+<p>开启今天的体验官之旅之前，先回忆下我们上期在新手村学到的内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1.安装环境 
+</span></span><span class="line"><span class="cl">2.创建 mysql 实例 
+</span></span><span class="line"><span class="cl">3.创建项目 
+</span></span><span class="line"><span class="cl">4.创建数据库，建表
+</span></span><span class="line"><span class="cl">5.插入数据并查询
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>详细内容可查看 <a href="https://zhuyaguang.github.io/bytabase2/" target="_blank" rel="noopener noreffer">Bytebase 体验官之勇闯新手村</a></p>
+<p>当然要走出新手村靠以上这点基本功是不行的，今天我们要学习  <strong>Schema 变更</strong> 这个必杀技。</p>
+<p>那什么是  <strong>Schema 变更</strong> 呢，之前我们上期创建了一张表，写入了一条数据。</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>state</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>朱亚光</td>
+<td>新手村</td>
+</tr>
+</tbody>
+</table>
+<p>现在我想记录下我的体验官之旅到了第几关了，加了 shut 这一列。</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>state</th>
+<th>shut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>朱亚光</td>
+<td>新手村</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>那 Bytebase 里面怎么操作呢？</p>
+<p>我们先看看 Schema 关系图</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20230319115410306.png"
+        data-srcset="../img/image-20230319115410306.png, ../img/image-20230319115410306.png 1.5x, ../img/image-20230319115410306.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20230319115410306.png"
+        title="image-20230319115410306" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20230319115237606.png"
+        data-srcset="../img/image-20230319115237606.png, ../img/image-20230319115237606.png 1.5x, ../img/image-20230319115237606.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20230319115237606.png"
+        title="image-20230319115237606" /></p>
+<p>那我们直接点击变更 <strong>Schema</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20230319115537019.png"
+        data-srcset="../img/image-20230319115537019.png, ../img/image-20230319115537019.png 1.5x, ../img/image-20230319115537019.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20230319115537019.png"
+        title="image-20230319115537019" /></p>
+<p>然后 <strong>添加列</strong> shut ,选择 INT 类型</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20230319115954503.png"
+        data-srcset="../img/image-20230319115954503.png, ../img/image-20230319115954503.png 1.5x, ../img/image-20230319115954503.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20230319115954503.png"
+        title="image-20230319115954503" /></p>
+<p>然后就成功 变更了 Schema</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../img/image-20230319120120206.png"
+        data-srcset="../img/image-20230319120120206.png, ../img/image-20230319120120206.png 1.5x, ../img/image-20230319120120206.png 2x"
+        data-sizes="auto"
+        alt="../img/image-20230319120120206.png"
+        title="image-20230319120120206" /></p>
+<p>是不是很简单！</p>
+<p>那今天的题目和狂飙和 ChatGPT 有什么关系呢</p>
+<p>Bytebase 针对具体业务场景，初步集成了 ChatGPT 的功能，在使用 Bytebase 过程中遇到不会写的 SQL 语句。直接问 AI 小助手了。</p>
+<p>我把我体验的过程，做了一个<a href="https://xie.infoq.cn/article/432f88db614513217a520bf9f" target="_blank" rel="noopener noreffer">小视频</a>，欢迎大家收看。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://mmbiz.qpic.cn/sz_mmbiz_png/MYlicw4Vl5Sj8D8tQezoZWh681jatGe9QDkh5tHB1xDl9sB7OD0jiazK58GMibP4ZJ6247Bk4NVJ0u0A1iaiaic43GDA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1"
+        data-srcset="https://mmbiz.qpic.cn/sz_mmbiz_png/MYlicw4Vl5Sj8D8tQezoZWh681jatGe9QDkh5tHB1xDl9sB7OD0jiazK58GMibP4ZJ6247Bk4NVJ0u0A1iaiaic43GDA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1, https://mmbiz.qpic.cn/sz_mmbiz_png/MYlicw4Vl5Sj8D8tQezoZWh681jatGe9QDkh5tHB1xDl9sB7OD0jiazK58GMibP4ZJ6247Bk4NVJ0u0A1iaiaic43GDA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1 1.5x, https://mmbiz.qpic.cn/sz_mmbiz_png/MYlicw4Vl5Sj8D8tQezoZWh681jatGe9QDkh5tHB1xDl9sB7OD0jiazK58GMibP4ZJ6247Bk4NVJ0u0A1iaiaic43GDA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1 2x"
+        data-sizes="auto"
+        alt="https://mmbiz.qpic.cn/sz_mmbiz_png/MYlicw4Vl5Sj8D8tQezoZWh681jatGe9QDkh5tHB1xDl9sB7OD0jiazK58GMibP4ZJ6247Bk4NVJ0u0A1iaiaic43GDA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1"
+        title="图片" /></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-03-18</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/bytebase03/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/bytebase03/" data-title="Bytebase 体验官之狂飙的 ChatGPT" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/bytebase03/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/bytebase03/" data-title="Bytebase 体验官之狂飙的 ChatGPT" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/bytebase03/" data-title="Bytebase 体验官之狂飙的 ChatGPT"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/bytebase03/" data-title="Bytebase 体验官之狂飙的 ChatGPT"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/bytebase03/" data-title="Bytebase 体验官之狂飙的 ChatGPT" data-description="Bytebase 体验官系列"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/bytebase03/" data-title="Bytebase 体验官之狂飙的 ChatGPT" data-description="Bytebase 体验官系列"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/bytebase03/" data-title="Bytebase 体验官之狂飙的 ChatGPT"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/bytabase2/" class="prev" rel="prev" title="Bytebase 体验官之勇闯新手村"><i class="fas fa-angle-left fa-fw"></i>Bytebase 体验官之勇闯新手村</a>
+            <a href="/bigmodel/" class="next" rel="next" title="大模型实践之旅">大模型实践之旅<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZMX6LNNGD"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-9ZMX6LNNGD');
+            </script>
+        </div>
+        
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

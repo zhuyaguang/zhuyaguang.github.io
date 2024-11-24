@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>基于 kubesphere 搭建一站式云原生机器学习平台  - 朱亚光的博客</title><meta name="Description" content="在 kubesphere 上搭建 cube-studio "><meta property="og:title" content="基于 kubesphere 搭建一站式云原生机器学习平台 " />
+<meta property="og:description" content="在 kubesphere 上搭建 cube-studio " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhuyaguang.github.io/cube-on-kubesphere/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-18T11:31:10+08:00" />
+<meta property="article:modified_time" content="2022-07-18T11:31:10+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
+
+<meta name="twitter:title" content="基于 kubesphere 搭建一站式云原生机器学习平台 "/>
+<meta name="twitter:description" content="在 kubesphere 上搭建 cube-studio "/>
+<meta name="application-name" content="朱亚光的博客">
+<meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/cube-on-kubesphere/" /><link rel="prev" href="https://zhuyaguang.github.io/mysql-on-k8s/" /><link rel="next" href="https://zhuyaguang.github.io/gitlab-printer/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "基于 kubesphere 搭建一站式云原生机器学习平台 ",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/zhuyaguang.github.io\/cube-on-kubesphere\/"
+        },"genre": "posts","wordcount":  1345 ,
+        "url": "https:\/\/zhuyaguang.github.io\/cube-on-kubesphere\/","datePublished": "2022-07-18T11:31:10+08:00","dateModified": "2022-07-18T11:31:10+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "朱亚光"
+            },"description": "在 kubesphere 上搭建 cube-studio "
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="/reading/"> 书单 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="/reading/" title="">书单</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">基于 kubesphere 搭建一站式云原生机器学习平台 </h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-18">2022-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1345 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#搭建-kubesphere">搭建 kubesphere</a></li>
+    <li><a href="#部署-cube-studio">部署 cube-studio</a>
+      <ul>
+        <li><a href="#部署注意事项">部署注意事项</a>
+          <ul>
+            <li><a href="#注意-kubectl-版本是否是最新的">注意 kubectl 版本是否是最新的</a></li>
+            <li><a href="#mysql--遇到的坑">mysql  遇到的坑</a></li>
+            <li><a href="#notebook-遇到的坑">notebook 遇到的坑</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#使用-cube-studio">使用 cube-studio</a>
+      <ul>
+        <li><a href="#快速使用">快速使用</a></li>
+        <li><a href="#使用-gpu">使用 GPU</a></li>
+        <li><a href="#安装-harbor-并配置证书">安装 Harbor 并配置证书</a></li>
+        <li><a href="#使用-bentoml-快速发布一个-web-镜像">使用 BentoMl 快速发布一个 web 镜像</a></li>
+        <li><a href="#构建分布式存储">构建分布式存储</a></li>
+      </ul>
+    </li>
+    <li><a href="#遗留问题">遗留问题</a>
+      <ul>
+        <li><a href="#监控冲突">监控冲突</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考文档">参考文档</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="搭建-kubesphere">搭建 kubesphere</h2>
+<blockquote>
+<p>注意：机器最低规格为：8C16G ；kubectl 版本要1.24 ；之前安装过 KS 要提前清理下环境。</p>
+</blockquote>
+<ul>
+<li>
+<p>下载 KubeKey</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KKZONE</span><span class="o">=</span>cn
+</span></span><span class="line"><span class="cl">curl -sfL https://get-kk.kubesphere.io <span class="p">|</span> <span class="nv">VERSION</span><span class="o">=</span>v3.0.2 sh -
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>如果机器上之前安装过 KubeSphere 或者 KubeSphere 版本太高 ， 先卸载 KubeSphere，k8s 版本太高有问题，<a href="https://github.com/tencentmusic/cube-studio/issues/47" target="_blank" rel="noopener noreffer">会导致部分 CRD 不能安装</a></p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">./kk delete cluster
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>清理 kubeconfig，不然会导致其他 node 节点 无法使用 kubectl</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">rm -rf  /root/.kube/config
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>安装 1.22 版本的 k8s</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">./kk create cluster --with-kubernetes v1.22.12 --with-kubesphere v3.3.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>详细安装步骤可以参考 KubeSphere <a href="https://kubesphere.io/zh/docs/v3.3/quick-start/all-in-one-on-linux/" target="_blank" rel="noopener noreffer">官方文档</a></p>
+<h2 id="部署-cube-studio">部署 cube-studio</h2>
+<ol>
+<li>
+<p>下载 cube-studio 源码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/tencentmusic/cube-studio.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>安装</p>
+<p>将k8s集群的 kubeconfig 文件复制到 install/kubernetes/config 文件中，然后执行如下命令，其中xx.xx.xx.xx为机器内网的ip</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cp <span class="nv">$HOME</span>/.kube/config install/kubernetes/config
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 在k8s worker机器上执行</span>
+</span></span><span class="line"><span class="cl">sh start.sh xx.xx.xx.xx
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h3 id="部署注意事项">部署注意事项</h3>
+<h4 id="注意-kubectl-版本是否是最新的">注意 kubectl 版本是否是最新的</h4>
+<p>Kubectl 版本太低可能会导致部署 CRD 会报错，导致 istio-system 下面的 svc 创建不成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">customresourcedefinition.apiextensions.k8s.io/applications.app.k8s.io condition met
+</span></span><span class="line"><span class="cl">error: json: cannot unmarshal object into Go struct field Kustomization.patchesStrategicMerge of <span class="nb">type</span> patch.StrategicMerge
+</span></span><span class="line"><span class="cl">error: rawResources failed to <span class="nb">read</span> Resources: Load from path ../../base failed: <span class="s1">&#39;../../base&#39;</span> must be a file <span class="o">(</span>got <span class="nv">d</span><span class="o">=</span><span class="s1">&#39;/home/zjlab/zyg/cube-studio-master/install/kubernetes/kubeflow/train-operator/manifests/base&#39;</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Kubesphere 的 kubectl 默认在 <code>/usr/local/bin/kubectl</code> 目录下面，cube-studio 的 kubectl 默认在 <code>/usr/bin</code> 下面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cp /usr/bin/kubectl /usr/local/bin/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="mysql--遇到的坑">mysql  遇到的坑</h4>
+<ul>
+<li>标签未打成功</li>
+</ul>
+<p>查看node标签</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get nodes --show-labels
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现如果没有  mysql=true 标签，重新执行打标签命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl label node <span class="nv">$node</span> <span class="nv">train</span><span class="o">=</span><span class="nb">true</span> <span class="nv">cpu</span><span class="o">=</span><span class="nb">true</span> <span class="nv">notebook</span><span class="o">=</span><span class="nb">true</span> <span class="nv">service</span><span class="o">=</span><span class="nb">true</span> <span class="nv">org</span><span class="o">=</span>public <span class="nv">istio</span><span class="o">=</span><span class="nb">true</span> <span class="nv">knative</span><span class="o">=</span><span class="nb">true</span> <span class="nv">kubeflow</span><span class="o">=</span><span class="nb">true</span> kubeflow-dashboard<span class="o">=</span><span class="nb">true</span> <span class="nv">mysql</span><span class="o">=</span><span class="nb">true</span> <span class="nv">redis</span><span class="o">=</span><span class="nb">true</span> <span class="nv">monitoring</span><span class="o">=</span><span class="nb">true</span> <span class="nv">logging</span><span class="o">=</span><span class="nb">true</span> --overwrite
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>手动拉取 busybox</li>
+</ul>
+<p>如果  mysql 报错：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Warning Failed 34s kubelet Failed to pull image <span class="s2">&#34;busybox&#34;</span>: rpc error: <span class="nv">code</span> <span class="o">=</span> Unknown <span class="nv">desc</span> <span class="o">=</span> Error response from daemon: Head <span class="s2">&#34;https://registry-1.docker.io/v2/library/busybox/manifests/latest&#34;</span>: unauthorized: incorrect username or password
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要  docker login ，然后<code>docker pull busybox </code> 手动拉取</p>
+<ul>
+<li>PV 雨 PVC 未绑定</li>
+</ul>
+<p><code>kubectl get pv infra-mysql-pv</code>  查看PV状态，如果未绑定添加 <code>storageClassName: local</code>等字段</p>
+<p><code>kubectl edit pv infra-mysql-pv</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">claimRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PersistentVolumeClaim</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">infra-mysql-pvc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">infra</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="l">local</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220908194945477.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220908194945477.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220908194945477.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220908194945477.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220908194945477.png"
+        title="image-20220908194945477" /></p>
+<ul>
+<li>重启 mysql</li>
+</ul>
+<p><code>kubectl edit  deploy -n infra mysql</code> 设置 replicas=0</p>
+<p>然后清理 <code>/data/k8s/infra/mysql</code> 残余数据（慎用！！！）</p>
+<p>最后  replicas=1 坐等 infra 命名空间下面的 pod 都 running</p>
+<h4 id="notebook-遇到的坑">notebook 遇到的坑</h4>
+<ul>
+<li>notebook 无法运行，需要清空 kubeconfig</li>
+</ul>
+<p>kubectl edit configmap kubernetes-config -n infra</p>
+<p>kubectl edit configmap kubernetes-config -n pipelinekubectl edit configmap kubernetes-config -n katib</p>
+<h2 id="使用-cube-studio">使用 cube-studio</h2>
+<h3 id="快速使用">快速使用</h3>
+<ul>
+<li>
+<p>添加项目分组，不要把用户都放在  public 项目组里面，会有问题。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220824154753135.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220824154753135.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220824154753135.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220824154753135.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220824154753135.png"
+        title="image-20220824154753135" /></p>
+</li>
+<li>
+<p>添加模版分类</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145320312.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145320312.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145320312.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145320312.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145320312.png"
+        title="image-20220903145320312" /></p>
+</li>
+<li>
+<p>添加仓库</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145421237.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145421237.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145421237.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145421237.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145421237.png"
+        title="image-20220903145421237" /></p>
+</li>
+<li>
+<p>如果是拉取 docker hub 上面的镜像的话，训练&mdash;仓库&mdash;hubsecret，修改你的 dockerhub 的用户名和密码</p>
+</li>
+<li>
+<p>如果是拉取 Harbor 镜像，新建一个仓库，填写 Harbor 服务器域名或者 IP 和用户名密码</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">名称：
+</span></span><span class="line"><span class="cl">harbor
+</span></span><span class="line"><span class="cl">域名：
+</span></span><span class="line"><span class="cl">http://10.100.29.41:30080/
+</span></span><span class="line"><span class="cl">用户名：
+</span></span><span class="line"><span class="cl">admin
+</span></span><span class="line"><span class="cl">k8s hubsecret：
+</span></span><span class="line"><span class="cl">zjflab
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中 k8s hubsecret 的创建的命令为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl create secret docker-registry zjflab <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     --docker-server<span class="o">=</span>10.100.29.41:30080 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     --docker-username<span class="o">=</span>admin <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     --docker-password<span class="o">=</span>Harbor12345 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     --docker-email<span class="o">=</span>zhuyaguang1368@163.com <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>     --namespace<span class="o">=</span><span class="s2">&#34;pipeline&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>镜像管理，创建你的 任务 镜像</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145533135.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145533135.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145533135.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145533135.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145533135.png"
+        title="image-20220903145533135" /></p>
+</li>
+</ul>
+<p>设置镜像的仓库，完全名称并带上版本号。</p>
+<p>你的镜像可以在开发环境上打好，然后上传到 Harbor 上。</p>
+<ul>
+<li>
+<p>添加 任务模版</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145645393.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145645393.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145645393.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145645393.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145645393.png"
+        title="image-20220903145645393" /></p>
+</li>
+</ul>
+<p>填写镜像，任务名称，启动命令</p>
+<ul>
+<li>
+<p>创建任务流</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145918835.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145918835.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145918835.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145918835.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903145918835.png"
+        title="image-20220903145918835" /></p>
+</li>
+<li>
+<p>部署服务上线</p>
+<ol>
+<li>提前构建一个 web app 的镜像，可以对外暴露 http rest 接口</li>
+<li>使用 官方的 模型服务化-deploy-service 模版</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903150604506.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903150604506.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903150604506.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903150604506.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903150604506.png"
+        title="image-20220903150604506" /></p>
+<ol start="3">
+<li>
+<p>填写 服务类型为 serving ，镜像和暴露的端口号。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903151221785.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903151221785.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903151221785.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903151221785.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903151221785.png"
+        title="image-20220903151221785" /></p>
+<ol start="4">
+<li>
+<p>运行任务流，部署生产，部署生产，平台会生成一个 <code>EXTERNAL-IP</code> 对外暴露服务，即可通过 IP 栏地址进行访问服务。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903151636034.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903151636034.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903151636034.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903151636034.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20220903151636034.png"
+        title="image-20220903151636034" /></p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="使用-gpu">使用 GPU</h3>
+<ul>
+<li><a href="https://wangjunjian.com/gpu/2020/11/03/install-nvidia-gpu-driver-on-ubuntu.html" target="_blank" rel="noopener noreffer">安装 nvidia 驱动</a></li>
+<li><a href="https://wangjunjian.com/docker/2020/10/18/install-nvidia-docker2-on-ubuntu.html" target="_blank" rel="noopener noreffer">安装 nvidia-docker2</a></li>
+<li><a href="https://www.cnblogs.com/l-hh/p/13451639.html" target="_blank" rel="noopener noreffer">Ubuntu18.04安装nvidia-docker2</a></li>
+</ul>
+<p>打标签</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl label node worker-1 gpu=true gpu-type=V100 --overwrite
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装-harbor-并配置证书">安装 Harbor 并配置证书</h3>
+<p><a href="https://mp.weixin.qq.com/s/oj-C8ioIRfj9uYMDsDsA1w" target="_blank" rel="noopener noreffer">Harbor在线安装：3分钟体验Harbor!</a></p>
+<p><a href="https://blog.inkubate.io/how-to-use-harbor-private-registry-with-kubernetes/" target="_blank" rel="noopener noreffer">How to install and use VMware Harbor private registry with Kubernetes</a></p>
+<p><a href="https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/" target="_blank" rel="noopener noreffer">Pull an Image from a Private Registry</a></p>
+<p>在 部署好的 Harbor 中添加 HTTPS 证书配置</p>
+<p><a href="https://zhuanlan.zhihu.com/p/234918875" target="_blank" rel="noopener noreffer">harbor镜像仓库-https访问的证书配置</a></p>
+<p><a href="https://blog.csdn.net/min19900718/article/details/87920254" target="_blank" rel="noopener noreffer">x509: cannot validate certificate for 10.30.0.163 because it doesn&rsquo;t contain any IP SANs</a></p>
+<p>最后 Docker login $harborIP，就可以 docker pull 拉取服务。</p>
+<h3 id="使用-bentoml-快速发布一个-web-镜像">使用 BentoMl 快速发布一个 web 镜像</h3>
+<h3 id="构建分布式存储">构建分布式存储</h3>
+<ul>
+<li>
+<p>JuiceFS</p>
+<p><a href="https://mp.weixin.qq.com/s/Ks_qaEVp0W28532wjzqe5Q" target="_blank" rel="noopener noreffer">AI 企业多云存储架构实践 | 深势科技分享</a></p>
+</li>
+<li>
+<p>网易 curve</p>
+</li>
+</ul>
+<h2 id="遗留问题">遗留问题</h2>
+<h3 id="监控冲突">监控冲突</h3>
+<ul>
+<li>
+<p>使用 kubesphere 监控</p>
+<p>卸载 cube-studio</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl delete configmap grafana-config all-grafana-dashboards --namespace<span class="o">=</span>monitoring
+</span></span><span class="line"><span class="cl">kubectl delete -f ./grafana/grafana-dp.yml
+</span></span><span class="line"><span class="cl">kubectl delete -f ./prometheus/prometheus-main.yml
+</span></span><span class="line"><span class="cl">kubectl delete -f ./operator/operator-crd.yml
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<ol>
+<li>删掉 kubesphere 和 cube 其中之一的 node-exporter  的 ds</li>
+<li>将 kubesphere 和 cube 其中之一的 prometheus-operator deploy  replicas 设置为 0</li>
+</ol>
+<h2 id="参考文档">参考文档</h2>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/6uaUFS01W2lxnM-SU4PsfQ" target="_blank" rel="noopener noreffer">腾讯音乐栾鹏：cube-studio开源一站式云原生机器学习平台</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-07-18</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/cube-on-kubesphere/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 " data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 " data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 "><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 "><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 " data-description="在 kubesphere 上搭建 cube-studio "><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 " data-description="在 kubesphere 上搭建 cube-studio "><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/cube-on-kubesphere/" data-title="基于 kubesphere 搭建一站式云原生机器学习平台 "><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/mysql-on-k8s/" class="prev" rel="prev" title="K8s 上的中间件"><i class="fas fa-angle-left fa-fw"></i>K8s 上的中间件</a>
+            <a href="/gitlab-printer/" class="next" rel="next" title="我用 极狐 Gitlab 议题 来点菜">我用 极狐 Gitlab 议题 来点菜<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZMX6LNNGD"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-9ZMX6LNNGD');
+            </script>
+        </div>
+        
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

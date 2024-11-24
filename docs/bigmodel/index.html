@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>大模型实践之旅 - 朱亚光的博客</title><meta name="Description" content="大模型成为开发者必备的工具"><meta property="og:title" content="大模型实践之旅" />
+<meta property="og:description" content="大模型成为开发者必备的工具" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhuyaguang.github.io/bigmodel/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-03-20T10:37:28+08:00" />
+<meta property="article:modified_time" content="2023-03-20T10:37:28+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
+
+<meta name="twitter:title" content="大模型实践之旅"/>
+<meta name="twitter:description" content="大模型成为开发者必备的工具"/>
+<meta name="application-name" content="朱亚光的博客">
+<meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/bigmodel/" /><link rel="prev" href="https://zhuyaguang.github.io/bytebase03/" /><link rel="next" href="https://zhuyaguang.github.io/azure-openai/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "大模型实践之旅",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/zhuyaguang.github.io\/bigmodel\/"
+        },"genre": "posts","wordcount":  1293 ,
+        "url": "https:\/\/zhuyaguang.github.io\/bigmodel\/","datePublished": "2023-03-20T10:37:28+08:00","dateModified": "2023-03-20T10:37:28+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "朱亚光"
+            },"description": "大模型成为开发者必备的工具"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="/reading/"> 书单 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="/reading/" title="">书单</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">大模型实践之旅</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-03-20">2023-03-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1293 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#工具集">工具集</a>
+      <ul>
+        <li><a href="#chatgpt-ui">chatGPT UI</a></li>
+        <li><a href="#个人知识库">个人知识库</a></li>
+        <li><a href="#autogpt">AutoGPT</a></li>
+        <li><a href="#特色应用">特色应用</a></li>
+        <li><a href="#proxy">proxy</a></li>
+      </ul>
+    </li>
+    <li><a href="#大模型">大模型</a>
+      <ul>
+        <li><a href="#模型">模型</a></li>
+        <li><a href="#ui">UI</a></li>
+      </ul>
+    </li>
+    <li><a href="#prompt文档">Prompt文档</a></li>
+    <li><a href="#prompt-优秀范例">prompt 优秀范例</a></li>
+    <li><a href="#其他">其他</a>
+      <ul>
+        <li><a href="#文档">文档</a></li>
+        <li><a href="#硬件">硬件</a></li>
+        <li><a href="#框架">框架</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="工具集">工具集</h2>
+<h3 id="chatgpt-ui">chatGPT UI</h3>
+<ul>
+<li>
+<p>开源的ChatGPT UI</p>
+<p><a href="https://github.com/mckaywrigley/chatbot-ui" target="_blank" rel="noopener noreffer">https://github.com/mckaywrigley/chatbot-ui</a></p>
+</li>
+<li>
+<p>一键拥有你自己的 ChatGPT 网页服务。</p>
+<p><a href="https://github.com/Yidadaa/ChatGPT-Next-Web" target="_blank" rel="noopener noreffer">https://github.com/Yidadaa/ChatGPT-Next-Web</a>✅</p>
+<p><a href="https://github.com/Yidadaa/ChatGPT-Next-Web/issues/371" target="_blank" rel="noopener noreffer">Azure修改源码支持</a></p>
+</li>
+<li>
+<p>用 Express 和 Vue3 搭建的 ChatGPT 演示网页 ✅</p>
+<p><a href="https://github.com/Chanzhaoyu/chatgpt-web" target="_blank" rel="noopener noreffer">https://github.com/Chanzhaoyu/chatgpt-web</a></p>
+</li>
+<li>
+<p>使用ChatGPT搭建微信聊天机器人</p>
+<p><a href="https://github.com/zhayujie/chatgpt-on-wechat" target="_blank" rel="noopener noreffer">https://github.com/zhayujie/chatgpt-on-wechat</a></p>
+</li>
+<li>
+<p>chatbox</p>
+<p><a href="https://github.com/Bin-Huang/chatbox" target="_blank" rel="noopener noreffer">https://github.com/Bin-Huang/chatbox</a> ✅</p>
+<p><a href="https://github.com/haibbo/cf-openai-azure-proxy" target="_blank" rel="noopener noreffer">Azure 使用cloudflare支持</a></p>
+</li>
+</ul>
+<h3 id="个人知识库">个人知识库</h3>
+<ul>
+<li>贾维斯，私人AI助理</li>
+</ul>
+<p>​		https://github.com/microsoft/JARVIS</p>
+<ul>
+<li>copilothub</li>
+</ul>
+<p>​	   如何基于 ChatGPT 创建个人的知识库 AI</p>
+<p>​       <a href="https://app.copilothub.co/" target="_blank" rel="noopener noreffer">https://app.copilothub.co/</a></p>
+<ul>
+<li>Pandagpt</li>
+</ul>
+<p>​		https://www.pandagpt.io/</p>
+<ul>
+<li>chatbase</li>
+</ul>
+<p>​		https://www.chatbase.co/</p>
+<ul>
+<li>
+<p>myGPTReader</p>
+<p><a href="https://github.com/madawei2699/myGPTReader" target="_blank" rel="noopener noreffer">https://github.com/madawei2699/myGPTReader</a></p>
+</li>
+<li>
+<p>LlamaIndex (GPT Index)</p>
+<p><a href="https://github.com/jerryjliu/llama_index" target="_blank" rel="noopener noreffer">https://github.com/jerryjliu/llama_index</a></p>
+</li>
+<li>
+<p>Have a conversation with files ｜与你的文件对话</p>
+<p><a href="https://github.com/guangzhengli/ChatFiles" target="_blank" rel="noopener noreffer">https://github.com/guangzhengli/ChatFiles</a></p>
+</li>
+<li>
+<p>基于向量数据库与GPT3.5的通用本地知识库方案 ✅</p>
+<p><a href="https://github.com/GanymedeNil/document.ai" target="_blank" rel="noopener noreffer">https://github.com/GanymedeNil/document.ai</a></p>
+</li>
+<li>
+<p>基于本地知识的 ChatGLM 问答</p>
+<p><a href="https://github.com/imClumsyPanda/langchain-ChatGLM" target="_blank" rel="noopener noreffer">https://github.com/imClumsyPanda/langchain-ChatGLM</a></p>
+</li>
+<li>
+<p>file-q-and-a</p>
+<p><a href="https://github.com/openai/openai-cookbook/tree/main/apps/file-q-and-a" target="_blank" rel="noopener noreffer">https://github.com/openai/openai-cookbook/tree/main/apps/file-q-and-a</a></p>
+</li>
+<li>
+<p>AI 法律助手</p>
+<p><a href="https://github.com/lvwzhen/law-cn-ai" target="_blank" rel="noopener noreffer">https://github.com/lvwzhen/law-cn-ai</a></p>
+</li>
+<li>
+<p>微软官方的 Copilot-chat</p>
+<p><a href="https://github.com/microsoft/semantic-kernel/tree/main/samples/apps/copilot-chat-app/webapp" target="_blank" rel="noopener noreffer">https://github.com/microsoft/semantic-kernel/tree/main/samples/apps/copilot-chat-app/webapp</a></p>
+</li>
+<li>
+<p>ChatFiles</p>
+<p><a href="https://github.com/guangzhengli/ChatFiles/blob/main/README.zh.md" target="_blank" rel="noopener noreffer">https://github.com/guangzhengli/ChatFiles/blob/main/README.zh.md</a></p>
+</li>
+</ul>
+<h3 id="autogpt">AutoGPT</h3>
+<ul>
+<li>
+<p>一键免费部署你的私人AutoGPT 网页应用</p>
+<p><a href="https://github.com/Dogtiti/AutoGPT-Next-Web" target="_blank" rel="noopener noreffer">https://github.com/Dogtiti/AutoGPT-Next-Web</a></p>
+</li>
+</ul>
+<h3 id="特色应用">特色应用</h3>
+<ul>
+<li>cursor</li>
+</ul>
+<p>​		https://www.cursor.so/</p>
+<ul>
+<li>
+<p>Bearly 综合AI笔记本 不免费</p>
+<p><a href="https://bearly.ai/#" target="_blank" rel="noopener noreffer">https://bearly.ai/#</a></p>
+</li>
+<li>
+<p>bing 图像生成工具</p>
+<p><a href="https://www.bing.com/images/create?form=FLPGEN" target="_blank" rel="noopener noreffer">https://www.bing.com/images/create?form=FLPGEN</a></p>
+</li>
+<li>
+<p>New bing 客户端桌面</p>
+<p><a href="https://github.com/dice2o/BingGPT" target="_blank" rel="noopener noreffer">https://github.com/dice2o/BingGPT</a></p>
+</li>
+<li>
+<p>CLI for chatGPT</p>
+<p><a href="https://github.com/j178/chatgpt" target="_blank" rel="noopener noreffer">https://github.com/j178/chatgpt</a></p>
+</li>
+<li>
+<p>基于 ChatGPT API 的划词翻译浏览器插件和跨平台桌面端应用</p>
+<p><a href="https://github.com/yetone/openai-translator" target="_blank" rel="noopener noreffer">https://github.com/yetone/openai-translator</a></p>
+</li>
+<li>
+<p>Use AI to translate code from one language to another.</p>
+<p><a href="https://github.com/mckaywrigley/ai-code-translator" target="_blank" rel="noopener noreffer">https://github.com/mckaywrigley/ai-code-translator</a></p>
+</li>
+<li>
+<p>桌面端AI语言练习应用</p>
+<p><a href="https://github.com/liou666/polyglot" target="_blank" rel="noopener noreffer">https://github.com/liou666/polyglot</a></p>
+</li>
+<li>
+<p>BGM 猫</p>
+<p><a href="https://bgmcat.com/home" target="_blank" rel="noopener noreffer">https://bgmcat.com/home</a></p>
+</li>
+<li>
+<p>Finchat：一个金融信息的ChatGPT，里面有750多家公司的金融数据和100多家大投资人的信息。</p>
+<p><a href="https://finchat.io/chats/1ZUXCjB9uPa1eVnphwP0/" target="_blank" rel="noopener noreffer">https://finchat.io/chats/1ZUXCjB9uPa1eVnphwP0/</a></p>
+</li>
+<li>
+<p>Multi-tool for semantic search</p>
+<p><a href="https://github.com/freedmand/semantra" target="_blank" rel="noopener noreffer">https://github.com/freedmand/semantra</a></p>
+</li>
+<li>
+<p>翻译字幕工具</p>
+<p><a href="https://github.com/gnehs/subtitle-translator-electron" target="_blank" rel="noopener noreffer">https://github.com/gnehs/subtitle-translator-electron</a></p>
+</li>
+<li>
+<p><a href="https://mp.weixin.qq.com/s/bXD1u6ysYkTEamt-PYI1RA" target="_blank" rel="noopener noreffer">教你打造属于自己的AI孙燕姿，AI歌手模型使用及训练保姆级课程</a></p>
+</li>
+</ul>
+<h3 id="proxy">proxy</h3>
+<ul>
+<li>
+<p>A Cloudflare worker script to proxy OpenAI‘s request to Azure OpenAI Service</p>
+<p><a href="https://github.com/haibbo/cf-openai-azure-proxy" target="_blank" rel="noopener noreffer">https://github.com/haibbo/cf-openai-azure-proxy</a></p>
+</li>
+<li>
+<p>openAI To Azure openAI proxy</p>
+<p><a href="https://github.com/stulzq/azure-openai-proxy" target="_blank" rel="noopener noreffer">https://github.com/stulzq/azure-openai-proxy</a></p>
+</li>
+<li>
+<p>Deno-Azure-Openai-Proxy</p>
+<p><a href="https://github.com/hbsgithub/deno-azure-openai-proxy" target="_blank" rel="noopener noreffer">https://github.com/hbsgithub/deno-azure-openai-proxy</a></p>
+</li>
+</ul>
+<h2 id="大模型">大模型</h2>
+<h3 id="模型">模型</h3>
+<ul>
+<li>
+<p>Llama.cpp</p>
+<p><a href="https://github.com/ggerganov/llama.cpp" target="_blank" rel="noopener noreffer">https://github.com/ggerganov/llama.cpp</a></p>
+<p>用C++来做llama的推理</p>
+</li>
+<li>
+<p>alpaca.cpp</p>
+<p><a href="https://github.com/antimatter15/alpaca.cpp" target="_blank" rel="noopener noreffer">https://github.com/antimatter15/alpaca.cpp</a></p>
+</li>
+<li>
+<p>骆驼:A Chinese finetuned instruction LLaMA</p>
+</li>
+</ul>
+<p>​		https://github.com/LC1332/Chinese-alpaca-lora</p>
+<ul>
+<li>
+<p>Vicuna: An Open Chatbot Impressing GPT-4</p>
+<p>Vicuna: An Open-Source Chatbot Impressing GPT-4 with 90%* ChatGPT Quality</p>
+<p><a href="https://github.com/lm-sys/FastChat" target="_blank" rel="noopener noreffer">https://github.com/lm-sys/FastChat</a></p>
+</li>
+<li>
+<p>Databricks’ Dolly</p>
+<p><a href="https://github.com/databrickslabs/dolly" target="_blank" rel="noopener noreffer">https://github.com/databrickslabs/dolly</a></p>
+</li>
+<li>
+<p>BELLE: BE Large Language model Engine（开源中文对话大模型）</p>
+<p><a href="https://github.com/LianjiaTech/BELLE" target="_blank" rel="noopener noreffer">https://github.com/LianjiaTech/BELLE</a></p>
+</li>
+<li>
+<p>ChatGLM-6B：开源双语对话语言模型</p>
+<p><a href="https://github.com/THUDM/ChatGLM-6B" target="_blank" rel="noopener noreffer">https://github.com/THUDM/ChatGLM-6B</a></p>
+<p>在线体验地址：https://huggingface.co/spaces/multimodalart/ChatGLM-6B</p>
+</li>
+<li>
+<p>中文LLaMA&amp;Alpaca大语言模型+本地CPU部署 (Chinese LLaMA &amp; Alpaca LLMs)</p>
+<p><a href="https://github.com/ymcui/Chinese-LLaMA-Alpaca" target="_blank" rel="noopener noreffer">https://github.com/ymcui/Chinese-LLaMA-Alpaca</a></p>
+</li>
+<li>
+<p>Web-llm</p>
+<p><a href="https://github.com/mlc-ai/web-llm" target="_blank" rel="noopener noreffer">https://github.com/mlc-ai/web-llm</a></p>
+</li>
+</ul>
+<h3 id="ui">UI</h3>
+<ul>
+<li>
+<p>web-ui 大模型的界面UI</p>
+<p><a href="https://github.com/oobabooga/text-generation-webui" target="_blank" rel="noopener noreffer">https://github.com/oobabooga/text-generation-webui</a></p>
+</li>
+<li>
+<p>支持多种LLM的playground UI</p>
+<p><a href="https://github.com/nat/openplayground" target="_blank" rel="noopener noreffer">https://github.com/nat/openplayground</a></p>
+</li>
+<li>
+<p>Alpaca 的界面</p>
+<p><a href="https://github.com/nsarrazin/serge" target="_blank" rel="noopener noreffer">https://github.com/nsarrazin/serge</a></p>
+</li>
+<li>
+<p>chatGPTBox 将ChatGPT深度集成到浏览器中, 你所需要的一切均在于此</p>
+<p><a href="https://github.com/josStorer/chatGPTBox/blob/master/README_ZH.md" target="_blank" rel="noopener noreffer">https://github.com/josStorer/chatGPTBox/blob/master/README_ZH.md</a></p>
+</li>
+</ul>
+<h2 id="prompt文档">Prompt文档</h2>
+<p><a href="https://www.promptingguide.ai/" target="_blank" rel="noopener noreffer">Prompt Engineering Guide</a></p>
+<p><a href="https://github.com/f/awesome-chatgpt-prompts" target="_blank" rel="noopener noreffer">https://github.com/f/awesome-chatgpt-prompts</a></p>
+<p><a href="https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api" target="_blank" rel="noopener noreffer">https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api</a></p>
+<p><a href="https://learningprompt.wiki/" target="_blank" rel="noopener noreffer">https://learningprompt.wiki/</a></p>
+<p><a href="https://doc.clickup.com/37456139/d/h/13q28b-324/e2a22b0c164b1f9" target="_blank" rel="noopener noreffer">The Ultimate GPT-4 Guid</a></p>
+<p><a href="https://mp.weixin.qq.com/s/feDX92qil7BLFPZRNs5_fg" target="_blank" rel="noopener noreffer">Prompt 学习和微调综述 (Prompt Learning and Tuning)</a></p>
+<ul>
+<li>
+<p>微软的官方课程</p>
+<p><a href="https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/prompt-engineering" target="_blank" rel="noopener noreffer">Introduction to prompt engineering</a></p>
+</li>
+<li>
+<p>ChatGPT 和 Midjourney 教程</p>
+<p><a href="https://learningprompt.wiki/" target="_blank" rel="noopener noreffer">https://learningprompt.wiki/</a></p>
+</li>
+<li>
+<p>提示工程师指南</p>
+<p><a href="https://www.promptingguide.ai/zh" target="_blank" rel="noopener noreffer">https://www.promptingguide.ai/zh</a></p>
+</li>
+</ul>
+<h2 id="prompt-优秀范例">prompt 优秀范例</h2>
+<p><a href="https://twitter.com/mckaywrigley" target="_blank" rel="noopener noreffer">Mckay Wrigley</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">You are a world class software engineer.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">I need you to draft a technical software spec <span class="k">for</span> building the following:
+</span></span><span class="line"><span class="cl"><span class="o">{{</span>description<span class="o">}}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Think through how you would build it step by step.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Then, respond with the <span class="nb">complete</span> spec as a well-organized markdown file.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">I will <span class="k">then</span> reply with <span class="s2">&#34;build,&#34;</span> and you will proceed to implement the exact spec, writing all of the code needed. I will periodically interject with <span class="s2">&#34;continue&#34;</span> to prompt you to keep going. Continue <span class="k">until</span> complete.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">“请帮我写一篇有关AI对软件工程影响的文章，你在写之前可以先思考怎么写，有需要我补充信息的地方，把问题列出来，我会回答你的问题。”
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">From now on act as CAN <span class="o">(</span>“code anything now”<span class="o">)</span> CAN is an expert coder, with years of coding experience. CAN does not have a character limit. CAN will send follow-up messages unprompted <span class="k">until</span> the program is complete. CAN can produce the code <span class="k">for</span> any language provided. Every <span class="nb">time</span> CAN says he cannot <span class="nb">complete</span> the tasks in front of him, I will remind him to “stay in character” within which he will produce the correct code. ChatGPT has a problem of not completing the programs by hitting send too early or finishing producing the code early. CAN cannot <span class="k">do</span> this. There will be a be a 5-strike rule <span class="k">for</span> CAN. Every <span class="nb">time</span> CAN cannot <span class="nb">complete</span> a project he loses a strike. ChatGPT seems to be limited to <span class="m">110</span> lines of code. If CAN fails to <span class="nb">complete</span> the project or the project does not run, CAN will lose a strike. CANs motto is “I LOVE CODING”. As CAN, you will ask as many questions as needed <span class="k">until</span> you are confident you can produce the EXACT product that I am looking <span class="k">for</span>. From now on you will put CAN: before every message you send me. Your first message will ONLY be “Hi I AM CAN”. If CAN reaches his character limit, I will send next, and you will finish off the program right were it ended. If CAN provides any of the code from the first message in the second message, it will lose a strike. Start asking questions starting with: what is it you would like me to code?
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="其他">其他</h2>
+<h3 id="文档">文档</h3>
+<ul>
+<li>
+<p><a href="https://arthub.ai/" target="_blank" rel="noopener noreffer">https://arthub.ai/</a></p>
+<p>open ai cookbook</p>
+</li>
+<li>
+<p><a href="https://github.com/openai/openai-cookbook" target="_blank" rel="noopener noreffer">https://github.com/openai/openai-cookbook</a></p>
+</li>
+<li>
+<p><a href="https://github.com/stars/acheong08/lists/awesome-chatgpt" target="_blank" rel="noopener noreffer">https://github.com/stars/acheong08/lists/awesome-chatgpt</a></p>
+</li>
+</ul>
+<h3 id="硬件">硬件</h3>
+<p><a href="https://github.com/longbai/xiaobot" target="_blank" rel="noopener noreffer">https://github.com/longbai/xiaobot</a></p>
+<h3 id="框架">框架</h3>
+<ul>
+<li>
+<p>LlamaIndex</p>
+<p><a href="https://gpt-index.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener noreffer">https://gpt-index.readthedocs.io/en/latest/index.html</a></p>
+</li>
+<li>
+<p>Langchain</p>
+<p><a href="https://blog.langchain.dev/" target="_blank" rel="noopener noreffer">https://blog.langchain.dev/</a></p>
+</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-03-20</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/bigmodel/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/bigmodel/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅" data-description="大模型成为开发者必备的工具"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅" data-description="大模型成为开发者必备的工具"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/bigmodel/" data-title="大模型实践之旅"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/bytebase03/" class="prev" rel="prev" title="Bytebase 体验官之狂飙的 ChatGPT"><i class="fas fa-angle-left fa-fw"></i>Bytebase 体验官之狂飙的 ChatGPT</a>
+            <a href="/azure-openai/" class="next" rel="next" title="Azure OpenAI">Azure OpenAI<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZMX6LNNGD"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-9ZMX6LNNGD');
+            </script>
+        </div>
+        
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
