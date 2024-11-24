@@ -2,6 +2,7 @@
 title: "自律的生活"
 date: 2024-11-17T21:19:56+08:00
 draft: true
+description: "自律让我自由"
 featuredImage: https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/11732403575_.pic.jpg
 ---
 

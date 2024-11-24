@@ -2,7 +2,7 @@
 title: "Cursor 和 Windsurf 使用技巧"
 date: 2024-11-17T07:41:32+08:00
 draft: true
-description: " 真的很强"
+description: " AI IDE开始卷起来了"
 featuredImage: https://i.ytimg.com/vi/AD4BLcJf5Bg/maxresdefault.jpg
 ---
 
