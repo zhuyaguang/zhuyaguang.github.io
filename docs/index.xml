@@ -4,9 +4,16 @@
         <link>https://zhuyaguang.github.io/</link>
         <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Sun, 17 Nov 2024 21:19:56 &#43;0800</lastBuildDate>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Tue, 26 Nov 2024 18:14:01 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>利用 GitHub pages 构建类似 byconity 的网站</title>
+    <link>https://zhuyaguang.github.io/github-byconity/</link>
+    <pubDate>Tue, 26 Nov 2024 18:14:01 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/github-byconity/</guid>
+    <description><![CDATA[利用 GitHub pages 构建类似 byconity 的网站 新建一个GitHub 账号 比如： zhuyaguang782126 新建一个仓库 比如： zhuyaguang782126.github.io 下载 byconity 源码 1、更新 pnpm 到最新版本 npm install -g pnpm@latest 2、下载 byconity 源码 git clone https://github.com/ByConity/byconity.github.io.git 3、进]]></description>
+</item><item>
     <title>自律的生活2024</title>
     <link>https://zhuyaguang.github.io/how-to-live-healthy/</link>
     <pubDate>Sun, 17 Nov 2024 21:19:56 &#43;0800</pubDate>
@@ -77,12 +84,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/</guid>
     <description><![CDATA[]]></description>
-</item><item>
-    <title>Kubeedge 代码解析（更新中）</title>
-    <link>https://zhuyaguang.github.io/kubeedge-code/</link>
-    <pubDate>Thu, 21 Mar 2024 09:02:57 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/kubeedge-code/</guid>
-    <description><![CDATA[kubeEdge 代码解析 目录 CHANGELOG 版本新特性 其他组件依赖比较大的三个组件，beehive，viaduct, mapper-framework beehive beehive是一个基于go channel的消息]]></description>
 </item></channel>
 </rss>
