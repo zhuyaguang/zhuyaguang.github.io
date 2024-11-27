@@ -9,9 +9,11 @@
 
 ### 新建一个仓库
 
+> 注意仓库名必须以**用户名**+github.io 
+
 比如： zhuyaguang782126.github.io
 
-![123](image.png)
+![123](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image.png)
 
 ### 下载 byconity 源码
 
@@ -37,6 +39,8 @@ pnpm start
 
 6、访问 http://localhost:3000
 
+能够访问说明本地环境配置OK了
+
 
 ### 拷贝代码到 zhuyaguang782126.github.io
 
@@ -58,22 +62,55 @@ git add . && git commit -m "update" && git push -u origin gh-pages
 
 ### 部署到 GitHub pages
 
+#### 设置环境变量
 
-#### .github/workflows/deploy.yml  设置 github_token: ${{ secrets.GITHUB_TOKEN }} 
+代码推送到 GitHub 上之后，会自动触发 GitHub action，然后会发现跑失败了，看下日志 应该是获取不到 secrets.GITHUB_TOKEN 这个值。
 
-在 GitHub Actions 中，GITHUB_TOKEN 是自动提供的，你不需要手动设置它。但如果你需要设置其他自定义变量，你可以通过 GitHub 仓库的 Settings 来设置。以下是设置步骤：
+我们修改下  代码仓库   `.github/workflows/deploy.yml  ` ` 路径下到 值，把 secrets.GITHUB_TOKEN 改成  secrets.ASS  
 
-打开你的 GitHub 仓库
-点击顶部的 "Settings" 标签
-在左侧菜单中，点击 "Secrets and variables" 下的 "Actions"
-在这里你可以添加两种类型的变量：
-"Secrets": 用于敏感信息（加密存储）
-"Variables": 用于非敏感信息（明文存储）
-要在 GitHub Actions 工作流中使用这些变量：
+![image-20241127075631046](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20241127075631046.png)
 
-对于 Secrets: ${{ secrets.YOUR_SECRET_NAME }}
-对于 Variables: ${{ vars.YOUR_VARIABLE_NAME }}
-在你的 deploy.yml 中，已经在使用 GITHUB_TOKEN secret：
+
+
+#### secrets.ASS 
+
+1、secrets.ASS  是新的变量 如何设置呢
+
+![image-20241127080414360](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20241127080414360.png)
+
+
+
+2、点击 New repository secret 
+
+![image-20241127080747811](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20241127080747811.png)
+
+
+
+3、那token 怎么获取呢
+
+3.1、第一步打开 GitHub 账号个人设置
+
+![image-20241127081259361](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20241127081259361.png)
+
+3.2、打开开发者设置
+
+![image-20241127081342126](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20241127081342126.png)
+
+
+
+
+
+3.3、打开 tokens
+
+*![image-20241127081420503](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20241127081420503.png)**
+
+3.4、配置 token
+
+下面框都选上
+
+![image-20241127081521224](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20241127081521224.png)
+
+最后点生成
 
 #### 修改完 部署到 GitHub pages
 

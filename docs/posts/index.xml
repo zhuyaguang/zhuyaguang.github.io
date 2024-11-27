@@ -10,7 +10,7 @@
     <pubDate>Tue, 26 Nov 2024 18:14:01 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/github-byconity/</guid>
-    <description><![CDATA[利用 GitHub pages 构建类似 byconity 的网站 新建一个GitHub 账号 比如： zhuyaguang782126 新建一个仓库 比如： zhuyaguang782126.github.io 下载 byconity 源码 1、更新 pnpm 到最新版本 npm install -g pnpm@latest 2、下载 byconity 源码 git clone https://github.com/ByConity/byconity.github.io.git 3、进]]></description>
+    <description><![CDATA[利用 GitHub pages 构建类似 byconity 的网站 新建一个GitHub 账号 比如： zhuyaguang782126 新建一个仓库 注意仓库名必须以用户名+github.io 比如： zhuyaguang782126.github.io 下载 byconity 源码 1、更新 pnpm 到]]></description>
 </item><item>
     <title>自律的生活2024</title>
     <link>https://zhuyaguang.github.io/how-to-live-healthy/</link>
