@@ -4,9 +4,16 @@
         <link>https://zhuyaguang.github.io/</link>
         <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Tue, 26 Nov 2024 18:14:01 &#43;0800</lastBuildDate>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Thu, 23 Jan 2025 15:21:16 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>通过cadvistor在Kubeedge监控边缘节点pod信息</title>
+    <link>https://zhuyaguang.github.io/cadvistor-on-kubeedge/</link>
+    <pubDate>Thu, 23 Jan 2025 15:21:16 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/cadvistor-on-kubeedge/</guid>
+    <description><![CDATA[KubeEdge 监控三部曲：通过cadvistor在Kubeedge监控边缘节点pod信息 KubeEdge 上的监控，之前我们已经实现了通过 Node-exporter 实现节点信息监控，通过 gpu-exporter 实现]]></description>
+</item><item>
     <title>利用 GitHub pages 构建类似 byconity 的网站</title>
     <link>https://zhuyaguang.github.io/github-byconity/</link>
     <pubDate>Tue, 26 Nov 2024 18:14:01 &#43;0800</pubDate>
@@ -77,12 +84,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/prometheus-jetson-on-kubeedge-in-kubesphere/</guid>
     <description><![CDATA[KubeSphere 边缘节点的可观测性 KubeSphere 愿景是打造一个以 Kubernetes 为内核的云原生分布式操作系统，它的架构可以非常方便地使第三方应用与云原生生态组件进行即插即用（plu]]></description>
-</item><item>
-    <title>基于 kubesphere 和 kubeedge 在 Jetson 上运行 GPU 应用（docker/containerd）</title>
-    <link>https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/</link>
-    <pubDate>Thu, 21 Mar 2024 09:07:51 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/jetson-on-kubeedge-use-gpu/</guid>
-    <description><![CDATA[]]></description>
 </item></channel>
 </rss>
