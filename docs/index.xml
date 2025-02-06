@@ -4,9 +4,16 @@
         <link>https://zhuyaguang.github.io/</link>
         <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Thu, 23 Jan 2025 16:31:24 &#43;0800</lastBuildDate>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Thu, 06 Feb 2025 15:52:45 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>2024总结</title>
+    <link>https://zhuyaguang.github.io/2024/</link>
+    <pubDate>Thu, 06 Feb 2025 15:52:45 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/2024/</guid>
+    <description><![CDATA[2024 年总结 ![7dab5d0beaebe2417df5af3a47a8809](C:\Users\DELL\Documents\WeChat Files\love1368\FileStorage\Temp\7dab5d0beaebe2417df5af3a47a8809.jpg) 生活 今年除了出差，没有出去玩过。8月之前，还从来没有坐过飞机，到现在已经飞了6次。点亮了三座城市，深圳，银川，成都。 很遗憾没有带]]></description>
+</item><item>
     <title>实现一个controller 同步远程私有集群状态</title>
     <link>https://zhuyaguang.github.io/k8s-node-controller/</link>
     <pubDate>Thu, 23 Jan 2025 16:31:24 &#43;0800</pubDate>
@@ -77,12 +84,5 @@
     <author>作者</author>
     <guid>https://zhuyaguang.github.io/scheduler/</guid>
     <description><![CDATA[fork Scheduler Plugins 开发调度逻辑 github 下载完代码，新建一个你自己的调度插件文件目录，spacecloud.go 里面写上你的调度节点逻辑 1 2 3 4 5 6 7 8 9 10 11 12]]></description>
-</item><item>
-    <title>2024 meetup</title>
-    <link>https://zhuyaguang.github.io/2024meetup/</link>
-    <pubDate>Mon, 25 Mar 2024 16:42:03 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/2024meetup/</guid>
-    <description><![CDATA[2024搞天基的一年]]></description>
 </item></channel>
 </rss>
