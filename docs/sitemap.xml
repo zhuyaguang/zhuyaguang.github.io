@@ -2,11 +2,11 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://zhuyaguang.github.io/2024/</loc><lastmod>2025-02-06T15:52:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://zhuyaguang.github.io/posts/</loc><lastmod>2025-02-06T15:52:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://zhuyaguang.github.io/</loc><lastmod>2025-02-06T15:52:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://zhuyaguang.github.io/k8s-node-controller/</loc><lastmod>2025-01-23T16:31:24&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-            <loc>https://zhuyaguang.github.io/cadvistor-on-kubeedge/</loc><lastmod>2025-01-23T15:21:16&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>https://zhuyaguang.github.io/2024/</loc><lastmod>2025-02-06T15:52:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://zhuyaguang.github.io/posts/</loc><lastmod>2025-02-06T15:52:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://zhuyaguang.github.io/</loc><lastmod>2025-02-06T15:52:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://zhuyaguang.github.io/k8s-node-controller/</loc><lastmod>2025-01-23T16:31:24&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://zhuyaguang.github.io/cadvistor-on-kubeedge/</loc><lastmod>2025-01-23T15:21:16&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/github-byconity/</loc><lastmod>2024-11-26T18:14:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/how-to-live-healthy/</loc><lastmod>2024-11-17T21:19:56&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://zhuyaguang.github.io/cursor/</loc><lastmod>2024-11-17T07:41:32&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
