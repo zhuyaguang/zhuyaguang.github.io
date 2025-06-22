@@ -2,7 +2,12 @@
 title: "我和AI论空船"
 date: 2025-06-22T14:08:50+08:00
 draft: true
+featuredImage: https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/8K5P27inDTsVMyfrlms%253D.png
 ---
+
+
+
+
 
 ## Claude 空船的智慧：从庄子寓言到现代生活的觉察
 
