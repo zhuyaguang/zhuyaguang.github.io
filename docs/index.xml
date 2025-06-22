@@ -4,9 +4,16 @@
         <link>https://zhuyaguang.github.io/</link>
         <description>zhuyaguang blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>zhuyaguang1368@163.com (朱亚光)</managingEditor>
-            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Fri, 20 Jun 2025 15:35:26 &#43;0800</lastBuildDate>
+            <webMaster>zhuyaguang1368@163.com (朱亚光)</webMaster><lastBuildDate>Sun, 22 Jun 2025 14:08:50 &#43;0800</lastBuildDate>
             <atom:link href="https://zhuyaguang.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>我和AI论空船</title>
+    <link>https://zhuyaguang.github.io/ai-talk/</link>
+    <pubDate>Sun, 22 Jun 2025 14:08:50 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://zhuyaguang.github.io/ai-talk/</guid>
+    <description><![CDATA[空船的智慧：从庄子寓言到现代生活的觉察 庄子在《山木》中讲过一个故事：有人看到一艘大船快速驶来，眼看就要撞上，他愤怒地大喊大叫，结果发现船上空]]></description>
+</item><item>
     <title>Vibe Coding</title>
     <link>https://zhuyaguang.github.io/vibe-coding/</link>
     <pubDate>Fri, 20 Jun 2025 15:35:26 &#43;0800</pubDate>
@@ -77,12 +84,5 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Grafana_logo.svg/1200px-Grafana_logo.svg.png" referrerpolicy="no-referrer">
             </div>Grafana 告警的使用]]></description>
-</item><item>
-    <title>使用 Prometheus 监控 KubeEdge 边缘节点</title>
-    <link>https://zhuyaguang.github.io/kubeedge-on-prometheus/</link>
-    <pubDate>Wed, 12 Jun 2024 13:45:35 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://zhuyaguang.github.io/kubeedge-on-prometheus/</guid>
-    <description><![CDATA[使用 Prometheus 监控 KubeEdge 边缘节点 环境信息 组件 版本 containerd 1.7.2 k8s 1.26.0 KubeEdge 1.15.1或者1.17.0 Jetson型号 NVIDIA Jetson Xavier NX (16GB ram) 部署 prometheus 我们可以直接使用 kube-prometheus 的 Helm Charts 来进行快]]></description>
 </item></channel>
 </rss>
