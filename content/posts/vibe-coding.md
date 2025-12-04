@@ -12,7 +12,7 @@ draft: true
 | ----------- | -------------- | ------------------------- |
 | Trae VIP    | 21.71          | 官网                      |
 | Gemini Pro  | 60             | 咸鱼 购买教育邮箱         |
-| Claude Code | 90+169             | 代理，买了两天+一周体验券 |
+| Claude Code | 259           | 代理，买了两天+一周体验券 |
 |             |                |                           |
 |             |                |                           |
 
@@ -53,6 +53,16 @@ trae 设置从vscode同步配置
 
 ![image-20250620162410653](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20250620162410653.png)
 
+
+
+#### Antigravity
+
+
+
+ 截止到2025年12月，最终使用的IDE主要是  Antigravity + vscode。其它的因为不免费+缺少大模型而渐渐不再使用。
+
+Kiro TraeCN Qoder 
+
 ### Claude Code
 
 ![Claude Code Review: How to be a 10x Coder](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/Claude-Code-Img.jpg)
@@ -79,3 +89,8 @@ Claude code +  trae
 
 本项目是一个基于DDPG（Deep Deterministic Policy Gradient）强化学习算法的分布式星地协同推理任务调度系统。系统能够智能地在卫星和地面站之间分配计算任务，优化资源利用率，降低通信成本，提升整体系统性能。
 
+
+
+#### 案例三：星地通信框架
+
+Claude code
