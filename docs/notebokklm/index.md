@@ -141,7 +141,7 @@
 1. 去[https://openstax.org](https://t.co/icY3Dfq9xd) 里找本感兴趣的教材，下载PDF 
 2. 上传到notebookLM里 
 3. 使用Gemini生成notebookLM的教材导读 
-4. 4去notebookLM里放入教材导读prompt，生成音频或者视频
+4. 去notebookLM里放入教材导读prompt，生成音频或者视频
 
 例子：
 
