@@ -1,5 +1,5 @@
 ---
-title: "Notebokklm"
+title: "NoteBookLM 使用总结"
 date: 2025-12-13T10:27:31+08:00
 draft: true
 ---
