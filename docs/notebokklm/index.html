@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Notebokklm - 朱亚光的博客</title><meta name="Description" content="true"><meta property="og:title" content="Notebokklm" />
+<meta property="og:description" content="NoteBookLM 使用总结 1、生成儿童绘本或者PPT 第一步使用Gemini生成prompt 1 根据列那狐故事帮我完成一个小学生作业PPT，来讲述这个故事 1 2 3" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhuyaguang.github.io/notebokklm/" /><meta property="og:image" content="https://zhuyaguang.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-12-13T10:27:31+08:00" />
+<meta property="article:modified_time" content="2025-12-13T10:27:31+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhuyaguang.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Notebokklm"/>
+<meta name="twitter:description" content="NoteBookLM 使用总结 1、生成儿童绘本或者PPT 第一步使用Gemini生成prompt 1 根据列那狐故事帮我完成一个小学生作业PPT，来讲述这个故事 1 2 3"/>
+<meta name="application-name" content="朱亚光的博客">
+<meta name="apple-mobile-web-app-title" content="朱亚光的博客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhuyaguang.github.io/notebokklm/" /><link rel="prev" href="https://zhuyaguang.github.io/2025meetup/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Notebokklm",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/zhuyaguang.github.io\/notebokklm\/"
+        },"genre": "posts","wordcount":  3773 ,
+        "url": "https:\/\/zhuyaguang.github.io\/notebokklm\/","datePublished": "2025-12-13T10:27:31+08:00","dateModified": "2025-12-13T10:27:31+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "朱亚光"
+            },"description": ""
+    }
+    </script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9164191817861622"
+            crossorigin="anonymous"></script>
+    </head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="/reading/"> 书单 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="朱亚光的博客">朱亚光的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="/reading/" title="">书单</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Notebokklm</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/zhuyaguang" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>朱亚光</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2025-12-13">2025-12-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3773 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1生成儿童绘本或者ppt">1、生成儿童绘本或者PPT</a></li>
+    <li><a href="#2学习专业知识">2、学习专业知识</a></li>
+    <li><a href="#3读书">3、读书</a></li>
+    <li><a href="#4读论文">4、读论文</a></li>
+    <li><a href="#5其它">5、其它</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="notebooklm-使用总结">NoteBookLM 使用总结</h1>
+<h2 id="1生成儿童绘本或者ppt">1、生成儿童绘本或者PPT</h2>
+<ul>
+<li>第一步使用Gemini生成prompt</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">根据列那狐故事帮我完成一个小学生作业PPT，来讲述这个故事
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">这是一个非常有趣的主题！《列那狐的故事》（Reynard the Fox）是一部中世纪的经典动物寓言，主角列那狐聪明、狡猾，经常捉弄其他比他强壮的动物。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">针对小学生群体，PPT的设计需要注意以下几点：
+</span></span><span class="line"><span class="cl">1.  **故事选择**：列那狐有些故事比较黑暗或成人化，我们要选择**有趣、简单、强调智慧战胜蛮力**的段落。最经典且适合孩子的是“**列那狐教狼钓鱼**”的故事。
+</span></span><span class="line"><span class="cl">2.  **语言风格**：简单生动，富有童趣，避免生僻字。
+</span></span><span class="line"><span class="cl">3.  **视觉效果**：图片要多，文字要少。每一页最好都配有卡通插图。
+</span></span><span class="line"><span class="cl">4.  **教育意义**：结尾要有一个简单易懂的道理。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">下面是一个为你设计的小学生作业PPT大纲，共约10-12页。你可以根据这个框架去寻找图片和制作。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">### PPT整体风格建议
+</span></span><span class="line"><span class="cl">* **背景**：森林、卡通风格。
+</span></span><span class="line"><span class="cl">* **字体**：可爱的卡通字体，字号要大。
+</span></span><span class="line"><span class="cl">* **配图**：这是关键！一定要找可爱的动物卡通图（狐狸、狼、狮子等）。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">### PPT内容大纲
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#### 第1页：封面页
+</span></span><span class="line"><span class="cl">* **标题**：《机智的列那狐》
+</span></span><span class="line"><span class="cl">* **副标题**：一个关于聪明和恶作剧的故事
+</span></span><span class="line"><span class="cl">* **署名**：[你的名字/班级]
+</span></span><span class="line"><span class="cl">* **配图**：一只看起来非常聪明、嘴角带着坏笑的卡通红狐狸。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#### 第2页：主角介绍——我叫列那！
+</span></span><span class="line"><span class="cl">* **标题**：认识一下主角
+</span></span><span class="line"><span class="cl">* **内容**：
+</span></span><span class="line"><span class="cl">    * 大家好，我是**列那**（Reynard）！
+</span></span><span class="line"><span class="cl">    * 我是一只红狐狸。
+</span></span><span class="line"><span class="cl">    * 我的特点：聪明、机智，最喜欢搞点小恶作剧。
+</span></span><span class="line"><span class="cl">    * 我的口头禅：“遇事要动脑筋哦！”
+</span></span><span class="line"><span class="cl">* **配图**：列那狐指着自己脑袋，眨眼睛的图片。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#### 第3页：配角介绍——我的“笨”邻居们
+</span></span><span class="line"><span class="cl">* **标题**：森林里的伙伴们
+</span></span><span class="line"><span class="cl">* **内容**：
+</span></span><span class="line"><span class="cl">    * **伊桑格兰（狼）**：个子大，力气大，但是有点笨，还很贪吃。
+</span></span><span class="line"><span class="cl">    * **诺博尔（狮子）**：森林的国王，威严但有时也会被骗。
+</span></span><span class="line"><span class="cl">    * 今天，我要讲讲我和**狼大哥**的故事。
+</span></span><span class="line"><span class="cl">* **配图**：一只看起来呆头呆脑的卡通狼，和一只戴皇冠的卡通狮子。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#### 第4页：故事开始——寒冷的冬天
+</span></span><span class="line"><span class="cl">* **标题**：肚子好饿啊！
+</span></span><span class="line"><span class="cl">* **内容**：
+</span></span><span class="line"><span class="cl">    * 有一年冬天，天气特别冷，河水都结冰了。
+</span></span><span class="line"><span class="cl">    * 森林里的动物们都找不到吃的。
+</span></span><span class="line"><span class="cl">    * 大灰狼伊桑格兰饿得肚子咕咕叫，正巧碰到了列那狐。
+</span></span><span class="line"><span class="cl">* **配图**：白雪皑皑的森林背景，大灰狼捂着肚子，一脸苦相。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#### 第5页：列那的“好主意”
+</span></span><span class="line"><span class="cl">* **标题**：一个钓鱼的秘诀
+</span></span><span class="line"><span class="cl">* **内容**：
+</span></span><span class="line"><span class="cl">    * 列那狐其实偷到了几条鱼，但他不想分给狼。
+</span></span><span class="line"><span class="cl">    * 他对狼说：“狼大哥，我知道一个钓鱼的好办法！”
+</span></span><span class="line"><span class="cl">    * 狼急忙问：“快告诉我！快告诉我！”
+</span></span><span class="line"><span class="cl">* **配图**：列那狐手里拿着一条鱼，狡猾地笑着；狼流着口水凑过去听。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#### 第6页：特殊的钓鱼竿
+</span></span><span class="line"><span class="cl">* **标题**：用尾巴钓鱼？
+</span></span><span class="line"><span class="cl">* **内容**：
+</span></span><span class="line"><span class="cl">    * 列那把狼带到结冰的河边，在冰上凿了一个洞。
+</span></span><span class="line"><span class="cl">    * 列那说：“把你的长尾巴伸进冰洞里，鱼就会咬住你的尾巴。”
+</span></span><span class="line"><span class="cl">    * “记住，要多等一会儿，尾巴越重，说明钓的鱼越多！”
+</span></span><span class="line"><span class="cl">* **配图**：狼坐在冰洞边，把尾巴伸进水里的卡通图。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#### 第7页：贪心的狼
+</span></span><span class="line"><span class="cl">* **标题**：再等一会儿……
+</span></span><span class="line"><span class="cl">* **内容**：
+</span></span><span class="line"><span class="cl">    * 狼听了列那的话，一动不动地坐在冰上。
+</span></span><span class="line"><span class="cl">    * 天气越来越冷，冰洞的水开始慢慢结冰了。
+</span></span><span class="line"><span class="cl">    * 狼觉得尾巴越来越重，心里想：“哇！肯定钓到大鱼了！我再等一会儿！”
+</span></span><span class="line"><span class="cl">* **配图**：狼在寒风中瑟瑟发抖，但是脸上露出贪婪的笑容，尾巴周围的冰块在变厚。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#### 第8页：糟糕！动不了了！
+</span></span><span class="line"><span class="cl">* **标题**：被冻住啦！
+</span></span><span class="line"><span class="cl">* **内容**：
+</span></span><span class="line"><span class="cl">    * 过了一好久，狼想把尾巴提起来。
+</span></span><span class="line"><span class="cl">    * 哎呀！糟了！
+</span></span><span class="line"><span class="cl">    * 尾巴已经被牢牢地冻在厚厚的冰里，根本拔不出来！
+</span></span><span class="line"><span class="cl">    * 列那狐早就躲在一边偷笑呢。
+</span></span><span class="line"><span class="cl">* **配图**：狼惊慌失措的表情，用力拔尾巴但纹丝不动；远处树后露出列那狐在偷笑的脑袋。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#### 第9页：结局
+</span></span><span class="line"><span class="cl">* **标题**：倒霉的狼大哥
+</span></span><span class="line"><span class="cl">* **内容**：
+</span></span><span class="line"><span class="cl">    * 天亮了，附近的村民出来打水，发现了动不了的狼。
+</span></span><span class="line"><span class="cl">    * 大家拿起棍子打狼，狼好不容易挣断了一截尾巴才逃跑。
+</span></span><span class="line"><span class="cl">    * 可怜的狼，鱼没吃到，还丢了半条尾巴。
+</span></span><span class="line"><span class="cl">* **配图**：村民拿着扫把追赶狼，狼狼狈逃跑的卡通图（画面要滑稽，不要血腥）。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#### 第10页：我们学到了什么？（总结陈词）
+</span></span><span class="line"><span class="cl">* **标题**：小故事，大道理
+</span></span><span class="line"><span class="cl">* **内容**（用醒目的列表展示）：
+</span></span><span class="line"><span class="cl">    1.  **遇事要动脑筋**：像列那狐一样聪明，但不要太坏哦。
+</span></span><span class="line"><span class="cl">    2.  **不要太贪心**：狼因为贪心，想钓好多鱼，结果被冻住了。
+</span></span><span class="line"><span class="cl">    3.  **不要轻信别人**：对于别人的话，我们要自己思考对不对。
+</span></span><span class="line"><span class="cl">* **配图**：一个思考的灯泡图标，或者一个小朋友在思考的卡通图。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#### 第11页：互动问答（可选，增加趣味性）
+</span></span><span class="line"><span class="cl">* **标题**：考考你
+</span></span><span class="line"><span class="cl">* **问题**：
+</span></span><span class="line"><span class="cl">    * 如果你是那只狼，你会相信用尾巴能钓鱼吗？为什么？
+</span></span><span class="line"><span class="cl">* **配图**：一个大大的问号。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#### 第12页：结束页
+</span></span><span class="line"><span class="cl">* **标题**：谢谢大家观看！
+</span></span><span class="line"><span class="cl">* **内容**：希望你们喜欢列那狐的故事。
+</span></span><span class="line"><span class="cl">* **配图**：列那狐和其他小动物一起挥手再见的可爱图片。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">### 给你的制作小贴士：
+</span></span><span class="line"><span class="cl">* 如果你找不到合适的图片，可以使用AI绘画工具（如果老师允许），或者在网上搜索关键词如：“狐狸 卡通”、“狼 卡通”、“冬天 森林 卡通”。
+</span></span><span class="line"><span class="cl">* 讲PPT的时候，声音要生动，模仿狼笨拙的声音和狐狸狡猾的声音，同学们会更喜欢听！
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>第二步把 prompt 作为来源输入notebooklm</li>
+<li>第三步生成PPT或者绘本</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20251213103302431.png"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20251213103302431.png, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20251213103302431.png 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20251213103302431.png 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20251213103302431.png"
+        title="image-20251213103302431" /></p>
+<h2 id="2学习专业知识">2、学习专业知识</h2>
+<ol>
+<li>去<a href="https://t.co/icY3Dfq9xd" target="_blank" rel="noopener noreffer">https://openstax.org</a> 里找本感兴趣的教材，下载PDF</li>
+<li>上传到notebookLM里</li>
+<li>使用Gemini生成notebookLM的教材导读</li>
+<li>4去notebookLM里放入教材导读prompt，生成音频或者视频</li>
+</ol>
+<p>例子：</p>
+<p><a href="https://notebooklm.google.com/notebook/920f4371-0acd-4add-a8e1-8f43a96e90c7" target="_blank" rel="noopener noreffer">哲学导论：批判性思维与伦理价值</a></p>
+<h2 id="3读书">3、读书</h2>
+<p>结合微信读书，将读过的书进行总结。</p>
+<h2 id="4读论文">4、读论文</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1. 原始论文PDF放在左屏幕。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">用系统自带或任意分屏工具，比如我用Raycast的Window Management插件。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2. 右边是Gemini 或 NotebookLM。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Gemini排版和提示词遵循更好，虽然有时不如NotebookLM解读的深入，不知道为啥。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3. 用提示词生成解读。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">可以用简单提示词，如：用高中生（初中生/小学生/弱智）能懂的话逐句解读这篇论文。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">也可以用稍微复杂点的（会包含公式等，指出配图所在页码等）：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">你是一位既精通学术研究又擅长把复杂概念讲给中学生听的导师。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">请帮我完整读懂这篇论文，我是高中生。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">从标题和摘要开始，逐段给我讲解每一部分在说什么，为什么要这么写，和前后段落有什么关系。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">遇到专业术语就用日常例子解释清楚，遇到公式就拆开讲每个符号和每步推导的意思，说明这个公式在解决什么问题。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">当讲到图表时，明确告诉我这是PDF第几页的哪个图，图里的横纵坐标是什么，曲线或数据代表什么含义，重点要看哪些关键信息，以及这个图是为了证明或说明什么观点。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">讲解过程中要指出哪些是论文的核心创新点，哪些是铺垫性的背景知识。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">不要跳过任何重要内容，把整篇论文的逻辑线索串起来，让我能理解作者的思路是怎么一步步展开的，以及为什么要这样安排结构。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">讲的时候就像老师面对面教学生那样，用完整的段落把每个知识点说透，确保我这个基础薄弱的高中生能真正听懂。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">如果我说没理解，请用更简单的方式重新解释，必要时可以降到初中甚至小学的知识水平来类比。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/G7vHM7caMAAwqmK.jpeg"
+        data-srcset="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/G7vHM7caMAAwqmK.jpeg, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/G7vHM7caMAAwqmK.jpeg 1.5x, https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/G7vHM7caMAAwqmK.jpeg 2x"
+        data-sizes="auto"
+        alt="https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/G7vHM7caMAAwqmK.jpeg"
+        title="图像" /></p>
+<h2 id="5其它">5、其它</h2>
+<p>还未实践的一些用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1.创意脑暴
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">从来源中脑暴10个创新想法：每个想法都要说明概念、对应证据、可行性评分（1-10分）、原型建议。鼓励疯狂类比和“如果……会怎样”的假设，最后按影响力排序。用轻松的对话方式回应，并基于我的回复继续发散。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2.自测与测验生成
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">根据来源出20道题：10道多选（含解析）、5道简答、5道论文题。标出难易度（简单/中等/困难），提供答案和原文出处，支持“解释为什么我错了”的追问，能跨会话记录我的进度。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3.播客式音频概述
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">把Audio Overview做成播客形式：两位主持人（一位怀疑派专家，一位热情探险家）围绕来源的关键主题展开辩论。结构：吸睛开场→3段深度对谈（带原文引用）→互相反驳→模拟听众问答→最后给出可执行的3个行动要点。对话要自然、幽默，适当留悬念。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">4.发现研究空白
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">分析来源中的研究空白：(1) 总结学术共识；(2) 找出矛盾或未回答的问题；(3) 提出3个有证据支持的新假设；(4) 推荐后续研究，包括方法和潜在影响。特别关注跨学科连接。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">5.快速制作PPT
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">根据来源制作10页PPT大纲：第1-2页：引言+关键数据/视觉图；第3-7页：核心分析，用项目符号、图表并标注来源；第8-9页：挑战与解决方案；第10页：结论+互动问答提示。每页建议适合的视觉元素（如信息图、流程图），语言精简（每页最多5行）。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">6.学术论文深度拆解
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">用费曼技巧向一个好奇的12岁孩子解释这篇论文的核心概念：用最简单的比喻拆解，找出我理解的漏洞，再用生活例子重新搭建。然后指出材料中的矛盾、偏见和替代解释。最后提出3个现实世界应用场景和1个值得进一步研究的空白。
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2025-12-13</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/notebokklm/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://zhuyaguang.github.io/notebokklm/" data-title="Notebokklm" data-via="SurfingSnail"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://zhuyaguang.github.io/notebokklm/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://zhuyaguang.github.io/notebokklm/" data-title="Notebokklm" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://zhuyaguang.github.io/notebokklm/" data-title="Notebokklm"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://zhuyaguang.github.io/notebokklm/" data-title="Notebokklm"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://zhuyaguang.github.io/notebokklm/" data-title="Notebokklm" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://zhuyaguang.github.io/notebokklm/" data-title="Notebokklm" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://zhuyaguang.github.io/notebokklm/" data-title="Notebokklm"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/2025meetup/" class="prev" rel="prev" title="2025meetup"><i class="fas fa-angle-left fa-fw"></i>2025meetup</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2025</span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZMX6LNNGD"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-9ZMX6LNNGD');
+            </script>
+            
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9164191817861622"
+                crossorigin="anonymous"></script>
+        </div>
+        
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
