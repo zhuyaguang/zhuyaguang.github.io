@@ -9,6 +9,10 @@ draft: true
 ## 1、生成儿童绘本或者PPT
 
 * 第一步使用Gemini生成prompt
+* 第二步把 prompt 作为来源输入notebooklm
+* 第三步生成PPT或者绘本
+
+### 我的实践1-列那狐故事
 
 ```
 根据列那狐故事帮我完成一个小学生作业PPT，来讲述这个故事
@@ -134,8 +138,7 @@ draft: true
  * 讲PPT的时候，声音要生动，模仿狼笨拙的声音和狐狸狡猾的声音，同学们会更喜欢听！
  ```
 
-* 第二步把 prompt 作为来源输入notebooklm
-* 第三步生成PPT或者绘本
+
 
 ![image-20251213103302431](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/image-20251213103302431.png)
 
@@ -158,7 +161,7 @@ draft: true
 
 
 
-## 4、读论文
+## 4、读论文和写论文
 
 ```
 1. 原始论文PDF放在左屏幕。
@@ -195,6 +198,12 @@ Gemini排版和提示词遵循更好，虽然有时不如NotebookLM解读的深�
 ```
 
 ![图像](https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/G7vHM7caMAAwqmK.jpeg)
+
+写论文
+
+https://mp.weixin.qq.com/s/OEDZXDze3rOJG5cW9hGUIw
+
+
 
 ## 5、其它
 
