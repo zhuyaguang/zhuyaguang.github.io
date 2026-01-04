@@ -1,9 +1,5 @@
----
-title: "2025年总结"
-date: 2026-01-04T15:55:16+08:00
-draft: true
-featuredImage: https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/quality,Q_80.jpeg
----
+# 2025年总结
+
 
 # 2025 年总结
 
@@ -68,3 +64,4 @@ featuredImage: https://zhuyaguang-1308110266.cos.ap-shanghai.myqcloud.com/img/qu
 ## 2026计划
 
 存款涨上去，重量下下来。
+
